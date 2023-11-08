@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask zone2Mask;
     public float gravityZone1;
     public float speedZone1;
+    public float speedZone2;
     private float movementX;
     private float movementY;
     public float bumperJumpHeight;
@@ -70,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpHeight = 0f;
             gravity = defaultGravity; 
-            speed = defaultSpeed; 
+            speed = speedZone2; 
         }
         else
         {

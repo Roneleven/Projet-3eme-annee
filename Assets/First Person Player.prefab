@@ -206,6 +206,7 @@ MonoBehaviour:
     m_Bits: 128
   gravityZone1: -7
   speedZone1: 20
+  speedZone2: 15
   bumperJumpHeight: 10
   inZone1: 0
   inZone2: 0

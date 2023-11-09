@@ -11,17 +11,17 @@ public class Bumpers : MonoBehaviour
     // Le CharacterController du personnage
     public CharacterController characterController;
 
-    // Initialisation
+    // Initialisation iub
     private void Start()
     {
-        // Récupération du CharacterController du personnage
+        // Rï¿½cupï¿½ration du CharacterController du personnage
         characterController = GetComponent<CharacterController>();
     }
 
-    // Événement OnControllerColliderHit
+    // ï¿½vï¿½nement OnControllerColliderHit
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        // Si l'élément est en collision avec le CharacterController du personnage
+        // Si l'ï¿½lï¿½ment est en collision avec le CharacterController du personnage
         if (hit.gameObject.GetComponent<CharacterController>() == characterController)
         {
             // Applique la force de propulsion au CharacterController

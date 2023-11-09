@@ -11,7 +11,7 @@ public class Bumpers : MonoBehaviour
     // Le CharacterController du personnage
     public CharacterController characterController;
 
-    // Initialisation iub
+    // Initialisation ordughdtiughver du start
     private void Start()
     {
         // R�cup�ration du CharacterController du personnage

@@ -29,12 +29,6 @@ public class CubeHealth : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    else
-    {
-        // Notify the enemy that this block has taken damage
-        GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
-        enemy.GetComponent<Enemy1>().SetCurrentBlock(gameObject);
-    }
 }
 
     private void UpdateMaterial()

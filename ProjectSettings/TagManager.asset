@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bumper
+  - Block
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - UI
   - zone1Mask
   - zone2Mask
-  - 
+  - Bullet
   - 
   - 
   - 

@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1908079080107618008, guid: 1dcac5b6c9411ce43ae119f6f5f948d7, type: 3}
+      propertyPath: fireRate
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -39,21 +39,29 @@ public class CubeSpawner : MonoBehaviour
                 spawnPosition += transform.position;
 
                 Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
-                if (colliders.Length > 0)
-                {
-                    foreach (Collider collider in colliders)
-                    {
-                        CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
-                        if (cubeHealth != null)
-                        {
-                            cubeHealth.health += 5;
-                        }
-                    }
-                }
-                else
-                {
-                    Instantiate(cubePrefab, spawnPosition, Quaternion.identity);
-                }
+if (colliders.Length > 0)
+{
+    foreach (Collider collider in colliders)
+    {
+        CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
+        if (cubeHealth != null)
+        {
+            if (cubeHealth.health < 26)
+            {
+                cubeHealth.health += 5;
+                break;
+            }
+            else
+            {
+                continue;
+            }
+        }
+    }
+}
+else
+{
+    Instantiate(cubePrefab, spawnPosition, Quaternion.identity);
+}
             }
 
             yield return new WaitForSeconds(spawnInterval);

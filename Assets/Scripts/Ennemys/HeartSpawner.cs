@@ -68,11 +68,12 @@ private IEnumerator SpawnCube()
                     StartCoroutine(SpawnTransparentAndRealCube(spawnPosition)); // Appeler la nouvelle coroutine
                 }
             }
-                else
-                {
-                    StartCoroutine(SpawnTransparentAndRealCube(spawnPosition)); // Appeler la nouvelle coroutine
-                }
+else
+{
+    StartCoroutine(SpawnTransparentAndRealCube(spawnPosition)); // Appeler la nouvelle coroutine
+}
         }
+
         yield return new WaitForSeconds(spawnInterval);
     }
 }
@@ -124,7 +125,6 @@ private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition) // Nouvel
 }
 
     private IEnumerator ChangeSpawnRadiusAndCount()
-
     {
         yield return new WaitForSeconds(30);
         spawnRadius = 8;

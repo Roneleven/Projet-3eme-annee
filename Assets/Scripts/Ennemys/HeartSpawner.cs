@@ -18,7 +18,7 @@ public class HeartSpawner : MonoBehaviour
         StartCoroutine(ChangeSpawnRadiusAndCount());
     }
 
-    private IEnumerator SpawnCube()
+    public IEnumerator SpawnCube()
     {
         while (true)
         {
@@ -69,7 +69,7 @@ public class HeartSpawner : MonoBehaviour
         }
     }
 
-    private IEnumerator ChangeSpawnRadiusAndCount()
+    public IEnumerator ChangeSpawnRadiusAndCount()
     {
         yield return new WaitForSeconds(30);
         spawnRadius = 8;

@@ -311,13 +311,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAmmo: 30
-  fireRate: 0.5
+  fireRate: 5
   recoilForce: 1
   reloadTime: 2
   shootingSoundEvent: event:/shootingSound
   reloadSoundEvent: event:/reloadSound
+  mustUseAllAmmoBeforeReload: 0
   shootingPoint: {fileID: 2468726739403775544}
+  bulletsPerShot: 1
+  spreadAmount: 0.1
   bulletPrefab: {fileID: 6786013472321727789, guid: 005c8ad54fbad8b4295133ac2f24f610, type: 3}
+  bulletSpeed: 20
+  bulletLifeTime: 5
+  bulletDamage: 10
+  bulletPenetrationCount: 1
 --- !u!1 &8751717045185583812
 GameObject:
   m_ObjectHideFlags: 0

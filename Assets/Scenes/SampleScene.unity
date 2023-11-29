@@ -137,16 +137,32 @@ PrefabInstance:
       objectReference: {fileID: 1056952542}
     - target: {fileID: 445138976197890382, guid: 2462394dbc6015c41b1b4bea11408c07, type: 3}
       propertyPath: fireRate
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 445138976197890382, guid: 2462394dbc6015c41b1b4bea11408c07, type: 3}
       propertyPath: bulletSpeed
-      value: 50
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 445138976197890382, guid: 2462394dbc6015c41b1b4bea11408c07, type: 3}
+      propertyPath: bulletDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 445138976197890382, guid: 2462394dbc6015c41b1b4bea11408c07, type: 3}
+      propertyPath: spreadAmount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 445138976197890382, guid: 2462394dbc6015c41b1b4bea11408c07, type: 3}
       propertyPath: bulletsPerShot
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 445138976197890382, guid: 2462394dbc6015c41b1b4bea11408c07, type: 3}
+      propertyPath: bulletPenetrationCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 445138976197890382, guid: 2462394dbc6015c41b1b4bea11408c07, type: 3}
+      propertyPath: bulletProperties.bulletPrefab
+      value: 
+      objectReference: {fileID: 6786013472321727789, guid: 005c8ad54fbad8b4295133ac2f24f610, type: 3}
     - target: {fileID: 1388989741479645467, guid: 2462394dbc6015c41b1b4bea11408c07, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

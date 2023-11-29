@@ -10,14 +10,23 @@ public class GunController : MonoBehaviour
     public float reloadTime = 2.0f;
     public string shootingSoundEvent = "event:/shootingSound";
     public string reloadSoundEvent = "event:/reloadSound";
+    public bool mustUseAllAmmoBeforeReload = false;
 
     [Header("Shooting Mechanics")]
-    public Transform shootingPoint;  // The point from where bullets are shot
-    public GameObject bulletPrefab;  // The bullet prefab
-    public int bulletsPerShot = 1;   // Number of bullets fired per shot
+    public Transform shootingPoint;
+    public int bulletsPerShot = 1;
+    public float spreadAmount = 0.1f;
+
+    [Header("Bullet Settings")]
+    public GameObject bulletPrefab;
+    public float bulletSpeed = 20f;
+    public float bulletLifeTime = 5f;
+    public int bulletDamage = 10;
+    public int bulletPenetrationCount = 1;
 
     private int currentAmmo;
     private float nextTimeToFire = 0.0f;
+    private bool isReloading = false;
 
     void Start()
     {
@@ -26,13 +35,16 @@ public class GunController : MonoBehaviour
 
     void Update()
     {
+        if (isReloading)
+            return;
+
         if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire && currentAmmo >= bulletsPerShot)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && (!mustUseAllAmmoBeforeReload || currentAmmo < maxAmmo))
         {
             StartCoroutine(Reload());
         }
@@ -50,23 +62,27 @@ public class GunController : MonoBehaviour
                 GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
 
                 // Adding bullet spread
-                Vector3 spread = shootingPoint.forward;
-                spread.x += Random.Range(-recoilForce, recoilForce) * 0.1f; // Adjust these values for more/less spread
-                spread.y += Random.Range(-recoilForce, recoilForce) * 0.1f;
-                bullet.transform.forward = spread.normalized;
+                Vector3 spread = Random.insideUnitSphere * spreadAmount;
+                spread += shootingPoint.forward;
+                Quaternion spreadRotation = Quaternion.LookRotation(spread);
 
-                // Add force or velocity to the bullet if needed
-                // bullet.GetComponent<Rigidbody>().AddForce(spread * bulletSpeed, ForceMode.VelocityChange);
+                bullet.transform.rotation = spreadRotation;
+
+                Bullet bulletScript = bullet.GetComponent<Bullet>();
+                if (bulletScript != null)
+                {
+                    bulletScript.Initialize(bulletSpeed, bulletLifeTime, bulletDamage, bulletPenetrationCount);
+                }
             }
         }
-
-        // Apply recoil and other effects here
     }
 
     System.Collections.IEnumerator Reload()
     {
+        isReloading = true;
         FMODUnity.RuntimeManager.PlayOneShot(reloadSoundEvent, transform.position);
         yield return new WaitForSeconds(reloadTime);
         currentAmmo = maxAmmo;
+        isReloading = false;
     }
 }

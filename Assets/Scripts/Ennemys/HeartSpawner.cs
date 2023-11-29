@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeSpawner : MonoBehaviour
+public class HeartSpawner : MonoBehaviour
 {
     public GameObject cubePrefab;
     public float spawnInterval = 1f;
@@ -11,6 +11,7 @@ public class CubeSpawner : MonoBehaviour
     public float exclusionRadius = 2f;
     public float spawnCount = 1; // Nombre de cubes à faire apparaître à chaque intervalle
     public GameObject transparentCubePrefab;
+    public HeartHealth heartHealth;
 
     private void Start()
     {
@@ -67,12 +68,11 @@ private IEnumerator SpawnCube()
                     StartCoroutine(SpawnTransparentAndRealCube(spawnPosition)); // Appeler la nouvelle coroutine
                 }
             }
-else
-{
-    StartCoroutine(SpawnTransparentAndRealCube(spawnPosition)); // Appeler la nouvelle coroutine
-}
+                else
+                {
+                    StartCoroutine(SpawnTransparentAndRealCube(spawnPosition)); // Appeler la nouvelle coroutine
+                }
         }
-
         yield return new WaitForSeconds(spawnInterval);
     }
 }
@@ -124,6 +124,7 @@ private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition) // Nouvel
 }
 
     private IEnumerator ChangeSpawnRadiusAndCount()
+
     {
         yield return new WaitForSeconds(30);
         spawnRadius = 8;
@@ -131,7 +132,7 @@ private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition) // Nouvel
 
         yield return new WaitForSeconds(60);
         spawnRadius = 12;
-        spawnCount = 8; 
+        spawnCount = 8;
 
         yield return new WaitForSeconds(90);
         spawnRadius = 16;
@@ -139,7 +140,7 @@ private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition) // Nouvel
 
         yield return new WaitForSeconds(120);
         spawnRadius = 20;
-        spawnCount = 32; 
+        spawnCount = 32;
 
         yield return new WaitForSeconds(150);
         spawnRadius = 24;

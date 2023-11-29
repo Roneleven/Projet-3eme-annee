@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxColliderSpawner : MonoBehaviour
+public class BoxSpawner : MonoBehaviour
 {
     public GameObject cubePrefab;
     public float spawnInterval = 1f;

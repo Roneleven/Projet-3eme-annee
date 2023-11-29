@@ -7,10 +7,6 @@ public class BulletBaseBehavior : MonoBehaviour
 
     void Start()
     {
-        // Utilisez la direction de la caméra pour déterminer la direction de la balle
-        Vector3 direction = Camera.main.transform.forward;
-        rb.velocity = direction * speed;
-
         // Détruit la balle après 2 secondes
         Invoke("DestroyBullet", 2f);
     }

@@ -99,7 +99,7 @@ private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition) // Nouvel
 
     if (!playerInPosition)
     {
-        Instantiate(cubePrefab, spawnPosition, Quaternion.identity); // Instanciez le cube réel
+        Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform); // Instanciez le cube réel
     }
     else
     {
@@ -117,7 +117,7 @@ private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition) // Nouvel
                     Vector3 cubePosition = new Vector3(x, y, z);
                     if (Mathf.Abs(x - playerPosition.x) >= 3 || Mathf.Abs(y - playerPosition.y) >= 3 || Mathf.Abs(z - playerPosition.z) >= 3)
                     {
-                        Instantiate(cubePrefab, cubePosition, Quaternion.identity); // Instanciez le cube réel
+                        Instantiate(cubePrefab, cubePosition, Quaternion.identity, spawnContainer.transform); // Instanciez le cube réel
                     }
                 }
             }

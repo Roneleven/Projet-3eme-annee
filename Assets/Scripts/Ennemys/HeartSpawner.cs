@@ -7,6 +7,7 @@ public class HeartSpawner : MonoBehaviour
     public GameObject cubePrefab;
     public float spawnInterval = 1f;
     public float spawnRadius = 4f;
+    public GameObject spawnContainer;
     public float gridSize = 1f;
     public float exclusionRadius = 2f;
     public float spawnCount = 1; // Nombre de cubes à faire apparaître à chaque intervalle
@@ -80,8 +81,8 @@ else
 
 private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition) // Nouvelle coroutine
 {
-    GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity); // Instanciez le cube semi-transparent
-    yield return new WaitForSeconds(1); // Attendez une seconde
+    GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform); // Instanciez le cube semi-transparent
+        yield return new WaitForSeconds(1); // Attendez une seconde
 
     Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
     bool playerInPosition = false;
@@ -98,8 +99,8 @@ private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition) // Nouvel
 
     if (!playerInPosition)
     {
-        Instantiate(cubePrefab, spawnPosition, Quaternion.identity); // Instanciez le cube réel
-    }
+            Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform); // Instanciez le cube réel
+        }
     else
     {
         Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
@@ -116,8 +117,8 @@ private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition) // Nouvel
                     Vector3 cubePosition = new Vector3(x, y, z);
                     if (Mathf.Abs(x - playerPosition.x) >= 3 || Mathf.Abs(y - playerPosition.y) >= 3 || Mathf.Abs(z - playerPosition.z) >= 3)
                     {
-                        Instantiate(cubePrefab, cubePosition, Quaternion.identity); // Instanciez le cube réel
-                    }
+                            Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform); // Instanciez le cube réel
+                        }
                 }
             }
         }

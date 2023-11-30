@@ -173,6 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   health: 5
+  currentPalier: 1
   teleportPositions:
   - {fileID: 303000850}
   - {fileID: 277559457}
@@ -1065,6 +1066,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1571765360}
+    - target: {fileID: 445138976197890382, guid: 2462394dbc6015c41b1b4bea11408c07, type: 3}
+      propertyPath: spreadAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1388989741479645467, guid: 2462394dbc6015c41b1b4bea11408c07, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.6826322
@@ -1551,6 +1556,14 @@ PrefabInstance:
       propertyPath: spawnContainer
       value: 
       objectReference: {fileID: 177016507}
+    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: temporarySpawnCount
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: timeTemporaryPalier
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: transparentCubePrefab
       value: 

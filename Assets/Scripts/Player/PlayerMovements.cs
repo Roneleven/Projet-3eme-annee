@@ -15,30 +15,36 @@ public class PlayerMovements : MonoBehaviour
     private float movementX;
     private float movementY;
     public float bumperJumpHeight;
+    public Transform respawnPoint;
 
     Vector3 velocity;
     bool isGrounded;
 
     private void Update()
+{
+    GetPlayerInput();
+
+    // Check if grounded
+    isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+    // Apply gravity and movement
+    if (isGrounded && velocity.y < 0)
     {
-        GetPlayerInput();
-
-        // Check if grounded
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
-        // Apply gravity and movement
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f;
-        }
-
-        Vector3 move = transform.right * movementX + transform.forward * movementY;
-
-        controller.Move(move.normalized * speed * Time.deltaTime);
-
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+        velocity.y = -2f;
     }
+
+    Vector3 move = transform.right * movementX + transform.forward * movementY;
+
+    controller.Move(move.normalized * speed * Time.deltaTime);
+
+    velocity.y += gravity * Time.deltaTime;
+    controller.Move(velocity * Time.deltaTime);
+
+    if (transform.position.y < -100)
+    {
+        transform.position = respawnPoint.position;
+    }
+}
 
     // Input handling methods
     private void OnMove(InputValue movementValue)

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class SceneTransition : MonoBehaviour
 {
-    public Image blackFade; // L'objet Image pour le panneau UI noir
-    public Animator anim; // L'Animator pour l'objet Image
+    public Image blackFade;
+    public Animator anim;
 
 
     public void ReloadScene()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class HeartSpawner : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class HeartSpawner : MonoBehaviour
     public float timer = 10;
     private bool timerActive = false;
     public TextMeshProUGUI timerText;
+    public Image blackFade;
+    public Animator anim;
 
     private bool isCooldownActive = false;
 
@@ -88,20 +91,27 @@ public class HeartSpawner : MonoBehaviour
         }
     }
 
-    void Update()
+void Update()
 {
     if (timerActive)
     {
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
-            TimeOut();
+            StartCoroutine(PlayAnimationAndReload());
         }
         else
         {
             timerText.text = Mathf.Round(timer).ToString() + "s";
         }
     }
+}
+
+IEnumerator PlayAnimationAndReload()
+{
+    anim.Play("FadeIn");
+     yield return new WaitForSeconds(1);
+    TimeOut();
 }
 
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
@@ -205,7 +215,7 @@ public void ChangePalierOnTeleport()
 
 private void TimeOut()
 {
-    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    FindObjectOfType<SceneTransition>().ReloadScene();
 }
 
 

@@ -71,23 +71,21 @@ public class BoxSpawner : MonoBehaviour
     // Fonction pour vérifier si la position de spawn est en collision avec le sol
     private bool IsSpawnPositionColliding(Vector3 position)
     {
-        // Ajustez la hauteur de la ligne en fonction de votre cube et de la précision nécessaire
         float lineHeight = gridSize;
-
         Vector3 start = position + Vector3.up * lineHeight;
         Vector3 end = position - Vector3.up * lineHeight;
 
-        if (Physics.Linecast(start, end))
+        // Ajoutez ici toutes les couches que vous souhaitez éviter
+        int layerMask = LayerMask.GetMask("Ground", "Wall");
+
+        if (Physics.Linecast(start, end, layerMask))
         {
-            // Ajoutez ici toutes les couches que vous souhaitez éviter (par exemple, Ground)
-            if (Physics.Linecast(start, end, 1 << LayerMask.NameToLayer("Ground")))
-            {
-                return true;
-            }
+            return true;
         }
 
         return false;
     }
+
 
 
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)

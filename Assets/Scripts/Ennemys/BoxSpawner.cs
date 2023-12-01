@@ -13,6 +13,12 @@ public class BoxSpawner : MonoBehaviour
     public float spawnCount;
     public GameObject transparentCubePrefab;
 
+    // Nouvelle variable pour définir le nombre maximal de blocs dans l'inspecteur Unity
+    public int maxCubeCount;
+
+    // Variable pour suivre le nombre actuel de blocs réels
+    public int cubeCount = 0;
+
     private void Start()
     {
         StartCoroutine(SpawnCube());
@@ -22,47 +28,51 @@ public class BoxSpawner : MonoBehaviour
     {
         while (true)
         {
-            for (int i = 0; i < spawnCount; i++)
+            if (cubeCount < maxCubeCount)
             {
-                Vector3 spawnPosition;
-                do
+                for (int i = 0; i < spawnCount; i++)
                 {
-                    spawnPosition = new Vector3(
-                        Random.Range(-spawnBoxSize.x / 2, spawnBoxSize.x / 2),
-                        Random.Range(-spawnBoxSize.y / 2, spawnBoxSize.y / 2),
-                        Random.Range(-spawnBoxSize.z / 2, spawnBoxSize.z / 2)
-                    );
-                } while (spawnPosition.magnitude < exclusionRadius);
-
-                spawnPosition /= gridSize;
-                spawnPosition = new Vector3(Mathf.Round(spawnPosition.x), Mathf.Round(spawnPosition.y), Mathf.Round(spawnPosition.z));
-                spawnPosition *= gridSize;
-
-                spawnPosition += transform.position;
-
-                Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
-                if (colliders.Length > 0)
-                {
-                    foreach (Collider collider in colliders)
+                    Vector3 spawnPosition;
+                    do
                     {
-                        bool playerInPosition = collider.gameObject.CompareTag("Player");
-                        if (playerInPosition)
-                        {
-                            StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
-                            break;
-                        }
+                        spawnPosition = new Vector3(
+                            Random.Range(-spawnBoxSize.x / 2, spawnBoxSize.x / 2),
+                            Random.Range(-spawnBoxSize.y / 2, spawnBoxSize.y / 2),
+                            Random.Range(-spawnBoxSize.z / 2, spawnBoxSize.z / 2)
+                        );
+                    } while (spawnPosition.magnitude < exclusionRadius);
 
-                        CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
-                        if (cubeHealth != null && cubeHealth.health < 26)
+                    spawnPosition /= gridSize;
+                    spawnPosition = new Vector3(Mathf.Round(spawnPosition.x), Mathf.Round(spawnPosition.y), Mathf.Round(spawnPosition.z));
+                    spawnPosition *= gridSize;
+
+                    spawnPosition += transform.position;
+
+                    Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
+                    if (colliders.Length > 0)
+                    {
+                        foreach (Collider collider in colliders)
                         {
-                            cubeHealth.health += 5;
-                            break;
+                            bool playerInPosition = collider.gameObject.CompareTag("Player");
+                            if (playerInPosition)
+                            {
+                                StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
+                                break;
+                            }
+
+                            CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
+                            if (cubeHealth != null && cubeHealth.health < 26)
+                            {
+                                cubeHealth.health += 5;
+                                break;
+                            }
                         }
                     }
-                }
-                else
-                {
-                    StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
+                    else
+                    {
+                        StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
+                        cubeCount++; // Incrémente le nombre de blocs réels
+                    }
                 }
             }
 
@@ -73,7 +83,7 @@ public class BoxSpawner : MonoBehaviour
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {
         GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-        yield return new WaitForSeconds(spawnInterval);//variable pour le temps du bloc transparent
+        yield return new WaitForSeconds(spawnInterval);
 
         Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
         bool playerInPosition = false;
@@ -105,6 +115,7 @@ public class BoxSpawner : MonoBehaviour
                         if (Mathf.Abs(x - playerPosition.x) >= 3 || Mathf.Abs(y - playerPosition.y) >= 3 || Mathf.Abs(z - playerPosition.z) >= 3)
                         {
                             Instantiate(cubePrefab, cubePosition, Quaternion.identity, spawnContainer.transform);
+                            cubeCount++; // Incrémente le nombre de blocs réels
                         }
                     }
                 }
@@ -113,8 +124,13 @@ public class BoxSpawner : MonoBehaviour
         else
         {
             Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+            cubeCount++; // Incrémente le nombre de blocs réels
         }
+
+        // Décrémente le nombre de blocs réels lorsque la coroutine est terminée (quand le bloc transparent est détruit)
+        cubeCount--;
     }
+
 
     private void OnDrawGizmos()
     {

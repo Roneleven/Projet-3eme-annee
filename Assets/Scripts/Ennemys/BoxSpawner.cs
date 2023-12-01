@@ -61,9 +61,21 @@ public class BoxSpawner : MonoBehaviour
                             }
 
                             CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
-                            if (cubeHealth != null && cubeHealth.health < 26)
+                            if (cubeHealth != null)
                             {
-                                cubeHealth.health += 5;
+                                if (cubeHealth.health < 26)
+                                {
+                                    cubeHealth.health += 5;
+                                    cubeCount++; // Incrémente le nombre de blocs réels
+                                }
+                                else
+                                {
+                                    // Cube amélioré, comptez-le comme un cube supplémentaire
+                                    cubeCount++; // Incrémente le nombre de blocs réels
+
+                                    // Ajoutez ici la logique d'augmentation du cubeCount en fonction de l'amélioration du cube
+                                    cubeCount += Mathf.CeilToInt(cubeHealth.health / 5f) - 1;
+                                }
                                 break;
                             }
                         }

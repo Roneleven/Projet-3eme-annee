@@ -280,6 +280,10 @@ PrefabInstance:
       value: BoxContainer (1)
       objectReference: {fileID: 0}
     - target: {fileID: 2836226785195394683, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
+      propertyPath: maxCubeCount
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836226785195394683, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
       propertyPath: spawnBoxSize.x
       value: 5
       objectReference: {fileID: 0}

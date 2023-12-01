@@ -93,60 +93,36 @@ public class HeartSpawner : MonoBehaviour
         }
     }
 
-void Update()
-{
-    if (timerActive)
+    void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0)
+        if (timerActive)
         {
-            StartCoroutine(PlayAnimationAndReload());
-        }
-        else
-        {
-            timerText.text = Mathf.Round(timer).ToString() + "s";
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                StartCoroutine(PlayAnimationAndReload());
+            }
+            else
+            {
+                timerText.text = Mathf.Round(timer).ToString() + "s";
+            }
         }
     }
-}
 
-IEnumerator PlayAnimationAndReload()
-{
-    anim.Play("FadeIn");
-     yield return new WaitForSeconds(1);
-    TimeOut();
-}
-
-    private bool IsSpawnPositionColliding(Vector3 position)
+    IEnumerator PlayAnimationAndReload()
     {
-        float rayHeight = gridSize;
-
-        Vector3 start = position + Vector3.up * rayHeight;
-        Vector3 end = position - Vector3.up * rayHeight;
-
-        RaycastHit hit;
-
-        int layerMask = LayerMask.GetMask("Ground", "Wall"); // Ajoutez les noms de vos autres layers
-        if (Physics.Linecast(start, end, out hit, layerMask))
-        {
-            return true;
-        }
-
-        return false;
+        anim.Play("FadeIn");
+        yield return new WaitForSeconds(1);
+        TimeOut();
     }
 
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {
-        if (IsSpawnPositionColliding(spawnPosition))
-        {
-            yield break; // Si la position de spawn est en collision, arrêter la coroutine
-        }
-
         GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
         yield return new WaitForSeconds(spawnInterval);
 
         Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
         bool playerInPosition = false;
-
         foreach (Collider collider in colliders)
         {
             if (collider.gameObject.tag == "Player")
@@ -178,10 +154,7 @@ IEnumerator PlayAnimationAndReload()
                         Vector3 cubePosition = new Vector3(x, y, z);
                         if (Mathf.Abs(x - playerPosition.x) >= 3 || Mathf.Abs(y - playerPosition.y) >= 3 || Mathf.Abs(z - playerPosition.z) >= 3)
                         {
-                            if (!IsSpawnPositionColliding(cubePosition))
-                            {
-                                Instantiate(cubePrefab, cubePosition, Quaternion.identity, spawnContainer.transform);
-                            }
+                            Instantiate(cubePrefab, cubePosition, Quaternion.identity, spawnContainer.transform);
                         }
                     }
                 }
@@ -190,65 +163,65 @@ IEnumerator PlayAnimationAndReload()
     }
 
     public void ChangePalierOnTeleport()
-{
-    if (isCooldownActive) return;
-
-    if (heartHealth != null)
     {
-        timer = defaultTimer; // Réinitialisez le timer ici
+        if (isCooldownActive) return;
 
-        if (currentPalier > previousPalier)
+        if (heartHealth != null)
         {
-            previousPalier = currentPalier;
-        }
+            timer = defaultTimer; // Réinitialisez le timer ici
 
-        timerActive = true;
-        StartCoroutine(ResetPalier());
+            if (currentPalier > previousPalier)
+            {
+                previousPalier = currentPalier;
+            }
+
+            timerActive = true;
+            StartCoroutine(ResetPalier());
+        }
     }
-}
 
 
     private IEnumerator ResetPalier()
-{
-    isCooldownActive = true;
-
-    float originalSpawnRadius = spawnRadius;
-    float originalSpawnCount = spawnCount;
-    float originalSpawnInterval = spawnInterval;
-
-    spawnCount = temporarySpawnCount;
-    spawnInterval = temporarySpawnInterval;
-
-    for (int palier = 1; palier <= currentPalier; palier++)
     {
-        float temporarySpawnCountBeforeAdjust = spawnCount;
-        AdjustPalierValues(palier);
-        spawnCount = temporarySpawnCountBeforeAdjust;
-        yield return new WaitForSeconds(timeTemporaryPalier);
+        isCooldownActive = true;
+
+        float originalSpawnRadius = spawnRadius;
+        float originalSpawnCount = spawnCount;
+        float originalSpawnInterval = spawnInterval;
+
+        spawnCount = temporarySpawnCount;
+        spawnInterval = temporarySpawnInterval;
+
+        for (int palier = 1; palier <= currentPalier; palier++)
+        {
+            float temporarySpawnCountBeforeAdjust = spawnCount;
+            AdjustPalierValues(palier);
+            spawnCount = temporarySpawnCountBeforeAdjust;
+            yield return new WaitForSeconds(timeTemporaryPalier);
+        }
+
+        // Restaurer les valeurs originales
+        spawnRadius = originalSpawnRadius;
+        spawnCount = originalSpawnCount;
+        spawnInterval = originalSpawnInterval;
+
+        // Passer au palier suivant
+        currentPalier++;
+        AdjustPalierValues(currentPalier);
+
+        if (currentPalier >= 2 && !timerActive)
+        {
+            timerActive = true;
+            Invoke("TimeOut", timer);
+        }
+
+        isCooldownActive = false;
     }
 
-    // Restaurer les valeurs originales
-    spawnRadius = originalSpawnRadius;
-    spawnCount = originalSpawnCount;
-    spawnInterval = originalSpawnInterval;
-
-    // Passer au palier suivant
-    currentPalier++;
-    AdjustPalierValues(currentPalier);
-
-    if (currentPalier >= 2 && !timerActive)
+    private void TimeOut()
     {
-        timerActive = true;
-        Invoke("TimeOut", timer);
+        FindObjectOfType<SceneTransition>().ReloadScene();
     }
-
-    isCooldownActive = false;
-}
-
-private void TimeOut()
-{
-    FindObjectOfType<SceneTransition>().ReloadScene();
-}
 
 
     private void AdjustPalierValues(int palier)

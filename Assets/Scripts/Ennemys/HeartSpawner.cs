@@ -118,7 +118,7 @@ IEnumerator PlayAnimationAndReload()
 
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {
-        GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity);
+        GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
         yield return new WaitForSeconds(1);
 
         Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);

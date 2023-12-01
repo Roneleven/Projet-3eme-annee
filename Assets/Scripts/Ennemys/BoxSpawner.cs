@@ -1,15 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BoxSpawner : MonoBehaviour
 {
     public GameObject cubePrefab;
     public float spawnInterval = 1f;
+    public float spawnRadius;
+    public GameObject spawnContainer;
     public Vector3 spawnBoxSize = new Vector3(8f, 8f, 8f); // Taille de la boîte de spawn
     public float gridSize = 1f;
     public float exclusionRadius = 2f;
-    public float spawnCount = 1; // Nombre de cubes à faire apparaître à chaque intervalle
+    public float spawnCount;
+    public GameObject transparentCubePrefab;
 
     private void Start()
     {
@@ -30,8 +32,7 @@ public class BoxSpawner : MonoBehaviour
                         Random.Range(-spawnBoxSize.y / 2, spawnBoxSize.y / 2),
                         Random.Range(-spawnBoxSize.z / 2, spawnBoxSize.z / 2)
                     );
-                }
-                while (spawnPosition.magnitude < exclusionRadius);
+                } while (spawnPosition.magnitude < exclusionRadius);
 
                 spawnPosition /= gridSize;
                 spawnPosition = new Vector3(Mathf.Round(spawnPosition.x), Mathf.Round(spawnPosition.y), Mathf.Round(spawnPosition.z));
@@ -39,33 +40,79 @@ public class BoxSpawner : MonoBehaviour
 
                 spawnPosition += transform.position;
 
-                Collider[] colliders = Physics.OverlapBox(spawnPosition, new Vector3(gridSize / 2, gridSize / 2, gridSize / 2));
+                Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
                 if (colliders.Length > 0)
                 {
                     foreach (Collider collider in colliders)
                     {
-                        CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
-                        if (cubeHealth != null)
+                        bool playerInPosition = collider.gameObject.CompareTag("Player");
+                        if (playerInPosition)
                         {
-                            if (cubeHealth.health < 26)
-                            {
-                                cubeHealth.health += 5;
-                                break;
-                            }
-                            else
-                            {
-                                continue;
-                            }
+                            StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
+                            break;
+                        }
+
+                        CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
+                        if (cubeHealth != null && cubeHealth.health < 26)
+                        {
+                            cubeHealth.health += 5;
+                            break;
                         }
                     }
                 }
                 else
                 {
-                    Instantiate(cubePrefab, spawnPosition, Quaternion.identity);
+                    StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
                 }
             }
 
             yield return new WaitForSeconds(spawnInterval);
+        }
+    }
+
+    private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
+    {
+        GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+        yield return new WaitForSeconds(spawnInterval);//variable pour le temps du bloc transparent
+
+        Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
+        bool playerInPosition = false;
+        foreach (Collider collider in colliders)
+        {
+            if (collider.gameObject.CompareTag("Player"))
+            {
+                playerInPosition = true;
+                break;
+            }
+        }
+
+        Destroy(transparentCube);
+
+        if (playerInPosition)
+        {
+            Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+            playerPosition /= gridSize;
+            playerPosition = new Vector3(Mathf.Round(playerPosition.x), Mathf.Round(playerPosition.y), Mathf.Round(playerPosition.z));
+            playerPosition *= gridSize;
+
+            for (float x = playerPosition.x - 3; x <= playerPosition.x + 3; x += gridSize)
+            {
+                for (float y = playerPosition.y - 3; y <= playerPosition.y + 3; y += gridSize)
+                {
+                    for (float z = playerPosition.z - 3; z <= playerPosition.z + 3; z += gridSize)
+                    {
+                        Vector3 cubePosition = new Vector3(x, y, z);
+                        if (Mathf.Abs(x - playerPosition.x) >= 3 || Mathf.Abs(y - playerPosition.y) >= 3 || Mathf.Abs(z - playerPosition.z) >= 3)
+                        {
+                            Instantiate(cubePrefab, cubePosition, Quaternion.identity, spawnContainer.transform);
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
         }
     }
 

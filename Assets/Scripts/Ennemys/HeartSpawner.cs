@@ -19,6 +19,7 @@ public class HeartSpawner : MonoBehaviour
     public int previousPalier = 1;
     public int currentPalier = 1;
     public float temporarySpawnCount;
+    public float temporarySpawnInterval;
     public float timeTemporaryPalier;
     public float timer = 10;
     private bool timerActive = false;
@@ -185,8 +186,10 @@ public void ChangePalierOnTeleport()
 
     float originalSpawnRadius = spawnRadius;
     float originalSpawnCount = spawnCount;
+    float originalSpawnInterval = spawnInterval;
 
     spawnCount = temporarySpawnCount;
+    spawnInterval = temporarySpawnInterval;
 
     for (int palier = 1; palier <= currentPalier; palier++)
     {
@@ -199,6 +202,7 @@ public void ChangePalierOnTeleport()
     // Restaurer les valeurs originales
     spawnRadius = originalSpawnRadius;
     spawnCount = originalSpawnCount;
+    spawnInterval = originalSpawnInterval;
 
     // Passer au palier suivant
     currentPalier++;

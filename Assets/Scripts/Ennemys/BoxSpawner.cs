@@ -14,7 +14,7 @@ public class BoxSpawner : MonoBehaviour
     public GameObject transparentCubePrefab;
 
     // Nouvelle variable pour définir le nombre maximal de blocs dans l'inspecteur Unity
-    public int maxCubeCount;
+    public int maxCubeCount = 50;
 
     // Variable pour suivre le nombre actuel de blocs réels
     public int cubeCount = 0;
@@ -24,7 +24,7 @@ public class BoxSpawner : MonoBehaviour
         StartCoroutine(SpawnCube());
     }
 
-    private IEnumerator SpawnCube()
+	private IEnumerator SpawnCube()
     {
         while (true)
         {
@@ -33,11 +33,6 @@ public class BoxSpawner : MonoBehaviour
                 for (int i = 0; i < spawnCount; i++)
                 {
                     Vector3 spawnPosition;
-
-                    // Utilisez un nombre limité de tentatives pour éviter une boucle infinie
-                    int maxAttempts = 10;
-                    int attemptCount = 0;
-
                     do
                     {
                         spawnPosition = new Vector3(
@@ -45,18 +40,47 @@ public class BoxSpawner : MonoBehaviour
                             Random.Range(-spawnBoxSize.y / 2, spawnBoxSize.y / 2),
                             Random.Range(-spawnBoxSize.z / 2, spawnBoxSize.z / 2)
                         );
+                    } while (spawnPosition.magnitude < exclusionRadius);
 
-                        spawnPosition /= gridSize;
-                        spawnPosition = new Vector3(Mathf.Round(spawnPosition.x), Mathf.Round(spawnPosition.y), Mathf.Round(spawnPosition.z));
-                        spawnPosition *= gridSize;
+                    spawnPosition /= gridSize;
+                    spawnPosition = new Vector3(Mathf.Round(spawnPosition.x), Mathf.Round(spawnPosition.y), Mathf.Round(spawnPosition.z));
+                    spawnPosition *= gridSize;
 
-                        spawnPosition += transform.position;
+                    spawnPosition += transform.position;
 
-                        attemptCount++;
-                    } while (IsSpawnPositionColliding(spawnPosition) && attemptCount < maxAttempts);
+                    Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
+                    if (colliders.Length > 0)
+                    {
+                        foreach (Collider collider in colliders)
+                        {
+                            bool playerInPosition = collider.gameObject.CompareTag("Player");
+                            if (playerInPosition)
+                            {
+                                StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
+                                break;
+                            }
 
-                    // Vérifiez à nouveau si la position est en collision avec le sol
-                    if (!IsSpawnPositionColliding(spawnPosition))
+                            CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
+                            if (cubeHealth != null)
+                            {
+                                if (cubeHealth.health < 26)
+                                {
+                                    cubeHealth.health += 5;
+                                    cubeCount++; // Incrémente le nombre de blocs réels
+                                }
+                                else
+                                {
+                                    // Cube amélioré, comptez-le comme un cube supplémentaire
+                                    cubeCount++; // Incrémente le nombre de blocs réels
+
+                                    // Ajoutez ici la logique d'augmentation du cubeCount en fonction de l'amélioration du cube
+                                    cubeCount += Mathf.CeilToInt(cubeHealth.health / 5f) - 1;
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    else
                     {
                         StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
                         cubeCount++; // Incrémente le nombre de blocs réels
@@ -67,25 +91,6 @@ public class BoxSpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
     }
-
-    // Fonction pour vérifier si la position de spawn est en collision avec le sol
-    private bool IsSpawnPositionColliding(Vector3 position)
-    {
-        float lineHeight = gridSize;
-        Vector3 start = position + Vector3.up * lineHeight;
-        Vector3 end = position - Vector3.up * lineHeight;
-
-        // Ajoutez ici toutes les couches que vous souhaitez éviter
-        int layerMask = LayerMask.GetMask("Ground", "Wall");
-
-        if (Physics.Linecast(start, end, layerMask))
-        {
-            return true;
-        }
-
-        return false;
-    }
-
 
 
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
@@ -101,19 +106,6 @@ public class BoxSpawner : MonoBehaviour
             {
                 playerInPosition = true;
                 break;
-            }
-            CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
-            if (cubeHealth != null)
-            {
-                if (cubeHealth.health < 26)
-                {
-                    cubeHealth.health += 5;
-                    break;
-                }
-                else
-                {
-                    continue;
-                }
             }
         }
 
@@ -151,7 +143,6 @@ public class BoxSpawner : MonoBehaviour
         // Décrémente le nombre de blocs réels lorsque la coroutine est terminée (quand le bloc transparent est détruit)
         cubeCount--;
     }
-
 
     private void OnDrawGizmos()
     {

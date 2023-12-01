@@ -33,6 +33,11 @@ public class BoxSpawner : MonoBehaviour
                 for (int i = 0; i < spawnCount; i++)
                 {
                     Vector3 spawnPosition;
+
+                    // Utilisez un nombre limité de tentatives pour éviter une boucle infinie
+                    int maxAttempts = 10;
+                    int attemptCount = 0;
+
                     do
                     {
                         spawnPosition = new Vector3(
@@ -40,47 +45,18 @@ public class BoxSpawner : MonoBehaviour
                             Random.Range(-spawnBoxSize.y / 2, spawnBoxSize.y / 2),
                             Random.Range(-spawnBoxSize.z / 2, spawnBoxSize.z / 2)
                         );
-                    } while (spawnPosition.magnitude < exclusionRadius);
 
-                    spawnPosition /= gridSize;
-                    spawnPosition = new Vector3(Mathf.Round(spawnPosition.x), Mathf.Round(spawnPosition.y), Mathf.Round(spawnPosition.z));
-                    spawnPosition *= gridSize;
+                        spawnPosition /= gridSize;
+                        spawnPosition = new Vector3(Mathf.Round(spawnPosition.x), Mathf.Round(spawnPosition.y), Mathf.Round(spawnPosition.z));
+                        spawnPosition *= gridSize;
 
-                    spawnPosition += transform.position;
+                        spawnPosition += transform.position;
 
-                    Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
-                    if (colliders.Length > 0)
-                    {
-                        foreach (Collider collider in colliders)
-                        {
-                            bool playerInPosition = collider.gameObject.CompareTag("Player");
-                            if (playerInPosition)
-                            {
-                                StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
-                                break;
-                            }
+                        attemptCount++;
+                    } while (IsSpawnPositionColliding(spawnPosition) && attemptCount < maxAttempts);
 
-                            CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
-                            if (cubeHealth != null)
-                            {
-                                if (cubeHealth.health < 26)
-                                {
-                                    cubeHealth.health += 5;
-                                    cubeCount++; // Incrémente le nombre de blocs réels
-                                }
-                                else
-                                {
-                                    // Cube amélioré, comptez-le comme un cube supplémentaire
-                                    cubeCount++; // Incrémente le nombre de blocs réels
-
-                                    // Ajoutez ici la logique d'augmentation du cubeCount en fonction de l'amélioration du cube
-                                    cubeCount += Mathf.CeilToInt(cubeHealth.health / 5f) - 1;
-                                }
-                                break;
-                            }
-                        }
-                    }
-                    else
+                    // Vérifiez à nouveau si la position est en collision avec le sol
+                    if (!IsSpawnPositionColliding(spawnPosition))
                     {
                         StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
                         cubeCount++; // Incrémente le nombre de blocs réels
@@ -91,6 +67,28 @@ public class BoxSpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
     }
+
+    // Fonction pour vérifier si la position de spawn est en collision avec le sol
+    private bool IsSpawnPositionColliding(Vector3 position)
+    {
+        // Ajustez la hauteur de la ligne en fonction de votre cube et de la précision nécessaire
+        float lineHeight = gridSize;
+
+        Vector3 start = position + Vector3.up * lineHeight;
+        Vector3 end = position - Vector3.up * lineHeight;
+
+        if (Physics.Linecast(start, end))
+        {
+            // Ajoutez ici toutes les couches que vous souhaitez éviter (par exemple, Ground)
+            if (Physics.Linecast(start, end, 1 << LayerMask.NameToLayer("Ground")))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {

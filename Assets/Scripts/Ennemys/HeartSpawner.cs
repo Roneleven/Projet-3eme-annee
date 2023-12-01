@@ -116,13 +116,37 @@ IEnumerator PlayAnimationAndReload()
     TimeOut();
 }
 
+    private bool IsSpawnPositionColliding(Vector3 position)
+    {
+        float rayHeight = gridSize;
+
+        Vector3 start = position + Vector3.up * rayHeight;
+        Vector3 end = position - Vector3.up * rayHeight;
+
+        RaycastHit hit;
+
+        int layerMask = LayerMask.GetMask("Ground", "Wall"); // Ajoutez les noms de vos autres layers
+        if (Physics.Linecast(start, end, out hit, layerMask))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {
+        if (IsSpawnPositionColliding(spawnPosition))
+        {
+            yield break; // Si la position de spawn est en collision, arrêter la coroutine
+        }
+
         GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
         yield return new WaitForSeconds(spawnInterval);
 
         Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
         bool playerInPosition = false;
+
         foreach (Collider collider in colliders)
         {
             if (collider.gameObject.tag == "Player")
@@ -154,7 +178,10 @@ IEnumerator PlayAnimationAndReload()
                         Vector3 cubePosition = new Vector3(x, y, z);
                         if (Mathf.Abs(x - playerPosition.x) >= 3 || Mathf.Abs(y - playerPosition.y) >= 3 || Mathf.Abs(z - playerPosition.z) >= 3)
                         {
-                            Instantiate(cubePrefab, cubePosition, Quaternion.identity, spawnContainer.transform);
+                            if (!IsSpawnPositionColliding(cubePosition))
+                            {
+                                Instantiate(cubePrefab, cubePosition, Quaternion.identity, spawnContainer.transform);
+                            }
                         }
                     }
                 }
@@ -162,7 +189,7 @@ IEnumerator PlayAnimationAndReload()
         }
     }
 
-public void ChangePalierOnTeleport()
+    public void ChangePalierOnTeleport()
 {
     if (isCooldownActive) return;
 

@@ -104,6 +104,19 @@ public class BoxSpawner : MonoBehaviour
                 playerInPosition = true;
                 break;
             }
+            CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
+            if (cubeHealth != null)
+            {
+                if (cubeHealth.health < 26)
+                {
+                    cubeHealth.health += 5;
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
+            }
         }
 
         Destroy(transparentCube);

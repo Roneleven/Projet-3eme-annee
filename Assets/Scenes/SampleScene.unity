@@ -1134,7 +1134,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1549c4dbd1a21b94a8c03d72f9d52df9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a07d442990e24ed48b6595df3fd65b4d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1555,7 +1555,7 @@ PrefabInstance:
     - target: {fileID: 4727346879537957042, guid: 2462394dbc6015c41b1b4bea11408c07, type: 3}
       propertyPath: respawnPoint
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7062176311708731224}
     - target: {fileID: 5271623896339654414, guid: 2462394dbc6015c41b1b4bea11408c07, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2793,6 +2793,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6283e5f320508834a8482df675eace07, type: 3}
+--- !u!4 &7062176311708731224 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3769642707380938023, guid: 6283e5f320508834a8482df675eace07, type: 3}
+  m_PrefabInstance: {fileID: 7062176311708731223}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9098042349590109725
 PrefabInstance:
   m_ObjectHideFlags: 0

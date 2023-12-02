@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bumper
   - Block
+  - TransparentBlock
   layers:
   - Default
   - TransparentFX

@@ -21,7 +21,7 @@ public class HeartSpawner : MonoBehaviour
     public float temporarySpawnCount;
     public float temporarySpawnInterval;
     public float timeTemporaryPalier;
-    public float timer = 10;
+    public float timer = 60;
     private bool timerActive = false;
     public TextMeshProUGUI timerText;
     public Image blackFade;
@@ -167,7 +167,7 @@ public void ChangePalierOnTeleport()
 
     if (heartHealth != null)
     {
-        timer = 20; // Réinitialisez le timer ici
+        timer = 60; // Réinitialisez le timer ici
 
         if (currentPalier > previousPalier)
         {

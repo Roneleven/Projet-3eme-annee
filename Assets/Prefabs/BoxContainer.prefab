@@ -45,9 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubePrefab: {fileID: 1230891745418371966, guid: 75a55552e1acd2a4e8137cda36a98ade, type: 3}
-  transparentCubePrefab: {fileID: 2751100251518416, guid: e270576d61d2b784582b8db1cc980d8d, type: 3}
-  spawnInterval: 1
+  spawnInterval: 2
+  spawnRadius: 0
+  spawnContainer: {fileID: 0}
   spawnBoxSize: {x: 10, y: 5, z: 8}
   gridSize: 1
-  exclusionRadius: 2
-  spawnCount: 1
+  exclusionRadius: 0
+  spawnCount: 3
+  transparentCubePrefab: {fileID: 2751100251518416, guid: e270576d61d2b784582b8db1cc980d8d, type: 3}
+  maxCubeCount: 50
+  cubeCount: 0

@@ -319,17 +319,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1709170488}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &256205060 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-  m_PrefabInstance: {fileID: 1756300164}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2547ce751589b89479e419e3366a37a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &277559456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1848,16 +1837,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 588251712}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: heartHealth
-      value: 
-      objectReference: {fileID: 256205060}
-    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: defaultTimer
       value: 60
       objectReference: {fileID: 0}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: spawnInterval
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: fadeOutUIImage
@@ -2868,6 +2853,10 @@ PrefabInstance:
       propertyPath: spawnContainer
       value: 
       objectReference: {fileID: 177016507}
+    - target: {fileID: 2836226785195394683, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
+      propertyPath: exclusionRadius
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

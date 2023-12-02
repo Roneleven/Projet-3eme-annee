@@ -9,15 +9,15 @@ public class HeartSpawner : MonoBehaviour
 {
     public GameObject cubePrefab;
     public float spawnInterval = 1f;
-    private float spawnRadius;
+    public float spawnRadius;
     public GameObject spawnContainer;
     public float gridSize = 1f;
-    private float exclusionRadius = 2f;
-    private float spawnCount;
+    public float exclusionRadius = 2f;
+    public float spawnCount;
     public GameObject transparentCubePrefab;
     public HeartHealth heartHealth;
-    private int previousPalier = 1;
-    private int currentPalier = 1;
+    public int previousPalier = 1;
+    public int currentPalier = 1;
     public float temporarySpawnCount;
     public float temporarySpawnInterval;
     public float timeTemporaryPalier;
@@ -119,7 +119,7 @@ public class HeartSpawner : MonoBehaviour
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {
         GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-        yield return new WaitForSeconds(spawnInterval);
+        yield return new WaitForSeconds(1);
 
         Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
         bool playerInPosition = false;

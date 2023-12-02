@@ -21,7 +21,8 @@ public class HeartSpawner : MonoBehaviour
     public float temporarySpawnCount;
     public float temporarySpawnInterval;
     public float timeTemporaryPalier;
-    public float timer = 10;
+    public float timer;
+    public float defaultTimer;
     private bool timerActive = false;
     public TextMeshProUGUI timerText;
     public Image blackFade;
@@ -92,33 +93,33 @@ public class HeartSpawner : MonoBehaviour
         }
     }
 
-void Update()
-{
-    if (timerActive)
+    void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0)
+        if (timerActive)
         {
-            StartCoroutine(PlayAnimationAndReload());
-        }
-        else
-        {
-            timerText.text = Mathf.Round(timer).ToString() + "s";
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                StartCoroutine(PlayAnimationAndReload());
+            }
+            else
+            {
+                timerText.text = Mathf.Round(timer).ToString() + "s";
+            }
         }
     }
-}
 
-IEnumerator PlayAnimationAndReload()
-{
-    anim.Play("FadeIn");
-     yield return new WaitForSeconds(1);
-    TimeOut();
-}
+    IEnumerator PlayAnimationAndReload()
+    {
+        anim.Play("FadeIn");
+        yield return new WaitForSeconds(1);
+        TimeOut();
+    }
 
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {
-        GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity);
-        yield return new WaitForSeconds(1);
+        GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+        yield return new WaitForSeconds(spawnInterval);
 
         Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
         bool playerInPosition = false;
@@ -161,66 +162,66 @@ IEnumerator PlayAnimationAndReload()
         }
     }
 
-public void ChangePalierOnTeleport()
-{
-    if (isCooldownActive) return;
-
-    if (heartHealth != null)
+    public void ChangePalierOnTeleport()
     {
-        timer = 20; // Réinitialisez le timer ici
+        if (isCooldownActive) return;
 
-        if (currentPalier > previousPalier)
+        if (heartHealth != null)
         {
-            previousPalier = currentPalier;
-        }
+            timer = defaultTimer; // Réinitialisez le timer ici
 
-        timerActive = true;
-        StartCoroutine(ResetPalier());
+            if (currentPalier > previousPalier)
+            {
+                previousPalier = currentPalier;
+            }
+
+            timerActive = true;
+            StartCoroutine(ResetPalier());
+        }
     }
-}
 
 
     private IEnumerator ResetPalier()
-{
-    isCooldownActive = true;
-
-    float originalSpawnRadius = spawnRadius;
-    float originalSpawnCount = spawnCount;
-    float originalSpawnInterval = spawnInterval;
-
-    spawnCount = temporarySpawnCount;
-    spawnInterval = temporarySpawnInterval;
-
-    for (int palier = 1; palier <= currentPalier; palier++)
     {
-        float temporarySpawnCountBeforeAdjust = spawnCount;
-        AdjustPalierValues(palier);
-        spawnCount = temporarySpawnCountBeforeAdjust;
-        yield return new WaitForSeconds(timeTemporaryPalier);
+        isCooldownActive = true;
+
+        float originalSpawnRadius = spawnRadius;
+        float originalSpawnCount = spawnCount;
+        float originalSpawnInterval = spawnInterval;
+
+        spawnCount = temporarySpawnCount;
+        spawnInterval = temporarySpawnInterval;
+
+        for (int palier = 1; palier <= currentPalier; palier++)
+        {
+            float temporarySpawnCountBeforeAdjust = spawnCount;
+            AdjustPalierValues(palier);
+            spawnCount = temporarySpawnCountBeforeAdjust;
+            yield return new WaitForSeconds(timeTemporaryPalier);
+        }
+
+        // Restaurer les valeurs originales
+        spawnRadius = originalSpawnRadius;
+        spawnCount = originalSpawnCount;
+        spawnInterval = originalSpawnInterval;
+
+        // Passer au palier suivant
+        currentPalier++;
+        AdjustPalierValues(currentPalier);
+
+        if (currentPalier >= 2 && !timerActive)
+        {
+            timerActive = true;
+            Invoke("TimeOut", timer);
+        }
+
+        isCooldownActive = false;
     }
 
-    // Restaurer les valeurs originales
-    spawnRadius = originalSpawnRadius;
-    spawnCount = originalSpawnCount;
-    spawnInterval = originalSpawnInterval;
-
-    // Passer au palier suivant
-    currentPalier++;
-    AdjustPalierValues(currentPalier);
-
-    if (currentPalier >= 2 && !timerActive)
+    private void TimeOut()
     {
-        timerActive = true;
-        Invoke("TimeOut", timer);
+        FindObjectOfType<SceneTransition>().ReloadScene();
     }
-
-    isCooldownActive = false;
-}
-
-private void TimeOut()
-{
-    FindObjectOfType<SceneTransition>().ReloadScene();
-}
 
 
     private void AdjustPalierValues(int palier)

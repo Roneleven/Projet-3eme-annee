@@ -9,15 +9,15 @@ public class HeartSpawner : MonoBehaviour
 {
     public GameObject cubePrefab;
     public float spawnInterval = 1f;
-    public float spawnRadius;
+    private float spawnRadius;
     public GameObject spawnContainer;
     public float gridSize = 1f;
-    public float exclusionRadius = 2f;
-    public float spawnCount;
+    private float exclusionRadius = 2f;
+    private float spawnCount;
     public GameObject transparentCubePrefab;
     public HeartHealth heartHealth;
-    public int previousPalier = 1;
-    public int currentPalier = 1;
+    private int previousPalier = 1;
+    private int currentPalier = 1;
     public float temporarySpawnCount;
     public float temporarySpawnInterval;
     public float timeTemporaryPalier;

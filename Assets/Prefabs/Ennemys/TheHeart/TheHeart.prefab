@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8869519526867607393}
   - component: {fileID: 977420063153213807}
   - component: {fileID: -1437274018121235859}
+  - component: {fileID: 2264444207413364211}
   m_Layer: 0
   m_Name: TheHeart
   m_TagString: Untagged
@@ -27,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5743461851523346344}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.4047234, y: 4.415761, z: 4.2148557}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2347755179319362466
 MeshFilter:
@@ -119,7 +120,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubePrefab: {fileID: 1230891745418371966, guid: 75a55552e1acd2a4e8137cda36a98ade, type: 3}
-  spawnInterval: 0.2
+  spawnInterval: 1
   spawnRadius: 4
+  spawnContainer: {fileID: 0}
   gridSize: 1
   exclusionRadius: 2
+  spawnCount: 4
+  transparentCubePrefab: {fileID: 2751100251518416, guid: e270576d61d2b784582b8db1cc980d8d, type: 3}
+  heartHealth: {fileID: 0}
+  currentPalier: 1
+  temporarySpawnCount: 50
+  timeTemporaryPalier: 5
+--- !u!114 &2264444207413364211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5743461851523346344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2547ce751589b89479e419e3366a37a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  health: 5
+  currentPalier: 1
+  teleportPositions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

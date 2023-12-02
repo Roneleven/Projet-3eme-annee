@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class CubeHealth : MonoBehaviour
 {
-    public int health = 5;
+    public int health = 1;
     public Material lvl1;
     public Material lvl2; 
     public Material lvl3;
     public Material lvl4;
     public Material lvl5; 
 
-    private Renderer renderer; 
+    private Renderer cubeRenderer; 
 
     private void Start()
     {
-        renderer = GetComponent<Renderer>();
+        cubeRenderer = GetComponent<Renderer>();
     }
 
     private void Update()
@@ -34,25 +34,25 @@ public class CubeHealth : MonoBehaviour
     private void UpdateMaterial()
     {
         
-        if (health <= 5)
+        if (health <= 1)
         {
-            renderer.material = lvl1;
+            cubeRenderer.material = lvl1;
         }
-        else if (health <= 10)
+        else if (health <= 2)
         {
-            renderer.material = lvl2;
+            cubeRenderer.material = lvl2;
         }
-        else if (health <= 20)
+        else if (health <= 5)
         {
-            renderer.material = lvl3;
+            cubeRenderer.material = lvl3;
         }
-         else if (health <= 30)
+         else if (health <= 10)
         {
-            renderer.material = lvl4;
+            cubeRenderer.material = lvl4;
         }
-         else if (health <= 50)
+         else if (health <= 25)
         {
-            renderer.material = lvl5;
+            cubeRenderer.material = lvl5;
         }
     }
 }

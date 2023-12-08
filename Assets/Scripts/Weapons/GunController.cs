@@ -8,8 +8,8 @@ public class GunController : MonoBehaviour
     public float fireRate = 0.5f;
     public float recoilForce = 1.0f;
     public float reloadTime = 2.0f;
-    public string shootingSoundEvent = "event:/shootingSound";
-    public string reloadSoundEvent = "event:/reloadSound";
+    public string shootingSoundEvent = "event:/Player/Shoot";
+    public string reloadSoundEvent = "event:/Player/Shoot";
     public bool mustUseAllAmmoBeforeReload = false;
 
     [Header("Shooting Mechanics")]

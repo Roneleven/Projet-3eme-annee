@@ -1,4 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
+[System.Serializable]
+public struct TeleportPointBoxSpawnerPair
+{
+    public int teleportPointIndex;
+    public List<BoxSpawner> boxSpawners;
+}
 
 public class HeartHealth : MonoBehaviour
 {
@@ -8,6 +15,7 @@ public class HeartHealth : MonoBehaviour
     public Transform[] teleportPositions; // Tableau des positions de téléportation
     private int lastTeleportIndex = -1;
     private HeartSpawner heartSpawner;
+    public List<TeleportPointBoxSpawnerPair> teleportPointBoxSpawnerPairs = new List<TeleportPointBoxSpawnerPair>();
 
     private void Start()
     {
@@ -26,6 +34,9 @@ public class HeartHealth : MonoBehaviour
 
     private void TeleportHeart()
     {
+        // Désactiver les BoxSpawner associés à l'index de téléportation actuel
+        DeactivateLinkedBoxSpawners();
+
         if (teleportPositions.Length > 0)
         {
             int newTeleportIndex;
@@ -43,6 +54,32 @@ public class HeartHealth : MonoBehaviour
             if (heartSpawner != null)
             {
                 heartSpawner.ChangePalierOnTeleport();
+            }
+
+            // Activer tous les BoxSpawner associés à l'index de téléportation
+            foreach (var pair in teleportPointBoxSpawnerPairs)
+            {
+                if (pair.teleportPointIndex == newTeleportIndex)
+                {
+                    foreach (var boxSpawner in pair.boxSpawners)
+                    {
+                        boxSpawner.gameObject.SetActive(true);
+                    }
+                }
+            }
+        }
+    }
+
+    private void DeactivateLinkedBoxSpawners()
+    {
+        foreach (var pair in teleportPointBoxSpawnerPairs)
+        {
+            if (pair.teleportPointIndex == lastTeleportIndex)
+            {
+                foreach (var boxSpawner in pair.boxSpawners)
+                {
+                    boxSpawner.gameObject.SetActive(false);
+                }
             }
         }
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 167789009264155350}
   - component: {fileID: 2836226785195394683}
   m_Layer: 0
-  m_Name: BoxContainer
+  m_Name: BoxSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 897814931625706344}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2979722, y: 9.082659, z: 17.511765}
+  m_LocalPosition: {x: 1, y: 9, z: 17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,9 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubePrefab: {fileID: 1230891745418371966, guid: 75a55552e1acd2a4e8137cda36a98ade, type: 3}
-  transparentCubePrefab: {fileID: 2751100251518416, guid: e270576d61d2b784582b8db1cc980d8d, type: 3}
-  spawnInterval: 1
+  spawnInterval: 2
+  spawnRadius: 0
+  spawnContainer: {fileID: 0}
   spawnBoxSize: {x: 10, y: 5, z: 8}
   gridSize: 1
-  exclusionRadius: 2
-  spawnCount: 1
+  exclusionRadius: 0
+  spawnCount: 3
+  transparentCubePrefab: {fileID: 2751100251518416, guid: e270576d61d2b784582b8db1cc980d8d, type: 3}
+  maxCubeCount: 50
+  cubeCount: 0

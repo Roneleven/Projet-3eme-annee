@@ -120,17 +120,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubePrefab: {fileID: 1230891745418371966, guid: 75a55552e1acd2a4e8137cda36a98ade, type: 3}
-  spawnInterval: 1
+  spawnInterval: 1.5
   spawnRadius: 4
   spawnContainer: {fileID: 0}
   gridSize: 1
   exclusionRadius: 2
   spawnCount: 4
   transparentCubePrefab: {fileID: 2751100251518416, guid: e270576d61d2b784582b8db1cc980d8d, type: 3}
-  heartHealth: {fileID: 0}
+  heartHealth: {fileID: 2264444207413364211}
+  previousPalier: 1
   currentPalier: 1
-  temporarySpawnCount: 50
-  timeTemporaryPalier: 5
+  temporarySpawnCount: 40
+  temporarySpawnInterval: 0.1
+  timeTemporaryPalier: 3
+  timer: 60
+  defaultTimer: 60
+  timerText: {fileID: 0}
+  blackFade: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!114 &2264444207413364211
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,7 +1,8 @@
 using UnityEngine;
 using FMODUnity;
 
-public class GunController : MonoBehaviour
+[System.Serializable]
+public class GunProperties
 {
     [Header("Gun Properties")]
     public int maxAmmo = 30;
@@ -23,14 +24,21 @@ public class GunController : MonoBehaviour
     public float bulletLifeTime = 5f;
     public int bulletDamage = 10;
     public int bulletPenetrationCount = 1;
+}
 
-    private int currentAmmo;
+public class GunController : MonoBehaviour
+{
+    public GunProperties gunProperties;
+
+    [HideInInspector]
+    public int currentAmmo;
+
     private float nextTimeToFire = 0.0f;
     private bool isReloading = false;
 
     void Start()
     {
-        currentAmmo = maxAmmo;
+        currentAmmo = gunProperties.maxAmmo;
     }
 
     void Update()
@@ -38,13 +46,13 @@ public class GunController : MonoBehaviour
         if (isReloading)
             return;
 
-        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire && currentAmmo >= bulletsPerShot)
+        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire && currentAmmo >= gunProperties.bulletsPerShot)
         {
-            nextTimeToFire = Time.time + 1f / fireRate;
+            nextTimeToFire = Time.time + 1f / gunProperties.fireRate;
             Shoot();
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && (!mustUseAllAmmoBeforeReload || currentAmmo < maxAmmo))
+        if (Input.GetKeyDown(KeyCode.R) && (!gunProperties.mustUseAllAmmoBeforeReload || currentAmmo < gunProperties.maxAmmo))
         {
             StartCoroutine(Reload());
         }
@@ -52,18 +60,18 @@ public class GunController : MonoBehaviour
 
     void Shoot()
     {
-        currentAmmo -= bulletsPerShot;
-        FMODUnity.RuntimeManager.PlayOneShot(shootingSoundEvent, transform.position);
+        currentAmmo -= gunProperties.bulletsPerShot;
+        FMODUnity.RuntimeManager.PlayOneShot(gunProperties.shootingSoundEvent, transform.position);
 
-        for (int i = 0; i < bulletsPerShot; i++)
+        for (int i = 0; i < gunProperties.bulletsPerShot; i++)
         {
-            if (bulletPrefab != null && shootingPoint != null)
+            if (gunProperties.bulletPrefab != null && gunProperties.shootingPoint != null)
             {
-                GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
+                GameObject bullet = Instantiate(gunProperties.bulletPrefab, gunProperties.shootingPoint.position, gunProperties.shootingPoint.rotation);
 
                 // Adding bullet spread
-                Vector3 spread = Random.insideUnitSphere * spreadAmount;
-                spread += shootingPoint.forward;
+                Vector3 spread = Random.insideUnitSphere * gunProperties.spreadAmount;
+                spread += gunProperties.shootingPoint.forward;
                 Quaternion spreadRotation = Quaternion.LookRotation(spread);
 
                 bullet.transform.rotation = spreadRotation;
@@ -71,7 +79,7 @@ public class GunController : MonoBehaviour
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
                 if (bulletScript != null)
                 {
-                    bulletScript.Initialize(bulletSpeed, bulletLifeTime, bulletDamage, bulletPenetrationCount);
+                    bulletScript.Initialize(gunProperties.bulletSpeed, gunProperties.bulletLifeTime, gunProperties.bulletDamage, gunProperties.bulletPenetrationCount);
                 }
             }
         }
@@ -80,9 +88,9 @@ public class GunController : MonoBehaviour
     System.Collections.IEnumerator Reload()
     {
         isReloading = true;
-        FMODUnity.RuntimeManager.PlayOneShot(reloadSoundEvent, transform.position);
-        yield return new WaitForSeconds(reloadTime);
-        currentAmmo = maxAmmo;
+        FMODUnity.RuntimeManager.PlayOneShot(gunProperties.reloadSoundEvent, transform.position);
+        yield return new WaitForSeconds(gunProperties.reloadTime);
+        currentAmmo = gunProperties.maxAmmo;
         isReloading = false;
     }
 }

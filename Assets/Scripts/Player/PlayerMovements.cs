@@ -40,7 +40,7 @@ public class PlayerMovements : MonoBehaviour
     velocity.y += gravity * Time.deltaTime;
     controller.Move(velocity * Time.deltaTime);
 
-    if (transform.position.y < -100)
+    if (transform.position.y < -25)
     {
         transform.position = respawnPoint.position;
     }

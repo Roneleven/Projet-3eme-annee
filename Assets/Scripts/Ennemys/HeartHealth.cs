@@ -63,7 +63,8 @@ public class HeartHealth : MonoBehaviour
                 {
                     foreach (var boxSpawner in pair.boxSpawners)
                     {
-                        boxSpawner.gameObject.SetActive(true);
+                        //boxSpawner.gameObject.SetActive(true);
+                        boxSpawner.StartCoroutine(boxSpawner.SpawnCube());
                     }
                 }
             }
@@ -78,7 +79,8 @@ public class HeartHealth : MonoBehaviour
             {
                 foreach (var boxSpawner in pair.boxSpawners)
                 {
-                    boxSpawner.gameObject.SetActive(false);
+                    //boxSpawner.gameObject.SetActive(false);
+                    boxSpawner.StopAllCoroutines();
                 }
             }
         }

@@ -16,10 +16,10 @@ public class HeartHealth : MonoBehaviour
     public Transform[] teleportPositions;
     private int lastTeleportIndex = -1;
     private HeartSpawner heartSpawner;
-    private List<TeleportPointBoxSpawnerPair> teleportPointBoxSpawnerPairs = new List<TeleportPointBoxSpawnerPair>();
+    [SerializeField] private List<TeleportPointBoxSpawnerPair> teleportPointBoxSpawnerPairs = new List<TeleportPointBoxSpawnerPair>();
 
     // Nouvelle variable pour stocker les points de téléportation accessibles après chaque téléportation
-    public List<int> accessibleTeleportPoints = new List<int>();
+    private List<int> accessibleTeleportPoints = new List<int>();
 
     private void Start()
     {

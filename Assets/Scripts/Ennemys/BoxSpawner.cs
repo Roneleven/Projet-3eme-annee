@@ -21,13 +21,15 @@ public class BoxSpawner : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnCube());
+        //StartCoroutine(SpawnCube());
     }
 
-	private IEnumerator SpawnCube()
+	public IEnumerator SpawnCube()
     {
         while (true)
         {
+           // while (pause) yield return new WaitForEndOfFrame();
+
             if (cubeCount < maxCubeCount)
             {
                 for (int i = 0; i < spawnCount; i++)

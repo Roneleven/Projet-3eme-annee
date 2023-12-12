@@ -1495,6 +1495,14 @@ PrefabInstance:
       propertyPath: bulletsPerShot
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 445138976197890382, guid: 2462394dbc6015c41b1b4bea11408c07, type: 3}
+      propertyPath: reloadSoundEvent
+      value: event:/Guns/PrimaryGun/Reload
+      objectReference: {fileID: 0}
+    - target: {fileID: 445138976197890382, guid: 2462394dbc6015c41b1b4bea11408c07, type: 3}
+      propertyPath: shootingSoundEvent
+      value: event:/Guns/PrimaryGun/Shoot
+      objectReference: {fileID: 0}
     - target: {fileID: 1388989741479645467, guid: 2462394dbc6015c41b1b4bea11408c07, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.6

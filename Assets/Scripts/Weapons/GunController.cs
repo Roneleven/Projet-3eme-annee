@@ -24,7 +24,7 @@ public class GunController : MonoBehaviour
     public int bulletDamage = 10;
     public int bulletPenetrationCount = 1;
 
-    private int currentAmmo;
+    public int currentAmmo;
     private float nextTimeToFire = 0.0f;
     private bool isReloading = false;
 

@@ -27,6 +27,7 @@ public class CubeHealth : MonoBehaviour
 
     if (health <= 0)
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/Destruction", GetComponent<Transform>().position);
         Destroy(gameObject);
     }
 }

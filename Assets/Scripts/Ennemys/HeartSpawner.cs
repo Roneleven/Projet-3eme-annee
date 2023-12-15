@@ -116,53 +116,69 @@ public class HeartSpawner : MonoBehaviour
         TimeOut();
     }
 
-    private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
+    private void UpgradeCubeIfNeeded(Vector3 position)
+{
+    Collider[] colliders = Physics.OverlapSphere(position, gridSize / 2);
+    foreach (Collider collider in colliders)
     {
-        GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-        FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/Spawning", GetComponent<Transform>().position);
-        yield return new WaitForSeconds(1);
-
-        Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
-        bool playerInPosition = false;
-        foreach (Collider collider in colliders)
+        CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
+        if (cubeHealth != null && cubeHealth.health < 26)
         {
-            if (collider.gameObject.tag == "Player")
-            {
-                playerInPosition = true;
-                break;
-            }
+            cubeHealth.health += 5;
+            break;
         }
+    }
+}
 
-        Destroy(transparentCube);
+    private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
+{
+    GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+    FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/Spawning", GetComponent<Transform>().position);
+    yield return new WaitForSeconds(1);
 
-        if (!playerInPosition)
+    Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
+    bool playerInPosition = false;
+    foreach (Collider collider in colliders)
+    {
+        if (collider.gameObject.tag == "Player")
         {
-            Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-            FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/Spawn", GetComponent<Transform>().position);
+            playerInPosition = true;
+            break;
         }
-        else
-        {
-            Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-            playerPosition /= gridSize;
-            playerPosition = new Vector3(Mathf.Round(playerPosition.x), Mathf.Round(playerPosition.y), Mathf.Round(playerPosition.z));
-            playerPosition *= gridSize;
+    }
 
-            for (float x = playerPosition.x - 3; x <= playerPosition.x + 3; x += gridSize)
+    Destroy(transparentCube);
+
+    if (!playerInPosition)
+    {
+        Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/Spawn", GetComponent<Transform>().position);
+    }
+    else
+    {
+        UpgradeCubeIfNeeded(spawnPosition);
+
+        Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+        playerPosition /= gridSize;
+        playerPosition = new Vector3(Mathf.Round(playerPosition.x), Mathf.Round(playerPosition.y), Mathf.Round(playerPosition.z));
+        playerPosition *= gridSize;
+
+        for (float x = playerPosition.x - 3; x <= playerPosition.x + 3; x += gridSize)
+        {
+            for (float y = playerPosition.y - 3; y <= playerPosition.y + 3; y += gridSize)
             {
-                for (float y = playerPosition.y - 3; y <= playerPosition.y + 3; y += gridSize)
+                for (float z = playerPosition.z - 3; z <= playerPosition.z + 3; z += gridSize)
                 {
-                    for (float z = playerPosition.z - 3; z <= playerPosition.z + 3; z += gridSize)
+                    Vector3 cubePosition = new Vector3(x, y, z);
+                    if (Mathf.Abs(x - playerPosition.x) >= 3 || Mathf.Abs(y - playerPosition.y) >= 3 || Mathf.Abs(z - playerPosition.z) >= 3)
                     {
-                        Vector3 cubePosition = new Vector3(x, y, z);
-                        if (Mathf.Abs(x - playerPosition.x) >= 3 || Mathf.Abs(y - playerPosition.y) >= 3 || Mathf.Abs(z - playerPosition.z) >= 3)
-                        {
-                            Instantiate(cubePrefab, cubePosition, Quaternion.identity, spawnContainer.transform);
-                        }
+                        Instantiate(cubePrefab, cubePosition, Quaternion.identity, spawnContainer.transform);
                     }
                 }
             }
         }
     }
+}
 
     public void ChangePalierOnTeleport()
     {

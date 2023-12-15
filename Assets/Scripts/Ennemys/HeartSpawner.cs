@@ -119,6 +119,7 @@ public class HeartSpawner : MonoBehaviour
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {
         GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/Spawning", GetComponent<Transform>().position);
         yield return new WaitForSeconds(1);
 
         Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
@@ -137,6 +138,7 @@ public class HeartSpawner : MonoBehaviour
         if (!playerInPosition)
         {
             Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/Spawn", GetComponent<Transform>().position);
         }
         else
         {

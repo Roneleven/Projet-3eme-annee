@@ -19,9 +19,9 @@ public class GunController : MonoBehaviour
 
     [Header("Bullet Settings")]
     public GameObject bulletPrefab;
-    public float bulletSpeed = 20f;
+    public float bulletSpeed = 100f;
     public float bulletLifeTime = 5f;
-    public int bulletDamage = 10;
+    public int bulletDamage = 1;
     public int bulletPenetrationCount = 1;
 
     public int currentAmmo;

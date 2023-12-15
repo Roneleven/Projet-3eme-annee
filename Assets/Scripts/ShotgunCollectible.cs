@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class ShotgunCollectible : MonoBehaviour
 {
-    public GunController gunController; // Faites glisser votre objet GunController ici depuis l'éditeur Unity
+    public GunController gunController; // Faites glisser votre objet GunController ici depuis l'ï¿½diteur Unity
 
-    // Les nouvelles propriétés que vous souhaitez appliquer lorsque le collectible est ramassé
+    // Les nouvelles propriï¿½tï¿½s que vous souhaitez appliquer lorsque le collectible est ramassï¿½
     [Header("Gun Properties")]
     public int newMaxAmmo = 50;
     public float newFireRate = 0.7f;
@@ -20,25 +20,25 @@ public class ShotgunCollectible : MonoBehaviour
     public float newSpreadAmount = 0.1f;
 
     [Header("Bullet Settings")]
-    public float newBulletSpeed = 20f;
+    public float newBulletSpeed = 100f;
     public float newBulletLifeTime = 5f;
-    public int newBulletDamage = 10;
+    public int newBulletDamage = 1;
     public int newBulletPenetrationCount = 1;
 
-    // Ajoutez d'autres propriétés selon vos besoins
+    // Ajoutez d'autres propriï¿½tï¿½s selon vos besoins
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             ApplyChangesToGun();
-            Destroy(gameObject); // Détruisez le collectible après qu'il a été ramassé
+            Destroy(gameObject); // Dï¿½truisez le collectible aprï¿½s qu'il a ï¿½tï¿½ ramassï¿½
         }
     }
 
     void ApplyChangesToGun()
     {
-        // Appliquer les nouvelles propriétés au GunController
+        // Appliquer les nouvelles propriï¿½tï¿½s au GunController
         gunController.maxAmmo = newMaxAmmo;
         gunController.fireRate = newFireRate;
         gunController.recoilForce = newRecoilForce;
@@ -52,6 +52,6 @@ public class ShotgunCollectible : MonoBehaviour
         gunController.bulletLifeTime = newBulletLifeTime;
         gunController.bulletDamage = newBulletDamage;
         gunController.currentAmmo = Mathf.Min(gunController.currentAmmo, gunController.maxAmmo);
-        // Appliquer d'autres propriétés selon vos besoins
+        // Appliquer d'autres propriï¿½tï¿½s selon vos besoins
     }
 }

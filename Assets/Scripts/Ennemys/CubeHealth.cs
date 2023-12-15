@@ -9,16 +9,21 @@ public class CubeHealth : MonoBehaviour
     public Material lvl4;
     public Material lvl5; 
 
-    private Renderer cubeRenderer; 
+    private Renderer cubeRenderer;
+    private int previousHealth; 
 
     private void Start()
     {
         cubeRenderer = GetComponent<Renderer>();
+        previousHealth = health;
     }
 
     private void Update()
     {
-        UpdateMaterial(); 
+        UpdateMaterial();
+        CheckLevelDown(); 
+        CheckLevelUp(); 
+        previousHealth = health;
     }
 
     public void TakeDamage(int damage)
@@ -56,4 +61,50 @@ public class CubeHealth : MonoBehaviour
             cubeRenderer.material = lvl5;
         }
     }
+
+    private void CheckLevelDown()
+    {
+        int currentLevel = DetermineLevel(health);
+        int previousLevel = DetermineLevel(previousHealth);
+
+        if (currentLevel < previousLevel)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/LevelLess", transform.position);
+        }
+    }
+
+private void CheckLevelUp()
+    {
+        if (health > previousHealth)
+        {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/MoreHP", GetComponent<Transform>().position);
+        }
+
+        previousHealth = health;
+    }
+
+// Fonction pour déterminer le niveau en fonction de la santé
+private int DetermineLevel(int healthValue)
+{
+    if (healthValue <= 1)
+    {
+        return 1;
+    }
+    else if (healthValue <= 2)
+    {
+        return 2;
+    }
+    else if (healthValue <= 5)
+    {
+        return 3;
+    }
+    else if (healthValue <= 10)
+    {
+        return 4;
+    }
+    else
+    {
+        return 5;
+    }
+}
 }

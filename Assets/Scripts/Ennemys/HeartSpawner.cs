@@ -149,6 +149,13 @@ public class HeartSpawner : MonoBehaviour
 
     Destroy(transparentCube);
 
+    // Appel de la méthode pour arrêter le son du cube transparent s'il est en train de jouer
+    PlayerCage playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCage>();
+    if (playerScript != null)
+    {
+        playerScript.StopTransparentCubeWarningSound();
+    }
+
     if (!playerInPosition)
     {
         Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);

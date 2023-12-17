@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 4727346879537957042}
   - component: {fileID: 445138976197890382}
   m_Layer: 0
-  m_Name: FPS Player
+  m_Name: OUTDATEDFPS Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

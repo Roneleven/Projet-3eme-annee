@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5463507546113587738}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.2762737, y: 1.9238901, z: 5.632889}
+  m_LocalPosition: {x: -2.5, y: 2, z: 6}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -118,9 +118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6383efc3daa4f2643bf8b0153bcfbe0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunController: {fileID: 0}
+  gunController: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
   newMaxAmmo: 50
-  newFireRate: 10
+  newFireRate: 1
   newRecoilForce: 0.8
   newReloadTime: 0.2
   recoilForce: 1

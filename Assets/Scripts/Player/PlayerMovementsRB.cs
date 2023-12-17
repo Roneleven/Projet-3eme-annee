@@ -34,7 +34,8 @@ public class PlayerMovementsRB : MonoBehaviour
 
         Vector3 move = transform.right * movementX + transform.forward * movementY;
 
-        rb.MovePosition(rb.position + move * speed * Time.deltaTime);
+        //rb.MovePosition(rb.position + move * speed * Time.deltaTime);
+        rb.velocity = new Vector3(move.x * speed, rb.velocity.y, move.z * speed);
 
         if (transform.position.y < -100)
         {
@@ -54,7 +55,6 @@ public class PlayerMovementsRB : MonoBehaviour
     {
         if (isGrounded)
         {
-            // Code pour gérer le saut
             rb.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
         }
     }

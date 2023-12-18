@@ -7963,7 +7963,7 @@ GameObject:
   - component: {fileID: 1394867424}
   - component: {fileID: 1394867423}
   - component: {fileID: 1394867422}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9138,13 +9138,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 417779558}
     - target: {fileID: 1662342133783437384, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: jumpHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662342133783437384, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: jetpackForce
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1662342133783437384, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: respawnPoint
       value: 
       objectReference: {fileID: 1982265432}
+    - target: {fileID: 1662342133783437384, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: maxJetpackCharge
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3032890351301840679, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -11225,7 +11233,7 @@ GameObject:
   - component: {fileID: 1892072436}
   - component: {fileID: 1892072435}
   - component: {fileID: 1892072434}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12397,7 +12405,7 @@ GameObject:
   - component: {fileID: 1892828414}
   - component: {fileID: 1892828413}
   - component: {fileID: 1892828412}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13569,7 +13577,7 @@ GameObject:
   - component: {fileID: 1916357213}
   - component: {fileID: 1916357212}
   - component: {fileID: 1916357211}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15354,7 +15362,7 @@ GameObject:
   - component: {fileID: 2026217204}
   - component: {fileID: 2026217203}
   - component: {fileID: 2026217202}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

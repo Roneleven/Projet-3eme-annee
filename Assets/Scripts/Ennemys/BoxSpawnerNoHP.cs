@@ -24,7 +24,7 @@ public class BoxSpawnerNoHP : MonoBehaviour
         StartCoroutine(SpawnCube());
     }
 
-    private IEnumerator SpawnCube()
+    public IEnumerator SpawnCube()
     {
         while (true)
         {

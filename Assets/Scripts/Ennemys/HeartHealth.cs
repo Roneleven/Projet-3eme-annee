@@ -6,6 +6,7 @@ public struct TeleportPointBoxSpawnerPair
 {
     public int teleportPointIndex;
     public List<BoxSpawner> boxSpawners;
+    public List<BoxSpawnerNoHP> boxSpawnersNoHP;
 }
 
 public class HeartHealth : MonoBehaviour
@@ -17,6 +18,7 @@ public class HeartHealth : MonoBehaviour
     private int lastTeleportIndex = -1;
     private HeartSpawner heartSpawner;
     [SerializeField] private List<TeleportPointBoxSpawnerPair> teleportPointBoxSpawnerPairs = new List<TeleportPointBoxSpawnerPair>();
+    [SerializeField] private List<TeleportPointBoxSpawnerPair> teleportPointBoxSpawnerPairsNoHP = new List<TeleportPointBoxSpawnerPair>();
 
     // Nouvelle variable pour stocker les points de téléportation accessibles après chaque téléportation
     private List<int> accessibleTeleportPoints = new List<int>();
@@ -82,6 +84,17 @@ public class HeartHealth : MonoBehaviour
                     }
                 }
             }
+            foreach (var pair in teleportPointBoxSpawnerPairsNoHP)
+            {
+                if (pair.teleportPointIndex == newTeleportIndex)
+                {
+                    foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
+                    {
+                        //boxSpawnerNoHP.gameObject.SetActive(true);
+                        boxSpawnerNoHP.StartCoroutine(boxSpawnerNoHP.SpawnCube());
+                    }
+                }
+            }
 
             // Mettre à jour la liste des points de téléportation accessibles après cette téléportation
             UpdateAccessibleTeleportPoints();
@@ -110,6 +123,18 @@ public class HeartHealth : MonoBehaviour
                 {
                     //boxSpawner.gameObject.SetActive(false);
                     boxSpawner.StopAllCoroutines();
+                }
+            }
+        }
+
+        foreach (var pair in teleportPointBoxSpawnerPairsNoHP)
+        {
+            if (pair.teleportPointIndex == lastTeleportIndex)
+            {
+                foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
+                {
+                    //boxSpawnerNoHP.gameObject.SetActive(false);
+                    boxSpawnerNoHP.StopAllCoroutines();
                 }
             }
         }

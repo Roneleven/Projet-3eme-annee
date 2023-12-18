@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunController: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
-  newMaxAmmo: 50
+  newMaxAmmo: 500
   newFireRate: 10
   newRecoilForce: 0.8
   newReloadTime: 0.2

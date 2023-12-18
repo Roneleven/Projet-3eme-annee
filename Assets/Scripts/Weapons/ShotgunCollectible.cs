@@ -5,24 +5,24 @@ public class ShotgunCollectible : MonoBehaviour
     public GunController gunController; // Faites glisser votre objet GunController ici depuis l'�diteur Unity
 
     [Header("Gun Properties")]
-    public int newMaxAmmo = 50;
-    public float newFireRate = 0.7f;
-    public float newRecoilForce = 0.8f;
-    public float newReloadTime = 1.5f;
-    public float recoilForce = 1.0f;
+    public int newMaxAmmo;
+    public float newFireRate;
+    public float newRecoilForce;
+    public float newReloadTime;
+    public float recoilForce;
     public string newShootingSoundEvent = "event:/Player/Shoot";
     public string newReloadSoundEvent = "event:/Player/Shoot";
     public bool newMustUseAllAmmoBeforeReload = false;
 
     [Header("Shooting Mechanics")]
-    public int newBulletsPerShot = 1;
-    public float newSpreadAmount = 0.1f;
+    public int newBulletsPerShot;
+    public float newSpreadAmount;
 
     [Header("Bullet Settings")]
-    public float newBulletSpeed = 100f;
-    public float newBulletLifeTime = 5f;
-    public int newBulletDamage = 1;
-    public int newBulletPenetrationCount = 1;
+    public float newBulletSpeed;
+    public float newBulletLifeTime;
+    public int newBulletDamage;
+    public int newBulletPenetrationCount;
 
     private void OnTriggerEnter(Collider other)
     {

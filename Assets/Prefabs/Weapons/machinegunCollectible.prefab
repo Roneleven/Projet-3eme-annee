@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5746602088960207365}
   - component: {fileID: 769959633543313672}
   - component: {fileID: 6877992825087241825}
-  - component: {fileID: 8272368071134501062}
   - component: {fileID: 5233640631427301055}
   m_Layer: 0
   m_Name: machinegunCollectible
@@ -107,33 +106,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8272368071134501062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1496660357756909618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6383efc3daa4f2643bf8b0153bcfbe0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gunController: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
-  newMaxAmmo: 500
-  newFireRate: 10
-  newRecoilForce: 0.8
-  newReloadTime: 0.2
-  recoilForce: 1
-  newShootingSoundEvent: event:/Guns/PrimaryGun/Shoot
-  newReloadSoundEvent: event:/Guns/PrimaryGun/Reload
-  newMustUseAllAmmoBeforeReload: 0
-  newBulletsPerShot: 1
-  newSpreadAmount: 0.1
-  newBulletSpeed: 200
-  newBulletLifeTime: 5
-  newBulletDamage: 10
-  newBulletPenetrationCount: 1
 --- !u!114 &5233640631427301055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,8 +119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunController: {fileID: 0}
-  newMaxAmmo: 200
-  newFireRate: 5
+  newMaxAmmo: 300
+  newFireRate: 10
   newRecoilForce: 0.8
   newReloadTime: 1.5
   recoilForce: 1
@@ -157,7 +129,7 @@ MonoBehaviour:
   newMustUseAllAmmoBeforeReload: 0
   newBulletsPerShot: 1
   newSpreadAmount: 0.1
-  newBulletSpeed: 40
+  newBulletSpeed: 100
   newBulletLifeTime: 5
   newBulletDamage: 10
   newBulletPenetrationCount: 1

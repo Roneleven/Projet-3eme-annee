@@ -2641,18 +2641,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8272368071134501062, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
-      propertyPath: newMaxAmmo
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 8272368071134501062, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
+    - target: {fileID: 5233640631427301055, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
       propertyPath: gunController
       value: 
       objectReference: {fileID: 177495167}
-    - target: {fileID: 8272368071134501062, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
-      propertyPath: newBulletsPerShot
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2740,15 +2732,15 @@ PrefabInstance:
       objectReference: {fileID: 1967270690}
     - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: maxAmmo
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: fireRate
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: bulletSpeed
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: bulletDamage
@@ -2818,10 +2810,6 @@ PrefabInstance:
     - target: {fileID: 5463507546113587738, guid: e3639dc1cb34c9d4f8baee2249dbf9fa, type: 3}
       propertyPath: m_Name
       value: shotgunCollectible
-      objectReference: {fileID: 0}
-    - target: {fileID: 8919750035094726245, guid: e3639dc1cb34c9d4f8baee2249dbf9fa, type: 3}
-      propertyPath: newFireRate
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8919750035094726245, guid: e3639dc1cb34c9d4f8baee2249dbf9fa, type: 3}
       propertyPath: gunController

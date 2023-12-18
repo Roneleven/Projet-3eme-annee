@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,54 +5,47 @@ public class PlayerMovements : MonoBehaviour
 {
     public CharacterController controller;
     public float speed;
-    public float gravity = -9.81f; // Base gravity
+    public float gravity = -9.81f;
     public float jumpHeight;
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
-    private float movementX;
-    private float movementY;
     public float bumperJumpHeight;
     public Transform respawnPoint;
 
-    Vector3 velocity;
-    bool isGrounded;
+    private Vector3 velocity;
+    private bool isGrounded;
+    private Vector2 movementInput;
+    public Vector2 lookInput;
 
     private void Update()
-{
-    GetPlayerInput();
-
-    // Check if grounded
-    isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
-    // Apply gravity and movement
-    if (isGrounded && velocity.y < 0)
     {
-        velocity.y = -2f;
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
+
+        Vector3 move = transform.right * movementInput.x + transform.forward * movementInput.y;
+        controller.Move(move.normalized * speed * Time.deltaTime);
+
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+
+        if (transform.position.y < -100)
+        {
+            transform.position = respawnPoint.position;
+        }
+        Debug.Log("Look Input: " + lookInput);
     }
 
-    Vector3 move = transform.right * movementX + transform.forward * movementY;
-
-    controller.Move(move.normalized * speed * Time.deltaTime);
-
-    velocity.y += gravity * Time.deltaTime;
-    controller.Move(velocity * Time.deltaTime);
-
-    if (transform.position.y < -100)
+    public void OnMove(InputValue movementValue)
     {
-        transform.position = respawnPoint.position;
-    }
-}
-
-    // Input handling methods
-    private void OnMove(InputValue movementValue)
-    {
-        Vector2 movementVector = movementValue.Get<Vector2>();
-        movementX = movementVector.x;
-        movementY = movementVector.y;
+        movementInput = movementValue.Get<Vector2>();
     }
 
-    private void OnJump(InputValue jumpValue)
+    public void OnJump(InputValue jumpValue)
     {
         if (isGrounded)
         {
@@ -66,19 +57,29 @@ public class PlayerMovements : MonoBehaviour
     {
         if (hit.collider.CompareTag("Bumper"))
         {
-            float originalJumpHeight = jumpHeight;
-            jumpHeight = bumperJumpHeight;
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            jumpHeight = originalJumpHeight;
+            velocity.y = Mathf.Sqrt(bumperJumpHeight * -2f * gravity);
         }
     }
 
-    private float xInput;
-    private float zInput;
-
-    void GetPlayerInput()
+    public void OnLook(InputValue value)
     {
-        xInput = Input.GetAxis("Horizontal");
-        zInput = Input.GetAxis("Vertical");
+        lookInput = value.Get<Vector2>();
+    }
+
+
+    // Public methods to provide movement and look data
+    public Vector2 GetMovementInput()
+    {
+        return movementInput;
+    }
+
+    public Vector2 GetLookInput()
+    {
+        return lookInput;
+    }
+
+    public bool IsGrounded()
+    {
+        return isGrounded;
     }
 }

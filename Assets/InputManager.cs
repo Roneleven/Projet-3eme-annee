@@ -80,6 +80,15 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LookInput"",
+                    ""type"": ""Value"",
+                    ""id"": ""a5d986e6-eee7-44f6-8725-e704728c501a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -258,6 +267,17 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""action"": ""GravityDecrement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""24edb000-a435-4eeb-ae26-0436f80ce134"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LookInput"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -300,6 +320,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Player_SpeedDecrement = m_Player.FindAction("SpeedDecrement", throwIfNotFound: true);
         m_Player_GravityIncrement = m_Player.FindAction("GravityIncrement", throwIfNotFound: true);
         m_Player_GravityDecrement = m_Player.FindAction("GravityDecrement", throwIfNotFound: true);
+        m_Player_LookInput = m_Player.FindAction("LookInput", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -367,6 +388,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SpeedDecrement;
     private readonly InputAction m_Player_GravityIncrement;
     private readonly InputAction m_Player_GravityDecrement;
+    private readonly InputAction m_Player_LookInput;
     public struct PlayerActions
     {
         private @InputManager m_Wrapper;
@@ -377,6 +399,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         public InputAction @SpeedDecrement => m_Wrapper.m_Player_SpeedDecrement;
         public InputAction @GravityIncrement => m_Wrapper.m_Player_GravityIncrement;
         public InputAction @GravityDecrement => m_Wrapper.m_Player_GravityDecrement;
+        public InputAction @LookInput => m_Wrapper.m_Player_LookInput;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -404,6 +427,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @GravityDecrement.started += instance.OnGravityDecrement;
             @GravityDecrement.performed += instance.OnGravityDecrement;
             @GravityDecrement.canceled += instance.OnGravityDecrement;
+            @LookInput.started += instance.OnLookInput;
+            @LookInput.performed += instance.OnLookInput;
+            @LookInput.canceled += instance.OnLookInput;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -426,6 +452,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @GravityDecrement.started -= instance.OnGravityDecrement;
             @GravityDecrement.performed -= instance.OnGravityDecrement;
             @GravityDecrement.canceled -= instance.OnGravityDecrement;
+            @LookInput.started -= instance.OnLookInput;
+            @LookInput.performed -= instance.OnLookInput;
+            @LookInput.canceled -= instance.OnLookInput;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -469,5 +498,6 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         void OnSpeedDecrement(InputAction.CallbackContext context);
         void OnGravityIncrement(InputAction.CallbackContext context);
         void OnGravityDecrement(InputAction.CallbackContext context);
+        void OnLookInput(InputAction.CallbackContext context);
     }
 }

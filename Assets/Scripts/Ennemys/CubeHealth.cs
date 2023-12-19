@@ -44,15 +44,15 @@ public class CubeHealth : MonoBehaviour
         {
             cubeRenderer.material = lvl1;
         }
-        else if (health <= 2)
+        else if (health <= 6)
         {
             cubeRenderer.material = lvl2;
         }
-        else if (health <= 5)
+        else if (health <= 11)
         {
             cubeRenderer.material = lvl3;
         }
-         else if (health <= 10)
+         else if (health <= 16)
         {
             cubeRenderer.material = lvl4;
         }

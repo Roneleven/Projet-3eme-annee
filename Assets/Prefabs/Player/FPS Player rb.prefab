@@ -753,6 +753,7 @@ GameObject:
   - component: {fileID: 1662342133783437384}
   - component: {fileID: 8347870928131129040}
   - component: {fileID: 5729225776423105573}
+  - component: {fileID: 1410426708537084780}
   m_Layer: 0
   m_Name: FPS Player rb
   m_TagString: Player
@@ -891,6 +892,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1410426708537084780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232101016860361905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3919951c178d95247aea904577ca794f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelAnimator: {fileID: 169150853690367392}
 --- !u!1 &6929624682293325984
 GameObject:
   m_ObjectHideFlags: 0

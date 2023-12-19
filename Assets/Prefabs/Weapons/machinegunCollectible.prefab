@@ -128,7 +128,7 @@ MonoBehaviour:
   newReloadSoundEvent: event:/Player/Shoot
   newMustUseAllAmmoBeforeReload: 0
   newBulletsPerShot: 1
-  newSpreadAmount: 0.1
+  newSpreadAmount: 0.03
   newBulletSpeed: 100
   newBulletLifeTime: 5
   newBulletDamage: 10

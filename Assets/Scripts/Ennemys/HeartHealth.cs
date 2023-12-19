@@ -18,7 +18,6 @@ public class HeartHealth : MonoBehaviour
     private int lastTeleportIndex = -1;
     private HeartSpawner heartSpawner;
     [SerializeField] private List<TeleportPointBoxSpawnerPair> teleportPointBoxSpawnerPairs = new List<TeleportPointBoxSpawnerPair>();
-    [SerializeField] private List<TeleportPointBoxSpawnerPair> teleportPointBoxSpawnerPairsNoHP = new List<TeleportPointBoxSpawnerPair>();
 
     // Nouvelle variable pour stocker les points de téléportation accessibles après chaque téléportation
     private List<int> accessibleTeleportPoints = new List<int>();
@@ -84,7 +83,7 @@ public class HeartHealth : MonoBehaviour
                     }
                 }
             }
-            foreach (var pair in teleportPointBoxSpawnerPairsNoHP)
+            foreach (var pair in teleportPointBoxSpawnerPairs)
             {
                 if (pair.teleportPointIndex == newTeleportIndex)
                 {
@@ -103,10 +102,8 @@ public class HeartHealth : MonoBehaviour
 
     private void UpdateAccessibleTeleportPoints()
     {
-        // Retirer le point de téléportation actuel de la liste des points accessibles
         accessibleTeleportPoints.Remove(lastTeleportIndex);
 
-        // Réinitialiser la liste des points accessibles si tous ont été visités
         if (accessibleTeleportPoints.Count == 0)
         {
             InitializeAccessibleTeleportPoints();
@@ -127,7 +124,7 @@ public class HeartHealth : MonoBehaviour
             }
         }
 
-        foreach (var pair in teleportPointBoxSpawnerPairsNoHP)
+        foreach (var pair in teleportPointBoxSpawnerPairs)
         {
             if (pair.teleportPointIndex == lastTeleportIndex)
             {

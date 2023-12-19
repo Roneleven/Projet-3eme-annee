@@ -104,7 +104,7 @@ public class HeartSpawner : MonoBehaviour
             }
             else
             {
-                timerText.text = Mathf.Round(timer).ToString() + "s";
+                //timerText.text = Mathf.Round(timer).ToString() + "s";
             }
         }
     }

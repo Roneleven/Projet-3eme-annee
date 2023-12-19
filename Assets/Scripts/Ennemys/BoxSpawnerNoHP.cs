@@ -21,7 +21,7 @@ public class BoxSpawnerNoHP : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnCube());
+        //StartCoroutine(SpawnCube());
     }
 
     public IEnumerator SpawnCube()

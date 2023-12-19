@@ -1,36 +1,32 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI; // Added for UI elements
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementsRB : MonoBehaviour
 {
-    [Header("Player Settings")]
     public float speed;
     public float jumpHeight;
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
-    [Header("Respawn Settings")]
     public Transform respawnPoint;
     public float respawnPositionY;
 
-    [Header("Jetpack Settings")]
     public float jetpackForce = 10f;
     public float jetpackChargeRate = 1f;
     public float maxJetpackCharge = 100f;
-    public float jetpackCharge;
     public InputActionReference jetpack;
 
-    [Header("Jetpack UI Settings")]
-    public Image jetpackChargeImage; // UI element to show jetpack charge
+    public Image jetpackChargeImage;
 
     private Rigidbody rb;
     private float movementX;
     private float movementY;
     private bool isGrounded;
+    private float jetpackCharge;
 
     private void Start()
     {
@@ -58,7 +54,7 @@ public class PlayerMovementsRB : MonoBehaviour
             UseJetpack();
         }
 
-        UpdateJetpackChargeUI(); // Update the jetpack charge UI
+        UpdateJetpackChargeUI();
 
         if (transform.position.y < respawnPositionY)
         {
@@ -66,18 +62,21 @@ public class PlayerMovementsRB : MonoBehaviour
         }
     }
 
-    private void OnMove(InputValue movementValue)
+    private void FixedUpdate()
     {
-        Vector2 movementVector = movementValue.Get<Vector2>();
-        movementX = movementVector.x;
-        movementY = movementVector.y;
+        // Gestion de la physique dans FixedUpdate
+        // Ajout de force du jetpack dans FixedUpdate
+        if (jetpack.action.IsPressed())
+        {
+            UseJetpack();
+        }
     }
 
     private void UseJetpack()
     {
         if (jetpackCharge > 0)
         {
-            rb.AddForce(Vector3.up * jetpackForce, ForceMode.Force);
+            rb.AddForce(Vector3.up * jetpackForce * Time.deltaTime, ForceMode.Force);
             jetpackCharge = Mathf.Max(jetpackCharge - Time.deltaTime, 0);
         }
     }

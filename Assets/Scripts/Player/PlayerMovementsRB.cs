@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI; // Added for UI elements
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementsRB : MonoBehaviour
@@ -23,11 +24,13 @@ public class PlayerMovementsRB : MonoBehaviour
     public float jetpackCharge;
     public InputActionReference jetpack;
 
+    [Header("Jetpack UI Settings")]
+    public Image jetpackChargeImage; // UI element to show jetpack charge
+
     private Rigidbody rb;
     private float movementX;
     private float movementY;
     private bool isGrounded;
-    
 
     private void Start()
     {
@@ -50,16 +53,17 @@ public class PlayerMovementsRB : MonoBehaviour
         Vector3 move = transform.right * movementX + transform.forward * movementY;
         rb.MovePosition(rb.position + move * speed * Time.deltaTime);
 
+        if (jetpack.action.IsPressed())
+        {
+            UseJetpack();
+        }
 
-        // Respawn logic
+        UpdateJetpackChargeUI(); // Update the jetpack charge UI
+
         if (transform.position.y < respawnPositionY)
         {
             Respawn();
         }
-
-        if (jetpack.action.IsPressed()){
-            UseJetpack();
-           }
     }
 
     private void OnMove(InputValue movementValue)
@@ -69,23 +73,13 @@ public class PlayerMovementsRB : MonoBehaviour
         movementY = movementVector.y;
     }
 
-    /*private void OnJump(InputValue jetpackValue)
-    {
-        float jetpackInput = jetpackValue.Get<float>();
-        if (jetpackInput > 0 && jetpackCharge > 0)
-        {
-            UseJetpack();
-        }
-        else
-        {
-
-        }
-    }*/
-
     private void UseJetpack()
     {
-        rb.AddForce(Vector3.up * jetpackForce, ForceMode.Acceleration);
-        jetpackCharge = Mathf.Max(jetpackCharge - Time.deltaTime, 0);
+        if (jetpackCharge > 0)
+        {
+            rb.AddForce(Vector3.up * jetpackForce, ForceMode.Force);
+            jetpackCharge = Mathf.Max(jetpackCharge - Time.deltaTime, 0);
+        }
     }
 
     private void GetPlayerInput()
@@ -97,5 +91,13 @@ public class PlayerMovementsRB : MonoBehaviour
     private void Respawn()
     {
         transform.position = respawnPoint.position;
+    }
+
+    private void UpdateJetpackChargeUI()
+    {
+        if (jetpackChargeImage != null)
+        {
+            jetpackChargeImage.fillAmount = jetpackCharge / maxJetpackCharge;
+        }
     }
 }

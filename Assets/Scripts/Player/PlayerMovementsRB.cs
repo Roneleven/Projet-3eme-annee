@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI; // Added for UI elements
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementsRB : MonoBehaviour
@@ -25,7 +25,7 @@ public class PlayerMovementsRB : MonoBehaviour
     public InputActionReference jetpack;
 
     [Header("Jetpack UI Settings")]
-    public Image jetpackChargeImage; // UI element to show jetpack charge
+    public Image jetpackChargeImage;
 
     private Rigidbody rb;
     private float movementX;
@@ -43,26 +43,34 @@ public class PlayerMovementsRB : MonoBehaviour
     {
         GetPlayerInput();
 
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
         if (isGrounded)
         {
             jetpackCharge = Mathf.Min(jetpackCharge + jetpackChargeRate * Time.deltaTime, maxJetpackCharge);
         }
-
-        Vector3 move = transform.right * movementX + transform.forward * movementY;
-        rb.MovePosition(rb.position + move * speed * Time.deltaTime);
 
         if (jetpack.action.IsPressed())
         {
             UseJetpack();
         }
 
-        UpdateJetpackChargeUI(); // Update the jetpack charge UI
+        UpdateJetpackChargeUI();
 
         if (transform.position.y < respawnPositionY)
         {
             Respawn();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        Vector3 move = transform.right * movementX + transform.forward * movementY;
+        rb.MovePosition(rb.position + move * speed * Time.fixedDeltaTime);
+
+        if (jetpack.action.IsPressed())
+        {
+            UseJetpack();
         }
     }
 
@@ -78,7 +86,7 @@ public class PlayerMovementsRB : MonoBehaviour
         if (jetpackCharge > 0)
         {
             rb.AddForce(Vector3.up * jetpackForce, ForceMode.Force);
-            jetpackCharge = Mathf.Max(jetpackCharge - Time.deltaTime, 0);
+            jetpackCharge = Mathf.Max(jetpackCharge - Time.fixedDeltaTime, 0);
         }
     }
 

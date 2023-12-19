@@ -85,7 +85,7 @@ public class PlayerMovementsRB : MonoBehaviour
     {
         if (jetpackCharge > 0)
         {
-            rb.AddForce(Vector3.up * jetpackForce, ForceMode.Acceleration);
+            rb.AddForce(Vector3.up * jetpackForce, ForceMode.Force);
 
             jetpackCharge = Mathf.Max(jetpackCharge - Time.fixedDeltaTime, 0);
         }

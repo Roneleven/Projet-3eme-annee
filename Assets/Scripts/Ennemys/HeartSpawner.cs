@@ -33,6 +33,7 @@ public class HeartSpawner : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SpawnCube());
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);
     }
 
     private IEnumerator SpawnCube()
@@ -174,6 +175,7 @@ public class HeartSpawner : MonoBehaviour
                     if (Mathf.Abs(x - playerPosition.x) >= 3 || Mathf.Abs(y - playerPosition.y) >= 3 || Mathf.Abs(z - playerPosition.z) >= 3)
                     {
                         Instantiate(cubePrefab, cubePosition, Quaternion.identity, spawnContainer.transform);
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Cage/Traped");
                     }
                 }
             }
@@ -218,7 +220,7 @@ public class HeartSpawner : MonoBehaviour
             spawnCount = temporarySpawnCountBeforeAdjust;
             yield return new WaitForSeconds(timeTemporaryPalier);
         }
-
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UX/Annonce/CoconForme");
         // Restaurer les valeurs originales
         spawnRadius = originalSpawnRadius;
         spawnCount = originalSpawnCount;

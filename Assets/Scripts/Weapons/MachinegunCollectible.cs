@@ -31,6 +31,7 @@ public class MachinegunCollectible : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             ApplyChangesToGun();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/LevelDesign/Collectibles/Collected");
             Destroy(gameObject);
         }
     }

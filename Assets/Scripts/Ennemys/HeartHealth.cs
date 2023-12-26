@@ -19,7 +19,7 @@ public class HeartHealth : MonoBehaviour
     private HeartSpawner heartSpawner;
     [SerializeField] private List<TeleportPointBoxSpawnerPair> teleportPointBoxSpawnerPairs = new List<TeleportPointBoxSpawnerPair>();
 
-    // Nouvelle variable pour stocker les points de téléportation accessibles après chaque téléportation
+    // Nouvelle variable pour stocker les points de tï¿½lï¿½portation accessibles aprï¿½s chaque tï¿½lï¿½portation
     private List<int> accessibleTeleportPoints = new List<int>();
 
     private void Start()
@@ -30,7 +30,7 @@ public class HeartHealth : MonoBehaviour
 
     private void InitializeAccessibleTeleportPoints()
     {
-        // Initialiser la liste des points de téléportation accessibles au début
+        // Initialiser la liste des points de tï¿½lï¿½portation accessibles au dï¿½but
         accessibleTeleportPoints.Clear();
         for (int i = 0; i < teleportPositions.Length; i++)
         {
@@ -57,13 +57,15 @@ public class HeartHealth : MonoBehaviour
             int newTeleportIndex;
             do
             {
-                // Choisir un point de téléportation parmi ceux qui sont accessibles
+                // Choisir un point de tï¿½lï¿½portation parmi ceux qui sont accessibles
                 newTeleportIndex = accessibleTeleportPoints[Random.Range(0, accessibleTeleportPoints.Count)];
             } while (newTeleportIndex == lastTeleportIndex);
 
             lastTeleportIndex = newTeleportIndex;
             Transform nextTeleportPosition = teleportPositions[lastTeleportIndex];
             transform.position = nextTeleportPosition.position;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Locomotion/Teleport");
+
 
             health = maxHealth;
 
@@ -95,7 +97,7 @@ public class HeartHealth : MonoBehaviour
                 }
             }
 
-            // Mettre à jour la liste des points de téléportation accessibles après cette téléportation
+            // Mettre ï¿½ jour la liste des points de tï¿½lï¿½portation accessibles aprï¿½s cette tï¿½lï¿½portation
             UpdateAccessibleTeleportPoints();
         }
     }

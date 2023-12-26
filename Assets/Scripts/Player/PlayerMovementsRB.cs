@@ -72,6 +72,12 @@ public class PlayerMovementsRB : MonoBehaviour
         {
             UseJetpack();
         }
+
+        if (isGrounded && (Mathf.Abs(movementX) > 0 || Mathf.Abs(movementY) > 0))
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Footsteps");
+        }
+
     }
 
     private void OnMove(InputValue movementValue)

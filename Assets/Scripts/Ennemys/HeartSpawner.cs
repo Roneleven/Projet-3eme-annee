@@ -30,9 +30,34 @@ public class HeartSpawner : MonoBehaviour
 
     private bool isCooldownActive = false;
 
+    private bool playerInPosition;
+    private Vector3 playerPosition;
+
+    public int cubesGeneratedDuringPalier;
+    public int offensivePatternThreshold = 20;
+    public float cubeDestroyDelay = 5f;
+    public float launchForce = 10f;
+    public float percentageToLaunch = 20f;
+
     private void Start()
     {
         StartCoroutine(SpawnCube());
+    }
+
+    private void Update()
+    {
+        if (timerActive)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                StartCoroutine(PlayAnimationAndReload());
+            }
+            else
+            {
+                timerText.text = Mathf.Round(timer).ToString() + "s";
+            }
+        }
     }
 
     private IEnumerator SpawnCube()
@@ -56,12 +81,13 @@ public class HeartSpawner : MonoBehaviour
                 Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
                 if (colliders.Length > 0)
                 {
-                    bool playerInPosition = false;
+                    playerInPosition = false;
                     foreach (Collider collider in colliders)
                     {
                         if (collider.gameObject.tag == "Player")
                         {
                             playerInPosition = true;
+                            playerPosition = collider.transform.position;
                             break;
                         }
                         CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
@@ -87,28 +113,52 @@ public class HeartSpawner : MonoBehaviour
                 {
                     StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
                 }
+
+                // Incrémente le compteur de cubes générés
+                cubesGeneratedDuringPalier++;
+
+                // Vérifie si le seuil est atteint pour déclencher le pattern offensif
+                if (cubesGeneratedDuringPalier >= offensivePatternThreshold)
+                {
+                    StartCoroutine(TriggerOffensivePattern());
+                }
             }
 
             yield return new WaitForSeconds(spawnInterval);
         }
     }
 
-    void Update()
+    private IEnumerator TriggerOffensivePattern()
     {
-        if (timerActive)
+        List<GameObject> generatedCubes = new List<GameObject>(GameObject.FindGameObjectsWithTag("HeartBlock"));
+
+        // Choisissez la moitié des cubes générés (ou un autre ratio selon vos besoins)
+        int cubesToLaunch = Mathf.CeilToInt(generatedCubes.Count * (percentageToLaunch / 100f));
+
+        for (int i = 0; i < cubesToLaunch; i++)
         {
-            timer -= Time.deltaTime;
-            if (timer <= 0)
-            {
-                StartCoroutine(PlayAnimationAndReload());
-            }
-            else
-            {
-                
-            timerText.text = Mathf.Round(timer).ToString() + "s";
-            }
+            GameObject cubeToLaunch = generatedCubes[i];
+
+            // Ajoute un Rigidbody au cube et active la gravité
+            Rigidbody cubeRigidbody = cubeToLaunch.AddComponent<Rigidbody>();
+            cubeRigidbody.useGravity = true;
+
+            // Calcule la direction de propulsion (vers le joueur)
+            Vector3 launchDirection = (playerPosition - cubeToLaunch.transform.position).normalized;
+
+            // Applique une force pour propulser le cube
+            cubeRigidbody.AddForce(launchDirection * launchForce, ForceMode.Impulse);
+
+            // Détruit le cube après un certain délai
+            Destroy(cubeToLaunch, cubeDestroyDelay);
         }
+
+        // Reset du compteur de cubes générés
+        cubesGeneratedDuringPalier = 0;
+
+        yield return null;
     }
+
 
     IEnumerator PlayAnimationAndReload()
     {
@@ -117,69 +167,74 @@ public class HeartSpawner : MonoBehaviour
         TimeOut();
     }
 
-    private void UpgradeCubeIfNeeded(Vector3 position)
-{
-    Collider[] colliders = Physics.OverlapSphere(position, gridSize / 2);
-    foreach (Collider collider in colliders)
+    private void TimeOut()
     {
-        CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
-        if (cubeHealth != null && cubeHealth.health < 26)
+        FindObjectOfType<SceneTransition>().ReloadScene();
+    }
+
+    private void UpgradeCubeIfNeeded(Vector3 position)
+    {
+        Collider[] colliders = Physics.OverlapSphere(position, gridSize / 2);
+        foreach (Collider collider in colliders)
         {
-            cubeHealth.health += 5;
-            break;
+            CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
+            if (cubeHealth != null && cubeHealth.health < 26)
+            {
+                cubeHealth.health += 5;
+                break;
+            }
         }
     }
-}
 
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
-{
-    GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-    FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/Spawning", GetComponent<Transform>().position);
-    yield return new WaitForSeconds(1);
-
-    Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
-    bool playerInPosition = false;
-    foreach (Collider collider in colliders)
     {
-        if (collider.gameObject.tag == "Player")
+        GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/Spawning", GetComponent<Transform>().position);
+        yield return new WaitForSeconds(1);
+
+        Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
+        bool playerInPosition = false;
+        foreach (Collider collider in colliders)
         {
-            playerInPosition = true;
-            break;
-        }
-    }
-
-    Destroy(transparentCube);
-
-    if (!playerInPosition)
-    {
-        Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-        FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/Spawn", GetComponent<Transform>().position);
-    }
-    else
-    {
-        UpgradeCubeIfNeeded(spawnPosition);
-
-        Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-        playerPosition /= gridSize;
-        playerPosition = new Vector3(Mathf.Round(playerPosition.x), Mathf.Round(playerPosition.y), Mathf.Round(playerPosition.z));
-        playerPosition *= gridSize;
-
-        for (float x = playerPosition.x - 3; x <= playerPosition.x + 3; x += gridSize)
-        {
-            for (float y = playerPosition.y - 3; y <= playerPosition.y + 3; y += gridSize)
+            if (collider.gameObject.tag == "Player")
             {
-                for (float z = playerPosition.z - 3; z <= playerPosition.z + 3; z += gridSize)
+                playerInPosition = true;
+                break;
+            }
+        }
+
+        Destroy(transparentCube);
+
+        if (!playerInPosition)
+        {
+            Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/Spawn", GetComponent<Transform>().position);
+        }
+        else
+        {
+            UpgradeCubeIfNeeded(spawnPosition);
+
+            Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+            playerPosition /= gridSize;
+            playerPosition = new Vector3(Mathf.Round(playerPosition.x), Mathf.Round(playerPosition.y), Mathf.Round(playerPosition.z));
+            playerPosition *= gridSize;
+
+            for (float x = playerPosition.x - 3; x <= playerPosition.x + 3; x += gridSize)
+            {
+                for (float y = playerPosition.y - 3; y <= playerPosition.y + 3; y += gridSize)
                 {
-                    Vector3 cubePosition = new Vector3(x, y, z);
-                    if (Mathf.Abs(x - playerPosition.x) >= 3 || Mathf.Abs(y - playerPosition.y) >= 3 || Mathf.Abs(z - playerPosition.z) >= 3)
+                    for (float z = playerPosition.z - 3; z <= playerPosition.z + 3; z += gridSize)
                     {
-                        Instantiate(cubePrefab, cubePosition, Quaternion.identity, spawnContainer.transform);
+                        Vector3 cubePosition = new Vector3(x, y, z);
+                        if (Mathf.Abs(x - playerPosition.x) >= 3 || Mathf.Abs(y - playerPosition.y) >= 3 || Mathf.Abs(z - playerPosition.z) >= 3)
+                        {
+                            Instantiate(cubePrefab, cubePosition, Quaternion.identity, spawnContainer.transform);
+                        }
                     }
                 }
             }
         }
     }
-}
 
     public void ChangePalierOnTeleport()
     {
@@ -187,7 +242,7 @@ public class HeartSpawner : MonoBehaviour
 
         if (heartHealth != null)
         {
-            timer = defaultTimer; // Réinitialisez le timer ici
+            timer = defaultTimer;
 
             if (currentPalier > previousPalier)
             {
@@ -198,7 +253,6 @@ public class HeartSpawner : MonoBehaviour
             StartCoroutine(ResetPalier());
         }
     }
-
 
     private IEnumerator ResetPalier()
     {
@@ -237,35 +291,27 @@ public class HeartSpawner : MonoBehaviour
         isCooldownActive = false;
     }
 
-    private void TimeOut()
-    {
-        FindObjectOfType<SceneTransition>().ReloadScene();
-    }
-
-
     private void AdjustPalierValues(int palier)
     {
-
-
         if (palier == 1)
         {
-            spawnRadius = 4; // Changer en fonction du palier 1
-            spawnCount = 6; // Changer en fonction du palier 1
+            spawnRadius = 4;
+            spawnCount = 6;
         }
         else if (palier == 2)
         {
-            spawnRadius = 8; // Changer en fonction du palier 2
-            spawnCount = 12; // Changer en fonction du palier 2
+            spawnRadius = 8;
+            spawnCount = 12;
         }
         else if (palier == 3)
         {
-            spawnRadius = 12; // Changer en fonction du palier 3
-            spawnCount = 25; // Changer en fonction du palier 3
+            spawnRadius = 12;
+            spawnCount = 25;
         }
         else if (palier == 4)
         {
-            spawnRadius = 16; // Changer en fonction du palier 3
-            spawnCount = 35; // Changer en fonction du palier 3
+            spawnRadius = 16;
+            spawnCount = 35;
         }
     }
 }

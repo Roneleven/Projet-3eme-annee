@@ -1705,6 +1705,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 588251712}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: cubePrefab
+      value: 
+      objectReference: {fileID: 1230891745418371966, guid: 71ac9b849b750ce4882a68bea94b1d8b, type: 3}
+    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: defaultTimer
       value: 60
       objectReference: {fileID: 0}
@@ -1715,6 +1719,10 @@ PrefabInstance:
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: fadeOutUIImage
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: offensiveForce
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: spawnContainer
@@ -1731,6 +1739,10 @@ PrefabInstance:
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: temporarySpawnInterval
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: offensiveBlockThreshold
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: health

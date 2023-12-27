@@ -4,28 +4,28 @@ using FMODUnity;
 public class GunController : MonoBehaviour
 {
     [Header("Gun Properties")]
-    public int maxAmmo = 30;
-    public float fireRate = 0.5f;
-    public float recoilForce = 1.0f;
-    public float reloadTime = 2.0f;
-    public string shootingSoundEvent = "event:/shootingSound";
-    public string reloadSoundEvent = "event:/reloadSound";
+    public int maxAmmo;
+    public float fireRate;
+    public float recoilForce;
+    public float reloadTime;
+    public string shootingSoundEvent = "event:/Guns/PrimaryGun/Shoot";
+    public string reloadSoundEvent = "event:/Guns/PrimaryGun/Reload";
     public bool mustUseAllAmmoBeforeReload = false;
 
     [Header("Shooting Mechanics")]
     public Transform shootingPoint;
-    public int bulletsPerShot = 1;
-    public float spreadAmount = 0.1f;
+    public int bulletsPerShot;
+    public float spreadAmount;
 
     [Header("Bullet Settings")]
     public GameObject bulletPrefab;
-    public float bulletSpeed = 20f;
-    public float bulletLifeTime = 5f;
-    public int bulletDamage = 10;
-    public int bulletPenetrationCount = 1;
+    public float bulletSpeed;
+    public float bulletLifeTime;
+    public int bulletDamage;
+    public int bulletPenetrationCount;
 
-    private int currentAmmo;
-    private float nextTimeToFire = 0.0f;
+    public int currentAmmo;
+    private float nextTimeToFire;
     private bool isReloading = false;
 
     void Start()

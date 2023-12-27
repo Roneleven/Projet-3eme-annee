@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BoxSpawner : MonoBehaviour
+public class BoxSpawnerNoHP : MonoBehaviour
 {
     public GameObject cubePrefab;
     public float spawnInterval = 1f;
@@ -24,12 +24,10 @@ public class BoxSpawner : MonoBehaviour
         //StartCoroutine(SpawnCube());
     }
 
-	public IEnumerator SpawnCube()
+    public IEnumerator SpawnCube()
     {
         while (true)
         {
-           // while (pause) yield return new WaitForEndOfFrame();
-
             if (cubeCount < maxCubeCount)
             {
                 for (int i = 0; i < spawnCount; i++)
@@ -65,19 +63,7 @@ public class BoxSpawner : MonoBehaviour
                             CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
                             if (cubeHealth != null)
                             {
-                                if (cubeHealth.health < 26)
-                                {
-                                    cubeHealth.health += 5;
-                                    cubeCount++; // Incrémente le nombre de blocs réels
-                                }
-                                else
-                                {
-                                    // Cube amélioré, comptez-le comme un cube supplémentaire
-                                    cubeCount++; // Incrémente le nombre de blocs réels
-
-                                    // Ajoutez ici la logique d'augmentation du cubeCount en fonction de l'amélioration du cube
-                                    cubeCount += Mathf.CeilToInt(cubeHealth.health / 5f) - 1;
-                                }
+                                // Logique pour ajouter de la vie au cube
                                 break;
                             }
                         }
@@ -93,7 +79,6 @@ public class BoxSpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
     }
-
 
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {

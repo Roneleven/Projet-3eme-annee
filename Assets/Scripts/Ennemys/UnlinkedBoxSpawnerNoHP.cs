@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BoxSpawner : MonoBehaviour
+public class UnlinkedBoxSpawnerNoHP : MonoBehaviour
 {
     public GameObject cubePrefab;
     public float spawnInterval = 1f;
@@ -12,8 +12,6 @@ public class BoxSpawner : MonoBehaviour
     public float exclusionRadius = 2f;
     public float spawnCount;
     public GameObject transparentCubePrefab;
-
-    // Nouvelle variable pour définir le nombre maximal de blocs dans l'inspecteur Unity
     public int maxCubeCount = 50;
 
     // Variable pour suivre le nombre actuel de blocs réels
@@ -21,15 +19,13 @@ public class BoxSpawner : MonoBehaviour
 
     private void Start()
     {
-        //StartCoroutine(SpawnCube());
+        StartCoroutine(SpawnCube());
     }
 
-	public IEnumerator SpawnCube()
+    public IEnumerator SpawnCube()
     {
         while (true)
         {
-           // while (pause) yield return new WaitForEndOfFrame();
-
             if (cubeCount < maxCubeCount)
             {
                 for (int i = 0; i < spawnCount; i++)
@@ -65,19 +61,7 @@ public class BoxSpawner : MonoBehaviour
                             CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
                             if (cubeHealth != null)
                             {
-                                if (cubeHealth.health < 26)
-                                {
-                                    cubeHealth.health += 5;
-                                    cubeCount++; // Incrémente le nombre de blocs réels
-                                }
-                                else
-                                {
-                                    // Cube amélioré, comptez-le comme un cube supplémentaire
-                                    cubeCount++; // Incrémente le nombre de blocs réels
-
-                                    // Ajoutez ici la logique d'augmentation du cubeCount en fonction de l'amélioration du cube
-                                    cubeCount += Mathf.CeilToInt(cubeHealth.health / 5f) - 1;
-                                }
+                                // Logique pour ajouter de la vie au cube
                                 break;
                             }
                         }
@@ -93,7 +77,6 @@ public class BoxSpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
     }
-
 
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {

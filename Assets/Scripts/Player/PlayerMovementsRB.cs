@@ -27,16 +27,23 @@ public class PlayerMovementsRB : MonoBehaviour
     [Header("Jetpack UI Settings")]
     public Image jetpackChargeImage;
 
+    [Header("Camera Shake Settings")]
+    public float shakeDuration = 0.5f;
+    public AnimationCurve shakeAccelerationCurve;
+    public AnimationCurve shakeDecelerationCurve;
+
     private Rigidbody rb;
     private float movementX;
     private float movementY;
     private bool isGrounded;
+    public Camera mainCamera;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         jetpackCharge = maxJetpackCharge;
+
     }
 
     private void Update()
@@ -50,6 +57,7 @@ public class PlayerMovementsRB : MonoBehaviour
 
         if (jetpack.action.IsPressed())
         {
+            StartCoroutine(ShakeCamera());
             UseJetpack();
         }
 
@@ -68,16 +76,10 @@ public class PlayerMovementsRB : MonoBehaviour
         Vector3 move = transform.right * movementX + transform.forward * movementY;
         rb.MovePosition(rb.position + move * speed * Time.fixedDeltaTime);
 
-        if (jetpack.action.IsPressed())
-        {
-            UseJetpack();
-        }
-
         if (isGrounded && (Mathf.Abs(movementX) > 0 || Mathf.Abs(movementY) > 0))
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Footsteps");
         }
-
     }
 
     private void OnMove(InputValue movementValue)
@@ -92,7 +94,6 @@ public class PlayerMovementsRB : MonoBehaviour
         if (jetpackCharge > 0)
         {
             rb.AddForce(Vector3.up * jetpackForce, ForceMode.Force);
-
             jetpackCharge = Mathf.Max(jetpackCharge - Time.fixedDeltaTime, 0);
         }
     }
@@ -114,5 +115,27 @@ public class PlayerMovementsRB : MonoBehaviour
         {
             jetpackChargeImage.fillAmount = jetpackCharge / maxJetpackCharge;
         }
+    }
+
+    private IEnumerator ShakeCamera()
+    {
+        if (mainCamera == null)
+        {
+            yield break; // Sortir de la coroutine si la caméra n'est pas trouvée
+        }
+
+        float elapsedTime = 0f;
+        Vector3 originalPosition = mainCamera.transform.localPosition;
+
+        while (elapsedTime < shakeDuration)
+        {
+            float shakeAcceleration = shakeAccelerationCurve.Evaluate(elapsedTime / shakeDuration);
+            mainCamera.transform.localPosition = originalPosition + Random.insideUnitSphere * shakeAcceleration;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        mainCamera.transform.localPosition = originalPosition;
     }
 }

@@ -7,20 +7,28 @@ using UnityEngine.UI;
 
 public class HeartSpawner : MonoBehaviour
 {
+    [Header("Cubes Spawn Properties")]
+
     public GameObject cubePrefab;
-    public float spawnInterval = 1f;
-    public float spawnRadius;
-    public GameObject spawnContainer;
-    public float gridSize = 1f;
-    public float exclusionRadius = 2f;
-    public float spawnCount;
     public GameObject transparentCubePrefab;
+    public float spawnInterval;
+    public float spawnRadius;
+    public float gridSize;
+    public float exclusionRadius;
+    public float spawnCount;
+    public GameObject spawnContainer;
+
+    [Header("Palier Properties")]
+
     public HeartHealth heartHealth;
-    public int previousPalier = 1;
-    public int currentPalier = 1;
-    public float temporarySpawnCount;
-    public float temporarySpawnInterval;
-    public float timeTemporaryPalier;
+    public int previousPalier;
+    public int currentPalier;
+    public float temporarySpawnCount; //le spawncount pendant le changement de palier
+    public float temporarySpawnInterval;//le spawninterval pendant le changement de palier
+    public float timeTemporaryPalier; //la durée du changement de palier
+
+    [Header("Timer/Reset Properties")]
+
     public float timer;
     public float defaultTimer;
     private bool timerActive = false;
@@ -33,11 +41,13 @@ public class HeartSpawner : MonoBehaviour
     private bool playerInPosition;
     private Vector3 playerPosition;
 
+    [Header("Throw cube pattern Properties")]
+
     public int cubesGeneratedDuringPalier;
-    public int offensivePatternThreshold = 20;
-    public float cubeDestroyDelay = 5f;
-    public float launchForce = 10f;
-    public float percentageToLaunch = 20f;
+    public int offensivePatternThreshold;
+    public float cubeDestroyDelay;
+    public float launchForce;
+    public float percentageToLaunch;
 
     private void Start()
     {
@@ -143,8 +153,14 @@ public class HeartSpawner : MonoBehaviour
             Rigidbody cubeRigidbody = cubeToLaunch.AddComponent<Rigidbody>();
             cubeRigidbody.useGravity = true;
 
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            if (playerObject != null)
+            {
+                playerPosition = playerObject.transform.position;
+            }
             // Calcule la direction de propulsion (vers le joueur)
             Vector3 launchDirection = (playerPosition - cubeToLaunch.transform.position).normalized;
+            Debug.Log("Player Position: " + playerPosition);
 
             // Applique une force pour propulser le cube
             cubeRigidbody.AddForce(launchDirection * launchForce, ForceMode.Impulse);
@@ -158,6 +174,7 @@ public class HeartSpawner : MonoBehaviour
 
         yield return null;
     }
+
 
 
     IEnumerator PlayAnimationAndReload()

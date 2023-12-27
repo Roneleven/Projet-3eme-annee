@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+
 [System.Serializable]
 public struct TeleportPointBoxSpawnerPair
 {
     public int teleportPointIndex;
     public List<BoxSpawner> boxSpawners;
+    public List<BoxSpawnerNoHP> boxSpawnersNoHP;
 }
 
 public class HeartHealth : MonoBehaviour
@@ -12,14 +14,28 @@ public class HeartHealth : MonoBehaviour
     public int maxHealth = 100;
     public int health = 100;
     public int currentPalier = 1;
-    public Transform[] teleportPositions; // Tableau des positions de téléportation
+    public Transform[] teleportPositions;
     private int lastTeleportIndex = -1;
     private HeartSpawner heartSpawner;
-    public List<TeleportPointBoxSpawnerPair> teleportPointBoxSpawnerPairs = new List<TeleportPointBoxSpawnerPair>();
+    [SerializeField] private List<TeleportPointBoxSpawnerPair> teleportPointBoxSpawnerPairs = new List<TeleportPointBoxSpawnerPair>();
+
+    // Nouvelle variable pour stocker les points de tï¿½lï¿½portation accessibles aprï¿½s chaque tï¿½lï¿½portation
+    private List<int> accessibleTeleportPoints = new List<int>();
 
     private void Start()
     {
         heartSpawner = FindObjectOfType<HeartSpawner>();
+        InitializeAccessibleTeleportPoints();
+    }
+
+    private void InitializeAccessibleTeleportPoints()
+    {
+        // Initialiser la liste des points de tï¿½lï¿½portation accessibles au dï¿½but
+        accessibleTeleportPoints.Clear();
+        for (int i = 0; i < teleportPositions.Length; i++)
+        {
+            accessibleTeleportPoints.Add(i);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -34,39 +50,65 @@ public class HeartHealth : MonoBehaviour
 
     private void TeleportHeart()
     {
-        // Désactiver les BoxSpawner associés à l'index de téléportation actuel
         DeactivateLinkedBoxSpawners();
 
-        if (teleportPositions.Length > 0)
+        if (accessibleTeleportPoints.Count > 0)
         {
             int newTeleportIndex;
             do
             {
-                newTeleportIndex = Random.Range(0, teleportPositions.Length);
+                // Choisir un point de tï¿½lï¿½portation parmi ceux qui sont accessibles
+                newTeleportIndex = accessibleTeleportPoints[Random.Range(0, accessibleTeleportPoints.Count)];
             } while (newTeleportIndex == lastTeleportIndex);
+
             lastTeleportIndex = newTeleportIndex;
             Transform nextTeleportPosition = teleportPositions[lastTeleportIndex];
             transform.position = nextTeleportPosition.position;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Locomotion/Teleport");
+
 
             health = maxHealth;
 
-            // Ajouter cette ligne pour déclencher le changement de palier
             if (heartSpawner != null)
             {
                 heartSpawner.ChangePalierOnTeleport();
             }
 
-            // Activer tous les BoxSpawner associés à l'index de téléportation
             foreach (var pair in teleportPointBoxSpawnerPairs)
             {
                 if (pair.teleportPointIndex == newTeleportIndex)
                 {
                     foreach (var boxSpawner in pair.boxSpawners)
                     {
-                        boxSpawner.gameObject.SetActive(true);
+                        //boxSpawner.gameObject.SetActive(true);
+                        boxSpawner.StartCoroutine(boxSpawner.SpawnCube());
                     }
                 }
             }
+            foreach (var pair in teleportPointBoxSpawnerPairs)
+            {
+                if (pair.teleportPointIndex == newTeleportIndex)
+                {
+                    foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
+                    {
+                        //boxSpawnerNoHP.gameObject.SetActive(true);
+                        boxSpawnerNoHP.StartCoroutine(boxSpawnerNoHP.SpawnCube());
+                    }
+                }
+            }
+
+            // Mettre ï¿½ jour la liste des points de tï¿½lï¿½portation accessibles aprï¿½s cette tï¿½lï¿½portation
+            UpdateAccessibleTeleportPoints();
+        }
+    }
+
+    private void UpdateAccessibleTeleportPoints()
+    {
+        accessibleTeleportPoints.Remove(lastTeleportIndex);
+
+        if (accessibleTeleportPoints.Count == 0)
+        {
+            InitializeAccessibleTeleportPoints();
         }
     }
 
@@ -78,7 +120,20 @@ public class HeartHealth : MonoBehaviour
             {
                 foreach (var boxSpawner in pair.boxSpawners)
                 {
-                    boxSpawner.gameObject.SetActive(false);
+                    //boxSpawner.gameObject.SetActive(false);
+                    boxSpawner.StopAllCoroutines();
+                }
+            }
+        }
+
+        foreach (var pair in teleportPointBoxSpawnerPairs)
+        {
+            if (pair.teleportPointIndex == lastTeleportIndex)
+            {
+                foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
+                {
+                    //boxSpawnerNoHP.gameObject.SetActive(false);
+                    boxSpawnerNoHP.StopAllCoroutines();
                 }
             }
         }

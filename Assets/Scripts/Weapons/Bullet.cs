@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Bullet hit: " + collision.gameObject.name + "; Penetration count before hit: " + penetrationCount);
+        //Debug.Log("Bullet hit: " + collision.gameObject.name + "; Penetration count before hit: " + penetrationCount);
 
         CubeHealth cubeHealth = collision.gameObject.GetComponent<CubeHealth>();
         if (cubeHealth != null)
@@ -29,17 +29,17 @@ public class Bullet : MonoBehaviour
             cubeHealth.TakeDamage(damage);
             penetrationCount--;
 
-            Debug.Log("Penetration count after hit: " + penetrationCount);
+            //Debug.Log("Penetration count after hit: " + penetrationCount);
 
             if (penetrationCount <= 0)
             {
-                Debug.Log("Bullet destroyed after hitting: " + collision.gameObject.name);
+                //Debug.Log("Bullet destroyed after hitting: " + collision.gameObject.name);
                 Destroy(gameObject);
             }
         }
         else
         {
-            Debug.Log("Bullet hit a non-penetrable object: " + collision.gameObject.name);
+            //Debug.Log("Bullet hit a non-penetrable object: " + collision.gameObject.name);
             Destroy(gameObject);
         }
     }

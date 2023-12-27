@@ -124,3 +124,4 @@ MonoBehaviour:
   lvl3: {fileID: 2100000, guid: 4016d2b27bc782a40b44742b7dce2204, type: 2}
   lvl4: {fileID: 2100000, guid: f66327c6633685240adb0536f7329079, type: 2}
   lvl5: {fileID: 2100000, guid: 3837bc8960c237e4eb1e6470195de3a5, type: 2}
+  destructionParticlesPrefab: {fileID: 2061751337493195821, guid: f45478f9f08d3b6429ec187c2f9e0bc9, type: 3}

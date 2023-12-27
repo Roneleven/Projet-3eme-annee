@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class HeartSpawner : MonoBehaviour
 {
     [Header("Cubes Spawn Properties")]
-
     public GameObject cubePrefab;
     public GameObject transparentCubePrefab;
     public float spawnInterval;
@@ -19,7 +18,6 @@ public class HeartSpawner : MonoBehaviour
     public GameObject spawnContainer;
 
     [Header("Palier Properties")]
-
     public HeartHealth heartHealth;
     public int previousPalier;
     public int currentPalier;
@@ -28,7 +26,6 @@ public class HeartSpawner : MonoBehaviour
     public float timeTemporaryPalier; //la durée du changement de palier
 
     [Header("Timer/Reset Properties")]
-
     public float timer;
     public float defaultTimer;
     private bool timerActive = false;
@@ -42,18 +39,86 @@ public class HeartSpawner : MonoBehaviour
     private Vector3 playerPosition;
 
     [Header("Throw cube pattern Properties")]
-
     public int cubesGeneratedDuringPalier;
-    public int offensivePatternThreshold;
+    public int offensivePatternThreshold; //multiple de la variable spawnCount
     public float cubeDestroyDelay;
     public float launchForce;
     public float percentageToLaunch;
 
+    [Header("Wall pattern Properties")]
+    public float wallSpawnInterval = 10f;
+    public GameObject wallPrefab;
+    public float wallDistance = 10f;
+    public float wallWidth = 3f;
+    public float wallHeight = 3f;
+    public float wallSpeed = 10f;
+    public MouseLook mouseLookScript;
+
     private void Start()
     {
         StartCoroutine(SpawnCube());
+        StartCoroutine(SpawnWallPattern());
     }
 
+    private IEnumerator SpawnWallPattern()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(wallSpawnInterval);
+
+            // Crée un mur dans la direction du joueur
+            SpawnWall();
+        }
+    }
+
+    private void SpawnWall()
+    {
+        
+        // Récupérez la rotation actuelle du mur
+        Quaternion wallRotation = Quaternion.Euler(0f, mouseLookScript.transform.eulerAngles.y, 0f);
+
+        // Calcule la position du mur en fonction de la direction de la caméra
+        Vector3 wallPosition = mouseLookScript.transform.position +
+                              mouseLookScript.transform.forward * wallDistance;
+
+        // Crée le mur avec la rotation appropriée
+        GameObject wall = Instantiate(wallPrefab, wallPosition, wallRotation);
+
+        // Ajuste la taille du mur
+        wall.transform.localScale = new Vector3(wallWidth, wallHeight, 1f);
+
+        StartCoroutine(MoveWall(wall.transform));
+    }
+
+    private IEnumerator MoveWall(Transform wallTransform)
+    {
+        // Durée totale du mouvement du mur
+        float moveDuration = wallSpawnInterval;
+
+        // Temps écoulé
+        float elapsedTime = 0f;
+
+        // Position initiale du mur
+        Vector3 initialPosition = wallTransform.position;
+
+        // Position cible du mur (avancer dans la direction locale Z)
+        Vector3 targetPosition = initialPosition - wallTransform.forward * wallDistance;
+
+        while (elapsedTime < moveDuration)
+        {
+            // Calcule la position intermédiaire en fonction du temps écoulé
+            float t = elapsedTime / moveDuration;
+            wallTransform.position = Vector3.Lerp(initialPosition, targetPosition, t);
+
+            // Met à jour le temps écoulé
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        // Assurez-vous que le mur est à la position finale exacte
+        wallTransform.position = targetPosition;
+    }
     private void Update()
     {
         if (timerActive)
@@ -67,6 +132,12 @@ public class HeartSpawner : MonoBehaviour
             {
                 timerText.text = Mathf.Round(timer).ToString() + "s";
             }
+        }
+
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            playerPosition = playerObject.transform.position;
         }
     }
 
@@ -153,11 +224,7 @@ public class HeartSpawner : MonoBehaviour
             Rigidbody cubeRigidbody = cubeToLaunch.AddComponent<Rigidbody>();
             cubeRigidbody.useGravity = true;
 
-            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-            if (playerObject != null)
-            {
-                playerPosition = playerObject.transform.position;
-            }
+            
             // Calcule la direction de propulsion (vers le joueur)
             Vector3 launchDirection = (playerPosition - cubeToLaunch.transform.position).normalized;
             Debug.Log("Player Position: " + playerPosition);

@@ -73,22 +73,19 @@ public class HeartSpawner : MonoBehaviour
 
     private void SpawnWall()
     {
-        
-        // Récupérez la rotation actuelle du mur
         Quaternion wallRotation = Quaternion.Euler(0f, mouseLookScript.transform.eulerAngles.y, 0f);
-
-        // Calcule la position du mur en fonction de la direction de la caméra
         Vector3 wallPosition = mouseLookScript.transform.position +
-                              mouseLookScript.transform.forward * wallDistance;
+                               mouseLookScript.transform.forward * wallDistance;
 
-        // Crée le mur avec la rotation appropriée
+        // Ajuste la position Y pour correspondre à la hauteur du joueur
+        wallPosition.y = mouseLookScript.transform.position.y;
+
         GameObject wall = Instantiate(wallPrefab, wallPosition, wallRotation);
-
-        // Ajuste la taille du mur
         wall.transform.localScale = new Vector3(wallWidth, wallHeight, 1f);
 
         StartCoroutine(MoveWall(wall.transform));
     }
+
 
     private IEnumerator MoveWall(Transform wallTransform)
     {

@@ -1595,6 +1595,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1054882085 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 5729225776423105573, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+  m_PrefabInstance: {fileID: 5324958222575986769}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1239906063 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2836226785195394683, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
@@ -1752,12 +1757,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1566732636}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: playerRigidbody
+      value: 
+      objectReference: {fileID: 1054882085}
+    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: cubeDestroyDelay
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: wallSpawnInterval
-      value: 5
+      value: 555555
       objectReference: {fileID: 0}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: percentageToLaunch
@@ -2729,6 +2738,26 @@ PrefabInstance:
       propertyPath: respawnPoint
       value: 
       objectReference: {fileID: 7062176311708731224}
+    - target: {fileID: 1662342133783437384, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: maxJetpackCharge
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662342133783437384, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: groundMasks.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662342133783437384, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: groundMasks.Array.data[0].m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662342133783437384, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: groundMasks.Array.data[1].m_Bits
+      value: 520
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528680402090129508, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3032890351301840679, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2737,6 +2766,18 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 768127290}
+    - target: {fileID: 3943393590610212834, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5729225776423105573, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5729225776423105573, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6232101016860361905, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: m_Name
       value: FPS Player rb
@@ -2812,6 +2853,30 @@ PrefabInstance:
     - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: bulletsPerShot
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: explosionPrefab
+      value: 
+      objectReference: {fileID: 8134776921634541243, guid: e8efe73aba3aa9a47a14709912e9000a, type: 3}
+    - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: explosionRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: explosiveEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8510449247164050620, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8510449247164050620, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8510449247164050620, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: m_Center.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -28,6 +28,11 @@ public class GunController : MonoBehaviour
     private float nextTimeToFire;
     private bool isReloading = false;
 
+    [Header("Explosive Settings")]
+    public bool explosiveEnabled;
+    public float explosionRadius;
+    public GameObject explosionPrefab;
+
     void Start()
     {
         currentAmmo = maxAmmo;
@@ -60,6 +65,12 @@ public class GunController : MonoBehaviour
             if (bulletPrefab != null && shootingPoint != null)
             {
                 GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
+
+                // Ajout d'une balle explosive
+                if (explosiveEnabled)
+                {
+                    bullet.AddComponent<ExplosiveBullet>().InitializeExplosive(explosionRadius, explosionPrefab, bulletDamage);
+                }
 
                 // Adding bullet spread
                 Vector3 spread = Random.insideUnitSphere * spreadAmount;

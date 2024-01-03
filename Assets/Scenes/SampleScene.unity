@@ -1606,6 +1606,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad31aa5632d79e43b5190aac85716c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1566732636 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7666687759385885028, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+  m_PrefabInstance: {fileID: 5324958222575986769}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550d9e4aedbe4d146b398b21467aaf8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1656205341 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2836226785195394683, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
@@ -1693,10 +1704,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 800783734}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: timer
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: blackFade
       value: 
       objectReference: {fileID: 800783737}
@@ -1705,45 +1712,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 588251712}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: defaultTimer
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: spawnInterval
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: fadeOutUIImage
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: spawnContainer
       value: 
       objectReference: {fileID: 177016507}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: temporarySpawnCount
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: timeTemporaryPalier
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: temporarySpawnInterval
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: health
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: maxHealth
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: linkedBoxSpawner
+      propertyPath: mouseLookScript
       value: 
-      objectReference: {fileID: 1656205341}
+      objectReference: {fileID: 1566732636}
     - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: teleportPositions.Array.data[0]
       value: 
@@ -1760,42 +1735,6 @@ PrefabInstance:
       propertyPath: teleportPositions.Array.data[3]
       value: 
       objectReference: {fileID: 387272575}
-    - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: teleportPointBoxSpawnerPairs.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].teleportPointIndex
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: teleportPointBoxSpawnerPairs.Array.data[1].teleportPointIndex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: teleportPointBoxSpawnerPairs.Array.data[2].teleportPointIndex
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: teleportPointBoxSpawnerPairs.Array.data[3].teleportPointIndex
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].boxSpawners.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: teleportPointBoxSpawnerPairs.Array.data[1].boxSpawners.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: teleportPointBoxSpawnerPairs.Array.data[2].boxSpawners.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: teleportPointBoxSpawnerPairs.Array.data[3].boxSpawners.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].boxSpawners.Array.data[0]
       value: 
@@ -1819,22 +1758,6 @@ PrefabInstance:
     - target: {fileID: 5743461851523346344, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: m_Name
       value: TheHeart
-      objectReference: {fileID: 0}
-    - target: {fileID: 6715274798009452715, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6715274798009452715, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6715274798009452715, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6715274798009452715, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6715274798009452715, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1875,10 +1798,6 @@ PrefabInstance:
     - target: {fileID: 6715274798009452715, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6715274798009452715, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2667,10 +2586,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 768127290}
     - target: {fileID: 1662342133783437384, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
-      propertyPath: jetpackForce
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1662342133783437384, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: respawnPoint
       value: 
       objectReference: {fileID: 7062176311708731224}
@@ -2734,30 +2649,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1967270690}
-    - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
-      propertyPath: maxAmmo
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
-      propertyPath: fireRate
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
-      propertyPath: bulletSpeed
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
-      propertyPath: bulletDamage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
-      propertyPath: spreadAmount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
-      propertyPath: bulletsPerShot
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -11,7 +12,7 @@ public class PlayerMovementsRB : MonoBehaviour
     public float jumpHeight;
     public Transform groundCheck;
     public float groundDistance = 0.4f;
-    public LayerMask groundMask;
+    public List<LayerMask> groundMasks;
 
     [Header("Respawn Settings")]
     public Transform respawnPoint;
@@ -63,7 +64,16 @@ public class PlayerMovementsRB : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isGrounded = false;
+
+        foreach (LayerMask groundMask in groundMasks)
+        {
+            if (Physics.CheckSphere(groundCheck.position, groundDistance, groundMask))
+            {
+                isGrounded = true;
+                break;
+            }
+        }
 
         Vector3 move = transform.right * movementX + transform.forward * movementY;
         rb.MovePosition(rb.position + move * speed * Time.fixedDeltaTime);

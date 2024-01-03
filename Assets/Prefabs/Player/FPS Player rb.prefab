@@ -106,7 +106,7 @@ CapsuleCollider:
   m_Radius: 0.49999997
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0.00000047683716, y: 0, z: -0.00000023841858}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1908266363273210228
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,18 +822,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dcaacba706f73f4da878ed90c718463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 5
   jumpHeight: 2
   groundCheck: {fileID: 7463014139835152866}
   groundDistance: 0.4
-  groundMask:
-    serializedVersion: 2
+  groundMasks:
+  - serializedVersion: 2
     m_Bits: 8
+  - serializedVersion: 2
+    m_Bits: 520
   respawnPoint: {fileID: 0}
   respawnPositionY: -100
   jetpackForce: 4
   jetpackChargeRate: 1
-  maxJetpackCharge: 2
+  maxJetpackCharge: 4
   jetpackCharge: 0
   jetpack: {fileID: -2807530785661849503, guid: 6e6fe52b9edf0994fab010aae1aa7e18, type: 3}
   jetpackChargeImage: {fileID: 1308860844146114820}
@@ -849,8 +851,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc85c046cb8cb2e4c8f2a32055c9bc50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmmo: 20
-  fireRate: 2
+  maxAmmo: 50
+  fireRate: 3
   recoilForce: 1
   reloadTime: 0.9
   shootingSoundEvent: event:/Guns/PrimaryGun/Shoot
@@ -860,11 +862,14 @@ MonoBehaviour:
   bulletsPerShot: 1
   spreadAmount: 0
   bulletPrefab: {fileID: 6786013472321727789, guid: 005c8ad54fbad8b4295133ac2f24f610, type: 3}
-  bulletSpeed: 100
+  bulletSpeed: 50
   bulletLifeTime: 3
   bulletDamage: 1
   bulletPenetrationCount: 0
   currentAmmo: 0
+  explosiveEnabled: 0
+  explosionRadius: 2
+  explosionPrefab: {fileID: 8134776921634541243, guid: e8efe73aba3aa9a47a14709912e9000a, type: 3}
 --- !u!54 &5729225776423105573
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -889,9 +894,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &1410426708537084780
 MonoBehaviour:
   m_ObjectHideFlags: 0

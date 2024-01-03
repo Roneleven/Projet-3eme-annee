@@ -19422,6 +19422,10 @@ PrefabInstance:
       propertyPath: spawnContainer
       value: 
       objectReference: {fileID: 698495694}
+    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: mouseLookScript
+      value: 
+      objectReference: {fileID: 1304196124}
     - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: teleportPositions.Array.size
       value: 6
@@ -52937,6 +52941,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1126170983}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1304196124 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7666687759385885028, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+  m_PrefabInstance: {fileID: 340248020}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550d9e4aedbe4d146b398b21467aaf8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1306363855
 PrefabInstance:
   m_ObjectHideFlags: 0

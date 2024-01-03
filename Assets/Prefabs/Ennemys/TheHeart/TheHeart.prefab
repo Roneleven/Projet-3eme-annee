@@ -30,9 +30,9 @@ Transform:
   m_GameObject: {fileID: 5743461851523346344}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4047234, y: 4.415761, z: 4.2148557}
+  m_LocalPosition: {x: -24.25, y: 9, z: 5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -119,14 +119,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59179447d2eeb694eabcb5d21a81fcd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubePrefab: {fileID: 1230891745418371966, guid: 75a55552e1acd2a4e8137cda36a98ade, type: 3}
+  cubePrefab: {fileID: 1230891745418371966, guid: 71ac9b849b750ce4882a68bea94b1d8b, type: 3}
+  transparentCubePrefab: {fileID: 2751100251518416, guid: e270576d61d2b784582b8db1cc980d8d, type: 3}
   spawnInterval: 1.5
   spawnRadius: 4
-  spawnContainer: {fileID: 0}
   gridSize: 1
   exclusionRadius: 2
   spawnCount: 4
-  transparentCubePrefab: {fileID: 2751100251518416, guid: e270576d61d2b784582b8db1cc980d8d, type: 3}
+  spawnContainer: {fileID: 0}
   heartHealth: {fileID: 2264444207413364211}
   previousPalier: 1
   currentPalier: 1
@@ -138,6 +138,18 @@ MonoBehaviour:
   timerText: {fileID: 0}
   blackFade: {fileID: 0}
   anim: {fileID: 0}
+  cubesGeneratedDuringPalier: 24
+  offensivePatternThreshold: 50
+  cubeDestroyDelay: 3
+  launchForce: 0
+  percentageToLaunch: 5
+  wallSpawnInterval: 555555
+  wallPrefab: {fileID: 6557921315865226379, guid: 83d25b5cb38d8c040b363310469a5b2a, type: 3}
+  wallDistance: 10
+  wallWidth: 3
+  wallHeight: 3
+  wallSpeed: 10
+  mouseLookScript: {fileID: 0}
 --- !u!114 &2264444207413364211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,11 +162,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2547ce751589b89479e419e3366a37a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  health: 5
+  maxHealth: 3
+  health: 3
   currentPalier: 1
   teleportPositions:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  teleportPointBoxSpawnerPairs:
+  - teleportPointIndex: 0
+    boxSpawners:
+    - {fileID: 0}
+    - {fileID: 0}
+    boxSpawnersNoHP: []
+  - teleportPointIndex: 1
+    boxSpawners:
+    - {fileID: 0}
+    boxSpawnersNoHP: []
+  - teleportPointIndex: 2
+    boxSpawners:
+    - {fileID: 0}
+    boxSpawnersNoHP: []
+  - teleportPointIndex: 3
+    boxSpawners:
+    - {fileID: 0}
+    boxSpawnersNoHP: []

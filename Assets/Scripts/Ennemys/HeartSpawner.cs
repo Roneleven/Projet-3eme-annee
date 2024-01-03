@@ -58,10 +58,10 @@ public class HeartSpawner : MonoBehaviour
     {
         StartCoroutine(SpawnCube());
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);
-        StartCoroutine(SpawnWallPattern());
+        //StartCoroutine(SpawnWallPattern());
     }
 
-    private IEnumerator SpawnWallPattern()
+    /*private IEnumerator SpawnWallPattern()
     {
         while (true)
         {
@@ -117,6 +117,7 @@ public class HeartSpawner : MonoBehaviour
         // Assurez-vous que le mur est à la position finale exacte
         wallTransform.position = targetPosition;
     }
+    */
     private void Update()
     {
         if (timerActive)
@@ -197,17 +198,17 @@ public class HeartSpawner : MonoBehaviour
                 cubesGeneratedDuringPalier++;
 
                 // Vérifie si le seuil est atteint pour déclencher le pattern offensif
-                if (cubesGeneratedDuringPalier >= offensivePatternThreshold)
+                /*if (cubesGeneratedDuringPalier >= offensivePatternThreshold)
                 {
                     StartCoroutine(TriggerOffensivePattern());
-                }
+                }*/
             }
 
             yield return new WaitForSeconds(spawnInterval);
         }
     }
 
-    private IEnumerator TriggerOffensivePattern()
+    /*private IEnumerator TriggerOffensivePattern()
     {
         List<GameObject> generatedCubes = new List<GameObject>(GameObject.FindGameObjectsWithTag("HeartBlock"));
 
@@ -239,7 +240,7 @@ public class HeartSpawner : MonoBehaviour
 
         yield return null;
     }
-
+    */
 
 
     IEnumerator PlayAnimationAndReload()

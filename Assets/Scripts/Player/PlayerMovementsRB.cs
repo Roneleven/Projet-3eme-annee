@@ -25,6 +25,10 @@ public class PlayerMovementsRB : MonoBehaviour
     public float jetpackCharge;
     public InputActionReference jetpack;
 
+    [Header("Jetpack Shake Settings")]
+    public float shakeDuration;
+    public float shakeForce;
+
     [Header("Jetpack UI Settings")]
     public Image jetpackChargeImage;
 
@@ -104,6 +108,7 @@ public class PlayerMovementsRB : MonoBehaviour
             rb.AddForce(Vector3.up * jetpackForce, ForceMode.Force);
 
             jetpackCharge = Mathf.Max(jetpackCharge - Time.fixedDeltaTime, 0);
+            CameraShake.Shake(shakeDuration, shakeForce);
         }
     }
 

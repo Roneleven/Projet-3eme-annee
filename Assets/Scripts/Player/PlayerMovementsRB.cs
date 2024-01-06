@@ -36,15 +36,12 @@ public class PlayerMovementsRB : MonoBehaviour
     private float movementX;
     private float movementY;
     private bool isGrounded;
-    private FMOD.Studio.EventInstance jetUse;
-    private bool isJetUsePlaying = false;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         jetpackCharge = maxJetpackCharge;
-        jetUse = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Locomotion/JetUse");
     }
 
     private void Update()
@@ -55,22 +52,10 @@ public class PlayerMovementsRB : MonoBehaviour
         {
             jetpackCharge = Mathf.Min(jetpackCharge + jetpackChargeRate * Time.deltaTime, maxJetpackCharge);
         }
-        if (jetpack.action.IsPressed() && jetpackCharge > 0)
+
+        if (jetpack.action.IsPressed())
         {
-            if (!isJetUsePlaying)
-            {
-                jetUse.start();
-                isJetUsePlaying = true;
-            }
             UseJetpack();
-        }
-        else
-        {
-            if (isJetUsePlaying)
-            {
-                jetUse.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                isJetUsePlaying = false;
-            }
         }
 
         UpdateJetpackChargeUI();
@@ -83,19 +68,12 @@ public class PlayerMovementsRB : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (jetUse.isValid())
-        {
-            FMOD.Studio.PLAYBACK_STATE state;
-            jetUse.getPlaybackState(out state);
-            isJetUsePlaying = state != FMOD.Studio.PLAYBACK_STATE.STOPPED;
-        }
-
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         Vector3 move = transform.right * movementX + transform.forward * movementY;
         rb.MovePosition(rb.position + move * speed * Time.fixedDeltaTime);
 
-        if (jetpack.action.IsPressed() && jetpackCharge > 0)
+        if (jetpack.action.IsPressed())
         {
             UseJetpack();
         }
@@ -104,6 +82,7 @@ public class PlayerMovementsRB : MonoBehaviour
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Footsteps");
         }
+
     }
 
     private void OnMove(InputValue movementValue)

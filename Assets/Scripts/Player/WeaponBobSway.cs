@@ -1,77 +1,104 @@
 using UnityEngine;
 
-public class WeaponBobSway : MonoBehaviour
+public class SwayNBobScript : MonoBehaviour
 {
-    public float bobbingSpeed = 0.18f;
-    public float bobbingAmount = 0.2f;
-    public float swayAmount = 0.2f;
-    public float maxSwayAngle = 5.0f;
-    public Camera playerCamera;
+    public PlayerMovementsRB playerMovement; // Reference to PlayerMovementsRB script
 
-    private float timer = 0.0f;
-    private Vector3 restPosition;
-    private Quaternion restRotation;
-    private Vector2 lastMousePosition;
+    [Header("Sway")]
+    public float step = 0.01f;
+    public float maxStepDistance = 0.06f;
+    private Vector3 swayPos;
+
+    [Header("Sway Rotation")]
+    public float rotationStep = 4f;
+    public float maxRotationStep = 5f;
+    private Vector3 swayEulerRot; 
+
+    public float smooth = 10f;
+    private float smoothRot = 12f;
+
+    [Header("Bobbing")]
+    public float speedCurve;
+    private float curveSin => Mathf.Sin(speedCurve);
+    private float curveCos => Mathf.Cos(speedCurve);
+
+    public Vector3 travelLimit = Vector3.one * 0.025f;
+    public Vector3 bobLimit = Vector3.one * 0.01f;
+    private Vector3 bobPosition;
+
+    public float bobExaggeration;
+
+    [Header("Bob Rotation")]
+    public Vector3 multiplier;
+    private Vector3 bobEulerRotation;
+
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
+    private Vector2 walkInput;
 
     void Start()
     {
-        restPosition = transform.localPosition;
-        restRotation = transform.localRotation;
-        lastMousePosition = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        // Capture the initial position and rotation
+        initialPosition = transform.localPosition;
+        initialRotation = transform.localRotation;
     }
 
     void Update()
     {
-        float waveslice = 0.0f;
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        Sway();
+        SwayRotation();
+        BobOffset();
+        BobRotation();
 
-        Vector3 localPosition = transform.localPosition;
-        Quaternion localRotation = transform.localRotation;
+        CompositePositionRotation();
+    }
 
-        // Bobbing
-        if (Mathf.Abs(horizontal) == 0 && Mathf.Abs(vertical) == 0)
-        {
-            timer = 0.0f;
-        }
-        else
-        {
-            waveslice = Mathf.Sin(timer);
-            timer += bobbingSpeed;
-            if (timer > Mathf.PI * 2)
-            {
-                timer -= (Mathf.PI * 2);
-            }
-        }
+    void Sway()
+    {
+        // Using velocity for sway calculations
+        Vector3 invertLook = new Vector3(walkInput.y, -walkInput.x, 0) * -step;
+        invertLook.x = Mathf.Clamp(invertLook.x, -maxStepDistance, maxStepDistance);
+        invertLook.y = Mathf.Clamp(invertLook.y, -maxStepDistance, maxStepDistance);
 
-        if (waveslice != 0)
-        {
-            float translateChange = waveslice * bobbingAmount;
-            float totalAxes = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
-            totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
-            translateChange *= totalAxes;
-            localPosition.y = restPosition.y + translateChange;
-        }
-        else
-        {
-            localPosition.y = restPosition.y;
-        }
+        swayPos = invertLook;
+    }
 
-        // Position Sway
-        float factorX = -Input.GetAxis("Mouse X") * swayAmount;
-        float factorY = -Input.GetAxis("Mouse Y") * swayAmount;
-        Vector3 finalPosition = new Vector3(localPosition.x + factorX, localPosition.y, localPosition.z + factorY);
-        transform.localPosition = Vector3.Lerp(transform.localPosition, finalPosition, Time.deltaTime * swayAmount);
+    void SwayRotation()
+    {
+        // Using velocity for rotation calculations
+        Vector2 invertLook = new Vector2(walkInput.y, -walkInput.x) * -rotationStep;
+        invertLook.x = Mathf.Clamp(invertLook.x, -maxRotationStep, maxRotationStep);
+        invertLook.y = Mathf.Clamp(invertLook.y, -maxRotationStep, maxRotationStep);
+        swayEulerRot = new Vector3(invertLook.y, invertLook.x, invertLook.x);
+    }
 
-        // Rotation Sway based on camera movement
-        Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        Vector2 mouseDeltaDifference = mouseDelta - lastMousePosition;
-        lastMousePosition = mouseDelta;
+    void CompositePositionRotation()
+    {
+        // Apply sway and bob relative to the initial position and rotation
+        transform.localPosition = Vector3.Lerp(transform.localPosition, initialPosition + swayPos + bobPosition, Time.deltaTime * smooth);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, initialRotation * Quaternion.Euler(swayEulerRot) * Quaternion.Euler(bobEulerRotation), Time.deltaTime * smoothRot);
+    }
 
-        float tiltAroundZ = mouseDeltaDifference.x * maxSwayAngle;
-        float tiltAroundX = mouseDeltaDifference.y * maxSwayAngle;
+    void BobOffset()
+    {
+        speedCurve += Time.deltaTime * (playerMovement.isGrounded ? (walkInput.x + walkInput.y) * bobExaggeration : 1f) + 0.01f;
 
-        Quaternion finalRotation = Quaternion.Euler(-tiltAroundX, 0, tiltAroundZ);
-        transform.localRotation = Quaternion.Lerp(transform.localRotation, restRotation * finalRotation, Time.deltaTime * swayAmount);
+        bobPosition.x = (curveCos * bobLimit.x * (playerMovement.isGrounded ? 1 : 0)) - (walkInput.x * travelLimit.x);
+        bobPosition.y = (curveSin * bobLimit.y) - (walkInput.y * travelLimit.y);
+        bobPosition.z = -(walkInput.y * travelLimit.z);
+    }
+
+    void BobRotation()
+    {
+        bobEulerRotation.x = (walkInput != Vector2.zero ? multiplier.x * Mathf.Sin(2 * speedCurve) : multiplier.x * Mathf.Sin(2 * speedCurve) / 2);
+        bobEulerRotation.y = (walkInput != Vector2.zero ? multiplier.y * curveCos : 0);
+        bobEulerRotation.z = (walkInput != Vector2.zero ? multiplier.z * curveCos * walkInput.x : 0);
+    }
+
+    void LateUpdate()
+    {
+        // Update walkInput based on PlayerMovementsRB's velocity
+        Vector3 localVelocity = transform.InverseTransformDirection(playerMovement.Velocity);
+        walkInput = new Vector2(localVelocity.x, -localVelocity.z);
     }
 }

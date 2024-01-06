@@ -33,9 +33,10 @@ public class PlayerMovementsRB : MonoBehaviour
     public Image jetpackChargeImage;
 
     private Rigidbody rb;
-    private float movementX;
-    private float movementY;
-    private bool isGrounded;
+    public float movementX;
+    public float movementY;
+    public bool isGrounded;
+    public Vector3 Velocity => rb.velocity;
 
     private void Start()
     {

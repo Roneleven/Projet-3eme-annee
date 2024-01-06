@@ -885,8 +885,8 @@ MonoBehaviour:
   maxJetpackCharge: 4
   jetpackCharge: 0
   jetpack: {fileID: -2807530785661849503, guid: 6e6fe52b9edf0994fab010aae1aa7e18, type: 3}
-  shakeDuration: 0
-  shakeForce: 0
+  shakeDuration: 0.5
+  shakeForce: 1
   jetpackChargeImage: {fileID: 1308860844146114820}
 --- !u!114 &8347870928131129040
 MonoBehaviour:

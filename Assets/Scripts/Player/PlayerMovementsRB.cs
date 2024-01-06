@@ -27,7 +27,7 @@ public class PlayerMovementsRB : MonoBehaviour
 
     [Header("Jetpack Shake Settings")]
     public float shakeDuration;
-    public float shakeForce; 
+    public float shakeForce;
 
     [Header("Jetpack UI Settings")]
     public Image jetpackChargeImage;
@@ -68,7 +68,16 @@ public class PlayerMovementsRB : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isGrounded = false;
+
+        foreach (LayerMask groundMask in groundMasks)
+        {
+            if (Physics.CheckSphere(groundCheck.position, groundDistance, groundMask))
+            {
+                isGrounded = true;
+                break;
+            }
+        }
 
         Vector3 move = transform.right * movementX + transform.forward * movementY;
         rb.MovePosition(rb.position + move * speed * Time.fixedDeltaTime);

@@ -27,7 +27,7 @@ public class PlayerMovementsRB : MonoBehaviour
 
     [Header("Jetpack Shake Settings")]
     public float shakeDuration;
-    public float shakeForce;
+    public float shakeForce; 
 
     [Header("Jetpack UI Settings")]
     public Image jetpackChargeImage;

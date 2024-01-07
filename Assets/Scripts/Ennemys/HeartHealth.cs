@@ -20,7 +20,7 @@ public class HeartHealth : MonoBehaviour
     [SerializeField] private List<TeleportPointBoxSpawnerPair> teleportPointBoxSpawnerPairs = new List<TeleportPointBoxSpawnerPair>();
 
     // Nouvelle variable pour stocker les points de t�l�portation accessibles apr�s chaque t�l�portation
-    private List<int> accessibleTeleportPoints = new List<int>();
+    public List<int> accessibleTeleportPoints = new List<int>();
 
     private void Start()
     {

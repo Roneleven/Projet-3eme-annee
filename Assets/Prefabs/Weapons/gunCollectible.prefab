@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55eca3887a5b2f14c8176ad8360794e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunController: {fileID: 0}
+  gunController: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
   newMaxAmmo: 50
   newFireRate: 3
   newRecoilForce: 1
@@ -162,3 +162,6 @@ MonoBehaviour:
   bulletDamage: 1
   bulletPenetrationCount: 0
   currentAmmo: 0
+  explosiveEnabled: 0
+  explosionRadius: 0
+  explosionPrefab: {fileID: 0}

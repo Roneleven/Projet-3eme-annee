@@ -888,9 +888,6 @@ MonoBehaviour:
   shakeDuration: 0.5
   shakeForce: 1
   jetpackChargeImage: {fileID: 1308860844146114820}
-  movementX: 0
-  movementY: 0
-  isGrounded: 0
 --- !u!114 &8347870928131129040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -907,8 +904,8 @@ MonoBehaviour:
   fireRate: 3
   recoilForce: 1
   reloadTime: 0.9
-  shootingSoundEvent: event:/Guns/PrimaryGun/Shoot
-  reloadSoundEvent: event:/Guns/PrimaryGun/Reload
+  shootingSoundEvent: event:/Player/Shoot
+  reloadSoundEvent: event:/Player/Shoot
   mustUseAllAmmoBeforeReload: 0
   shootingPoint: {fileID: 4718860192780711441}
   bulletsPerShot: 1

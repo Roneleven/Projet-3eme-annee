@@ -1,21 +1,20 @@
 using UnityEngine;
 
-public class GunCollectible : MonoBehaviour
+public class RocketLauncherCollectible : MonoBehaviour
 {
-    public GunController gunController; 
+    public GunController gunController; // Faites glisser votre objet GunController ici depuis l'�diteur Unity
 
     [Header("Gun Properties")]
     public int newMaxAmmo;
     public float newFireRate;
     public float newRecoilForce;
     public float newReloadTime;
-    public float recoilForce;
     public string newShootingSoundEvent = "event:/Player/Shoot";
     public string newReloadSoundEvent = "event:/Player/Shoot";
     public bool newMustUseAllAmmoBeforeReload = false;
 
     [Header("Shooting Mechanics")]
-    public int newBulletsPerShot ;
+    public int newBulletsPerShot;
     public float newSpreadAmount;
 
     [Header("Bullet Settings")]
@@ -24,16 +23,16 @@ public class GunCollectible : MonoBehaviour
     public int newBulletDamage;
     public int newBulletPenetrationCount;
 
-    [Header("Explosive Settings")]
+    [Header("Exploslive Settings")]
     public bool explosiveBullet = true;
-
-    // Ajoutez d'autres propri�t�s selon vos besoins
+    public float newExplosionRadius;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             ApplyChangesToGun();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/LevelDesign/Collectibles/Collected");
             Destroy(gameObject);
         }
     }
@@ -54,5 +53,6 @@ public class GunCollectible : MonoBehaviour
         gunController.bulletDamage = newBulletDamage;
         gunController.currentAmmo = Mathf.Min(gunController.currentAmmo, gunController.maxAmmo);
         gunController.explosiveEnabled = explosiveBullet;
+        gunController.explosionRadius = newExplosionRadius;
     }
 }

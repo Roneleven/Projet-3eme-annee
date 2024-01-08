@@ -24,6 +24,9 @@ public class MachinegunCollectible : MonoBehaviour
     public int newBulletDamage;
     public int newBulletPenetrationCount;
 
+    [Header("Explosive Settings")]
+    public bool explosiveBullet = true;
+
     // Ajoutez d'autres propri�t�s selon vos besoins
 
     private void OnTriggerEnter(Collider other)
@@ -51,5 +54,6 @@ public class MachinegunCollectible : MonoBehaviour
         gunController.bulletLifeTime = newBulletLifeTime;
         gunController.bulletDamage = newBulletDamage;
         gunController.currentAmmo = Mathf.Min(gunController.currentAmmo, gunController.maxAmmo);
+        gunController.explosiveEnabled = explosiveBullet;
     }
 }

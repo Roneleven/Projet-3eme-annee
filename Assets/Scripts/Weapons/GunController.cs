@@ -33,6 +33,9 @@ public class GunController : MonoBehaviour
     public float explosionRadius;
     public GameObject explosionPrefab;
 
+    [Header("Death Particle Settings")]
+    public GameObject cubeDeath;
+
     void Start()
     {
         currentAmmo = maxAmmo;
@@ -82,7 +85,8 @@ public class GunController : MonoBehaviour
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
                 if (bulletScript != null)
                 {
-                    bulletScript.Initialize(bulletSpeed, bulletLifeTime, bulletDamage, bulletPenetrationCount);
+                    bulletScript.InitializeBullet(bulletSpeed, bulletLifeTime, bulletDamage, bulletPenetrationCount, cubeDeath);
+
                 }
             }
         }

@@ -5,12 +5,15 @@ public class Bullet : MonoBehaviour
     private float speed;
     private int damage;
     private int penetrationCount;
+    private GameObject cubeDeathPrefab;
 
-    public void Initialize(float bulletSpeed, float lifeTime, int bulletDamage, int bulletPenetrationCount)
+
+    public void InitializeBullet(float bulletSpeed, float lifeTime, int bulletDamage, int bulletPenetrationCount, GameObject cubeDeath)
     {
         speed = bulletSpeed;
         damage = bulletDamage;
         penetrationCount = bulletPenetrationCount;
+        cubeDeathPrefab = cubeDeath;
         Destroy(gameObject, lifeTime);
     }
 
@@ -21,25 +24,26 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log("Bullet hit: " + collision.gameObject.name + "; Penetration count before hit: " + penetrationCount);
-
         CubeHealth cubeHealth = collision.gameObject.GetComponent<CubeHealth>();
+
         if (cubeHealth != null)
         {
             cubeHealth.TakeDamage(damage);
             penetrationCount--;
 
-            //Debug.Log("Penetration count after hit: " + penetrationCount);
+            if (cubeHealth.health <= 0)
+            {
+                Instantiate(cubeDeathPrefab, collision.gameObject.transform.position, Quaternion.identity);
+                Destroy(collision.gameObject);
+            }
 
             if (penetrationCount <= 0)
             {
-                //Debug.Log("Bullet destroyed after hitting: " + collision.gameObject.name);
                 Destroy(gameObject);
             }
         }
         else
         {
-            //Debug.Log("Bullet hit a non-penetrable object: " + collision.gameObject.name);
             Destroy(gameObject);
         }
     }

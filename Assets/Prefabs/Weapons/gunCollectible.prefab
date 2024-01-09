@@ -134,6 +134,7 @@ MonoBehaviour:
   newBulletLifeTime: 3
   newBulletDamage: 1
   newBulletPenetrationCount: 0
+  explosiveBullet: 0
 --- !u!114 &95709090054893058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,3 +166,4 @@ MonoBehaviour:
   explosiveEnabled: 0
   explosionRadius: 0
   explosionPrefab: {fileID: 0}
+  cubeDeath: {fileID: 0}

@@ -33,7 +33,12 @@ public class Bullet : MonoBehaviour
 
             if (cubeHealth.health <= 0)
             {
-                Instantiate(cubeDeathPrefab, collision.gameObject.transform.position, Quaternion.identity);
+                if (!cubeHealth.IsDead()) // Ajoutez cette vérification
+                {
+                    Instantiate(cubeDeathPrefab, collision.gameObject.transform.position, Quaternion.identity);
+                    cubeHealth.SetDead(true); // Définissez le statut du cube comme mort
+                }
+
                 Destroy(collision.gameObject);
             }
 

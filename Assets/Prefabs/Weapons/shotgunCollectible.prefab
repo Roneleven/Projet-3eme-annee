@@ -133,3 +133,4 @@ MonoBehaviour:
   newBulletLifeTime: 5
   newBulletDamage: 10
   newBulletPenetrationCount: 1
+  explosiveBullet: 0

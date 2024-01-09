@@ -6619,6 +6619,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: cubeDeath
+      value: 
+      objectReference: {fileID: 120410, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
+    - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: bulletSpeed
       value: 100
       objectReference: {fileID: 0}
@@ -32865,6 +32869,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 69430278168256153, guid: f43f76cdd367cd14b9f0d87147e5b22b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95709090054893058, guid: f43f76cdd367cd14b9f0d87147e5b22b, type: 3}
+      propertyPath: bulletLifeTime
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5463507546113587738, guid: f43f76cdd367cd14b9f0d87147e5b22b, type: 3}

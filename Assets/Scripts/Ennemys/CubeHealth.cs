@@ -3,6 +3,7 @@ using UnityEngine;
 public class CubeHealth : MonoBehaviour
 {
     public int health = 1;
+    private bool isDead = false;
     public Material lvl1;
     public Material lvl2; 
     public Material lvl3;
@@ -107,4 +108,13 @@ private int DetermineLevel(int healthValue)
         return 5;
     }
 }
+    public bool IsDead()
+    {
+        return isDead;
+    }
+
+    public void SetDead(bool value)
+    {
+        isDead = value;
+    }
 }

@@ -6621,7 +6621,7 @@ PrefabInstance:
     - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: cubeDeath
       value: 
-      objectReference: {fileID: 120410, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
+      objectReference: {fileID: 2061751337493195821, guid: f45478f9f08d3b6429ec187c2f9e0bc9, type: 3}
     - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: reloadTime
       value: 0.7

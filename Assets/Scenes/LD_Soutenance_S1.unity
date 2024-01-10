@@ -6616,19 +6616,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: fireRate
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: cubeDeath
       value: 
       objectReference: {fileID: 120410, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
     - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: reloadTime
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: bulletSpeed
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: bulletDamage
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: spreadAmount
@@ -18331,6 +18335,14 @@ PrefabInstance:
     - target: {fileID: 5233640631427301055, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
       propertyPath: newSpreadAmount
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5233640631427301055, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
+      propertyPath: newReloadSoundEvent
+      value: event:/Guns/GatlinGun/Reload
+      objectReference: {fileID: 0}
+    - target: {fileID: 5233640631427301055, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
+      propertyPath: newShootingSoundEvent
+      value: event:/Guns/GatlinGun/Shoot
       objectReference: {fileID: 0}
     - target: {fileID: 5233640631427301055, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
       propertyPath: newBulletPenetrationCount
@@ -62326,6 +62338,10 @@ PrefabInstance:
       value: 9999999
       objectReference: {fileID: 0}
     - target: {fileID: 8919750035094726245, guid: e3639dc1cb34c9d4f8baee2249dbf9fa, type: 3}
+      propertyPath: newFireRate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919750035094726245, guid: e3639dc1cb34c9d4f8baee2249dbf9fa, type: 3}
       propertyPath: gunController
       value: 
       objectReference: {fileID: 742015256}
@@ -79608,6 +79624,10 @@ PrefabInstance:
     - target: {fileID: 69430278168256153, guid: 80b9e9367ffa5a44eb8f9db7e368c00a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747502721589192402, guid: 80b9e9367ffa5a44eb8f9db7e368c00a, type: 3}
+      propertyPath: newFireRate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2747502721589192402, guid: 80b9e9367ffa5a44eb8f9db7e368c00a, type: 3}
       propertyPath: gunController

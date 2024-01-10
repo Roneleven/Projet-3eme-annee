@@ -6624,7 +6624,7 @@ PrefabInstance:
       objectReference: {fileID: 120410, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
     - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: reloadTime
-      value: 0.6
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: bulletSpeed
@@ -6646,6 +6646,14 @@ PrefabInstance:
       propertyPath: explosionPrefab
       value: 
       objectReference: {fileID: 191186, guid: 517c65f5c21a00340b7af8423976621c, type: 3}
+    - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: reloadSoundEvent
+      value: event:/Guns/BasicGun/Reload
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: shootingSoundEvent
+      value: event:/Guns/BasicGun/Shoot
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18324,6 +18332,10 @@ PrefabInstance:
       propertyPath: gunController
       value: 
       objectReference: {fileID: 742015256}
+    - target: {fileID: 5233640631427301055, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
+      propertyPath: newReloadTime
+      value: 1.8
+      objectReference: {fileID: 0}
     - target: {fileID: 5233640631427301055, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
       propertyPath: newBulletSpeed
       value: 150
@@ -32903,6 +32915,18 @@ PrefabInstance:
       propertyPath: gunController
       value: 
       objectReference: {fileID: 742015256}
+    - target: {fileID: 6095989711344814350, guid: f43f76cdd367cd14b9f0d87147e5b22b, type: 3}
+      propertyPath: newReloadTime
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6095989711344814350, guid: f43f76cdd367cd14b9f0d87147e5b22b, type: 3}
+      propertyPath: newReloadSoundEvent
+      value: event:/Guns/BasicGun/Reload
+      objectReference: {fileID: 0}
+    - target: {fileID: 6095989711344814350, guid: f43f76cdd367cd14b9f0d87147e5b22b, type: 3}
+      propertyPath: newShootingSoundEvent
+      value: event:/Guns/BasicGun/Shoot
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -62353,6 +62377,14 @@ PrefabInstance:
       propertyPath: newBulletsPerShot
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 8919750035094726245, guid: e3639dc1cb34c9d4f8baee2249dbf9fa, type: 3}
+      propertyPath: newReloadSoundEvent
+      value: event:/Guns/ShotGun/Reload
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919750035094726245, guid: e3639dc1cb34c9d4f8baee2249dbf9fa, type: 3}
+      propertyPath: newShootingSoundEvent
+      value: event:/Guns/ShotGun/Shoot
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -79633,6 +79665,18 @@ PrefabInstance:
       propertyPath: gunController
       value: 
       objectReference: {fileID: 742015256}
+    - target: {fileID: 2747502721589192402, guid: 80b9e9367ffa5a44eb8f9db7e368c00a, type: 3}
+      propertyPath: newReloadTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747502721589192402, guid: 80b9e9367ffa5a44eb8f9db7e368c00a, type: 3}
+      propertyPath: newReloadSoundEvent
+      value: event:/Guns/GrenadeGun/Reload
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747502721589192402, guid: 80b9e9367ffa5a44eb8f9db7e368c00a, type: 3}
+      propertyPath: newShootingSoundEvent
+      value: event:/Guns/GrenadeGun/Shoot
+      objectReference: {fileID: 0}
     - target: {fileID: 5463507546113587738, guid: 80b9e9367ffa5a44eb8f9db7e368c00a, type: 3}
       propertyPath: m_Name
       value: rocketLauncherCollectible

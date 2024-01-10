@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunController: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
-  newMaxAmmo: 300
+  newMaxAmmo: 99999
   newFireRate: 10
   newRecoilForce: 0.8
   newReloadTime: 1.5
@@ -131,6 +131,6 @@ MonoBehaviour:
   newSpreadAmount: 0.03
   newBulletSpeed: 100
   newBulletLifeTime: 5
-  newBulletDamage: 10
-  newBulletPenetrationCount: 1
+  newBulletDamage: 1
+  newBulletPenetrationCount: 0
   explosiveBullet: 0

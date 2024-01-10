@@ -123,7 +123,7 @@ MonoBehaviour:
   newMaxAmmo: 50
   newFireRate: 3
   newRecoilForce: 1
-  newReloadTime: 0.9
+  newReloadTime: 0.6
   recoilForce: 1
   newShootingSoundEvent: event:/Player/Shoot
   newReloadSoundEvent: event:/Player/Shoot
@@ -132,7 +132,7 @@ MonoBehaviour:
   newSpreadAmount: 0
   newBulletSpeed: 50
   newBulletLifeTime: 3
-  newBulletDamage: 1
+  newBulletDamage: 10
   newBulletPenetrationCount: 0
   explosiveBullet: 0
 --- !u!114 &95709090054893058

@@ -25,6 +25,8 @@ public class HeartSpawner : MonoBehaviour
     public float temporarySpawnInterval;//le spawninterval pendant le changement de palier
     public float timeTemporaryPalier; //la durée du changement de palier
 
+    private FMOD.Studio.EventInstance BreakingHeart;
+
     [Header("Timer/Reset Properties")]
     public float timer;
     public float defaultTimer;
@@ -58,6 +60,9 @@ public class HeartSpawner : MonoBehaviour
     {
         StartCoroutine(SpawnCube());
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);
+        BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/UX/Ambience/BreakingTheHeart");
+        BreakingHeart.start();
+
         //StartCoroutine(SpawnWallPattern());
     }
 
@@ -138,6 +143,10 @@ public class HeartSpawner : MonoBehaviour
         {
             playerPosition = playerObject.transform.position;
         }
+
+        BreakingHeart.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        
+
     }
 
     private IEnumerator SpawnCube()
@@ -333,6 +342,9 @@ public class HeartSpawner : MonoBehaviour
                 previousPalier = currentPalier;
             }
 
+            float newLevelUpValue = (currentPalier + 1) * 1.0f;
+            BreakingHeart.setParameterByName("LevelUp", newLevelUpValue);
+
             timerActive = true;
             StartCoroutine(ResetPalier());
         }
@@ -377,25 +389,19 @@ public class HeartSpawner : MonoBehaviour
 
     private void AdjustPalierValues(int palier)
     {
+        float levelUpIncrement = 1.0f;
+
+        spawnRadius = palier * 4;
+
         if (palier == 1)
         {
-            spawnRadius = 4;
             spawnCount = 6;
         }
-        else if (palier == 2)
+        else
         {
-            spawnRadius = 8;
-            spawnCount = 12;
+            spawnCount = 6 + ((palier - 1) * 6);
         }
-        else if (palier == 3)
-        {
-            spawnRadius = 12;
-            spawnCount = 25;
-        }
-        else if (palier == 4)
-        {
-            spawnRadius = 16;
-            spawnCount = 35;
-        }
+
+        float newLevelUpValue = palier * levelUpIncrement;
     }
 }

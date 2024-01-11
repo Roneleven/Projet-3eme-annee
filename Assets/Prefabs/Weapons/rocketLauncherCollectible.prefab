@@ -118,13 +118,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ed4ea30095e4142bc3d108d45f283f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunController: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+  gunController: {fileID: 0}
   newMaxAmmo: 9999
-  newFireRate: 0.5
+  newFireRate: 1
   newRecoilForce: 0.8
-  newReloadTime: 1.2
-  newShootingSoundEvent: 
-  newReloadSoundEvent: 
+  newReloadTime: 2
+  newShootingSoundEvent: event:/Guns/GrenadeGun/Shoot
+  newReloadSoundEvent: event:/Guns/GrenadeGun/Reload
   newMustUseAllAmmoBeforeReload: 0
   newBulletsPerShot: 1
   newSpreadAmount: 0

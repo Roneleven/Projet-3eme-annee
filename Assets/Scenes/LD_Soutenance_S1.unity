@@ -4324,6 +4324,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: shotgunCollectible (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8919750035094726245, guid: e3639dc1cb34c9d4f8baee2249dbf9fa, type: 3}
+      propertyPath: gunController
+      value: 
+      objectReference: {fileID: 983030638}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18057,6 +18061,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: shotgunCollectible (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8919750035094726245, guid: e3639dc1cb34c9d4f8baee2249dbf9fa, type: 3}
+      propertyPath: gunController
+      value: 
+      objectReference: {fileID: 983030638}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18716,6 +18724,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2747502721589192402, guid: 80b9e9367ffa5a44eb8f9db7e368c00a, type: 3}
+      propertyPath: gunController
+      value: 
+      objectReference: {fileID: 983030638}
     - target: {fileID: 5463507546113587738, guid: 80b9e9367ffa5a44eb8f9db7e368c00a, type: 3}
       propertyPath: m_Name
       value: rocketLauncherCollectible (1)
@@ -30106,6 +30118,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: gunCollectible (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6095989711344814350, guid: f43f76cdd367cd14b9f0d87147e5b22b, type: 3}
+      propertyPath: gunController
+      value: 
+      objectReference: {fileID: 983030638}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

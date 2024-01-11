@@ -131,6 +131,6 @@ MonoBehaviour:
   newSpreadAmount: 0
   newBulletSpeed: 100
   newBulletLifeTime: 3
-  newBulletDamage: 10
+  newBulletDamage: 6
   newBulletPenetrationCount: 0
   explosiveBullet: 0

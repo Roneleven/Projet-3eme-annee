@@ -130,7 +130,7 @@ MonoBehaviour:
   newSpreadAmount: 0
   newBulletSpeed: 75
   newBulletLifeTime: 10
-  newBulletDamage: 3
+  newBulletDamage: 2
   newBulletPenetrationCount: 0
   explosiveBullet: 1
   newExplosionRadius: 5

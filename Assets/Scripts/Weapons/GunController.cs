@@ -11,6 +11,7 @@ public class GunController : MonoBehaviour
     public string shootingSoundEvent = "event:/Guns/BasicGun/Shoot";
     public string reloadSoundEvent = "event:/Guns/BasicGun/Reload";
     public bool mustUseAllAmmoBeforeReload = false;
+    public GameObject gunObject;
 
     [Header("Shooting Mechanics")]
     public Transform shootingPoint;

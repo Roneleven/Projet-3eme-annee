@@ -27,8 +27,6 @@ public class MachinegunCollectible : MonoBehaviour
     [Header("Explosive Settings")]
     public bool explosiveBullet = true;
 
-    // Ajoutez d'autres propri�t�s selon vos besoins
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

@@ -261,6 +261,7 @@ public class HeartSpawner : MonoBehaviour
 
     private void TimeOut()
     {
+        BreakingHeart.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         FindObjectOfType<SceneTransition>().ReloadScene();
     }
 

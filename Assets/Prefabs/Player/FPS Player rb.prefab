@@ -252,6 +252,11 @@ MonoBehaviour:
   bobbingSpeed: 15
   bobbingAmount: 0.05
   damping: 0.5
+  groundCheck: {fileID: 7463014139835152866}
+  groundDistance: 0.2
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &2660040998167138323
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,8 +10,8 @@ public class MachinegunCollectible : MonoBehaviour
     public float newRecoilForce;
     public float newReloadTime;
     public float recoilForce;
-    public string newShootingSoundEvent = "event:/Player/Shoot";
-    public string newReloadSoundEvent = "event:/Player/Shoot";
+    public string newShootingSoundEvent = "event:/Guns/GatlinGun/Shoot";
+    public string newReloadSoundEvent = "event:/Guns/GatlinGun/Reload";
     public bool newMustUseAllAmmoBeforeReload = false;
 
     [Header("Shooting Mechanics")]

@@ -9,8 +9,8 @@ public class RocketLauncherCollectible : MonoBehaviour
     public float newFireRate;
     public float newRecoilForce;
     public float newReloadTime;
-    public string newShootingSoundEvent = "event:/Player/Shoot";
-    public string newReloadSoundEvent = "event:/Player/Shoot";
+    public string newShootingSoundEvent = "event:/Guns/GrenadeGun/Shoot";
+    public string newReloadSoundEvent = "event:/Guns/GrenadeGun/Reload";
     public bool newMustUseAllAmmoBeforeReload = false;
 
     [Header("Shooting Mechanics")]

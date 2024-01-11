@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 497311369950399645}
   - component: {fileID: 5197492455476256952}
   - component: {fileID: 6095989711344814350}
-  - component: {fileID: 95709090054893058}
   m_Layer: 0
   m_Name: gunCollectible
   m_TagString: Untagged
@@ -125,8 +124,8 @@ MonoBehaviour:
   newRecoilForce: 1
   newReloadTime: 0.6
   recoilForce: 1
-  newShootingSoundEvent: event:/Player/Shoot
-  newReloadSoundEvent: event:/Player/Shoot
+  newShootingSoundEvent: 
+  newReloadSoundEvent: 
   newMustUseAllAmmoBeforeReload: 0
   newBulletsPerShot: 1
   newSpreadAmount: 0
@@ -135,35 +134,3 @@ MonoBehaviour:
   newBulletDamage: 10
   newBulletPenetrationCount: 0
   explosiveBullet: 0
---- !u!114 &95709090054893058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5463507546113587738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc85c046cb8cb2e4c8f2a32055c9bc50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxAmmo: 50
-  fireRate: 3
-  recoilForce: 1
-  reloadTime: 0.9
-  shootingSoundEvent: event:/Guns/PrimaryGun/Shoot
-  reloadSoundEvent: event:/Guns/PrimaryGun/Reload
-  mustUseAllAmmoBeforeReload: 0
-  shootingPoint: {fileID: 0}
-  bulletsPerShot: 1
-  spreadAmount: 0
-  bulletPrefab: {fileID: 6786013472321727789, guid: 005c8ad54fbad8b4295133ac2f24f610, type: 3}
-  bulletSpeed: 50
-  bulletLifeTime: 3
-  bulletDamage: 1
-  bulletPenetrationCount: 0
-  currentAmmo: 0
-  explosiveEnabled: 0
-  explosionRadius: 0
-  explosionPrefab: {fileID: 0}
-  cubeDeath: {fileID: 0}

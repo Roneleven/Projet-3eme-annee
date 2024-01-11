@@ -10,8 +10,8 @@ public class ShotgunCollectible : MonoBehaviour
     public float newRecoilForce;
     public float newReloadTime;
     public float recoilForce;
-    public string newShootingSoundEvent = "event:/Player/Shoot";
-    public string newReloadSoundEvent = "event:/Player/Shoot";
+    public string newShootingSoundEvent = "event:/Guns/ShotGun/Shoot";
+    public string newReloadSoundEvent = "event:/Guns/ShotGun/Reload";
     public bool newMustUseAllAmmoBeforeReload = false;
 
     [Header("Shooting Mechanics")]

@@ -124,8 +124,8 @@ MonoBehaviour:
   newRecoilForce: 0.8
   newReloadTime: 1.5
   recoilForce: 1
-  newShootingSoundEvent: event:/Player/Shoot
-  newReloadSoundEvent: event:/Player/Shoot
+  newShootingSoundEvent: 
+  newReloadSoundEvent: 
   newMustUseAllAmmoBeforeReload: 0
   newBulletsPerShot: 1
   newSpreadAmount: 0.03

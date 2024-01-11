@@ -127,6 +127,7 @@ MonoBehaviour:
   newShootingSoundEvent: event:/Guns/BasicGun/Shoot
   newReloadSoundEvent: event:/Guns/BasicGun/Reload
   newMustUseAllAmmoBeforeReload: 0
+  respawnCollectibleTime: 5
   newBulletsPerShot: 1
   newSpreadAmount: 0
   newBulletSpeed: 100

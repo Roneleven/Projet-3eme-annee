@@ -127,6 +127,7 @@ MonoBehaviour:
   newShootingSoundEvent: event:/Guns/GatlinGun/Shoot
   newReloadSoundEvent: event:/Guns/GatlinGun/Reload
   newMustUseAllAmmoBeforeReload: 0
+  respawnCollectibleTime: 5
   newBulletsPerShot: 1
   newSpreadAmount: 0.01
   newBulletSpeed: 150

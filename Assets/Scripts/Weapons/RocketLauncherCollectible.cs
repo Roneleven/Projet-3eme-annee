@@ -12,6 +12,8 @@ public class RocketLauncherCollectible : MonoBehaviour
     public string newShootingSoundEvent = "event:/Guns/GrenadeGun/Shoot";
     public string newReloadSoundEvent = "event:/Guns/GrenadeGun/Reload";
     public bool newMustUseAllAmmoBeforeReload = false;
+    private bool isCollected = false;
+    public float respawnCollectibleTime;
 
     [Header("Shooting Mechanics")]
     public int newBulletsPerShot;
@@ -29,12 +31,19 @@ public class RocketLauncherCollectible : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !isCollected)
         {
             ApplyChangesToGun();
             FMODUnity.RuntimeManager.PlayOneShot("event:/LevelDesign/Collectibles/Collected");
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            Invoke("RespawnCollectible", respawnCollectibleTime);
         }
+    }
+
+    void RespawnCollectible()
+    {
+        gameObject.SetActive(true);
+        isCollected = false;
     }
 
     void ApplyChangesToGun()

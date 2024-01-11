@@ -16400,33 +16400,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5233640631427301055, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
-      propertyPath: newMaxAmmo
-      value: 999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 5233640631427301055, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
-      propertyPath: newFireRate
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 5233640631427301055, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
       propertyPath: gunController
       value: 
       objectReference: {fileID: 983030638}
-    - target: {fileID: 5233640631427301055, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
-      propertyPath: newBulletSpeed
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 5233640631427301055, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
-      propertyPath: newBulletDamage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5233640631427301055, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
-      propertyPath: newSpreadAmount
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 5233640631427301055, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
-      propertyPath: newBulletPenetrationCount
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -57809,21 +57785,9 @@ PrefabInstance:
       value: shotgunCollectible
       objectReference: {fileID: 0}
     - target: {fileID: 8919750035094726245, guid: e3639dc1cb34c9d4f8baee2249dbf9fa, type: 3}
-      propertyPath: newMaxAmmo
-      value: 9999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 8919750035094726245, guid: e3639dc1cb34c9d4f8baee2249dbf9fa, type: 3}
       propertyPath: gunController
       value: 
       objectReference: {fileID: 983030638}
-    - target: {fileID: 8919750035094726245, guid: e3639dc1cb34c9d4f8baee2249dbf9fa, type: 3}
-      propertyPath: newBulletDamage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8919750035094726245, guid: e3639dc1cb34c9d4f8baee2249dbf9fa, type: 3}
-      propertyPath: newBulletsPerShot
-      value: 12
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

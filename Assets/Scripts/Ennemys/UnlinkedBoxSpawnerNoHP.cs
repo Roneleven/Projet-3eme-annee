@@ -7,20 +7,28 @@ public class UnlinkedBoxSpawnerNoHP : MonoBehaviour
     public float spawnInterval = 1f;
     public float spawnRadius;
     public GameObject spawnContainer;
-    public Vector3 spawnBoxSize = new Vector3(8f, 8f, 8f); // Taille de la boîte de spawn
+    public Vector3 spawnBoxSize = new Vector3(8f, 8f, 8f); // Taille de la boï¿½te de spawn
     public float gridSize = 1f;
     public float exclusionRadius = 2f;
     public float spawnCount;
     public GameObject transparentCubePrefab;
     public int maxCubeCount = 50;
+    private FMOD.Studio.EventInstance spawningSound;
 
-    // Variable pour suivre le nombre actuel de blocs réels
+    // Variable pour suivre le nombre actuel de blocs rï¿½els
     public int cubeCount = 0;
 
     private void Start()
     {
         StartCoroutine(SpawnCube());
+        spawningSound = FMODUnity.RuntimeManager.CreateInstance("event:/DestructibleBlock/Behaviours/Spawning");
     }
+
+    void Update()
+    {
+        spawningSound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+    }
+
 
     public IEnumerator SpawnCube()
     {
@@ -69,7 +77,7 @@ public class UnlinkedBoxSpawnerNoHP : MonoBehaviour
                     else
                     {
                         StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
-                        cubeCount++; // Incrémente le nombre de blocs réels
+                        cubeCount++; // Incrï¿½mente le nombre de blocs rï¿½els
                     }
                 }
             }
@@ -81,6 +89,7 @@ public class UnlinkedBoxSpawnerNoHP : MonoBehaviour
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {
         GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+        spawningSound.start();
         yield return new WaitForSeconds(spawnInterval);
 
         Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
@@ -93,7 +102,8 @@ public class UnlinkedBoxSpawnerNoHP : MonoBehaviour
                 break;
             }
         }
-
+        Debug.Log("Stopping spawning sound");
+        spawningSound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         Destroy(transparentCube);
 
         if (playerInPosition)
@@ -113,7 +123,7 @@ public class UnlinkedBoxSpawnerNoHP : MonoBehaviour
                         if (Mathf.Abs(x - playerPosition.x) >= 3 || Mathf.Abs(y - playerPosition.y) >= 3 || Mathf.Abs(z - playerPosition.z) >= 3)
                         {
                             Instantiate(cubePrefab, cubePosition, Quaternion.identity, spawnContainer.transform);
-                            cubeCount++; // Incrémente le nombre de blocs réels
+                            cubeCount++; // Incrï¿½mente le nombre de blocs rï¿½els
                         }
                     }
                 }
@@ -122,10 +132,10 @@ public class UnlinkedBoxSpawnerNoHP : MonoBehaviour
         else
         {
             Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-            cubeCount++; // Incrémente le nombre de blocs réels
+            cubeCount++; // Incrï¿½mente le nombre de blocs rï¿½els
         }
 
-        // Décrémente le nombre de blocs réels lorsque la coroutine est terminée (quand le bloc transparent est détruit)
+        // Dï¿½crï¿½mente le nombre de blocs rï¿½els lorsque la coroutine est terminï¿½e (quand le bloc transparent est dï¿½truit)
         cubeCount--;
     }
 

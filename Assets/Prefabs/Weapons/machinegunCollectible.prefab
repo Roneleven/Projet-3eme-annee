@@ -122,14 +122,14 @@ MonoBehaviour:
   newMaxAmmo: 99999
   newFireRate: 13
   newRecoilForce: 0.8
-  newReloadTime: 1.5
+  newReloadTime: 2
   recoilForce: 1
-  newShootingSoundEvent: 
-  newReloadSoundEvent: 
+  newShootingSoundEvent: event:/Guns/GatlinGun/Shoot
+  newReloadSoundEvent: event:/Guns/GatlinGun/Reload
   newMustUseAllAmmoBeforeReload: 0
   newBulletsPerShot: 1
-  newSpreadAmount: 0.03
-  newBulletSpeed: 175
+  newSpreadAmount: 0.01
+  newBulletSpeed: 150
   newBulletLifeTime: 5
   newBulletDamage: 1
   newBulletPenetrationCount: 0

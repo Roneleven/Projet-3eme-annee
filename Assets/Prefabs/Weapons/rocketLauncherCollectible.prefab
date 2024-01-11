@@ -128,7 +128,7 @@ MonoBehaviour:
   newMustUseAllAmmoBeforeReload: 0
   newBulletsPerShot: 1
   newSpreadAmount: 0
-  newBulletSpeed: 20
+  newBulletSpeed: 75
   newBulletLifeTime: 10
   newBulletDamage: 3
   newBulletPenetrationCount: 0

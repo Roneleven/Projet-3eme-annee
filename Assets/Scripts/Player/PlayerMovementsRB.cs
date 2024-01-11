@@ -137,7 +137,7 @@ public class PlayerMovementsRB : MonoBehaviour
 
             jetpackCharge = Mathf.Max(jetpackCharge - Time.fixedDeltaTime, 0);
 
-            // Déclencher le système de particules
+            // Dï¿½clencher le systï¿½me de particules
             if (!jetpackEffect.isPlaying)
             {
                 jetpackEffect.Play();
@@ -147,7 +147,7 @@ public class PlayerMovementsRB : MonoBehaviour
         }
         else
         {
-            // Arrêter le système de particules si le jetpack n'est plus utilisé ou plus de carburant
+            // Arrï¿½ter le systï¿½me de particules si le jetpack n'est plus utilisï¿½ ou plus de carburant
             jetpackEffect.Stop();
         }
     }

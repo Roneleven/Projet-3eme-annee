@@ -4,7 +4,11 @@ public class WeaponBob : MonoBehaviour
 {
     public float bobbingSpeed = 0.18f;
     public float bobbingAmount = 0.2f;
-    public float damping = 0.1f; // new damping factor for smoother transition
+    public float damping = 0.1f;
+
+    public Transform groundCheck; // Transform for where the ground check should start
+    public float groundDistance = 0.1f; // Distance of the ground check raycast
+    public LayerMask groundMask; // Layer mask to identify the ground
 
     private float timer = 0.0f;
     private Vector3 originalLocalPosition;
@@ -16,6 +20,11 @@ public class WeaponBob : MonoBehaviour
 
     void Update()
     {
+        // Check if the player is grounded
+        bool isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, groundDistance, groundMask);
+
+        if (!isGrounded) return; // Skip bobbing if not grounded
+
         float waveslice = 0.0f;
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
@@ -27,7 +36,7 @@ public class WeaponBob : MonoBehaviour
         else
         {
             waveslice = Mathf.Sin(timer);
-            timer = timer + bobbingSpeed * Time.deltaTime; // use Time.deltaTime for frame rate independence
+            timer = timer + bobbingSpeed * Time.deltaTime;
             if (timer > Mathf.PI * 2)
             {
                 timer = timer - (Mathf.PI * 2);
@@ -41,13 +50,13 @@ public class WeaponBob : MonoBehaviour
             float translateChange = waveslice * bobbingAmount;
             float totalAxes = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
             totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
-            translateChange = totalAxes * translateChange * damping; // apply damping
+            translateChange = totalAxes * translateChange * damping;
 
             localPosition.y += translateChange;
         }
         else
         {
-            localPosition.y = Mathf.Lerp(localPosition.y, originalLocalPosition.y, Time.deltaTime * damping); // smoothly return to the original position
+            localPosition.y = Mathf.Lerp(localPosition.y, originalLocalPosition.y, Time.deltaTime * damping);
         }
 
         transform.localPosition = localPosition;

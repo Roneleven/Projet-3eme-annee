@@ -16410,7 +16410,7 @@ PrefabInstance:
     - target: {fileID: 5233640631427301055, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
       propertyPath: gunController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 983030638}
     - target: {fileID: 5233640631427301055, guid: 002b2864c0f7c794fb54f31374e0478e, type: 3}
       propertyPath: newBulletSpeed
       value: 150
@@ -18741,6 +18741,14 @@ PrefabInstance:
     - target: {fileID: 897814931625706344, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
       propertyPath: m_Name
       value: BoxSpawner (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836226785195394683, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
+      propertyPath: maxCubeCount
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836226785195394683, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
+      propertyPath: spawnInterval
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2836226785195394683, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
       propertyPath: spawnBoxSize.x
@@ -29580,7 +29588,7 @@ PrefabInstance:
     - target: {fileID: 6095989711344814350, guid: f43f76cdd367cd14b9f0d87147e5b22b, type: 3}
       propertyPath: gunController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 983030638}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30356,6 +30364,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 897814931625706344, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
   m_PrefabInstance: {fileID: 929400213}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &983030638 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+  m_PrefabInstance: {fileID: 1964117807}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc85c046cb8cb2e4c8f2a32055c9bc50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &983291308 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 897814931625706344, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
@@ -44208,6 +44227,14 @@ PrefabInstance:
       value: BoxSpawner (5)
       objectReference: {fileID: 0}
     - target: {fileID: 2836226785195394683, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
+      propertyPath: maxCubeCount
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836226785195394683, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
+      propertyPath: spawnInterval
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836226785195394683, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
       propertyPath: spawnBoxSize.x
       value: 10
       objectReference: {fileID: 0}
@@ -48842,6 +48869,14 @@ PrefabInstance:
     - target: {fileID: 897814931625706344, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
       propertyPath: m_Name
       value: BoxSpawner (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836226785195394683, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
+      propertyPath: maxCubeCount
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836226785195394683, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
+      propertyPath: spawnInterval
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2836226785195394683, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
       propertyPath: spawnBoxSize.x
@@ -57780,7 +57815,7 @@ PrefabInstance:
     - target: {fileID: 8919750035094726245, guid: e3639dc1cb34c9d4f8baee2249dbf9fa, type: 3}
       propertyPath: gunController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 983030638}
     - target: {fileID: 8919750035094726245, guid: e3639dc1cb34c9d4f8baee2249dbf9fa, type: 3}
       propertyPath: newBulletDamage
       value: 1
@@ -75169,7 +75204,7 @@ PrefabInstance:
     - target: {fileID: 2747502721589192402, guid: 80b9e9367ffa5a44eb8f9db7e368c00a, type: 3}
       propertyPath: gunController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 983030638}
     - target: {fileID: 5463507546113587738, guid: 80b9e9367ffa5a44eb8f9db7e368c00a, type: 3}
       propertyPath: m_Name
       value: rocketLauncherCollectible

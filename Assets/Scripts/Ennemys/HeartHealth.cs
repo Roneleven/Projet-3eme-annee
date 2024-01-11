@@ -11,9 +11,8 @@ public struct TeleportPointBoxSpawnerPair
 
 public class HeartHealth : MonoBehaviour
 {
-    public int maxHealth = 100;
-    public int health = 100;
-    public int currentPalier = 1;
+    public int maxHealth;
+    public int health;
     public Transform[] teleportPositions;
     private int lastTeleportIndex = -1;
     private HeartSpawner heartSpawner;
@@ -78,13 +77,28 @@ public class HeartHealth : MonoBehaviour
             {
                 if (pair.teleportPointIndex == newTeleportIndex)
                 {
-                    foreach (var boxSpawner in pair.boxSpawners)
+                    if (pair.boxSpawners != null)
                     {
-                        //boxSpawner.gameObject.SetActive(true);
-                        boxSpawner.StartCoroutine(boxSpawner.SpawnCube());
+                        foreach (var boxSpawner in pair.boxSpawners)
+                        {
+                            if (boxSpawner != null)
+                            {
+                                //boxSpawner.gameObject.SetActive(true);
+                                boxSpawner.StartCoroutine(boxSpawner.SpawnCube());
+                            }
+                            else
+                            {
+                                Debug.LogError("boxSpawner is null in pair.boxSpawners");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("pair.boxSpawners is null");
                     }
                 }
             }
+
             foreach (var pair in teleportPointBoxSpawnerPairs)
             {
                 if (pair.teleportPointIndex == newTeleportIndex)

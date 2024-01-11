@@ -31,6 +31,7 @@ public class GunController : MonoBehaviour
     [Header("Explosive Settings")]
     public bool explosiveEnabled;
     public float explosionRadius;
+    public GameObject explosiveBulletPrefab;
     public GameObject explosionPrefab;
 
     [Header("Death Particle Settings")]
@@ -65,17 +66,28 @@ public class GunController : MonoBehaviour
 
         for (int i = 0; i < bulletsPerShot; i++)
         {
-            if (bulletPrefab != null && shootingPoint != null)
+            if (shootingPoint != null)
             {
-                GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
+                GameObject bullet;
 
-                // Ajout d'une balle explosive
-                if (explosiveEnabled)
+                // Utiliser le prefab de balle explosif si explosiveEnabled est vrai, sinon utiliser le prefab régulier
+                if (explosiveEnabled && explosiveBulletPrefab != null)
                 {
+                    bullet = Instantiate(explosiveBulletPrefab, shootingPoint.position, shootingPoint.rotation);
                     bullet.AddComponent<ExplosiveBullet>().InitializeExplosive(explosionRadius, explosionPrefab, bulletDamage);
                 }
+                else if (bulletPrefab != null)
+                {
+                    bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
+                }
+                else
+                {
+                    // Gérer le cas où le prefab de balle n'est pas défini
+                    Debug.LogError("Prefab de balle non défini.");
+                    return;
+                }
 
-                // Adding bullet spread
+                // Ajout du spread
                 Vector3 spread = Random.insideUnitSphere * spreadAmount;
                 spread += shootingPoint.forward;
                 Quaternion spreadRotation = Quaternion.LookRotation(spread);
@@ -86,7 +98,6 @@ public class GunController : MonoBehaviour
                 if (bulletScript != null)
                 {
                     bulletScript.InitializeBullet(bulletSpeed, bulletLifeTime, bulletDamage, bulletPenetrationCount, cubeDeath);
-
                 }
             }
         }

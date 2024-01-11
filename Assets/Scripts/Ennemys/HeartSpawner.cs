@@ -182,9 +182,9 @@ public class HeartSpawner : MonoBehaviour
                         CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
                         if (cubeHealth != null)
                         {
-                            if (cubeHealth.health < 26)
+                            if (cubeHealth.health < 6)
                             {
-                                cubeHealth.health += 5;
+                                cubeHealth.health += 1;
                                 break;
                             }
                             else
@@ -270,9 +270,9 @@ public class HeartSpawner : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
-            if (cubeHealth != null && cubeHealth.health < 26)
+            if (cubeHealth != null && cubeHealth.health < 6)
             {
-                cubeHealth.health += 5;
+                cubeHealth.health += 1;
                 break;
             }
         }

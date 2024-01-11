@@ -9595,4 +9595,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 096e628a50237eb44a7d8ff4c524588e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayInSeconds: 0.1
+  delayInSeconds: 1

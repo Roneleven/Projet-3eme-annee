@@ -201,7 +201,7 @@ public class HeartHealth : MonoBehaviour
                     foreach (var boxSpawner in pair.boxSpawners)
                     {
                         GameObject[] generatedCubes = GameObject.FindGameObjectsWithTag("Block");
-                        float percentageToRemove = 0.5f; 
+                        float percentageToRemove = 0.6f; 
                         float delayBetweenCubes = 5f / generatedCubes.Length;
                         StartCoroutine(DestroyPercentageOfCubesGradually(generatedCubes, percentageToRemove, delayBetweenCubes));
                     }
@@ -218,7 +218,7 @@ public class HeartHealth : MonoBehaviour
                     foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
                     {
                         GameObject[] generatedCubes = GameObject.FindGameObjectsWithTag("Block");
-                        float percentageToRemove = 0.5f; // Changer la valeur selon vos besoins
+                        float percentageToRemove = 0.6f; // Changer la valeur selon vos besoins
                         float delayBetweenCubes = 5f / generatedCubes.Length;
                         StartCoroutine(DestroyPercentageOfCubesGradually(generatedCubes, percentageToRemove, delayBetweenCubes));
                     }

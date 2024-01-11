@@ -103,15 +103,27 @@ public class HeartHealth : MonoBehaviour
             {
                 if (pair.teleportPointIndex == newTeleportIndex)
                 {
-                    foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
+                    if (pair.boxSpawnersNoHP != null)
                     {
-                        //boxSpawnerNoHP.gameObject.SetActive(true);
-                        boxSpawnerNoHP.StartCoroutine(boxSpawnerNoHP.SpawnCube());
+                        foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
+                        {
+                            if (boxSpawnerNoHP != null)
+                            {
+                                //boxSpawnerNoHP.gameObject.SetActive(true);
+                                boxSpawnerNoHP.StartCoroutine(boxSpawnerNoHP.SpawnCube());
+                            }
+                            else
+                            {
+                                Debug.LogError("boxSpawnerNoHP is null in pair.boxSpawners");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("pair.boxSpawnersNoHP is null");
                     }
                 }
             }
-
-            // Mettre � jour la liste des points de t�l�portation accessibles apr�s cette t�l�portation
             UpdateAccessibleTeleportPoints();
         }
     }

@@ -120,17 +120,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunController: {fileID: 8347870928131129040, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
   newMaxAmmo: 9999
-  newFireRate: 1
+  newFireRate: 0.5
   newRecoilForce: 0.8
   newReloadTime: 1.2
-  newShootingSoundEvent: event:/Player/Shoot
-  newReloadSoundEvent: event:/Player/Shoot
+  newShootingSoundEvent: 
+  newReloadSoundEvent: 
   newMustUseAllAmmoBeforeReload: 0
   newBulletsPerShot: 1
   newSpreadAmount: 0
-  newBulletSpeed: 100
+  newBulletSpeed: 20
   newBulletLifeTime: 10
-  newBulletDamage: 4
+  newBulletDamage: 3
   newBulletPenetrationCount: 0
   explosiveBullet: 1
   newExplosionRadius: 5

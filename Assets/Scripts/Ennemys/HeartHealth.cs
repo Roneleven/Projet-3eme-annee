@@ -11,9 +11,8 @@ public struct TeleportPointBoxSpawnerPair
 
 public class HeartHealth : MonoBehaviour
 {
-    public int maxHealth = 100;
-    public int health = 100;
-    public int currentPalier = 1;
+    public int maxHealth;
+    public int health;
     public Transform[] teleportPositions;
     private int lastTeleportIndex = -1;
     private HeartSpawner heartSpawner;
@@ -78,26 +77,53 @@ public class HeartHealth : MonoBehaviour
             {
                 if (pair.teleportPointIndex == newTeleportIndex)
                 {
-                    foreach (var boxSpawner in pair.boxSpawners)
+                    if (pair.boxSpawners != null)
                     {
-                        //boxSpawner.gameObject.SetActive(true);
-                        boxSpawner.StartCoroutine(boxSpawner.SpawnCube());
+                        foreach (var boxSpawner in pair.boxSpawners)
+                        {
+                            if (boxSpawner != null)
+                            {
+                                //boxSpawner.gameObject.SetActive(true);
+                                boxSpawner.StartCoroutine(boxSpawner.SpawnCube());
+                            }
+                            else
+                            {
+                                Debug.LogError("boxSpawner is null in pair.boxSpawners");
+                            }
+                        }
                     }
-                }
-            }
-            foreach (var pair in teleportPointBoxSpawnerPairs)
-            {
-                if (pair.teleportPointIndex == newTeleportIndex)
-                {
-                    foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
+                    else
                     {
-                        //boxSpawnerNoHP.gameObject.SetActive(true);
-                        boxSpawnerNoHP.StartCoroutine(boxSpawnerNoHP.SpawnCube());
+                        Debug.LogError("pair.boxSpawners is null");
                     }
                 }
             }
 
-            // Mettre � jour la liste des points de t�l�portation accessibles apr�s cette t�l�portation
+            foreach (var pair in teleportPointBoxSpawnerPairs)
+            {
+                if (pair.teleportPointIndex == newTeleportIndex)
+                {
+                    if (pair.boxSpawnersNoHP != null)
+                    {
+                        foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
+                        {
+                            if (boxSpawnerNoHP != null)
+                            {
+                                //boxSpawnerNoHP.gameObject.SetActive(true);
+                                boxSpawnerNoHP.StartCoroutine(boxSpawnerNoHP.SpawnCube());
+                            }
+                            else
+                            {
+                                Debug.LogError("boxSpawnerNoHP is null in pair.boxSpawners");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("pair.boxSpawnersNoHP is null");
+                    }
+                }
+            }
             UpdateAccessibleTeleportPoints();
         }
     }

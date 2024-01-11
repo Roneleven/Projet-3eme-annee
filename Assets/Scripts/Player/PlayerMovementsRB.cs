@@ -9,9 +9,8 @@ public class PlayerMovementsRB : MonoBehaviour
 {
     [Header("Player Settings")]
     public float speed;
-    public float jumpHeight;
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
+    public float groundDistance;
     public List<LayerMask> groundMasks;
 
     [Header("Respawn Settings")]
@@ -24,6 +23,7 @@ public class PlayerMovementsRB : MonoBehaviour
     public float maxJetpackCharge = 100f;
     public float jetpackCharge;
     public InputActionReference jetpack;
+    public ParticleSystem jetpackEffect;
 
     [Header("Jetpack Shake Settings")]
     public float shakeDuration;
@@ -70,6 +70,7 @@ public class PlayerMovementsRB : MonoBehaviour
             {
                 jetUse.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 isJetUsePlaying = false;
+                jetpackEffect.Stop();
             }
         }
 
@@ -78,6 +79,11 @@ public class PlayerMovementsRB : MonoBehaviour
         if (transform.position.y < respawnPositionY)
         {
             Respawn();
+        }
+
+        if (isGrounded)
+        {
+            jetpackEffect.Stop();
         }
     }
 
@@ -130,7 +136,19 @@ public class PlayerMovementsRB : MonoBehaviour
             rb.AddForce(Vector3.up * jetpackForce, ForceMode.Force);
 
             jetpackCharge = Mathf.Max(jetpackCharge - Time.fixedDeltaTime, 0);
+
+            // Déclencher le système de particules
+            if (!jetpackEffect.isPlaying)
+            {
+                jetpackEffect.Play();
+            }
+
             CameraShake.Shake(shakeDuration, shakeForce);
+        }
+        else
+        {
+            // Arrêter le système de particules si le jetpack n'est plus utilisé ou plus de carburant
+            jetpackEffect.Stop();
         }
     }
 
@@ -149,7 +167,7 @@ public class PlayerMovementsRB : MonoBehaviour
     {
         if (jetpackChargeImage != null)
         {
-            jetpackChargeImage.fillAmount = jetpackCharge / maxJetpackCharge;
+            jetpackChargeImage.fillAmount = jetpackCharge / maxJetpackCharge;   
         }
     }
 }

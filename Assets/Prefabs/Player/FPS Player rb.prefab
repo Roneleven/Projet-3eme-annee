@@ -5761,7 +5761,7 @@ MonoBehaviour:
   respawnPoint: {fileID: 0}
   respawnPositionY: -100
   jetpackForce: 3
-  jetpackChargeRate: 5
+  jetpackChargeRate: 10
   maxJetpackCharge: 8
   jetpackCharge: 0
   jetpack: {fileID: -2807530785661849503, guid: 6e6fe52b9edf0994fab010aae1aa7e18, type: 3}

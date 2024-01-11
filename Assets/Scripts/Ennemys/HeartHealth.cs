@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,6 +50,7 @@ public class HeartHealth : MonoBehaviour
 
     private void TeleportHeart()
     {
+        DestroyCubesBeforeTeleport();
         DeactivateLinkedBoxSpawners();
 
         if (accessibleTeleportPoints.Count > 0)
@@ -164,4 +166,71 @@ public class HeartHealth : MonoBehaviour
             }
         }
     }
+
+    private IEnumerator DestroyCubesGradually(GameObject[] cubes, float delay)
+    {
+        foreach (var cube in cubes)
+        {
+            Destroy(cube);
+            yield return new WaitForSeconds(delay);
+        }
+    }
+
+    private IEnumerator DestroyPercentageOfCubesGradually(GameObject[] cubes, float percentageToRemove, float delay)
+    {
+        int cubesToRemove = Mathf.CeilToInt(cubes.Length * percentageToRemove);
+        for (int i = 0; i < cubesToRemove; i++)
+        {
+            Destroy(cubes[i]);
+            yield return new WaitForSeconds(delay);
+        }
+    }
+
+    private void DestroyCubesBeforeTeleport()
+    {
+        GameObject[] heartGeneratedCubes = GameObject.FindGameObjectsWithTag("HeartBlock");
+        int cubesToDestroy = Mathf.CeilToInt(heartGeneratedCubes.Length * 0.6f);
+        StartCoroutine(DestroyCubesGradually(heartGeneratedCubes, 5f / cubesToDestroy)); // Changez la valeur 5f selon vos besoins
+
+        foreach (var pair in teleportPointBoxSpawnerPairs)
+        {
+            if (pair.teleportPointIndex == lastTeleportIndex)
+            {
+                if (pair.boxSpawners != null)
+                {
+                    foreach (var boxSpawner in pair.boxSpawners)
+                    {
+                        GameObject[] generatedCubes = GameObject.FindGameObjectsWithTag("Block");
+                        float percentageToRemove = 0.5f; 
+                        float delayBetweenCubes = 5f / generatedCubes.Length;
+                        StartCoroutine(DestroyPercentageOfCubesGradually(generatedCubes, percentageToRemove, delayBetweenCubes));
+                    }
+                }
+            }
+        }
+
+        foreach (var pair in teleportPointBoxSpawnerPairs)
+        {
+            if (pair.teleportPointIndex == lastTeleportIndex)
+            {
+                if (pair.boxSpawnersNoHP != null)
+                {
+                    foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
+                    {
+                        GameObject[] generatedCubes = GameObject.FindGameObjectsWithTag("Block");
+                        float percentageToRemove = 0.5f; // Changer la valeur selon vos besoins
+                        float delayBetweenCubes = 5f / generatedCubes.Length;
+                        StartCoroutine(DestroyPercentageOfCubesGradually(generatedCubes, percentageToRemove, delayBetweenCubes));
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+
 }

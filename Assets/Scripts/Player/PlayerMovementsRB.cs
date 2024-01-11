@@ -108,8 +108,10 @@ public class PlayerMovementsRB : MonoBehaviour
         }
 
 
-        Vector3 move = transform.right * movementX + transform.forward * movementY;
-        rb.MovePosition(rb.position + move * speed * Time.fixedDeltaTime);
+        Vector3 move = new Vector3(movementX, 0f, movementY);
+        move = transform.TransformDirection(move);
+        rb.velocity = new Vector3(move.x * speed, rb.velocity.y, move.z * speed);  // Appliquez la vélocité au Rigidbody tout en conservant la composante Y
+
 
         if (jetpack.action.IsPressed() && jetpackCharge > 0)
         {
@@ -133,11 +135,9 @@ public class PlayerMovementsRB : MonoBehaviour
     {
         if (jetpackCharge > 0)
         {
-            rb.AddForce(Vector3.up * jetpackForce, ForceMode.Force);
+            rb.velocity = new Vector3(rb.velocity.x, jetpackForce, rb.velocity.z);
+            jetpackCharge = Mathf.Max(jetpackCharge - Time.deltaTime, 0);
 
-            jetpackCharge = Mathf.Max(jetpackCharge - Time.fixedDeltaTime, 0);
-
-            // D�clencher le syst�me de particules
             if (!jetpackEffect.isPlaying)
             {
                 jetpackEffect.Play();
@@ -147,10 +147,10 @@ public class PlayerMovementsRB : MonoBehaviour
         }
         else
         {
-            // Arr�ter le syst�me de particules si le jetpack n'est plus utilis� ou plus de carburant
             jetpackEffect.Stop();
         }
     }
+
 
     private void GetPlayerInput()
     {

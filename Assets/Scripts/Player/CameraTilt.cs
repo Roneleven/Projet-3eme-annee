@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CameraTilt : MonoBehaviour
 {
-    public float tiltAngle = 5.0f; // Maximum tilt angle
-    public float smooth = 5.0f;    // Smoothing factor for tilting
+    public float tiltAngle; // Maximum tilt angle
+    public float smooth;    // Smoothing factor for tilting
 
     private Quaternion targetRotation;
 

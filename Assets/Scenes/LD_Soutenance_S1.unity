@@ -19480,6 +19480,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 698495694}
     - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: currentPalier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: teleportPositions.Array.data[0]
       value: 
       objectReference: {fileID: 557159683}

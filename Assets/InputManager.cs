@@ -46,36 +46,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""SpeedIncrement"",
+                    ""name"": ""StopTimer"",
                     ""type"": ""Button"",
                     ""id"": ""2dcc6baa-9d5e-4a6e-9882-b3fbc1a7df4f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SpeedDecrement"",
-                    ""type"": ""Button"",
-                    ""id"": ""501a4e15-ec24-404e-85ee-a49e495cd493"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""GravityIncrement"",
-                    ""type"": ""Button"",
-                    ""id"": ""2de6b7fd-87fa-4471-8521-9489b8ba9d0a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""GravityDecrement"",
-                    ""type"": ""Button"",
-                    ""id"": ""c5d75bd9-599d-45c7-b77c-f23c1e44d2d7"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -227,44 +200,11 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3c39124d-ef72-4173-a458-ab608af6c179"",
-                    ""path"": ""<Keyboard>/p"",
+                    ""path"": ""<Keyboard>/t"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""SpeedIncrement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1e41f9f2-80bb-4593-8518-be5ad62a8f66"",
-                    ""path"": ""<Keyboard>/semicolon"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""SpeedDecrement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7bddb94f-d194-459e-a9db-3031315e0ce8"",
-                    ""path"": ""<Keyboard>/o"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""GravityIncrement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""89d45005-66bd-4636-9d6c-9c5ee294f9d4"",
-                    ""path"": ""<Keyboard>/l"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""GravityDecrement"",
+                    ""action"": ""StopTimer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -316,10 +256,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_SpeedIncrement = m_Player.FindAction("SpeedIncrement", throwIfNotFound: true);
-        m_Player_SpeedDecrement = m_Player.FindAction("SpeedDecrement", throwIfNotFound: true);
-        m_Player_GravityIncrement = m_Player.FindAction("GravityIncrement", throwIfNotFound: true);
-        m_Player_GravityDecrement = m_Player.FindAction("GravityDecrement", throwIfNotFound: true);
+        m_Player_StopTimer = m_Player.FindAction("StopTimer", throwIfNotFound: true);
         m_Player_LookInput = m_Player.FindAction("LookInput", throwIfNotFound: true);
     }
 
@@ -384,10 +321,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_SpeedIncrement;
-    private readonly InputAction m_Player_SpeedDecrement;
-    private readonly InputAction m_Player_GravityIncrement;
-    private readonly InputAction m_Player_GravityDecrement;
+    private readonly InputAction m_Player_StopTimer;
     private readonly InputAction m_Player_LookInput;
     public struct PlayerActions
     {
@@ -395,10 +329,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         public PlayerActions(@InputManager wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @SpeedIncrement => m_Wrapper.m_Player_SpeedIncrement;
-        public InputAction @SpeedDecrement => m_Wrapper.m_Player_SpeedDecrement;
-        public InputAction @GravityIncrement => m_Wrapper.m_Player_GravityIncrement;
-        public InputAction @GravityDecrement => m_Wrapper.m_Player_GravityDecrement;
+        public InputAction @StopTimer => m_Wrapper.m_Player_StopTimer;
         public InputAction @LookInput => m_Wrapper.m_Player_LookInput;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -415,18 +346,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @SpeedIncrement.started += instance.OnSpeedIncrement;
-            @SpeedIncrement.performed += instance.OnSpeedIncrement;
-            @SpeedIncrement.canceled += instance.OnSpeedIncrement;
-            @SpeedDecrement.started += instance.OnSpeedDecrement;
-            @SpeedDecrement.performed += instance.OnSpeedDecrement;
-            @SpeedDecrement.canceled += instance.OnSpeedDecrement;
-            @GravityIncrement.started += instance.OnGravityIncrement;
-            @GravityIncrement.performed += instance.OnGravityIncrement;
-            @GravityIncrement.canceled += instance.OnGravityIncrement;
-            @GravityDecrement.started += instance.OnGravityDecrement;
-            @GravityDecrement.performed += instance.OnGravityDecrement;
-            @GravityDecrement.canceled += instance.OnGravityDecrement;
+            @StopTimer.started += instance.OnStopTimer;
+            @StopTimer.performed += instance.OnStopTimer;
+            @StopTimer.canceled += instance.OnStopTimer;
             @LookInput.started += instance.OnLookInput;
             @LookInput.performed += instance.OnLookInput;
             @LookInput.canceled += instance.OnLookInput;
@@ -440,18 +362,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @SpeedIncrement.started -= instance.OnSpeedIncrement;
-            @SpeedIncrement.performed -= instance.OnSpeedIncrement;
-            @SpeedIncrement.canceled -= instance.OnSpeedIncrement;
-            @SpeedDecrement.started -= instance.OnSpeedDecrement;
-            @SpeedDecrement.performed -= instance.OnSpeedDecrement;
-            @SpeedDecrement.canceled -= instance.OnSpeedDecrement;
-            @GravityIncrement.started -= instance.OnGravityIncrement;
-            @GravityIncrement.performed -= instance.OnGravityIncrement;
-            @GravityIncrement.canceled -= instance.OnGravityIncrement;
-            @GravityDecrement.started -= instance.OnGravityDecrement;
-            @GravityDecrement.performed -= instance.OnGravityDecrement;
-            @GravityDecrement.canceled -= instance.OnGravityDecrement;
+            @StopTimer.started -= instance.OnStopTimer;
+            @StopTimer.performed -= instance.OnStopTimer;
+            @StopTimer.canceled -= instance.OnStopTimer;
             @LookInput.started -= instance.OnLookInput;
             @LookInput.performed -= instance.OnLookInput;
             @LookInput.canceled -= instance.OnLookInput;
@@ -494,10 +407,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     {
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
-        void OnSpeedIncrement(InputAction.CallbackContext context);
-        void OnSpeedDecrement(InputAction.CallbackContext context);
-        void OnGravityIncrement(InputAction.CallbackContext context);
-        void OnGravityDecrement(InputAction.CallbackContext context);
+        void OnStopTimer(InputAction.CallbackContext context);
         void OnLookInput(InputAction.CallbackContext context);
     }
 }

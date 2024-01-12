@@ -72984,6 +72984,10 @@ PrefabInstance:
       propertyPath: bobbingSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1514023414076954680, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: enableGroundCheck
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1662342133783437384, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: speed
       value: 15

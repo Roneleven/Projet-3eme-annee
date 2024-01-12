@@ -6,9 +6,10 @@ public class WeaponBob : MonoBehaviour
     public float bobbingAmount = 0.2f;
     public float damping = 0.1f;
 
-    public Transform groundCheck; // Transform for where the ground check should start
-    public float groundDistance = 0.1f; // Distance of the ground check raycast
-    public LayerMask groundMask; // Layer mask to identify the ground
+    public bool enableGroundCheck = true; // Toggle this in the editor to enable/disable ground check
+    public Transform groundCheck; 
+    public float groundDistance = 0.1f; 
+    public LayerMask groundMask; 
 
     private float timer = 0.0f;
     private Vector3 originalLocalPosition;
@@ -20,10 +21,16 @@ public class WeaponBob : MonoBehaviour
 
     void Update()
     {
-        // Check if the player is grounded
-        bool isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, groundDistance, groundMask);
+        bool isGrounded = true; // Assume grounded by default
 
-        if (!isGrounded) return; // Skip bobbing if not grounded
+        // Perform ground check if enabled
+        if (enableGroundCheck)
+        {
+            isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, groundDistance, groundMask);
+        }
+
+        // Skip bobbing if not grounded and ground check is enabled
+        if (enableGroundCheck && !isGrounded) return;
 
         float waveslice = 0.0f;
         float horizontal = Input.GetAxis("Horizontal");

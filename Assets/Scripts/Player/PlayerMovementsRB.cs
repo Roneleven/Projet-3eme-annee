@@ -38,6 +38,7 @@ public class PlayerMovementsRB : MonoBehaviour
     private bool isGrounded;
     private FMOD.Studio.EventInstance jetUse;
     private bool isJetUsePlaying = false;
+    public HeartSpawner heartSpawner;
 
     private void Start()
     {
@@ -169,5 +170,10 @@ public class PlayerMovementsRB : MonoBehaviour
         {
             jetpackChargeImage.fillAmount = jetpackCharge / maxJetpackCharge;   
         }
+    }
+
+    private void OnStopTimer()
+    {
+        heartSpawner.timer += 60;
     }
 }

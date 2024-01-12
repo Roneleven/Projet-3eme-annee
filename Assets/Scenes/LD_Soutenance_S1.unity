@@ -18998,8 +18998,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: health
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: maxHealth
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2264444207413364211, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: currentPalier

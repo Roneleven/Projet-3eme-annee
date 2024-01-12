@@ -24,36 +24,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "SpeedIncrement",
+                    "name": "StopTimer",
                     "type": "Button",
                     "id": "2dcc6baa-9d5e-4a6e-9882-b3fbc1a7df4f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SpeedDecrement",
-                    "type": "Button",
-                    "id": "501a4e15-ec24-404e-85ee-a49e495cd493",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "GravityIncrement",
-                    "type": "Button",
-                    "id": "2de6b7fd-87fa-4471-8521-9489b8ba9d0a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "GravityDecrement",
-                    "type": "Button",
-                    "id": "c5d75bd9-599d-45c7-b77c-f23c1e44d2d7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -205,44 +178,11 @@
                 {
                     "name": "",
                     "id": "3c39124d-ef72-4173-a458-ab608af6c179",
-                    "path": "<Keyboard>/p",
+                    "path": "<Keyboard>/t",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "SpeedIncrement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1e41f9f2-80bb-4593-8518-be5ad62a8f66",
-                    "path": "<Keyboard>/semicolon",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "SpeedDecrement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7bddb94f-d194-459e-a9db-3031315e0ce8",
-                    "path": "<Keyboard>/o",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "GravityIncrement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "89d45005-66bd-4636-9d6c-9c5ee294f9d4",
-                    "path": "<Keyboard>/l",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "GravityDecrement",
+                    "action": "StopTimer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -43997,6 +43997,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1549833953}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1224914364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1224914365}
+  m_Layer: 0
+  m_Name: RespawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1224914365
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224914364}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -175.75, y: 25.75, z: -37.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1229706895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -72872,6 +72903,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 185128042}
+    - target: {fileID: 1514023414076954680, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: bobbingSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1662342133783437384, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: speed
       value: 15
@@ -72884,6 +72919,10 @@ PrefabInstance:
       propertyPath: jetpackForce
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1662342133783437384, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+      propertyPath: respawnPoint
+      value: 
+      objectReference: {fileID: 1224914365}
     - target: {fileID: 1662342133783437384, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
       propertyPath: jetpackChargeRate
       value: 10
@@ -83177,3 +83216,4 @@ SceneRoots:
   - {fileID: 1920504298}
   - {fileID: 1093361833}
   - {fileID: 1385954078}
+  - {fileID: 1224914365}

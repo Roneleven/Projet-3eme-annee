@@ -134,4 +134,4 @@ MonoBehaviour:
   newBulletDamage: 2
   newBulletPenetrationCount: 0
   explosiveBullet: 1
-  newExplosionRadius: 5
+  newExplosionRadius: 7

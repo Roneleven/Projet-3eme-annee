@@ -73,6 +73,15 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""ResetTimer"",
+                    ""type"": ""Button"",
+                    ""id"": ""494ec694-3482-4e24-b2be-367c6269b81b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""LookInput"",
                     ""type"": ""Value"",
                     ""id"": ""a5d986e6-eee7-44f6-8725-e704728c501a"",
@@ -258,6 +267,17 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""action"": ""SpeedDecrement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36005a5b-fb15-4e5c-ae6a-78fd16fe4144"",
+                    ""path"": ""<Keyboard>/n"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetTimer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -299,6 +319,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Player_StopTimer = m_Player.FindAction("StopTimer", throwIfNotFound: true);
         m_Player_SpeedIncrement = m_Player.FindAction("SpeedIncrement", throwIfNotFound: true);
         m_Player_SpeedDecrement = m_Player.FindAction("SpeedDecrement", throwIfNotFound: true);
+        m_Player_ResetTimer = m_Player.FindAction("ResetTimer", throwIfNotFound: true);
         m_Player_LookInput = m_Player.FindAction("LookInput", throwIfNotFound: true);
     }
 
@@ -366,6 +387,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_StopTimer;
     private readonly InputAction m_Player_SpeedIncrement;
     private readonly InputAction m_Player_SpeedDecrement;
+    private readonly InputAction m_Player_ResetTimer;
     private readonly InputAction m_Player_LookInput;
     public struct PlayerActions
     {
@@ -376,6 +398,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         public InputAction @StopTimer => m_Wrapper.m_Player_StopTimer;
         public InputAction @SpeedIncrement => m_Wrapper.m_Player_SpeedIncrement;
         public InputAction @SpeedDecrement => m_Wrapper.m_Player_SpeedDecrement;
+        public InputAction @ResetTimer => m_Wrapper.m_Player_ResetTimer;
         public InputAction @LookInput => m_Wrapper.m_Player_LookInput;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -401,6 +424,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @SpeedDecrement.started += instance.OnSpeedDecrement;
             @SpeedDecrement.performed += instance.OnSpeedDecrement;
             @SpeedDecrement.canceled += instance.OnSpeedDecrement;
+            @ResetTimer.started += instance.OnResetTimer;
+            @ResetTimer.performed += instance.OnResetTimer;
+            @ResetTimer.canceled += instance.OnResetTimer;
             @LookInput.started += instance.OnLookInput;
             @LookInput.performed += instance.OnLookInput;
             @LookInput.canceled += instance.OnLookInput;
@@ -423,6 +449,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @SpeedDecrement.started -= instance.OnSpeedDecrement;
             @SpeedDecrement.performed -= instance.OnSpeedDecrement;
             @SpeedDecrement.canceled -= instance.OnSpeedDecrement;
+            @ResetTimer.started -= instance.OnResetTimer;
+            @ResetTimer.performed -= instance.OnResetTimer;
+            @ResetTimer.canceled -= instance.OnResetTimer;
             @LookInput.started -= instance.OnLookInput;
             @LookInput.performed -= instance.OnLookInput;
             @LookInput.canceled -= instance.OnLookInput;
@@ -468,6 +497,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         void OnStopTimer(InputAction.CallbackContext context);
         void OnSpeedIncrement(InputAction.CallbackContext context);
         void OnSpeedDecrement(InputAction.CallbackContext context);
+        void OnResetTimer(InputAction.CallbackContext context);
         void OnLookInput(InputAction.CallbackContext context);
     }
 }

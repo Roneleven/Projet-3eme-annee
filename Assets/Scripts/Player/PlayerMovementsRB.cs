@@ -176,6 +176,10 @@ public class PlayerMovementsRB : MonoBehaviour
     {
         heartSpawner.timer += 60;
     }
+    private void OnResetTimer()
+    {
+        heartSpawner.timer = 0;
+    }
 
     private void OnSpeedIncrement()
     {

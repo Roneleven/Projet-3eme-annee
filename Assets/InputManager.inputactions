@@ -51,6 +51,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ResetTimer",
+                    "type": "Button",
+                    "id": "494ec694-3482-4e24-b2be-367c6269b81b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "LookInput",
                     "type": "Value",
                     "id": "a5d986e6-eee7-44f6-8725-e704728c501a",
@@ -234,6 +243,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SpeedDecrement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "36005a5b-fb15-4e5c-ae6a-78fd16fe4144",
+                    "path": "<Keyboard>/n",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetTimer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

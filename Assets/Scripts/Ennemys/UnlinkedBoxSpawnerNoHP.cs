@@ -102,7 +102,6 @@ public class UnlinkedBoxSpawnerNoHP : MonoBehaviour
                 break;
             }
         }
-        Debug.Log("Stopping spawning sound");
         spawningSound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         Destroy(transparentCube);
 

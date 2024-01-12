@@ -301,7 +301,6 @@ public class HeartSpawner : MonoBehaviour
         if (!playerInPosition)
         {
             Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-            FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/Spawn", GetComponent<Transform>().position);
         }
         else
         {

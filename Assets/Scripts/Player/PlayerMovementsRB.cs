@@ -176,4 +176,14 @@ public class PlayerMovementsRB : MonoBehaviour
     {
         heartSpawner.timer += 60;
     }
+
+    private void OnSpeedIncrement()
+    {
+        speed += 20;
+    }
+
+    private void OnSpeedDecrement()
+    {
+        speed = 17;
+    }
 }

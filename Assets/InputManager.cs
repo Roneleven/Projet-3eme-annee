@@ -55,6 +55,24 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""SpeedIncrement"",
+                    ""type"": ""Button"",
+                    ""id"": ""4c073e60-bfde-45ec-86ad-8f9b195b6021"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpeedDecrement"",
+                    ""type"": ""Button"",
+                    ""id"": ""0f9dde2e-34c4-45ca-881f-0bb47bff021e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""LookInput"",
                     ""type"": ""Value"",
                     ""id"": ""a5d986e6-eee7-44f6-8725-e704728c501a"",
@@ -218,6 +236,28 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""action"": ""LookInput"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cad36573-22c5-4626-8bb5-383d52bc1bb1"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""SpeedIncrement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f007329f-13ad-4927-baf3-19f3569fb2b5"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpeedDecrement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -257,6 +297,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_StopTimer = m_Player.FindAction("StopTimer", throwIfNotFound: true);
+        m_Player_SpeedIncrement = m_Player.FindAction("SpeedIncrement", throwIfNotFound: true);
+        m_Player_SpeedDecrement = m_Player.FindAction("SpeedDecrement", throwIfNotFound: true);
         m_Player_LookInput = m_Player.FindAction("LookInput", throwIfNotFound: true);
     }
 
@@ -322,6 +364,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_StopTimer;
+    private readonly InputAction m_Player_SpeedIncrement;
+    private readonly InputAction m_Player_SpeedDecrement;
     private readonly InputAction m_Player_LookInput;
     public struct PlayerActions
     {
@@ -330,6 +374,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @StopTimer => m_Wrapper.m_Player_StopTimer;
+        public InputAction @SpeedIncrement => m_Wrapper.m_Player_SpeedIncrement;
+        public InputAction @SpeedDecrement => m_Wrapper.m_Player_SpeedDecrement;
         public InputAction @LookInput => m_Wrapper.m_Player_LookInput;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -349,6 +395,12 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @StopTimer.started += instance.OnStopTimer;
             @StopTimer.performed += instance.OnStopTimer;
             @StopTimer.canceled += instance.OnStopTimer;
+            @SpeedIncrement.started += instance.OnSpeedIncrement;
+            @SpeedIncrement.performed += instance.OnSpeedIncrement;
+            @SpeedIncrement.canceled += instance.OnSpeedIncrement;
+            @SpeedDecrement.started += instance.OnSpeedDecrement;
+            @SpeedDecrement.performed += instance.OnSpeedDecrement;
+            @SpeedDecrement.canceled += instance.OnSpeedDecrement;
             @LookInput.started += instance.OnLookInput;
             @LookInput.performed += instance.OnLookInput;
             @LookInput.canceled += instance.OnLookInput;
@@ -365,6 +417,12 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @StopTimer.started -= instance.OnStopTimer;
             @StopTimer.performed -= instance.OnStopTimer;
             @StopTimer.canceled -= instance.OnStopTimer;
+            @SpeedIncrement.started -= instance.OnSpeedIncrement;
+            @SpeedIncrement.performed -= instance.OnSpeedIncrement;
+            @SpeedIncrement.canceled -= instance.OnSpeedIncrement;
+            @SpeedDecrement.started -= instance.OnSpeedDecrement;
+            @SpeedDecrement.performed -= instance.OnSpeedDecrement;
+            @SpeedDecrement.canceled -= instance.OnSpeedDecrement;
             @LookInput.started -= instance.OnLookInput;
             @LookInput.performed -= instance.OnLookInput;
             @LookInput.canceled -= instance.OnLookInput;
@@ -408,6 +466,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnStopTimer(InputAction.CallbackContext context);
+        void OnSpeedIncrement(InputAction.CallbackContext context);
+        void OnSpeedDecrement(InputAction.CallbackContext context);
         void OnLookInput(InputAction.CallbackContext context);
     }
 }

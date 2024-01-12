@@ -33,6 +33,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SpeedIncrement",
+                    "type": "Button",
+                    "id": "4c073e60-bfde-45ec-86ad-8f9b195b6021",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpeedDecrement",
+                    "type": "Button",
+                    "id": "0f9dde2e-34c4-45ca-881f-0bb47bff021e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "LookInput",
                     "type": "Value",
                     "id": "a5d986e6-eee7-44f6-8725-e704728c501a",
@@ -194,6 +212,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "LookInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cad36573-22c5-4626-8bb5-383d52bc1bb1",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "SpeedIncrement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f007329f-13ad-4927-baf3-19f3569fb2b5",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpeedDecrement",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

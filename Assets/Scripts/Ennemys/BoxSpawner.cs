@@ -7,16 +7,16 @@ public class BoxSpawner : MonoBehaviour
     public float spawnInterval = 1f;
     public float spawnRadius;
     public GameObject spawnContainer;
-    public Vector3 spawnBoxSize = new Vector3(8f, 8f, 8f); // Taille de la boîte de spawn
+    public Vector3 spawnBoxSize = new Vector3(8f, 8f, 8f); // Taille de la boï¿½te de spawn
     public float gridSize = 1f;
     public float exclusionRadius = 2f;
     public float spawnCount;
     public GameObject transparentCubePrefab;
 
-    // Nouvelle variable pour définir le nombre maximal de blocs dans l'inspecteur Unity
+    // Nouvelle variable pour dï¿½finir le nombre maximal de blocs dans l'inspecteur Unity
     public int maxCubeCount = 50;
 
-    // Variable pour suivre le nombre actuel de blocs réels
+    // Variable pour suivre le nombre actuel de blocs rï¿½els
     public int cubeCount = 0;
 
     private void Start()
@@ -65,17 +65,17 @@ public class BoxSpawner : MonoBehaviour
                             CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
                             if (cubeHealth != null)
                             {
-                                if (cubeHealth.health < 26)
+                                if (cubeHealth.health < 6)
                                 {
-                                    cubeHealth.health += 5;
-                                    cubeCount++; // Incrémente le nombre de blocs réels
+                                    cubeHealth.health += 1;
+                                    cubeCount++; // Incrï¿½mente le nombre de blocs rï¿½els
                                 }
                                 else
                                 {
-                                    // Cube amélioré, comptez-le comme un cube supplémentaire
-                                    cubeCount++; // Incrémente le nombre de blocs réels
+                                    // Cube amï¿½liorï¿½, comptez-le comme un cube supplï¿½mentaire
+                                    cubeCount++; // Incrï¿½mente le nombre de blocs rï¿½els
 
-                                    // Ajoutez ici la logique d'augmentation du cubeCount en fonction de l'amélioration du cube
+                                    // Ajoutez ici la logique d'augmentation du cubeCount en fonction de l'amï¿½lioration du cube
                                     cubeCount += Mathf.CeilToInt(cubeHealth.health / 5f) - 1;
                                 }
                                 break;
@@ -85,7 +85,7 @@ public class BoxSpawner : MonoBehaviour
                     else
                     {
                         StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
-                        cubeCount++; // Incrémente le nombre de blocs réels
+                        cubeCount++; // Incrï¿½mente le nombre de blocs rï¿½els
                     }
                 }
             }
@@ -130,7 +130,7 @@ public class BoxSpawner : MonoBehaviour
                         if (Mathf.Abs(x - playerPosition.x) >= 3 || Mathf.Abs(y - playerPosition.y) >= 3 || Mathf.Abs(z - playerPosition.z) >= 3)
                         {
                             Instantiate(cubePrefab, cubePosition, Quaternion.identity, spawnContainer.transform);
-                            cubeCount++; // Incrémente le nombre de blocs réels
+                            cubeCount++; // Incrï¿½mente le nombre de blocs rï¿½els
                         }
                     }
                 }
@@ -139,10 +139,10 @@ public class BoxSpawner : MonoBehaviour
         else
         {
             Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-            cubeCount++; // Incrémente le nombre de blocs réels
+            cubeCount++; // Incrï¿½mente le nombre de blocs rï¿½els
         }
 
-        // Décrémente le nombre de blocs réels lorsque la coroutine est terminée (quand le bloc transparent est détruit)
+        // Dï¿½crï¿½mente le nombre de blocs rï¿½els lorsque la coroutine est terminï¿½e (quand le bloc transparent est dï¿½truit)
         cubeCount--;
     }
 

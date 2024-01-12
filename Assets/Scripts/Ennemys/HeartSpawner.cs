@@ -370,6 +370,7 @@ public class HeartSpawner : MonoBehaviour
             yield return new WaitForSeconds(timeTemporaryPalier);
         }
         FMODUnity.RuntimeManager.PlayOneShot("event:/UX/Annonce/CoconForme");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);
         // Restaurer les valeurs originales
         spawnRadius = originalSpawnRadius;
         spawnCount = originalSpawnCount;

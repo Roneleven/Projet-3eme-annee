@@ -56,8 +56,13 @@ public class HeartSpawner : MonoBehaviour
     public float wallSpeed = 10f;
     public MouseLook mouseLookScript;
 
+    private WallPattern wallPattern;
+    public CubeLauncherPattern cubeLauncherPattern;
+
+
     private void Start()
     {
+        wallPattern = new WallPattern();
         StartCoroutine(SpawnCube());
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);
         BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/UX/Ambience/BreakingTheHeart");
@@ -145,8 +150,8 @@ public class HeartSpawner : MonoBehaviour
         }
 
         BreakingHeart.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
-        
 
+        wallPattern.UpdateWallPattern();
     }
 
     private IEnumerator SpawnCube()
@@ -207,10 +212,10 @@ public class HeartSpawner : MonoBehaviour
                 cubesGeneratedDuringPalier++;
 
                 // Vérifie si le seuil est atteint pour déclencher le pattern offensif
-                /*if (cubesGeneratedDuringPalier >= offensivePatternThreshold)
+                if (cubesGeneratedDuringPalier >= offensivePatternThreshold)
                 {
-                    StartCoroutine(TriggerOffensivePattern());
-                }*/
+                    cubeLauncherPattern.TriggerOffensivePattern();
+                }
             }
 
             yield return new WaitForSeconds(spawnInterval);

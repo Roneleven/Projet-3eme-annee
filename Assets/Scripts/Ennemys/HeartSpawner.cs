@@ -212,10 +212,10 @@ public class HeartSpawner : MonoBehaviour
                 cubesGeneratedDuringPalier++;
 
                 // Vérifie si le seuil est atteint pour déclencher le pattern offensif
-                if (cubesGeneratedDuringPalier >= offensivePatternThreshold)
+               /* if (cubesGeneratedDuringPalier >= offensivePatternThreshold)
                 {
                     cubeLauncherPattern.TriggerOffensivePattern();
-                }
+                }*/
             }
 
             yield return new WaitForSeconds(spawnInterval);

@@ -38,7 +38,7 @@ public class HeartSpawner : MonoBehaviour
     private bool isCooldownActive = false;
 
     private bool playerInPosition;
-    private Vector3 playerPosition;
+    public Vector3 playerPosition;
 
     [Header("Throw cube pattern Properties")]
     public int cubesGeneratedDuringPalier;
@@ -62,6 +62,8 @@ public class HeartSpawner : MonoBehaviour
 
     private void Start()
     {
+        cubeLauncherPattern = new CubeLauncherPattern();
+        cubeLauncherPattern.heartSpawner = this;
         wallPattern = new WallPattern();
         StartCoroutine(SpawnCube());
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);
@@ -151,7 +153,13 @@ public class HeartSpawner : MonoBehaviour
 
         BreakingHeart.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
 
-        wallPattern.UpdateWallPattern();
+        //wallPattern.UpdateWallPattern();
+
+        // Condition d'activation pour le pattern offensif
+        if (cubesGeneratedDuringPalier >= offensivePatternThreshold)
+        {
+            cubeLauncherPattern.TriggerOffensivePattern();
+        }
     }
 
     private IEnumerator SpawnCube()

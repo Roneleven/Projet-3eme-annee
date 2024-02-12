@@ -1,46 +1,39 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
-public class LaunchCubesPattern : MonoBehaviour
+public class CubeLauncherPattern : MonoBehaviour
 {
-    public int cubesGeneratedDuringPalier;
-    public int offensivePatternThreshold;
-    public float cubeDestroyDelay;
-    public float launchForce;
-    public float percentageToLaunch;
+    public HeartSpawner heartSpawner;
 
-    private Vector3 playerPosition;
 
-    // Appelé pour déclencher le pattern de lancement de cubes
-    public void DoCubeLaunchPattern(Vector3 playerPos)
-    {
-        playerPosition = playerPos;
-
-        StartCoroutine(TriggerOffensivePattern());
-    }
-
-    private IEnumerator TriggerOffensivePattern()
+    public void TriggerOffensivePattern()
     {
         List<GameObject> generatedCubes = new List<GameObject>(GameObject.FindGameObjectsWithTag("HeartBlock"));
 
-        int cubesToLaunch = Mathf.CeilToInt(generatedCubes.Count * (percentageToLaunch / 100f));
+        // Choisissez la moitié des cubes générés (ou un autre ratio selon vos besoins)
+        int cubesToLaunch = Mathf.CeilToInt(generatedCubes.Count * (heartSpawner.percentageToLaunch / 100f));
 
         for (int i = 0; i < cubesToLaunch; i++)
         {
             GameObject cubeToLaunch = generatedCubes[i];
+
+            // Ajoute un Rigidbody au cube et active la gravité
             Rigidbody cubeRigidbody = cubeToLaunch.AddComponent<Rigidbody>();
             cubeRigidbody.useGravity = true;
 
-            Vector3 launchDirection = (playerPosition - cubeToLaunch.transform.position).normalized;
+            // Calcule la direction de propulsion (vers le joueur)
+            Vector3 launchDirection = (heartSpawner.playerPosition - cubeToLaunch.transform.position).normalized;
+            Debug.Log("Player Position: " + heartSpawner.playerPosition);
 
-            cubeRigidbody.AddForce(launchDirection * launchForce, ForceMode.Impulse);
+            // Applique une force pour propulser le cube
+            cubeRigidbody.AddForce(launchDirection * heartSpawner.launchForce, ForceMode.Impulse);
 
-            Destroy(cubeToLaunch, cubeDestroyDelay);
+            // Détruit le cube après un certain délai
+            Destroy(cubeToLaunch, heartSpawner.cubeDestroyDelay);
         }
 
-        cubesGeneratedDuringPalier = 0;
-
-        yield return null;
+        // Reset du compteur de cubes générés
+        heartSpawner.cubesGeneratedDuringPalier = 0;
     }
 }

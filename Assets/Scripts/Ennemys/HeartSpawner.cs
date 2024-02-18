@@ -59,6 +59,13 @@ public class HeartSpawner : MonoBehaviour
     private WallPattern wallPattern;
     public CubeLauncherPattern cubeLauncherPattern;
 
+    [Header("Cage Tracking Properties")]
+    public float cageRadius;
+    private bool cagePatternActive = false;
+    private float cageTimer = 0f;
+    public float cageTriggerTime;
+    public float cageSpawnTime;
+    public float cageTransparentScale;
 
     private void Start()
     {
@@ -69,67 +76,8 @@ public class HeartSpawner : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);
         BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/UX/Ambience/BreakingTheHeart");
         BreakingHeart.start();
-
-        //StartCoroutine(SpawnWallPattern());
     }
 
-    /*private IEnumerator SpawnWallPattern()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(wallSpawnInterval);
-
-            // Crée un mur dans la direction du joueur
-            SpawnWall();
-        }
-    }
-
-    private void SpawnWall()
-    {
-        Quaternion wallRotation = Quaternion.Euler(0f, mouseLookScript.transform.eulerAngles.y, 0f);
-        Vector3 wallPosition = mouseLookScript.transform.position +
-                               mouseLookScript.transform.forward * wallDistance;
-
-        // Ajuste la position Y pour correspondre à la hauteur du joueur
-        wallPosition.y = mouseLookScript.transform.position.y;
-
-        GameObject wall = Instantiate(wallPrefab, wallPosition, wallRotation);
-        wall.transform.localScale = new Vector3(wallWidth, wallHeight, 1f);
-
-        StartCoroutine(MoveWall(wall.transform));
-    }
-
-
-    private IEnumerator MoveWall(Transform wallTransform)
-    {
-        // Durée totale du mouvement du mur
-        float moveDuration = wallSpawnInterval;
-
-        // Temps écoulé
-        float elapsedTime = 0f;
-
-        // Position initiale du mur
-        Vector3 initialPosition = wallTransform.position;
-
-        // Position cible du mur (avancer dans la direction locale Z)
-        Vector3 targetPosition = initialPosition - wallTransform.forward * wallDistance;
-
-        while (elapsedTime < moveDuration)
-        {
-            // Calcule la position intermédiaire en fonction du temps écoulé
-            float t = elapsedTime / moveDuration;
-            wallTransform.position = Vector3.Lerp(initialPosition, targetPosition, t);
-
-            // Met à jour le temps écoulé
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
-        }
-
-        // Assurez-vous que le mur est à la position finale exacte
-        wallTransform.position = targetPosition;
-    }
-    */
     private void Update()
     {
         if (timerActive)
@@ -158,7 +106,23 @@ public class HeartSpawner : MonoBehaviour
         // Condition d'activation pour le pattern offensif
         if (cubesGeneratedDuringPalier >= offensivePatternThreshold)
         {
-            cubeLauncherPattern.TriggerOffensivePattern();
+            //cubeLauncherPattern.TriggerOffensivePattern();
+        }
+
+        //condition de spawn du CageTracking
+
+        if (!cagePatternActive && Vector3.Distance(playerPosition, transform.position) < (spawnRadius * cageRadius))
+        {
+            cageTimer += Time.deltaTime;
+
+            if (cageTimer >= cageTriggerTime)
+            {
+                StartCoroutine(GenerateCagePattern());
+            }
+        }
+        else
+        {
+            cageTimer = 0f; // Réinitialiser le timer si le joueur sort de la zone
         }
     }
 
@@ -218,53 +182,11 @@ public class HeartSpawner : MonoBehaviour
 
                 // Incrémente le compteur de cubes générés
                 cubesGeneratedDuringPalier++;
-
-                // Vérifie si le seuil est atteint pour déclencher le pattern offensif
-               /* if (cubesGeneratedDuringPalier >= offensivePatternThreshold)
-                {
-                    cubeLauncherPattern.TriggerOffensivePattern();
-                }*/
             }
 
             yield return new WaitForSeconds(spawnInterval);
         }
     }
-
-    /*private IEnumerator TriggerOffensivePattern()
-    {
-        List<GameObject> generatedCubes = new List<GameObject>(GameObject.FindGameObjectsWithTag("HeartBlock"));
-
-        // Choisissez la moitié des cubes générés (ou un autre ratio selon vos besoins)
-        int cubesToLaunch = Mathf.CeilToInt(generatedCubes.Count * (percentageToLaunch / 100f));
-
-        for (int i = 0; i < cubesToLaunch; i++)
-        {
-            GameObject cubeToLaunch = generatedCubes[i];
-
-            // Ajoute un Rigidbody au cube et active la gravité
-            Rigidbody cubeRigidbody = cubeToLaunch.AddComponent<Rigidbody>();
-            cubeRigidbody.useGravity = true;
-
-            
-            // Calcule la direction de propulsion (vers le joueur)
-            Vector3 launchDirection = (playerPosition - cubeToLaunch.transform.position).normalized;
-            Debug.Log("Player Position: " + playerPosition);
-
-            // Applique une force pour propulser le cube
-            cubeRigidbody.AddForce(launchDirection * launchForce, ForceMode.Impulse);
-
-            // Détruit le cube après un certain délai
-            Destroy(cubeToLaunch, cubeDestroyDelay);
-        }
-
-        // Reset du compteur de cubes générés
-        cubesGeneratedDuringPalier = 0;
-
-        yield return null;
-    }
-    */
-
-
     IEnumerator PlayAnimationAndReload()
     {
         anim.Play("FadeIn");
@@ -417,6 +339,80 @@ public class HeartSpawner : MonoBehaviour
         }
 
         float newLevelUpValue = palier * levelUpIncrement;
+    }
+
+    private IEnumerator GenerateCagePattern()
+    {
+        cagePatternActive = true;
+
+        Vector3 playerGridPosition = playerPosition / gridSize;
+        playerGridPosition = new Vector3(Mathf.Round(playerGridPosition.x), Mathf.Round(playerGridPosition.y), Mathf.Round(playerGridPosition.z));
+        playerGridPosition *= gridSize;
+
+        int cageSizeXZ = 3; // Taille sur les axes X et Z
+
+        // Générer un seul cube transparent à une échelle 4 fois plus grande
+        GameObject transparentCube = Instantiate(transparentCubePrefab, playerGridPosition, Quaternion.identity, spawnContainer.transform);
+        transparentCube.transform.localScale = new Vector3(cageTransparentScale, cageTransparentScale, cageTransparentScale);
+
+        float timer = 0f;
+        bool playerInTransparentCube = true;
+
+        while (timer < cageSpawnTime)
+        {
+            // Vérifier si le joueur est toujours dans le cube transparent
+            if (Vector3.Distance(playerPosition, playerGridPosition) >= gridSize)
+            {
+                // Le joueur a quitté le cube transparent
+                playerInTransparentCube = false;
+            }
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        // Vérifier à la fin du timer si le joueur est dans le cube transparent
+        if (timer >= cageSpawnTime)
+        {
+            if (playerInTransparentCube)
+            {
+                // Générer la cage autour du joueur
+                for (float x = playerGridPosition.x - cageSizeXZ; x <= playerGridPosition.x + cageSizeXZ; x += gridSize)
+                {
+                    for (float y = playerGridPosition.y - cageSizeXZ; y <= playerGridPosition.y + cageSizeXZ; y += gridSize)
+                    {
+                        for (float z = playerGridPosition.z - cageSizeXZ; z <= playerGridPosition.z + cageSizeXZ; z += gridSize)
+                        {
+                            Vector3 cageSpawnPosition = new Vector3(x, y, z);
+                            if (Mathf.Abs(x - playerGridPosition.x) >= cageSizeXZ || Mathf.Abs(y - playerGridPosition.y) >= cageSizeXZ || Mathf.Abs(z - playerGridPosition.z) >= cageSizeXZ)
+                            {
+                                Instantiate(cubePrefab, cageSpawnPosition, Quaternion.identity, spawnContainer.transform);
+                                FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Cage/Traped");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Détruire le cube transparent car la cage a été générée
+        Destroy(transparentCube);
+
+        cagePatternActive = false;
+    }
+
+
+
+
+
+
+
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, spawnRadius * cageRadius);
     }
 
 }

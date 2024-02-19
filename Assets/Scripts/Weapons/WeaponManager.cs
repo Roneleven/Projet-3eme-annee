@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class WeaponManager : MonoBehaviour {
     public float pickupRange;
@@ -26,7 +27,7 @@ public class WeaponManager : MonoBehaviour {
     private Weapon _heldWeapon;
 
     private void Update() {
-        crosshairImage.gameObject.SetActive(!_isWeaponHeld || !_heldWeapon.Scoping);
+        //crosshairImage.gameObject.SetActive(!_isWeaponHeld || !_heldWeapon.Scoping);
         foreach (var cam in playerCams) {
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, _isWeaponHeld && _heldWeapon.Scoping ? scopedFov : defaultFov, fovSmooth * Time.deltaTime);
         }
@@ -36,11 +37,11 @@ public class WeaponManager : MonoBehaviour {
             swayHolder.localPosition = Vector3.Lerp(swayHolder.localPosition, Vector3.zero, swaySmooth * Time.deltaTime);
             swayHolder.localPosition += (Vector3) mouseDelta * swaySize;
             
-            if (Input.GetKeyDown(KeyCode.Q)) {
+            /*if (Input.GetKeyDown(KeyCode.A)) {
                 _heldWeapon.Drop(playerCamera);
                 _heldWeapon = null;
                 _isWeaponHeld = false;
-            }
+            }*/
         }
         else if (Input.GetKeyDown(KeyCode.E)) {
             var hitList = new RaycastHit[256];
@@ -49,6 +50,8 @@ public class WeaponManager : MonoBehaviour {
                 hitList);
             
             var realList = new List<RaycastHit>();
+            Debug.Log ("Pickup");
+
             for (var i = 0; i < hitNumber; i++) {
                 var hit = hitList[i];
                 if (hit.transform.gameObject.layer != weaponLayer) continue;

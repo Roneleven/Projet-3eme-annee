@@ -371,7 +371,10 @@ public class HeartSpawner : MonoBehaviour
         }
 
         // Vérifier si le joueur est toujours dans le cube transparent
-        if (Vector3.Distance(playerPosition, playerGridPosition) < gridSize)
+        float distanceToPlayer = Vector3.Distance(playerPosition, playerGridPosition);
+        float acceptableOverlap = gridSize / 2.0f;  // Ajustez cette valeur selon vos besoins
+
+        if (distanceToPlayer < (gridSize + acceptableOverlap))
         {
             // Générer la cage autour du joueur
             for (float x = playerGridPosition.x - cageSizeXZ; x <= playerGridPosition.x + cageSizeXZ; x += gridSize)

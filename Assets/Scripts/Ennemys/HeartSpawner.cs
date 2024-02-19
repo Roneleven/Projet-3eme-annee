@@ -125,7 +125,7 @@ public class HeartSpawner : MonoBehaviour
             cageTimer = 0f; // Réinitialiser le timer si le joueur sort de la zone
         }
     }
-
+    #region CUBES SPAWN
     private IEnumerator SpawnCube()
     {
         while (true)
@@ -263,7 +263,9 @@ public class HeartSpawner : MonoBehaviour
             }
         }
     }
+    #endregion
 
+    #region PALIER BEHAVIOURS
     public void ChangePalierOnTeleport()
     {
         if (isCooldownActive) return;
@@ -340,7 +342,9 @@ public class HeartSpawner : MonoBehaviour
 
         float newLevelUpValue = palier * levelUpIncrement;
     }
+    #endregion
 
+    #region BOSS PATTERNS
     private IEnumerator GenerateCagePattern()
     {
         cagePatternActive = true;
@@ -401,18 +405,11 @@ public class HeartSpawner : MonoBehaviour
         cagePatternActive = false;
     }
 
-
-
-
-
-
-
-
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, spawnRadius * cageRadius);
     }
+    #endregion
 
 }

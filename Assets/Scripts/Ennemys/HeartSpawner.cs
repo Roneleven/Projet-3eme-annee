@@ -217,6 +217,9 @@ public class HeartSpawner : MonoBehaviour
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {
         GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+        //GameObject transparentCube = transparentCubesPool.GetObject(); nstantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+        // transparentCube.transform.position = spawnPosition;
+        // transparentCube.transform.setParent(spawnContainer.transform);
         FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/Spawning", GetComponent<Transform>().position);
         yield return new WaitForSeconds(spawnInterval);
 
@@ -353,46 +356,35 @@ public class HeartSpawner : MonoBehaviour
         playerGridPosition = new Vector3(Mathf.Round(playerGridPosition.x), Mathf.Round(playerGridPosition.y), Mathf.Round(playerGridPosition.z));
         playerGridPosition *= gridSize;
 
-        int cageSizeXZ = 3; // Taille sur les axes X et Z
+        int cageSizeXZ = 3;
 
-        // Générer un seul cube transparent à une échelle 4 fois plus grande
+        // Générer un seul cube transparent à une échelle plus grande
         GameObject transparentCube = Instantiate(transparentCubePrefab, playerGridPosition, Quaternion.identity, spawnContainer.transform);
         transparentCube.transform.localScale = new Vector3(cageTransparentScale, cageTransparentScale, cageTransparentScale);
 
         float timer = 0f;
-        bool playerInTransparentCube = true;
 
         while (timer < cageSpawnTime)
         {
-            // Vérifier si le joueur est toujours dans le cube transparent
-            if (Vector3.Distance(playerPosition, playerGridPosition) >= gridSize)
-            {
-                // Le joueur a quitté le cube transparent
-                playerInTransparentCube = false;
-            }
-
             timer += Time.deltaTime;
             yield return null;
         }
 
-        // Vérifier à la fin du timer si le joueur est dans le cube transparent
-        if (timer >= cageSpawnTime)
+        // Vérifier si le joueur est toujours dans le cube transparent
+        if (Vector3.Distance(playerPosition, playerGridPosition) < gridSize)
         {
-            if (playerInTransparentCube)
+            // Générer la cage autour du joueur
+            for (float x = playerGridPosition.x - cageSizeXZ; x <= playerGridPosition.x + cageSizeXZ; x += gridSize)
             {
-                // Générer la cage autour du joueur
-                for (float x = playerGridPosition.x - cageSizeXZ; x <= playerGridPosition.x + cageSizeXZ; x += gridSize)
+                for (float y = playerGridPosition.y - cageSizeXZ; y <= playerGridPosition.y + cageSizeXZ; y += gridSize)
                 {
-                    for (float y = playerGridPosition.y - cageSizeXZ; y <= playerGridPosition.y + cageSizeXZ; y += gridSize)
+                    for (float z = playerGridPosition.z - cageSizeXZ; z <= playerGridPosition.z + cageSizeXZ; z += gridSize)
                     {
-                        for (float z = playerGridPosition.z - cageSizeXZ; z <= playerGridPosition.z + cageSizeXZ; z += gridSize)
+                        Vector3 cageSpawnPosition = new Vector3(x, y, z);
+                        if (Mathf.Abs(x - playerGridPosition.x) >= cageSizeXZ || Mathf.Abs(y - playerGridPosition.y) >= cageSizeXZ || Mathf.Abs(z - playerGridPosition.z) >= cageSizeXZ)
                         {
-                            Vector3 cageSpawnPosition = new Vector3(x, y, z);
-                            if (Mathf.Abs(x - playerGridPosition.x) >= cageSizeXZ || Mathf.Abs(y - playerGridPosition.y) >= cageSizeXZ || Mathf.Abs(z - playerGridPosition.z) >= cageSizeXZ)
-                            {
-                                Instantiate(cubePrefab, cageSpawnPosition, Quaternion.identity, spawnContainer.transform);
-                                FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Cage/Traped");
-                            }
+                            Instantiate(cubePrefab, cageSpawnPosition, Quaternion.identity, spawnContainer.transform);
+                            FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Cage/Traped");
                         }
                     }
                 }
@@ -404,6 +396,7 @@ public class HeartSpawner : MonoBehaviour
 
         cagePatternActive = false;
     }
+
 
     private void OnDrawGizmos()
     {

@@ -135,7 +135,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97876270}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc282219b8bea604c9ac350b6398cfdb, type: 3}
   m_Name: 
@@ -1956,7 +1956,7 @@ PrefabInstance:
       objectReference: {fileID: 588251712}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: cageRadius
-      value: 1.7
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: CageSpawnTime
@@ -1972,7 +1972,7 @@ PrefabInstance:
       objectReference: {fileID: 177016507}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: cageTriggerTime
-      value: 10
+      value: 50000
       objectReference: {fileID: 0}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: mouseLookScript

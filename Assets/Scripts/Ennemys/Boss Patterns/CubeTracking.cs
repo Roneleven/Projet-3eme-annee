@@ -9,6 +9,7 @@ public class CubeTracking : MonoBehaviour
     public int numberOfCubesToLaunch;
     public float homingCubeSpeed;
     public float destroyDelay;
+    public float cubeTimer;
 
     private void Start()
     {
@@ -19,7 +20,7 @@ public class CubeTracking : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(cubeTimer);
             LaunchHomingCubes();
         }
     }
@@ -71,8 +72,7 @@ public class CubeTracking : MonoBehaviour
             HomingCube homingCubeScript = homingCube.AddComponent<HomingCube>();
             Rigidbody homingCubeRigidbody = homingCube.AddComponent<Rigidbody>();
             homingCubeRigidbody.useGravity = true;
-            Collider homingCubeCollider = homingCube.GetComponent<Collider>();
-            homingCubeCollider.isTrigger = true;
+
 
            
             // Configure le cube à tête chercheuse

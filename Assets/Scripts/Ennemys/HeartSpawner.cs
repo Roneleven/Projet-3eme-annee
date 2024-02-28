@@ -24,6 +24,7 @@ public class HeartSpawner : MonoBehaviour
     public float temporarySpawnCount; //le spawncount pendant le changement de palier
     public float temporarySpawnInterval;//le spawninterval pendant le changement de palier
     public float timeTemporaryPalier; //la durée du changement de palier
+    private int maxPalier = 5;
 
     private FMOD.Studio.EventInstance BreakingHeart;
 
@@ -271,16 +272,12 @@ public class HeartSpawner : MonoBehaviour
     #region PALIER BEHAVIOURS
     public void ChangePalierOnTeleport()
     {
-        if (isCooldownActive) return;
+        if (isCooldownActive || currentPalier >= maxPalier)
+            return;
 
         if (heartHealth != null)
         {
             timer = defaultTimer;
-
-            if (currentPalier > previousPalier)
-            {
-                previousPalier = currentPalier;
-            }
 
             float newLevelUpValue = (currentPalier + 1) * 1.0f;
             BreakingHeart.setParameterByName("LevelUp", newLevelUpValue);
@@ -301,6 +298,8 @@ public class HeartSpawner : MonoBehaviour
         spawnCount = temporarySpawnCount;
         spawnInterval = temporarySpawnInterval;
 
+        previousPalier = currentPalier;
+
         for (int palier = 1; palier <= currentPalier; palier++)
         {
             float temporarySpawnCountBeforeAdjust = spawnCount;
@@ -308,8 +307,7 @@ public class HeartSpawner : MonoBehaviour
             spawnCount = temporarySpawnCountBeforeAdjust;
             yield return new WaitForSeconds(timeTemporaryPalier);
         }
-        FMODUnity.RuntimeManager.PlayOneShot("event:/UX/Annonce/CoconForme");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);
+
         // Restaurer les valeurs originales
         spawnRadius = originalSpawnRadius;
         spawnCount = originalSpawnCount;
@@ -317,9 +315,12 @@ public class HeartSpawner : MonoBehaviour
 
         // Passer au palier suivant
         currentPalier++;
-        AdjustPalierValues(currentPalier);
+        if (currentPalier <= maxPalier)
+        {
+            AdjustPalierValues(currentPalier);
+        }
 
-        if (currentPalier >= 2 && !timerActive)
+        if (currentPalier >= maxPalier && !timerActive)
         {
             timerActive = true;
             Invoke("TimeOut", timer);

@@ -65,19 +65,26 @@ public class CubeTracking : MonoBehaviour
                 continue;
             }
 
-            // Instancie un cube à tête chercheuse
-            GameObject homingCube = Instantiate(homingCubePrefab, cubeToLaunch.transform.position, Quaternion.identity);
-
-            // Attache dynamiquement le script HomingCube
-            HomingCube homingCubeScript = homingCube.AddComponent<HomingCube>();
-            Rigidbody homingCubeRigidbody = homingCube.AddComponent<Rigidbody>();
+            // Ajoute un Rigidbody au cube à tête chercheuse
+            Rigidbody homingCubeRigidbody = cubeToLaunch.AddComponent<Rigidbody>();
             homingCubeRigidbody.useGravity = true;
 
+            // Récupère ou ajoute un Collider au cube à tête chercheuse
+            Collider homingCubeCollider = cubeToLaunch.GetComponent<Collider>();
+            // Active le mode "Is Trigger" pour le Collider
+            homingCubeCollider.isTrigger = true;
 
-           
+            // Ajoute ou récupère le script HomingCube
+            HomingCube homingCubeScript = cubeToLaunch.GetComponent<HomingCube>();
+            if (homingCubeScript == null)
+            {
+                // Ajoute le script HomingCube s'il n'est pas déjà présent
+                homingCubeScript = cubeToLaunch.AddComponent<HomingCube>();
+            }
+
             // Configure le cube à tête chercheuse
             homingCubeScript.SetTarget(heartSpawner.playerPosition);
-            homingCubeScript.SetDestroyDelay(destroyDelay);
+            homingCubeScript.SetDestroyDelay(5f);
             homingCubeScript.SetSpeed(homingCubeSpeed);
         }
     }

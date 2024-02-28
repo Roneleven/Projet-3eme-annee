@@ -128,7 +128,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5743461851523346344, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
   m_PrefabInstance: {fileID: 1756300164}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &97876271
+--- !u!114 &97876272
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,11 +137,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 97876270}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc282219b8bea604c9ac350b6398cfdb, type: 3}
+  m_Script: {fileID: 11500000, guid: cad4f91a81e412142b41b2b50462d008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchForce: 20
-  explosionRadius: 5
+  heartSpawner: {fileID: 97876274}
+  homingCubePrefab: {fileID: 1230891745418371966, guid: 71ac9b849b750ce4882a68bea94b1d8b, type: 3}
+  numberOfCubesToLaunch: 5
+  homingCubeSpeed: 20
+  destroyDelay: 5
+  cubeTimer: 5
+--- !u!114 &97876274 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+  m_PrefabInstance: {fileID: 1756300164}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97876270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59179447d2eeb694eabcb5d21a81fcd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &141683301
 Mesh:
   m_ObjectHideFlags: 0
@@ -2076,7 +2091,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5743461851523346344, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 97876271}
+      addedObject: {fileID: 97876272}
   m_SourcePrefab: {fileID: 100100000, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
 --- !u!1 &1799073417
 GameObject:

@@ -7,12 +7,13 @@ public class CubeLauncherPattern : MonoBehaviour
     public HeartSpawner heartSpawner;
 
 
-    public void TriggerOffensivePattern()
+    public void LauncherPattern()
     {
         List<GameObject> generatedCubes = new List<GameObject>(GameObject.FindGameObjectsWithTag("HeartBlock"));
 
         // Choisissez la moitié des cubes générés (ou un autre ratio selon vos besoins)
-        int cubesToLaunch = Mathf.CeilToInt(generatedCubes.Count * (heartSpawner.percentageToLaunch / 100f));
+        //int cubesToLaunch = Mathf.CeilToInt(generatedCubes.Count * (heartSpawner.percentageToLaunch / 100f));
+        int cubesToLaunch = heartSpawner.cubesToLaunch;
 
         for (int i = 0; i < cubesToLaunch; i++)
         {

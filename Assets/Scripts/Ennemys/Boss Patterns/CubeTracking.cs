@@ -5,11 +5,11 @@ using UnityEngine;
 public class CubeTracking : MonoBehaviour
 {
     public HeartSpawner heartSpawner;
-    public GameObject homingCubePrefab;
     public int numberOfCubesToLaunch;
     public float homingCubeSpeed;
     public float destroyDelay;
     public float cubeTimer;
+    public Transform targetTransform;
 
     private void Start()
     {
@@ -30,12 +30,6 @@ public class CubeTracking : MonoBehaviour
         if (heartSpawner == null)
         {
             Debug.LogError("heartSpawner is not assigned.");
-            return;
-        }
-
-        if (homingCubePrefab == null)
-        {
-            Debug.LogError("homingCubePrefab is not assigned.");
             return;
         }
 
@@ -69,10 +63,6 @@ public class CubeTracking : MonoBehaviour
             Rigidbody homingCubeRigidbody = cubeToLaunch.AddComponent<Rigidbody>();
             homingCubeRigidbody.useGravity = true;
 
-            // Récupère ou ajoute un Collider au cube à tête chercheuse
-            Collider homingCubeCollider = cubeToLaunch.GetComponent<Collider>();
-            // Active le mode "Is Trigger" pour le Collider
-            homingCubeCollider.isTrigger = true;
 
             // Ajoute ou récupère le script HomingCube
             HomingCube homingCubeScript = cubeToLaunch.GetComponent<HomingCube>();
@@ -83,7 +73,7 @@ public class CubeTracking : MonoBehaviour
             }
 
             // Configure le cube à tête chercheuse
-            homingCubeScript.SetTarget(heartSpawner.playerPosition);
+            homingCubeScript.SetTarget(targetTransform);
             homingCubeScript.SetDestroyDelay(5f);
             homingCubeScript.SetSpeed(homingCubeSpeed);
         }

@@ -47,6 +47,9 @@ public class HeartSpawner : MonoBehaviour
     public float cubeDestroyDelay;
     public float launchForce;
     public float percentageToLaunch;
+    public int cubesToLaunch;
+    public float cubePatternTimer = 0f;
+    public float cubePatternInterval = 10f;
 
     [Header("Wall pattern Properties")]
     public float wallSpawnInterval = 10f;
@@ -102,16 +105,17 @@ public class HeartSpawner : MonoBehaviour
 
         BreakingHeart.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
 
-        //wallPattern.UpdateWallPattern();
-
-        // Condition d'activation pour le pattern offensif
-        if (cubesGeneratedDuringPalier >= offensivePatternThreshold)
+        // Condition for triggering the cube pattern every 10 seconds
+        cubePatternTimer += Time.deltaTime;
+        if (cubePatternTimer >= cubePatternInterval)
         {
-            //cubeLauncherPattern.TriggerOffensivePattern();
+            cubePatternTimer = 0f;  // Reset the timer
+
+            // Trigger the cube pattern
+            //cubeLauncherPattern.LauncherPattern();
         }
 
-        //condition de spawn du CageTracking
-
+        // Condition for spawn of the CageTracking pattern
         if (!cagePatternActive && Vector3.Distance(playerPosition, transform.position) < (spawnRadius * cageRadius))
         {
             cageTimer += Time.deltaTime;
@@ -123,7 +127,7 @@ public class HeartSpawner : MonoBehaviour
         }
         else
         {
-            cageTimer = 0f; // Réinitialiser le timer si le joueur sort de la zone
+            cageTimer = 0f; // Reset the timer if the player exits the zone
         }
     }
     #region CUBES SPAWN

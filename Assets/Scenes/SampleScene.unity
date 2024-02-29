@@ -141,11 +141,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartSpawner: {fileID: 97876274}
-  homingCubePrefab: {fileID: 1230891745418371966, guid: 71ac9b849b750ce4882a68bea94b1d8b, type: 3}
   numberOfCubesToLaunch: 5
   homingCubeSpeed: 20
   destroyDelay: 5
   cubeTimer: 5
+  targetTransform: {fileID: 1624170840}
 --- !u!114 &97876274 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
@@ -1875,6 +1875,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad31aa5632d79e43b5190aac85716c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1624170840 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7720814548836648889, guid: a178a4bdd955cda49be9f2f7b811e611, type: 3}
+  m_PrefabInstance: {fileID: 633738021}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1656205341 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2836226785195394683, guid: 74dd1e8a254d0cb418c9354ad1c25a5f, type: 3}
@@ -1974,12 +1979,20 @@ PrefabInstance:
       value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: launchForce
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: CageSpawnTime
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: cageSpawnTime
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: cubesToLaunch
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: spawnContainer
@@ -1992,6 +2005,14 @@ PrefabInstance:
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: mouseLookScript
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: cubePatternTimer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: cubePatternInterval
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: cageTransparentScale

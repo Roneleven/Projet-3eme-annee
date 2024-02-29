@@ -1999,6 +1999,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 177016507}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: timeNextPalier
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: cageTriggerTime
       value: 5
       objectReference: {fileID: 0}

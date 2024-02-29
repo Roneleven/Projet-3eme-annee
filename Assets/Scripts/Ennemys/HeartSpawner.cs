@@ -25,6 +25,9 @@ public class HeartSpawner : MonoBehaviour
     public float temporarySpawnInterval;//le spawninterval pendant le changement de palier
     public float timeTemporaryPalier; //la durée du changement de palier
     private int maxPalier = 5;
+    public float timeNextPalier;
+    public float timeSincePalierStart = 0f;
+
 
     private FMOD.Studio.EventInstance BreakingHeart;
 
@@ -95,6 +98,13 @@ public class HeartSpawner : MonoBehaviour
             {
                 timerText.text = Mathf.Round(timer).ToString() + "s";
             }
+        }
+
+        // Condition pour déclencher le changement de palier automatique
+        timeSincePalierStart += Time.deltaTime;
+        if (timeSincePalierStart >= timeNextPalier) // 30 secondes
+        {
+            StartCoroutine(ChangePalierAutomatically());
         }
 
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
@@ -288,6 +298,7 @@ public class HeartSpawner : MonoBehaviour
 
             timerActive = true;
             StartCoroutine(ResetPalier());
+            timeSincePalierStart = 0f;
         }
     }
 
@@ -350,6 +361,32 @@ public class HeartSpawner : MonoBehaviour
 
         float newLevelUpValue = palier * levelUpIncrement;
     }
+
+    private IEnumerator ChangePalierAutomatically()
+    {
+        if (currentPalier < maxPalier)
+        {
+            // Augmenter le palier automatiquement
+            currentPalier++;
+            AdjustPalierValues(currentPalier);
+
+            // Réinitialiser le temps pour le nouveau palier
+            timeSincePalierStart = 0f;
+
+            // Attendre avant de déclencher à nouveau le changement automatique (30 secondes)
+            yield return new WaitForSeconds(timeNextPalier);
+
+            // Appeler récursivement la fonction pour le palier suivant
+            StartCoroutine(ChangePalierAutomatically());
+        }
+        else
+        {
+            // Si nous avons atteint le dernier palier, activer le chronomètre pour le timeout
+            timerActive = true;
+            Invoke("TimeOut", timer);
+        }
+    }
+
     #endregion
 
     #region BOSS PATTERNS

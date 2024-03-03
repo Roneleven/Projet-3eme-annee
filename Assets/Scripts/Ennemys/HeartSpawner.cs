@@ -75,7 +75,7 @@ public class HeartSpawner : MonoBehaviour
     public float cageTransparentScale;
 
     [Header("Patterns Properties")]
-    public PatternState currentPatternState;
+    [SerializeField] private PatternState currentPatternState;
     public float timeBetweenPatterns; // Temps entre chaque changement de pattern (en secondes)
     private float patternTimer = 0f;
     public CubeTracking cubeTrackingScript;
@@ -170,23 +170,32 @@ public class HeartSpawner : MonoBehaviour
         switch (currentPatternState)
         {
             case PatternState.CubeTracking:
-                StartCoroutine(StartCubeTrackingPattern());
-                currentPatternState = PatternState.CubeLauncher; // Assurez-vous de définir le nouvel état ici
+                if (currentPalier == 1)  // Ajoutez cette condition pour le premier palier
+                {
+                    StartCoroutine(StartCubeLauncherPattern());
+                    currentPatternState = PatternState.CubeLauncher; // Reste dans le même état
+                }
+                else
+                {
+                    StartCoroutine(StartCubeTrackingPattern());
+                    currentPatternState = PatternState.CubeTracking; // Passe à l'état suivant
+                }
                 break;
 
             case PatternState.CubeLauncher:
                 StartCoroutine(StartCubeLauncherPattern());
-                currentPatternState = PatternState.CubeTracking; // Assurez-vous de définir le nouvel état ici
+                currentPatternState = PatternState.CubeLauncher; // Passe à l'état suivant
                 break;
 
             case PatternState.CageTracking:
                 //StartCoroutine(GenerateCagePattern());
-                currentPatternState = PatternState.CageTracking; // Assurez-vous de définir le nouvel état ici
+                currentPatternState = PatternState.CageTracking; // Reste dans le même état
                 break;
 
                 // Ajoutez d'autres cas pour d'autres états au besoin
         }
     }
+
 
     private IEnumerator StartCubeTrackingPattern()
     {

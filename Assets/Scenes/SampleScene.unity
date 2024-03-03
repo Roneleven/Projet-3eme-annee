@@ -135,7 +135,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97876270}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cad4f91a81e412142b41b2b50462d008, type: 3}
   m_Name: 
@@ -2000,7 +2000,7 @@ PrefabInstance:
       objectReference: {fileID: 177016507}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: timeNextPalier
-      value: 10
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: cageTriggerTime
@@ -2015,7 +2015,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: cubeTrackingScript
+      value: 
+      objectReference: {fileID: 97876272}
+    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: cubePatternInterval
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: timeBetweenPatterns
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}

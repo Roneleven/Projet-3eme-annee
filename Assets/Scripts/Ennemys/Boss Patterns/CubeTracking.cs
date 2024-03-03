@@ -11,10 +11,10 @@ public class CubeTracking : MonoBehaviour
     public float cubeTimer;
     public Transform targetTransform;
 
-    private void Start()
+    /*private void Start()
     {
         StartCoroutine(StartHomingCubePattern());
-    }
+    }*/
 
     IEnumerator StartHomingCubePattern()
     {
@@ -25,7 +25,7 @@ public class CubeTracking : MonoBehaviour
         }
     }
 
-    void LaunchHomingCubes()
+    public void LaunchHomingCubes()
     {
         if (heartSpawner == null)
         {

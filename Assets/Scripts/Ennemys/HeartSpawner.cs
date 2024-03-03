@@ -74,6 +74,12 @@ public class HeartSpawner : MonoBehaviour
     public float cageSpawnTime;
     public float cageTransparentScale;
 
+    private PatternState currentPatternState;
+    public float timeBetweenPatterns = 30f; // Temps entre chaque changement de pattern (en secondes)
+    public float patternTimer = 0f;
+    public CubeTracking cubeTrackingScript;
+
+
     private void Start()
     {
         cubeLauncherPattern = new CubeLauncherPattern();
@@ -83,6 +89,15 @@ public class HeartSpawner : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);
         BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/UX/Ambience/BreakingTheHeart");
         BreakingHeart.start();
+        currentPatternState = PatternState.CubeTracking;
+        currentPatternState = PatternState.CubeLauncher;
+    }
+
+    public enum PatternState
+    {
+        CubeTracking,
+        CubeLauncher,
+        // Ajoutez d'autres états au besoin
     }
 
     private void Update()
@@ -115,16 +130,6 @@ public class HeartSpawner : MonoBehaviour
 
         BreakingHeart.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
 
-        // Condition for triggering the cube pattern every 10 seconds
-        cubePatternTimer += Time.deltaTime;
-        if (cubePatternTimer >= cubePatternInterval)
-        {
-            cubePatternTimer = 0f;  // Reset the timer
-
-            // Trigger the cube pattern
-            //cubeLauncherPattern.LauncherPattern();
-        }
-
         // Condition for spawn of the CageTracking pattern
         if (!cagePatternActive && Vector3.Distance(playerPosition, transform.position) < (spawnRadius * cageRadius))
         {
@@ -139,7 +144,54 @@ public class HeartSpawner : MonoBehaviour
         {
             cageTimer = 0f; // Reset the timer if the player exits the zone
         }
+
+        // Condition pour changer d'état après le délai spécifié
+        patternTimer += Time.deltaTime;
+        if (patternTimer >= timeBetweenPatterns)
+        {
+            patternTimer = 0f;  // Réinitialise le compteur de temps
+            SwitchToNextPattern();
+        }
     }
+
+    private void SwitchToNextPattern()
+    {
+        switch (currentPatternState)
+        {
+            case PatternState.CubeTracking:
+                StartCoroutine(StartCubeTrackingPattern());
+                currentPatternState = PatternState.CubeLauncher; // Assurez-vous de définir le nouvel état ici
+                break;
+
+            case PatternState.CubeLauncher:
+                StartCoroutine(StartCubeLauncherPattern());
+                currentPatternState = PatternState.CubeTracking; // Assurez-vous de définir le nouvel état ici
+                break;
+
+                // Ajoutez d'autres cas pour d'autres états au besoin
+        }
+    }
+
+    private IEnumerator StartCubeTrackingPattern()
+    {
+        // Appelez la fonction StartHomingCubePattern ici
+        cubeTrackingScript.LaunchHomingCubes();
+
+        yield return null;
+    }
+
+
+    private IEnumerator StartCubeLauncherPattern()
+    {
+        // Logique pour démarrer le pattern CubeLauncher
+        CubeLauncherPattern cubeLauncherPatternScript = gameObject.AddComponent<CubeLauncherPattern>();
+
+        // Appel de la méthode LauncherPattern manuellement
+        cubeLauncherPatternScript.LauncherPattern();
+
+        yield return null;
+    }
+
     #region CUBES SPAWN
     private IEnumerator SpawnCube()
     {

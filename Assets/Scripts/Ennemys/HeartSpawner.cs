@@ -89,15 +89,24 @@ public class HeartSpawner : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);
         BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/UX/Ambience/BreakingTheHeart");
         BreakingHeart.start();
-        currentPatternState = PatternState.CubeTracking;
-        currentPatternState = PatternState.CubeLauncher;
+        if (currentPalier == 1)
+        {
+            currentPatternState = PatternState.CubeTracking;
+            StartCoroutine(StartCubeTrackingPattern());
+        }
+        else
+        {
+            currentPatternState = PatternState.CubeLauncher;
+            StartCoroutine(StartCubeLauncherPattern());
+        }
     }
 
     public enum PatternState
     {
         CubeTracking,
         CubeLauncher,
-        // Ajoutez d'autres états au besoin
+        CageTracking,
+        // Ajoutez d'autres patterns au besoin
     }
 
     private void Update()
@@ -131,7 +140,7 @@ public class HeartSpawner : MonoBehaviour
         BreakingHeart.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
 
         // Condition for spawn of the CageTracking pattern
-        if (!cagePatternActive && Vector3.Distance(playerPosition, transform.position) < (spawnRadius * cageRadius))
+        if (currentPalier >= 3 && !cagePatternActive && Vector3.Distance(playerPosition, transform.position) < (spawnRadius * cageRadius))
         {
             cageTimer += Time.deltaTime;
 
@@ -168,14 +177,23 @@ public class HeartSpawner : MonoBehaviour
                 currentPatternState = PatternState.CubeTracking; // Assurez-vous de définir le nouvel état ici
                 break;
 
+            case PatternState.CageTracking:
+                //StartCoroutine(GenerateCagePattern());
+                currentPatternState = PatternState.CageTracking; // Assurez-vous de définir le nouvel état ici
+                break;
+
                 // Ajoutez d'autres cas pour d'autres états au besoin
         }
     }
 
     private IEnumerator StartCubeTrackingPattern()
     {
-        // Appelez la fonction StartHomingCubePattern ici
-        cubeTrackingScript.LaunchHomingCubes();
+        // Vérifier le palier avant de lancer le pattern
+        if (currentPalier > 1)
+        {
+            // Appelez la fonction StartHomingCubePattern ici
+            cubeTrackingScript.LaunchHomingCubes();
+        }
 
         yield return null;
     }
@@ -185,7 +203,7 @@ public class HeartSpawner : MonoBehaviour
     {
         // Logique pour démarrer le pattern CubeLauncher
         CubeLauncherPattern cubeLauncherPatternScript = gameObject.AddComponent<CubeLauncherPattern>();
-
+        cubeLauncherPatternScript.heartSpawner = this;
         // Appel de la méthode LauncherPattern manuellement
         cubeLauncherPatternScript.LauncherPattern();
 
@@ -405,14 +423,26 @@ public class HeartSpawner : MonoBehaviour
         if (palier == 1)
         {
             spawnCount = 6;
+            currentPatternState = PatternState.CubeTracking;
+        }
+        else if (palier == 2)
+        {
+            spawnCount = 6 + ((palier - 1) * 6);
+            currentPatternState = PatternState.CubeLauncher;
+        }
+        else if (palier == 3)
+        {
+            // Ajoutez la logique pour le troisième palier (pattern de la cage)
+            currentPatternState = PatternState.CageTracking;
         }
         else
         {
-            spawnCount = 6 + ((palier - 1) * 6);
+            // Ajoutez des cas pour d'autres paliers si nécessaire
         }
 
         float newLevelUpValue = palier * levelUpIncrement;
     }
+
 
     private IEnumerator ChangePalierAutomatically()
     {

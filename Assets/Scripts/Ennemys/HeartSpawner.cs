@@ -74,9 +74,10 @@ public class HeartSpawner : MonoBehaviour
     public float cageSpawnTime;
     public float cageTransparentScale;
 
-    private PatternState currentPatternState;
-    public float timeBetweenPatterns = 30f; // Temps entre chaque changement de pattern (en secondes)
-    public float patternTimer = 0f;
+    [Header("Patterns Properties")]
+    public PatternState currentPatternState;
+    public float timeBetweenPatterns; // Temps entre chaque changement de pattern (en secondes)
+    private float patternTimer = 0f;
     public CubeTracking cubeTrackingScript;
 
 
@@ -89,6 +90,7 @@ public class HeartSpawner : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);
         BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/UX/Ambience/BreakingTheHeart");
         BreakingHeart.start();
+
         if (currentPalier == 1)
         {
             currentPatternState = PatternState.CubeTracking;

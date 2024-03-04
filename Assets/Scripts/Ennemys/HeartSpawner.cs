@@ -434,11 +434,13 @@ public class HeartSpawner : MonoBehaviour
         {
             spawnCount = 6;
             currentPatternState = PatternState.CubeTracking;
+            //cubeTrackingScript.numberOfCubesToLaunch = 30;
         }
         else if (palier == 2)
         {
             spawnCount = 6 + ((palier - 1) * 6);
             currentPatternState = PatternState.CubeLauncher;
+
         }
        
         else

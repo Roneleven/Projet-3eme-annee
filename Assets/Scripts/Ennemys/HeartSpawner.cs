@@ -173,18 +173,18 @@ public class HeartSpawner : MonoBehaviour
                 if (currentPalier == 1)  // Ajoutez cette condition pour le premier palier
                 {
                     StartCoroutine(StartCubeLauncherPattern());
-                    currentPatternState = PatternState.CubeLauncher; // Reste dans le même état
+                    currentPatternState = PatternState.CubeTracking; // Reste dans le même état
                 }
                 else
                 {
                     StartCoroutine(StartCubeTrackingPattern());
-                    currentPatternState = PatternState.CubeTracking; // Passe à l'état suivant
+                    currentPatternState = PatternState.CubeLauncher; // Passe à l'état suivant
                 }
                 break;
 
             case PatternState.CubeLauncher:
                 StartCoroutine(StartCubeLauncherPattern());
-                currentPatternState = PatternState.CubeLauncher; // Passe à l'état suivant
+                currentPatternState = PatternState.CubeTracking; // Passe à l'état suivant
                 break;
 
             case PatternState.CageTracking:
@@ -195,6 +195,7 @@ public class HeartSpawner : MonoBehaviour
                 // Ajoutez d'autres cas pour d'autres états au besoin
         }
     }
+
 
 
     private IEnumerator StartCubeTrackingPattern()
@@ -212,11 +213,9 @@ public class HeartSpawner : MonoBehaviour
 
     private IEnumerator StartCubeLauncherPattern()
     {
-        // Logique pour démarrer le pattern CubeLauncher
-        CubeLauncherPattern cubeLauncherPatternScript = gameObject.AddComponent<CubeLauncherPattern>();
-        cubeLauncherPatternScript.heartSpawner = this;
+
         // Appel de la méthode LauncherPattern manuellement
-        cubeLauncherPatternScript.LauncherPattern();
+        cubeLauncherPattern.LauncherPattern();
 
         yield return null;
     }
@@ -441,11 +440,7 @@ public class HeartSpawner : MonoBehaviour
             spawnCount = 6 + ((palier - 1) * 6);
             currentPatternState = PatternState.CubeLauncher;
         }
-        else if (palier == 3)
-        {
-            // Ajoutez la logique pour le troisième palier (pattern de la cage)
-            currentPatternState = PatternState.CageTracking;
-        }
+       
         else
         {
             // Ajoutez des cas pour d'autres paliers si nécessaire

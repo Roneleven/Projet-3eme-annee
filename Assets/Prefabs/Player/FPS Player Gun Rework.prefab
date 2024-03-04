@@ -6060,7 +6060,7 @@ Transform:
   m_GameObject: {fileID: 8869470360490455910}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.5, y: -0.3, z: 1.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6269,17 +6269,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bcb7ec8225cb9f4a8262a4601967761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupRange: 0
-  pickupRadius: 0
-  weaponLayer: 0
-  swaySize: 0
-  swaySmooth: 0
-  defaultFov: 0
-  scopedFov: 0
-  fovSmooth: 0
-  weaponHolder: {fileID: 0}
-  playerCamera: {fileID: 0}
-  swayHolder: {fileID: 0}
+  pickupRange: 4
+  pickupRadius: 0.25
+  weaponLayer: 11
+  swaySize: 0.004
+  swaySmooth: 25
+  defaultFov: 70
+  scopedFov: 40
+  fovSmooth: 11
+  weaponHolder: {fileID: 8160736099502127114}
+  playerCamera: {fileID: 5207891201020567820}
+  swayHolder: {fileID: 4824752360854578780}
   ammoText: {fileID: 7261237504141261587}
-  playerCams: []
+  playerCams:
+  - {fileID: 2649904338549692574}
+  - {fileID: 4676258182735163754}
   crosshairImage: {fileID: 8715988293668815701}

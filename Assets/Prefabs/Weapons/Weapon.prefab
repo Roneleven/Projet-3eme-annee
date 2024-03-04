@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwForce: 10
-  throwExtraForce: 15
+  throwExtraForce: 5
   rotationForce: 120
   animTime: 0
   maxAmmo: 30

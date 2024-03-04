@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Weapon : MonoBehaviour {
+public class Weapon : MonoBehaviour
+{
+    [Header("Damage")]
+    public int damage;
     [Header("Throwing")]
     public float throwForce;
     public float throwExtraForce;
@@ -41,11 +43,11 @@ public class Weapon : MonoBehaviour {
     private TMP_Text _ammoText;
     private Vector3 _startPosition;
     private Quaternion _startRotation;
-
-    private void Start() {
+    private void Start()
+    {
         _rb = gameObject.AddComponent<Rigidbody>();
         _rb.mass = 0.1f;
-        _ammo = maxAmmo;
+        _ammo = maxAmmo;    
     }
 
     private void Update() {
@@ -74,29 +76,66 @@ public class Weapon : MonoBehaviour {
             StartCoroutine(ReloadCooldown());
         }
 
-        if ((tapable ? Input.GetMouseButtonDown(0) : Input.GetMouseButton(0)) && !_shooting && !_reloading) {
+        if ((tapable ? Input.GetMouseButtonDown(0) : Input.GetMouseButton(0)) && !_shooting && !_reloading)
+        {
             _ammo--;
             _ammoText.text = _ammo + " / " + maxAmmo;
             Shoot();
             StartCoroutine(_ammo <= 0 ? ReloadCooldown() : ShootingCooldown());
         }
     }
-
-    private void Shoot() {
+    private void Shoot()
+    {
         transform.localPosition -= new Vector3(0, 0, kickbackForce);
         if (!Physics.Raycast(_playerCamera.position, _playerCamera.forward, out var hitInfo, range)) return;
-        var rb = hitInfo.transform.GetComponent<Rigidbody>();
-        if (rb == null) return;
-        rb.velocity += _playerCamera.forward * hitForce;
+
+        var heartHealth = hitInfo.transform.GetComponent<HeartHealth>();
+        if (heartHealth != null)
+        {
+            heartHealth.TakeDamage(damage);
+        }
+        else
+        {
+            HandleHitObject(hitInfo);
+        }
     }
 
-    private IEnumerator ShootingCooldown() {
+
+    private void HandleHitObject(RaycastHit hitInfo)
+    {
+        var rb = hitInfo.transform.GetComponent<Rigidbody>();
+        var cubeHealth = hitInfo.transform.GetComponent<CubeHealth>();
+
+        if (rb != null)
+        {
+            rb.velocity += _playerCamera.forward * hitForce;
+        }
+
+        if (cubeHealth != null)
+        {
+            cubeHealth.TakeDamage(damage);
+
+            if (cubeHealth.health <= 0)
+            {
+                if (!cubeHealth.IsDead())
+                {
+                    cubeHealth.SetDead(true);
+                }
+
+                Destroy(hitInfo.transform.gameObject);
+            }
+        }
+    }
+
+    private IEnumerator ShootingCooldown()
+    {
         _shooting = true;
         yield return new WaitForSeconds(1f / shotsPerSecond);
         _shooting = false;
     }
-    
-    private IEnumerator ReloadCooldown() {
+
+    private IEnumerator ReloadCooldown()
+    {
         _reloading = true;
         _ammoText.text = "RELOADING";
         _rotationTime = 0f;
@@ -106,17 +145,20 @@ public class Weapon : MonoBehaviour {
         _reloading = false;
     }
 
-    public void Pickup(Transform weaponHolder, Transform playerCamera, TMP_Text ammoText) {
+    public void Pickup(Transform weaponHolder, Transform playerCamera, TMP_Text ammoText)
+    {
         if (_held) return;
         Destroy(_rb);
         _time = 0f;
         transform.parent = weaponHolder;
         _startPosition = transform.localPosition;
         _startRotation = transform.localRotation;
-        foreach (var col in gfxColliders) {
+        foreach (var col in gfxColliders)
+        {
             col.enabled = false;
         }
-        foreach (var gfx in weaponGfxs) {
+        foreach (var gfx in weaponGfxs)
+        {
             gfx.layer = weaponGfxLayer;
         }
         _held = true;
@@ -126,7 +168,8 @@ public class Weapon : MonoBehaviour {
         _scoping = false;
     }
 
-    public void Drop(Transform playerCamera) {
+    public void Drop(Transform playerCamera)
+    {
         if (!_held) return;
         _rb = gameObject.AddComponent<Rigidbody>();
         _rb.mass = 0.1f;
@@ -137,10 +180,12 @@ public class Weapon : MonoBehaviour {
         _rb.velocity = forward * throwForce;
         _rb.velocity += Vector3.up * throwExtraForce;
         _rb.angularVelocity = Random.onUnitSphere * rotationForce;
-        foreach (var col in gfxColliders) {
+        foreach (var col in gfxColliders)
+        {
             col.enabled = true;
         }
-        foreach (var gfx in weaponGfxs) {
+        foreach (var gfx in weaponGfxs)
+        {
             gfx.layer = 0;
         }
         _ammoText.text = "";

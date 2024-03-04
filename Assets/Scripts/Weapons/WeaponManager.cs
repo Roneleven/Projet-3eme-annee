@@ -27,7 +27,7 @@ public class WeaponManager : MonoBehaviour {
     private Weapon _heldWeapon;
 
     private void Update() {
-        //crosshairImage.gameObject.SetActive(!_isWeaponHeld || !_heldWeapon.Scoping);
+        crosshairImage.gameObject.SetActive(!_isWeaponHeld || !_heldWeapon.Scoping);
         foreach (var cam in playerCams) {
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, _isWeaponHeld && _heldWeapon.Scoping ? scopedFov : defaultFov, fovSmooth * Time.deltaTime);
         }
@@ -37,17 +37,15 @@ public class WeaponManager : MonoBehaviour {
             swayHolder.localPosition = Vector3.Lerp(swayHolder.localPosition, Vector3.zero, swaySmooth * Time.deltaTime);
             swayHolder.localPosition += (Vector3) mouseDelta * swaySize;
             
-            /*if (Input.GetKeyDown(KeyCode.A)) {
+            if (Input.GetKeyDown(KeyCode.A)) {
                 _heldWeapon.Drop(playerCamera);
                 _heldWeapon = null;
                 _isWeaponHeld = false;
-            }*/
+            }
         }
         else if (Input.GetKeyDown(KeyCode.E)) {
             var hitList = new RaycastHit[256];
-            var hitNumber = Physics.CapsuleCastNonAlloc(playerCamera.position,
-                playerCamera.position + playerCamera.forward * pickupRange, pickupRadius, playerCamera.forward,
-                hitList);
+            var hitNumber = Physics.CapsuleCastNonAlloc(playerCamera.position,playerCamera.position + playerCamera.forward * pickupRange, pickupRadius, playerCamera.forward,hitList);
             
             var realList = new List<RaycastHit>();
             Debug.Log ("Pickup");

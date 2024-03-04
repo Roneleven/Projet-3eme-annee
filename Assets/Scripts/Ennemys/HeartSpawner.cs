@@ -122,7 +122,7 @@ public class HeartSpawner : MonoBehaviour
             }
             else
             {
-                timerText.text = Mathf.Round(timer).ToString() + "s";
+                //timerText.text = Mathf.Round(timer).ToString() + "s";
             }
         }
 
@@ -433,7 +433,7 @@ public class HeartSpawner : MonoBehaviour
         if (palier == 1)
         {
             spawnCount = 6;
-            currentPatternState = PatternState.CubeTracking;
+            currentPatternState = PatternState.CageTracking;
             //cubeTrackingScript.numberOfCubesToLaunch = 30;
         }
         else if (palier == 2)

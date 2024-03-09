@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 5727514438470342700}
   - component: {fileID: 8393400783610535343}
   m_Layer: 0
-  m_Name: TestWallPattern
+  m_Name: "Mod\xE8leWallPattern"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

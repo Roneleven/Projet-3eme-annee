@@ -187,6 +187,20 @@ MonoBehaviour:
   radius: 30
   journeyDuration: 40
   launchInterval: 5
+--- !u!114 &97876292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97876270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f052ff7bab8dbf14d822ee9fca18a7df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallPatternPrefab: {fileID: 4010771748805353341, guid: 7c10a8ad32a982641811b21c33623f4f, type: 3}
+  spawnInterval: 6
 --- !u!1001 &134362701
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1198,6 +1212,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5743461851523346344, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       insertIndex: -1
       addedObject: {fileID: 97876286}
+    - targetCorrespondingSourceObject: {fileID: 5743461851523346344, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 97876292}
   m_SourcePrefab: {fileID: 100100000, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
 --- !u!1 &1799073417
 GameObject:

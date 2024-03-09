@@ -8,6 +8,7 @@ TagManager:
   - Block
   - TransparentBlock
   - HeartBlock
+  - Ground
   layers:
   - Default
   - TransparentFX

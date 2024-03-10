@@ -2,16 +2,15 @@ using UnityEngine;
 
 public class ExplosivePillar : MonoBehaviour
 {
-    public Transform playerTransform; 
+    public Transform playerTransform;
     public float interval = 0.1f;
-    public bool spawnAllAtOnce = false; 
+    public bool spawnAllAtOnce = false;
     public float moveSpeed = 3f;
-    public float rotationSpeed = 90f; 
+    public float rotationSpeed = 90f;
 
-    private int currentIndex = 0;
     private Transform[] positions;
+    private int currentIndex = 0;
     private bool allCubesSpawned = false;
-    private Quaternion initialRotation;
     private Quaternion targetRotation;
     private bool isKinematicDisabled = false;
 
@@ -34,8 +33,7 @@ public class ExplosivePillar : MonoBehaviour
             InvokeRepeating("SpawnCube", interval, interval);
         }
 
-        initialRotation = transform.rotation;
-        targetRotation = Quaternion.Euler(initialRotation.eulerAngles.x + 45f, initialRotation.eulerAngles.y, initialRotation.eulerAngles.z);
+        targetRotation = Quaternion.Euler(transform.rotation.eulerAngles.x + 45f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
     }
 
     private void Update()
@@ -43,7 +41,7 @@ public class ExplosivePillar : MonoBehaviour
         if (allCubesSpawned)
         {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-            Destroy(gameObject, 20f); // Destruction après 20 secondes
+            Destroy(gameObject, 20f);
         }
     }
 
@@ -53,8 +51,7 @@ public class ExplosivePillar : MonoBehaviour
         {
             Transform cubeTransform = positions[currentIndex];
             cubeTransform.gameObject.SetActive(true);
-            
-            // Orienter le cube vers le joueur sur l'axe Y
+
             if (playerTransform != null)
             {
                 Vector3 direction = playerTransform.position - cubeTransform.position;
@@ -107,21 +104,17 @@ public class ExplosivePillar : MonoBehaviour
             foreach (Transform position in positions)
             {
                 Rigidbody rb = position.GetComponent<Rigidbody>();
-                if (rb != null && rb.isKinematic == false)
+                if (rb != null && !rb.isKinematic)
                 {
-                    EjectCube(position);
+                    EjectCube(rb);
                 }
             }
             isKinematicDisabled = false;
         }
     }
 
-    private void EjectCube(Transform cubeTransform)
+    private void EjectCube(Rigidbody rb)
     {
-        Rigidbody rb = cubeTransform.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.AddForce(Vector3.up * moveSpeed, ForceMode.Impulse);
-        }
+        rb.AddForce(Vector3.up * moveSpeed, ForceMode.Impulse);
     }
 }

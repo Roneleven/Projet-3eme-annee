@@ -1,44 +1,34 @@
-using System.Collections;
 using UnityEngine;
 
 public class ExplosiveBlock : MonoBehaviour
 {
     private Vector3 lastPosition;
-    private bool isMoving;
 
     public GameObject explosion;
 
-    void Start()
+    private void Start()
     {
         lastPosition = transform.position;
         StartCoroutine(CheckMovement());
     }
 
-
-    IEnumerator CheckMovement()
+    private System.Collections.IEnumerator CheckMovement()
     {
+        WaitForSeconds waitTime = new WaitForSeconds(0.1f);
         while (true)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return waitTime;
             if (transform.position != lastPosition)
             {
                 lastPosition = transform.position;
-                isMoving = true;
             }
             else
             {
-                isMoving = false;
-                StartCoroutine(SpawnNewObjectAndDestroy());
-                break;
+                yield return new WaitForSeconds(2f);
+                Instantiate(explosion, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+                yield break;
             }
         }
-    }
-
-    IEnumerator SpawnNewObjectAndDestroy()
-    {
-        yield return new WaitForSeconds(2f);
-
-        GameObject newObject = Instantiate(explosion, transform.position, Quaternion.identity);
-        Destroy(gameObject);
     }
 }

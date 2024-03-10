@@ -5,10 +5,8 @@ public class BigWall : MonoBehaviour
     public float interval = 0.1f;
     public float moveSpeed = 1f; 
 
-    private int currentIndex = 0;
     private Transform[] positions;
     private bool allCubesSpawned = false;
-    private Transform wallPatternTransform;
 
     private void Start()
     {
@@ -16,46 +14,38 @@ public class BigWall : MonoBehaviour
         for (int i = 0; i < transform.childCount; i++)
         {
             positions[i] = transform.GetChild(i);
+            positions[i].gameObject.SetActive(false);
         }
-
-        foreach (Transform position in positions)
-        {
-            position.gameObject.SetActive(false);
-        }
-
-        wallPatternTransform = GetComponent<Transform>();
 
         InvokeRepeating("SpawnCube", interval, interval);
     }
 
     private void Update()
     {
-        if (allCubesSpawned && !wallPatternTransform.GetComponent<WallPatternMovement>())
+        if (allCubesSpawned && !GetComponent<WallPatternMovement>())
         {
-            wallPatternTransform.gameObject.AddComponent<WallPatternMovement>().Initialize(moveSpeed);
-            // Détruire l'objet et ses enfants après 20 secondes de déplacement
+            gameObject.AddComponent<WallPatternMovement>().Initialize(moveSpeed);
             Invoke("DestroyWallPattern", 10f);
         }
     }
 
     private void DestroyWallPattern()
     {
-        // Détruire l'objet WallPattern2 et ses enfants (les cubes)
         Destroy(gameObject);
     }
 
     private void SpawnCube()
     {
-        if (currentIndex < positions.Length)
+        for (int i = 0; i < positions.Length; i++)
         {
-            positions[currentIndex].gameObject.SetActive(true);
-            currentIndex++;
+            if (!positions[i].gameObject.activeSelf)
+            {
+                positions[i].gameObject.SetActive(true);
+                return;
+            }
         }
-        else
-        {
-            CancelInvoke("SpawnCube");
-            allCubesSpawned = true;
-        }
+        CancelInvoke("SpawnCube");
+        allCubesSpawned = true;
     }
 }
 

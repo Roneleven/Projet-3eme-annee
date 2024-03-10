@@ -1,27 +1,23 @@
-using System.Collections;
 using UnityEngine;
 
 public class CrazyBlock : MonoBehaviour
 {
     public GameObject explosion;
-    public float bounceForce = 10f; // Force de rebondissement
+    public float bounceForce = 10f;
 
     private bool isKinematicDisabled = false;
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(CheckKinematic());
     }
 
-    IEnumerator CheckKinematic()
+    private System.Collections.IEnumerator CheckKinematic()
     {
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
-            while (rb.isKinematic)
-            {
-                yield return null;
-            }
+            yield return new WaitUntil(() => !rb.isKinematic);
 
             isKinematicDisabled = true;
             float randomDelay = Random.Range(5f, 8f);
@@ -37,7 +33,6 @@ public class CrazyBlock : MonoBehaviour
             Rigidbody rb = GetComponent<Rigidbody>();
             if (rb != null)
             {
-                // Ajouter une force vers le haut pour simuler le rebondissement
                 rb.AddForce(Vector3.up * bounceForce, ForceMode.Impulse);
             }
         }

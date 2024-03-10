@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CubeBehavior : MonoBehaviour
+public class ExplosiveBlock : MonoBehaviour
 {
     private Vector3 lastPosition;
     private bool isMoving;

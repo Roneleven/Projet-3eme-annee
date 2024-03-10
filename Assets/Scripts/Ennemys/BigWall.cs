@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class BigWall : MonoBehaviour
 {
-    public GameObject cubePrefab;
     public float interval = 0.1f;
     public float moveSpeed = 1f; 
 

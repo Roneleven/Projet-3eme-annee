@@ -26,6 +26,9 @@ public class Weapon : MonoBehaviour
     public float resetSmooth;
     public Vector3 scopePos;
 
+    [Header("ShootingVFX")]
+    private LineRenderer bulletTrail;
+
     [Header("Data")]
     public int weaponGfxLayer;
     public GameObject[] weaponGfxs;
@@ -47,7 +50,9 @@ public class Weapon : MonoBehaviour
     {
         _rb = gameObject.AddComponent<Rigidbody>();
         _rb.mass = 0.1f;
-        _ammo = maxAmmo;    
+        _ammo = maxAmmo;
+        bulletTrail = GetComponent<LineRenderer>();
+        bulletTrail.enabled = false;    
     }
 
     private void Update() {
@@ -88,6 +93,11 @@ public class Weapon : MonoBehaviour
     {
         transform.localPosition -= new Vector3(0, 0, kickbackForce);
         if (!Physics.Raycast(_playerCamera.position, _playerCamera.forward, out var hitInfo, range)) return;
+        bulletTrail.enabled = true;
+        bulletTrail.SetPosition(0, _playerCamera.position);
+        bulletTrail.SetPosition(1, hitInfo.point);
+
+        StartCoroutine(DisableBulletTrail());
 
         var heartHealth = hitInfo.transform.GetComponent<HeartHealth>();
         if (heartHealth != null)
@@ -125,6 +135,14 @@ public class Weapon : MonoBehaviour
                 Destroy(hitInfo.transform.gameObject);
             }
         }
+    }
+    private IEnumerator DisableBulletTrail()
+    {
+        // Wait for a short duration before disabling the bullet trail
+        yield return new WaitForSeconds(0.1f);
+
+        // Disable the LineRenderer
+        bulletTrail.enabled = false;
     }
 
     private IEnumerator ShootingCooldown()

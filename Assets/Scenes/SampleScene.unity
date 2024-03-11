@@ -170,6 +170,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartSpawner: {fileID: 97876274}
+--- !u!114 &97876281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97876270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2b5357cd3c9684391c33dafd359465, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartSpawner: {fileID: 97876274}
+  sphereRadius: 5
+  cubeMoveSpeed: 2
+  launchInterval: 0.2
+  launchDelay: 15
 --- !u!1001 &134362701
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1178,6 +1195,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5743461851523346344, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       insertIndex: -1
       addedObject: {fileID: 97876272}
+    - targetCorrespondingSourceObject: {fileID: 5743461851523346344, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 97876281}
   m_SourcePrefab: {fileID: 100100000, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
 --- !u!1 &1799073417
 GameObject:

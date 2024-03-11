@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7173625961838439358}
   - component: {fileID: 462281091523132872}
   m_Layer: 3
-  m_Name: Frequence
+  m_Name: DamageBlock
   m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc0844dfc989c9b4697bc698152b305d, type: 2}
+  - {fileID: 2100000, guid: fdacfcf9575e8bd4aa9aec4279f751ce, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

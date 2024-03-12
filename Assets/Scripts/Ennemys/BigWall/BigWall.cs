@@ -3,10 +3,11 @@ using UnityEngine;
 public class BigWall : MonoBehaviour
 {
     public float interval = 0.1f;
-    public float moveSpeed = 1f; 
+    public float moveSpeed = 1f;
 
     private Transform[] positions;
     private bool allCubesSpawned = false;
+    private bool isSpawning = true;
 
     private void Start()
     {
@@ -36,6 +37,9 @@ public class BigWall : MonoBehaviour
 
     private void SpawnCube()
     {
+        if (!isSpawning)
+            return;
+
         for (int i = 0; i < positions.Length; i++)
         {
             if (!positions[i].gameObject.activeSelf)
@@ -44,8 +48,21 @@ public class BigWall : MonoBehaviour
                 return;
             }
         }
+
+        isSpawning = false;
         CancelInvoke("SpawnCube");
         allCubesSpawned = true;
+    }
+
+    // Add this method to handle cube destruction
+    public void CubeDestroyed()
+    {
+        // If cubes are still spawning, stop spawning process
+        if (isSpawning)
+        {
+            isSpawning = false;
+            CancelInvoke("SpawnCube");
+        }
     }
 }
 

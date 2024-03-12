@@ -1,105 +1,140 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public class LauncherGatlinPattern : MonoBehaviour
+public class GatlinLauncherPattern : MonoBehaviour
 {
-    public HeartSpawner heartSpawner;
-    public float sphereRadius = 5f;
-    public float cubeMoveSpeed = 2f;
+    [Header("Launcher Pattern Properties")]
+    public float sphereRadiusMultiplier = 1.5f;
+    public float sphereHeightOffset = 5f;
+    public float sphereMovementDuration = 1f;
     public float launchInterval = 0.2f;
-    public float launchDelay = 15f;
+    public int cubesToLaunch = 25;
+    public float patternCooldown = 15f;
 
-    private bool isLaunching = false;
+    public HeartSpawner heartSpawner;
+    private bool isPatternActive = false;
 
-    void Start()
+    private void Start()
     {
-        StartCoroutine(LaunchPatternWithDelay());
+        StartCoroutine(StartPatternRoutine());
     }
 
-    IEnumerator LaunchPatternWithDelay()
+    private IEnumerator StartPatternRoutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(launchDelay);
+            yield return new WaitForSeconds(patternCooldown);
 
-            if (!isLaunching)
+            if (!isPatternActive)
             {
-                isLaunching = true;
-                SphereLauncherPattern();
+                SphereLauncherPattern(cubesToLaunch);
             }
         }
     }
 
-    public void SphereLauncherPattern()
+    public void SphereLauncherPattern(int numCubesToMove)
     {
-        List<GameObject> generatedCubes = new List<GameObject>(GameObject.FindGameObjectsWithTag("HeartBlock"));
-        int cubesToLaunch = heartSpawner.cubesToLaunch;
+        isPatternActive = true;
 
-        // Move cubes to form a sphere
-        MoveCubesToSphere(generatedCubes);
-
-        StartCoroutine(LaunchCubes(generatedCubes, cubesToLaunch));
-    }
-
-    void MoveCubesToSphere(List<GameObject> cubes)
-    {
-        int totalCubes = cubes.Count;
-        float angleIncrement = 360f / totalCubes;
-
-        for (int i = 0; i < totalCubes; i++)
+        if (heartSpawner == null)
         {
-            float angle = i * angleIncrement;
-            Vector3 targetPosition = transform.position + Quaternion.Euler(0, angle, 0) * Vector3.forward * sphereRadius;
-
-            StartCoroutine(MoveCubeToPosition(cubes[i], targetPosition));
+            Debug.LogError("HeartSpawner is not assigned.");
+            isPatternActive = false;
+            return;
         }
+
+        List<GameObject> generatedCubes = new List<GameObject>(GameObject.FindGameObjectsWithTag("HeartBlock"));
+
+        StartCoroutine(MoveCubesToSphere(generatedCubes, numCubesToMove, () => {
+            StartCoroutine(LaunchCubesOneByOne(generatedCubes));
+            StartCoroutine(ResetPattern());
+        }));
     }
 
-    IEnumerator MoveCubeToPosition(GameObject cube, Vector3 targetPosition)
+    private IEnumerator ResetPattern()
     {
-        while (Vector3.Distance(cube.transform.position, targetPosition) > 0.1f)
+        yield return new WaitForSeconds(launchInterval * cubesToLaunch);
+        isPatternActive = false;
+    }
+
+    private IEnumerator MoveCubesToSphere(List<GameObject> cubes, int numCubes, System.Action onCompletion)
+    {
+        Vector3 sphereCenter = heartSpawner.transform.position + Vector3.up * sphereHeightOffset;
+
+        cubes = cubes.Where(cube => cube != null).ToList();
+
+        for (int i = 0; i < numCubes; i++)
         {
-            cube.transform.position = Vector3.MoveTowards(cube.transform.position, targetPosition, cubeMoveSpeed * Time.deltaTime);
+            if (i < cubes.Count)
+            {
+                GameObject cubeToMove = cubes[i];
+
+                float polarAngle = Random.Range(0f, 180f);
+                float azimuthAngle = Random.Range(0f, 360f);
+
+                Vector3 spherePosition = CalculateSpherePosition(sphereCenter, polarAngle, azimuthAngle);
+
+                StartCoroutine(MoveCubeToPosition(cubeToMove, spherePosition));
+                yield return new WaitForSeconds(launchInterval); // Attendre avant de déplacer le prochain cube
+            }
+        }
+
+        // Attendre que tous les cubes aient atteint la sphère avant de déclencher l'action suivante
+        yield return new WaitForSeconds(sphereMovementDuration);
+
+        onCompletion?.Invoke(); // Déclencher l'action suivante
+    }
+
+    private Vector3 CalculateSpherePosition(Vector3 center, float polarAngle, float azimuthAngle)
+    {
+        float radius = heartSpawner.spawnRadius * sphereRadiusMultiplier;
+
+        float x = center.x + radius * Mathf.Sin(Mathf.Deg2Rad * polarAngle) * Mathf.Cos(Mathf.Deg2Rad * azimuthAngle);
+        float y = center.y + radius * Mathf.Cos(Mathf.Deg2Rad * polarAngle);
+        float z = center.z + radius * Mathf.Sin(Mathf.Deg2Rad * polarAngle) * Mathf.Sin(Mathf.Deg2Rad * azimuthAngle);
+
+        return new Vector3(x, y, z);
+    }
+
+    private IEnumerator MoveCubeToPosition(GameObject cube, Vector3 targetPosition)
+    {
+        float elapsedTime = 0f;
+        Vector3 initialPosition = cube.transform.position;
+
+        while (elapsedTime < sphereMovementDuration)
+        {
+            cube.transform.position = Vector3.Lerp(initialPosition, targetPosition, elapsedTime / sphereMovementDuration);
+            elapsedTime += Time.deltaTime;
+
             yield return null;
         }
+
+        cube.transform.position = targetPosition;
     }
 
-    IEnumerator LaunchCubes(List<GameObject> cubes, int cubesToLaunch)
+    private IEnumerator LaunchCubesOneByOne(List<GameObject> cubes)
     {
-        for (int i = 0; i < cubesToLaunch; i++)
+        if (cubes == null || cubes.Count == 0)
         {
-            GameObject cubeToLaunch = cubes[i];
+            Debug.LogError("List of cubes is null or empty.");
+            yield break;
+        }
 
-            // Vérifier si le cubeToLaunch est null ou a été détruit
-            if (cubeToLaunch != null)
-            {
-                Rigidbody cubeRigidbody = cubeToLaunch.AddComponent<Rigidbody>();
-                cubeRigidbody.useGravity = true;
+        foreach (GameObject cube in cubes)
+        {
+            Rigidbody cubeRigidbody = cube.AddComponent<Rigidbody>();
+            cubeRigidbody.useGravity = true;
 
-                Vector3 launchDirection = (heartSpawner.playerPosition - cubeToLaunch.transform.position).normalized;
-                cubeRigidbody.AddForce(launchDirection * heartSpawner.launchForce, ForceMode.Impulse);
+            Vector3 launchDirection = (heartSpawner.playerPosition - cube.transform.position).normalized;
+            cubeRigidbody.AddForce(launchDirection * heartSpawner.launchForce, ForceMode.Impulse);
 
-                // Modifier le tag du cube
-                cubeToLaunch.tag = "LaunchedCube";
+            Destroy(cube, heartSpawner.cubeDestroyDelay);
 
-                Destroy(cubeToLaunch, heartSpawner.cubeDestroyDelay);
-            }
-
-            // Ajouter un petit délai avant de lancer le prochain cube
             yield return new WaitForSeconds(launchInterval);
         }
 
-        // Réinitialiser le tag de tous les cubes après les avoir lancés
-        foreach (var cube in cubes)
-        {
-            if (cube != null)
-            {
-                cube.tag = "LaunchedCube";
-            }
-        }
-
         heartSpawner.cubesGeneratedDuringPalier = 0;
-        isLaunching = false; // Réinitialiser le drapeau une fois que tous les cubes ont été lancés
     }
 }

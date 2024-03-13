@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FallingObject : MonoBehaviour
+public class Meteorite : MonoBehaviour
 {
     public GameObject objectToSpawnOnImpact; // Le Game object à instancier au moment de l'impact avec le sol
 

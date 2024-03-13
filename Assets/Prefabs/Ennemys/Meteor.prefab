@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a79211b29f40604fb9aaad07c460db9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destructionRadius: 10
   objectToSpawnOnImpact: {fileID: 2572278838447988762, guid: bec44aac7fbb7344cbdba18651f1c50d, type: 3}
 --- !u!54 &-8739809017272414728
 Rigidbody:

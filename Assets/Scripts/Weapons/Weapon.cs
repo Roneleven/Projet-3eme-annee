@@ -26,6 +26,7 @@ public class Weapon : MonoBehaviour
     public float kickbackForce;
     public float resetSmooth;
     public Vector3 scopePos;
+    public float spreadAngle; // New parameter for controlling spread angle
 
     [Header("ShootingVFX")]
     public ParticleSystem bulletTrailVFX;
@@ -97,34 +98,45 @@ public class Weapon : MonoBehaviour
 
     private void Shoot()
     {
+        // Reduce accuracy if not scoped
+        Vector3 shotDirection = _playerCamera.forward;
+        if (!_scoping)
+        {
+            // Add random deviation to the shot direction
+            Vector3 spreadDirection = Quaternion.Euler(Random.insideUnitSphere * spreadAngle) * shotDirection;
+            shotDirection = Vector3.Slerp(shotDirection, spreadDirection, 0.5f); // Adjust spread strength
+        }
+
+        // Apply kickback force
         transform.localPosition -= new Vector3(0, 0, kickbackForce);
 
-        if (!Physics.Raycast(_playerCamera.position, _playerCamera.forward, out var hitInfo, range)) return;
-
-        var heartHealth = hitInfo.transform.GetComponent<HeartHealth>();
-        if (heartHealth != null)
+        // Play bullet trail VFX regardless of hitting something or not
+        if (bulletTrailVFX != null)
         {
-            heartHealth.TakeDamage(damage);
+            bulletTrailVFX.Stop(); // Ensure the particle system is stopped before playing
+            bulletTrailVFX.transform.position = transform.position;
+
+            // Apply rotation to the particle system
+            Quaternion lookRotation = Quaternion.LookRotation(shotDirection, Vector3.up);
+            bulletTrailVFX.transform.rotation = lookRotation;
+
+            // Play the particle system
+            bulletTrailVFX.Play();
         }
-        else
+
+        // Perform raycast to check for hit
+        RaycastHit hitInfo;
+        if (Physics.Raycast(_playerCamera.position, shotDirection, out hitInfo, range))
         {
-            HandleHitObject(hitInfo);
-
-            // Play the bullet trail VFX
-            if (bulletTrailVFX != null)
+            // Process hit object
+            var heartHealth = hitInfo.transform.GetComponent<HeartHealth>();
+            if (heartHealth != null)
             {
-                bulletTrailVFX.Stop(); // Ensure the particle system is stopped before playing
-                bulletTrailVFX.transform.position = transform.position;
-
-                // Calculate the direction of the shot
-                Vector3 shotDirection = hitInfo.point - transform.position;
-                Quaternion lookRotation = Quaternion.LookRotation(shotDirection, Vector3.up);
-
-                // Apply the rotation to the particle system
-                bulletTrailVFX.transform.rotation = lookRotation;
-
-                // Play the particle system
-                bulletTrailVFX.Play();
+                heartHealth.TakeDamage(damage);
+            }
+            else
+            {
+                HandleHitObject(hitInfo);
             }
         }
     }

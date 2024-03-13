@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
 {
     [Header("Damage")]
     public int damage;
+
     [Header("Throwing")]
     public float throwForce;
     public float throwExtraForce;
@@ -25,6 +26,10 @@ public class Weapon : MonoBehaviour
     public float kickbackForce;
     public float resetSmooth;
     public Vector3 scopePos;
+    public float spreadAngle; // New parameter for controlling spread angle
+
+    [Header("ShootingVFX")]
+    public ParticleSystem bulletTrailVFX;
 
     [Header("Data")]
     public int weaponGfxLayer;
@@ -43,36 +48,42 @@ public class Weapon : MonoBehaviour
     private TMP_Text _ammoText;
     private Vector3 _startPosition;
     private Quaternion _startRotation;
+
     private void Start()
     {
         _rb = gameObject.AddComponent<Rigidbody>();
         _rb.mass = 0.1f;
-        _ammo = maxAmmo;    
+        _ammo = maxAmmo;
     }
 
-    private void Update() {
+    private void Update()
+    {
         if (!_held) return;
 
-        if (_time < animTime) {
+        if (_time < animTime)
+        {
             _time += Time.deltaTime;
             _time = Mathf.Clamp(_time, 0f, animTime);
             var delta = -(Mathf.Cos(Mathf.PI * (_time / animTime)) - 1f) / 2f;
             transform.localPosition = Vector3.Lerp(_startPosition, Vector3.zero, delta);
             transform.localRotation = Quaternion.Lerp(_startRotation, Quaternion.identity, delta);
         }
-        else {
+        else
+        {
             _scoping = Input.GetMouseButton(1) && !_reloading;
             transform.localRotation = Quaternion.identity;
             transform.localPosition = Vector3.Lerp(transform.localPosition, _scoping ? scopePos : Vector3.zero, resetSmooth * Time.deltaTime);
         }
 
-        if (_reloading) {
+        if (_reloading)
+        {
             _rotationTime += Time.deltaTime;
             var spinDelta = -(Mathf.Cos(Mathf.PI * (_rotationTime / reloadSpeed)) - 1f) / 2f;
             transform.localRotation = Quaternion.Euler(new Vector3(spinDelta * 360f, 0, 0));
         }
-        
-        if (Input.GetKeyDown(KeyCode.R) && !_reloading && _ammo < maxAmmo) {
+
+        if (Input.GetKeyDown(KeyCode.R) && !_reloading && _ammo < maxAmmo)
+        {
             StartCoroutine(ReloadCooldown());
         }
 
@@ -84,22 +95,51 @@ public class Weapon : MonoBehaviour
             StartCoroutine(_ammo <= 0 ? ReloadCooldown() : ShootingCooldown());
         }
     }
+
     private void Shoot()
     {
-        transform.localPosition -= new Vector3(0, 0, kickbackForce);
-        if (!Physics.Raycast(_playerCamera.position, _playerCamera.forward, out var hitInfo, range)) return;
-
-        var heartHealth = hitInfo.transform.GetComponent<HeartHealth>();
-        if (heartHealth != null)
+        // Reduce accuracy if not scoped
+        Vector3 shotDirection = _playerCamera.forward;
+        if (!_scoping)
         {
-            heartHealth.TakeDamage(damage);
+            // Add random deviation to the shot direction
+            Vector3 spreadDirection = Quaternion.Euler(Random.insideUnitSphere * spreadAngle) * shotDirection;
+            shotDirection = Vector3.Slerp(shotDirection, spreadDirection, 0.5f); // Adjust spread strength
         }
-        else
+
+        // Apply kickback force
+        transform.localPosition -= new Vector3(0, 0, kickbackForce);
+
+        // Play bullet trail VFX regardless of hitting something or not
+        if (bulletTrailVFX != null)
         {
-            HandleHitObject(hitInfo);
+            bulletTrailVFX.Stop(); // Ensure the particle system is stopped before playing
+            bulletTrailVFX.transform.position = transform.position;
+
+            // Apply rotation to the particle system
+            Quaternion lookRotation = Quaternion.LookRotation(shotDirection, Vector3.up);
+            bulletTrailVFX.transform.rotation = lookRotation;
+
+            // Play the particle system
+            bulletTrailVFX.Play();
+        }
+
+        // Perform raycast to check for hit
+        RaycastHit hitInfo;
+        if (Physics.Raycast(_playerCamera.position, shotDirection, out hitInfo, range))
+        {
+            // Process hit object
+            var heartHealth = hitInfo.transform.GetComponent<HeartHealth>();
+            if (heartHealth != null)
+            {
+                heartHealth.TakeDamage(damage);
+            }
+            else
+            {
+                HandleHitObject(hitInfo);
+            }
         }
     }
-
 
     private void HandleHitObject(RaycastHit hitInfo)
     {

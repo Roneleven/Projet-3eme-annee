@@ -11,19 +11,6 @@ public class CubeTracking : MonoBehaviour
     public float cubeTimer;
     public Transform targetTransform;
 
-    /*private void Start()
-    {
-        StartCoroutine(StartHomingCubePattern());
-    }*/
-
-    IEnumerator StartHomingCubePattern()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(cubeTimer);
-            LaunchHomingCubes();
-        }
-    }
 
     public void LaunchHomingCubes()
     {

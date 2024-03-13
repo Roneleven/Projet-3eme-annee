@@ -91,6 +91,8 @@ public class HeartSpawner : MonoBehaviour
         BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/UX/Ambience/BreakingTheHeart");
         BreakingHeart.start();
 
+        //condition pour changement de state et appel de fonction pour lancer le pattern en question
+
         if (currentPalier == 1)
         {
             currentPatternState = PatternState.CubeTracking;
@@ -108,7 +110,7 @@ public class HeartSpawner : MonoBehaviour
         CubeTracking,
         CubeLauncher,
         CageTracking,
-        // Ajoutez d'autres patterns au besoin
+        //state à ajouter ici
     }
 
     private void Update()
@@ -165,6 +167,7 @@ public class HeartSpawner : MonoBehaviour
         }
     }
 
+    //Fonction a changer pour les changements de patterns (les states)
     private void SwitchToNextPattern()
     {
         switch (currentPatternState)
@@ -219,6 +222,8 @@ public class HeartSpawner : MonoBehaviour
 
         yield return null;
     }
+
+    //creer fonction IEnumerator pour lancer ton pattern
 
     #region CUBES SPAWN
     private IEnumerator SpawnCube()

@@ -65,10 +65,6 @@ public class HeartSpawner : MonoBehaviour
 
     private WallPattern wallPattern;
     public CubeLauncherPattern cubeLauncherPattern;
-    public ExplosivePillarPattern explosivePillarPattern;
-    public MeteorPattern meteorPattern;
-    public AerialMinesPattern aerialMinesPattern;
-    public BigWallPattern bigWallPattern;
 
     [Header("Cage Tracking Properties")]
     public float cageRadius;
@@ -114,10 +110,6 @@ public class HeartSpawner : MonoBehaviour
         CubeTracking,
         CubeLauncher,
         CageTracking,
-        ExplosivePillar,
-        Meteor,
-        AerialMines,
-        BigWall,
         //state à ajouter ici
     }
 

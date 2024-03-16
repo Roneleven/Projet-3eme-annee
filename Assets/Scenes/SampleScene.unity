@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sphereRadiusMultiplier: 0.5
+  sphereHeightOffset: 5
   sphereMovementDuration: 1
   launchInterval: 0.2
   cubesToLaunch: 25
@@ -203,6 +204,14 @@ PrefabInstance:
     - target: {fileID: 1613122716386559989, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662342133783437384, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: jetpackForce
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662342133783437384, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: maxJetpackCharge
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6232101016860361905, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_Name

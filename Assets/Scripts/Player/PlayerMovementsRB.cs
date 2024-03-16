@@ -39,6 +39,8 @@ public class PlayerMovementsRB : MonoBehaviour
     private FMOD.Studio.EventInstance jetUse;
     private bool isJetUsePlaying = false;
     public HeartSpawner heartSpawner;
+    public float glideForce = 5f; // Valeur par défaut de la force de planeur
+
 
     private void Start()
     {
@@ -90,16 +92,7 @@ public class PlayerMovementsRB : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isGrounded = false;
-
-        foreach (LayerMask groundMask in groundMasks)
-        {
-            if (Physics.CheckSphere(groundCheck.position, groundDistance, groundMask))
-            {
-                isGrounded = true;
-                break;
-            }
-        }
+        isGrounded = CheckGround();
 
         if (jetUse.isValid())
         {
@@ -108,22 +101,52 @@ public class PlayerMovementsRB : MonoBehaviour
             isJetUsePlaying = state != FMOD.Studio.PLAYBACK_STATE.STOPPED;
         }
 
+        if (!isGrounded && jetpackCharge <= 0 && jetpack.action.IsPressed())
+        {
+            rb.useGravity = false; 
+            rb.AddForce(Vector3.down * glideForce, ForceMode.Acceleration); //force vers le bas sans gravité
+            //Physics.gravity = new Vector3(0f, glideForce, 0f); //utilisation de la gravité 
+        }
+        else
+        {
+            rb.useGravity = true;
+            Physics.gravity = new Vector3(0f, -9.81f, 0f);
+
+            // Gérer l'utilisation du jetpack
+            if (jetpackCharge > 0 && jetpack.action.IsPressed())
+            {
+                UseJetpack();
+            }
+        }
 
         Vector3 move = new Vector3(movementX, 0f, movementY);
         move = transform.TransformDirection(move);
-        rb.velocity = new Vector3(move.x * speed, rb.velocity.y, move.z * speed);  // Appliquez la vélocité au Rigidbody tout en conservant la composante Y
-
-
-        if (jetpack.action.IsPressed() && jetpackCharge > 0)
-        {
-            UseJetpack();
-        }
+        rb.velocity = new Vector3(move.x * speed, rb.velocity.y, move.z * speed);
 
         if (isGrounded && (Mathf.Abs(movementX) > 0 || Mathf.Abs(movementY) > 0))
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Footsteps");
         }
     }
+
+
+
+
+
+
+
+    private bool CheckGround()
+    {
+        foreach (LayerMask groundMask in groundMasks)
+        {
+            if (Physics.CheckSphere(groundCheck.position, groundDistance, groundMask))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private void OnMove(InputValue movementValue)
     {

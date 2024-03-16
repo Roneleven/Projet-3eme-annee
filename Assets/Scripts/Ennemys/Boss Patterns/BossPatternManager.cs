@@ -3,8 +3,8 @@ using System.Collections;
 
 public class BossPatternManager : MonoBehaviour
 {
-     public HeartSpawner heartSpawner; // Référence au script HeartSpawner
-    private IEnumerator currentPatternCoroutine; // La coroutine du pattern actuel
+     public HeartSpawner heartSpawner;
+    private IEnumerator currentPatternCoroutine; 
 
     #region Wall Pattern
 
@@ -42,10 +42,10 @@ public class BossPatternManager : MonoBehaviour
      #region Aerial Mines Pattern
      [Header("AerialMines")]
     public GameObject cubePrefab; // Modèle de cube pour le pattern des mines aériennes
-    public int numberOfCubes; // Nombre de cubes à lancer
-    public float radius; // Rayon autour du joueur pour le lancement des cubes
+    public int numberOfCubes;
+    public float radius;
     public float journeyDuration = 40.0f; // Durée du mouvement des cubes
-    public float launchInterval = 5f; // Interval entre chaque lancement
+    public float launchInterval = 5f;
 
     private IEnumerator LaunchAerialMinesPattern()
     {
@@ -117,13 +117,11 @@ public class BossPatternManager : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(randomPoint, 20f, groundLayerMask);
         if (colliders.Length == 0)
         {
-            Debug.Log("No ground found near player.");
             yield return null;
         }
 
         if (!Physics.Raycast(randomPoint, Vector3.down, out RaycastHit hit, Mathf.Infinity, groundLayerMask))
         {
-            Debug.LogError("Failed to find ground surface.");
             yield return null;
         }
 
@@ -157,7 +155,6 @@ public class BossPatternManager : MonoBehaviour
         return;
     }
 
-    // Abonnez-vous à l'événement de changement de palier du boss
     heartSpawner.OnPalierChange += OnPalierChange;
 
     playerObject = GameObject.FindGameObjectWithTag("Player");
@@ -172,7 +169,6 @@ public class BossPatternManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Assurez-vous de vous désabonner à l'événement lorsque le script est détruit
         if (heartSpawner != null)
         {
             heartSpawner.OnPalierChange -= OnPalierChange;
@@ -181,44 +177,32 @@ public class BossPatternManager : MonoBehaviour
 
     private void OnPalierChange(int newPalier)
     {
-        Debug.Log("New Palier: " + newPalier);
-
-        // Arrêter la coroutine actuelle s'il y en a une
         if (currentPatternCoroutine != null)
         {
             StopCoroutine(currentPatternCoroutine);
             currentPatternCoroutine = null;
         }
 
-        // Vérifiez si le boss a atteint le palier 1 et arrêtez tout pattern
         if (newPalier == 1)
         {
-            Debug.Log("Palier 1 reached, no pattern will be launched.");
             return;
         }
 
-        // Vérifiez si le boss a atteint le palier 2 et qu'aucune coroutine n'est déjà en cours
-        if (newPalier == 2)
+        else if (newPalier == 2)
         {
-            Debug.Log("Palier 2 reached, spawning wall pattern.");
             currentPatternCoroutine = LaunchWallPattern();
             StartCoroutine(currentPatternCoroutine);
         }
-        // Si le boss atteint le palier 3, lancez le pattern des mines aériennes
         else if (newPalier == 3)
         {
-            Debug.Log("Palier 3 reached, launching aerial mines pattern.");
             currentPatternCoroutine = LaunchAerialMinesPattern();
             StartCoroutine(currentPatternCoroutine);
         }
-        // Si le boss atteint le palier 4, lancez le pattern des piliers explosifs
         else if (newPalier == 4)
         {
-            Debug.Log("Palier 4 reached, launching explosive pillar pattern.");
             currentPatternCoroutine = LaunchExplosivePillarPattern();
             StartCoroutine(currentPatternCoroutine);
         }
     }
 
-    
 }

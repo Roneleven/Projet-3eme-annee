@@ -177,6 +177,8 @@ public class BossPatternManager : MonoBehaviour
 
     private void OnPalierChange(int newPalier)
     {
+        Debug.Log("New Palier: " + newPalier);
+        
         if (currentPatternCoroutine != null)
         {
             StopCoroutine(currentPatternCoroutine);

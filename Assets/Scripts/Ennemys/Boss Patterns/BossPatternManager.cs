@@ -12,7 +12,7 @@ public class BossPatternManager : MonoBehaviour
     public GameObject wallPatternPrefab; // Modèle de pattern du mur
     public float wallSpawnInterval = 6f;
 
-    private IEnumerator SpawnWallPattern()
+    private IEnumerator LaunchWallPattern()
     {
         WaitForSeconds waitInterval = new WaitForSeconds(wallSpawnInterval);
 
@@ -36,6 +36,8 @@ public class BossPatternManager : MonoBehaviour
         }
     }
     #endregion
+
+
 
      #region Aerial Mines Pattern
      [Header("AerialMines")]
@@ -92,21 +94,81 @@ public class BossPatternManager : MonoBehaviour
     }
     #endregion
 
+
+
+    #region Explosive Pillar Pattern
+    [Header("ExplosivePillar")]
+    public GameObject emptyPrefab;
+    public float spawnRadius = 10f;
+    public float spawnInterval = 7f;
+    private GameObject playerObject;
+    private LayerMask groundLayerMask;
+
+    private IEnumerator LaunchExplosivePillarPattern()
+{
+    WaitForSeconds waitInterval = new WaitForSeconds(spawnInterval);
+
+    while (true)
+    {
+        Vector2 randomPoint2D = Random.insideUnitCircle * spawnRadius;
+        Vector3 randomPoint = new Vector3(randomPoint2D.x, 0f, randomPoint2D.y) + playerObject.transform.position;
+        randomPoint.z += Random.Range(-spawnRadius, spawnRadius);
+
+        Collider[] colliders = Physics.OverlapSphere(randomPoint, 20f, groundLayerMask);
+        if (colliders.Length == 0)
+        {
+            Debug.Log("No ground found near player.");
+            yield return null;
+        }
+
+        if (!Physics.Raycast(randomPoint, Vector3.down, out RaycastHit hit, Mathf.Infinity, groundLayerMask))
+        {
+            Debug.LogError("Failed to find ground surface.");
+            yield return null;
+        }
+
+        GameObject emptyObject = Instantiate(emptyPrefab, hit.point, Quaternion.identity);
+        Vector3 direction = playerObject.transform.position - hit.point;
+        direction.y = 0f;
+        emptyObject.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+
+        yield return waitInterval;
+    }
+}
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, spawnRadius);
+    }
+    #endregion
+
+
+
     private GameObject player;
 
     private void Start()
+{
+    player = GameObject.FindGameObjectWithTag("Player");
+
+    if (heartSpawner == null || wallPatternPrefab == null || player == null)
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-
-        if (heartSpawner == null || wallPatternPrefab == null || player == null)
-        {
-            Debug.LogWarning("Missing references in BossPatternManager.");
-            return;
-        }
-
-        // Abonnez-vous à l'événement de changement de palier du boss
-        heartSpawner.OnPalierChange += OnPalierChange;
+        Debug.LogWarning("Missing references in BossPatternManager.");
+        return;
     }
+
+    // Abonnez-vous à l'événement de changement de palier du boss
+    heartSpawner.OnPalierChange += OnPalierChange;
+
+    playerObject = GameObject.FindGameObjectWithTag("Player");
+    if (playerObject == null)
+    {
+        Debug.LogError("Player not found with tag: Player");
+        return;
+    }
+
+    groundLayerMask = LayerMask.GetMask("Ground");
+}
 
     private void OnDestroy()
     {
@@ -118,31 +180,45 @@ public class BossPatternManager : MonoBehaviour
     }
 
     private void OnPalierChange(int newPalier)
-{
-    Debug.Log("New Palier: " + newPalier);
+    {
+        Debug.Log("New Palier: " + newPalier);
 
-    // Arrêter la coroutine actuelle s'il y en a une
-    if (currentPatternCoroutine != null)
-    {
-        StopCoroutine(currentPatternCoroutine);
-        currentPatternCoroutine = null;
-    }
+        // Arrêter la coroutine actuelle s'il y en a une
+        if (currentPatternCoroutine != null)
+        {
+            StopCoroutine(currentPatternCoroutine);
+            currentPatternCoroutine = null;
+        }
 
-    // Vérifiez si le boss a atteint le palier 2 et qu'aucune coroutine n'est déjà en cours
-    if (newPalier == 2)
-    {
-        Debug.Log("Palier 2 reached, spawning wall pattern.");
-        currentPatternCoroutine = SpawnWallPattern();
-        StartCoroutine(currentPatternCoroutine);
+        // Vérifiez si le boss a atteint le palier 1 et arrêtez tout pattern
+        if (newPalier == 1)
+        {
+            Debug.Log("Palier 1 reached, no pattern will be launched.");
+            return;
+        }
+
+        // Vérifiez si le boss a atteint le palier 2 et qu'aucune coroutine n'est déjà en cours
+        if (newPalier == 2)
+        {
+            Debug.Log("Palier 2 reached, spawning wall pattern.");
+            currentPatternCoroutine = LaunchWallPattern();
+            StartCoroutine(currentPatternCoroutine);
+        }
+        // Si le boss atteint le palier 3, lancez le pattern des mines aériennes
+        else if (newPalier == 3)
+        {
+            Debug.Log("Palier 3 reached, launching aerial mines pattern.");
+            currentPatternCoroutine = LaunchAerialMinesPattern();
+            StartCoroutine(currentPatternCoroutine);
+        }
+        // Si le boss atteint le palier 4, lancez le pattern des piliers explosifs
+        else if (newPalier == 4)
+        {
+            Debug.Log("Palier 4 reached, launching explosive pillar pattern.");
+            currentPatternCoroutine = LaunchExplosivePillarPattern();
+            StartCoroutine(currentPatternCoroutine);
+        }
     }
-    // Si le boss atteint le palier 3, lancez le pattern des mines aériennes
-    else if (newPalier == 3)
-    {
-        Debug.Log("Palier 3 reached, launching aerial mines pattern.");
-        currentPatternCoroutine = LaunchAerialMinesPattern();
-        StartCoroutine(currentPatternCoroutine);
-    }
-}
 
     
 }

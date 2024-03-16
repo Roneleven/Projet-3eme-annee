@@ -170,23 +170,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartSpawner: {fileID: 97876274}
---- !u!114 &97876286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 97876270}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33d35e1e6e79e8e4a921f3bfbfb188e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cubePrefab: {fileID: 1230891745418371966, guid: 84298ffa45b86bd44a293d38649bea51, type: 3}
-  numberOfCubes: 100
-  radius: 30
-  journeyDuration: 40
-  launchInterval: 5
 --- !u!114 &97876298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,7 +216,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heartSpawner: {fileID: 97876274}
   wallPatternPrefab: {fileID: 4010771748805353341, guid: 7c10a8ad32a982641811b21c33623f4f, type: 3}
-  wallSpawnInterval: 10
+  wallSpawnInterval: 6
+  cubePrefab: {fileID: 1230891745418371966, guid: 84298ffa45b86bd44a293d38649bea51, type: 3}
+  numberOfCubes: 10
+  radius: 10
+  journeyDuration: 40
+  launchInterval: 5
+  emptyPrefab: {fileID: 1413787942626273727, guid: 63dbea012cb6cb740b5aee43bb62af8f, type: 3}
+  spawnRadius: 10
+  spawnInterval: 7
 --- !u!1001 &134362701
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1246,9 +1237,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5743461851523346344, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       insertIndex: -1
       addedObject: {fileID: 97876272}
-    - targetCorrespondingSourceObject: {fileID: 5743461851523346344, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 97876286}
     - targetCorrespondingSourceObject: {fileID: 5743461851523346344, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       insertIndex: -1
       addedObject: {fileID: 97876298}

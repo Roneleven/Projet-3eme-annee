@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class AerialMinesPattern : MonoBehaviour
 {
@@ -12,6 +11,11 @@ public class AerialMinesPattern : MonoBehaviour
 
     void Start()
     {
+        StartPattern();
+    }
+
+    void StartPattern()
+    {
         StartCoroutine(LaunchPatternRoutine());
     }
 
@@ -20,7 +24,6 @@ public class AerialMinesPattern : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(launchInterval);
-            
             LaunchAerialPattern();
         }
     }

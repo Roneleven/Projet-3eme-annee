@@ -5,110 +5,115 @@ public class CubeHealth : MonoBehaviour
 {
     public int health = 1;
     private bool isDead = false;
-    public Material lvl1;
-    public Material lvl2; 
-    public Material lvl3;
-    public Material lvl4;
-    public Material lvl5; 
 
-    private Renderer cubeRenderer;
-    private int previousHealth; 
+    // Déclarez les modèles 3D pour chaque niveau ici
+    public GameObject lvl1Model;
+    public GameObject lvl2Model;
+    public GameObject lvl3Model;
+    public GameObject lvl4Model;
+    public GameObject lvl5Model;
+
+    private int currentLevel;
+    private int previousLevel;
 
     private void Start()
     {
-        cubeRenderer = GetComponent<Renderer>();
-        previousHealth = health;
+        // Assurez-vous que seul le modèle approprié pour le niveau initial est créé
+        UpdateModel();
     }
 
     private void Update()
     {
-        UpdateMaterial();
-        CheckLevelDown(); 
-        CheckLevelUp(); 
-        previousHealth = health;
+        CheckLevelChange();
     }
 
     public void TakeDamage(int damage)
-{
-    health -= damage;
-
-    if (health <= 0)
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/Destruction", GetComponent<Transform>().position);
-        Destroy(gameObject);
+        health -= damage;
+
+        if (health <= 0)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/Destruction", transform.position);
+            Destroy(gameObject);
+        }
+        else
+        {
+            // Mettez à jour le modèle lorsque le niveau de santé change
+            UpdateModel();
+        }
     }
-}
 
-    private void UpdateMaterial()
+    private void UpdateModel()
     {
-        
+        // Détruire l'ancien GameObject
+        Destroy(gameObject);
+
+        // Instantiatez le nouveau modèle à la même position et rotation que l'ancien GameObject
+        GameObject newModel = null;
         if (health <= 1)
         {
-            cubeRenderer.material = lvl1;
+            newModel = Instantiate(lvl1Model, transform.position, transform.rotation);
         }
         else if (health <= 2)
         {
-            cubeRenderer.material = lvl2;
+            newModel = Instantiate(lvl2Model, transform.position, transform.rotation);
         }
         else if (health <= 3)
         {
-            cubeRenderer.material = lvl3;
+            newModel = Instantiate(lvl3Model, transform.position, transform.rotation);
         }
-         else if (health <= 4)
+        else if (health <= 4)
         {
-            cubeRenderer.material = lvl4;
+            newModel = Instantiate(lvl4Model, transform.position, transform.rotation);
         }
-         else if (health <= 5)
+        else if (health <= 5)
         {
-            cubeRenderer.material = lvl5;
+            newModel = Instantiate(lvl5Model, transform.position, transform.rotation);
         }
+
+        // Assurez-vous que le nouveau modèle est un enfant du même parent que l'ancien GameObject
+        newModel.transform.parent = transform.parent;
     }
 
-    private void CheckLevelDown()
+    private void CheckLevelChange()
     {
-        int currentLevel = DetermineLevel(health);
-        int previousLevel = DetermineLevel(previousHealth);
+        currentLevel = DetermineLevel(health);
 
-        if (currentLevel < previousLevel)
+        if (currentLevel != previousLevel)
         {
-            FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/LevelLess", transform.position);
+            // Niveau changé, donc mise à jour du modèle
+            UpdateModel();
+
+            // Stockez le niveau actuel comme niveau précédent pour la prochaine itération
+            previousLevel = currentLevel;
         }
     }
 
-private void CheckLevelUp()
+    // Fonction pour déterminer le niveau en fonction de la santé
+    private int DetermineLevel(int healthValue)
     {
-        if (health > previousHealth)
+        if (healthValue <= 1)
         {
-                FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/MoreHP", GetComponent<Transform>().position);
+            return 1;
         }
-
-        previousHealth = health;
+        else if (healthValue <= 2)
+        {
+            return 2;
+        }
+        else if (healthValue <= 3)
+        {
+            return 3;
+        }
+        else if (healthValue <= 4)
+        {
+            return 4;
+        }
+        else
+        {
+            return 5;
+        }
     }
 
-// Fonction pour déterminer le niveau en fonction de la santé
-private int DetermineLevel(int healthValue)
-{
-    if (healthValue <= 1)
-    {
-        return 1;
-    }
-    else if (healthValue <= 2)
-    {
-        return 2;
-    }
-    else if (healthValue <= 3)
-    {
-        return 3;
-    }
-    else if (healthValue <= 4)
-    {
-        return 4;
-    }
-    else
-    {
-        return 5;
-    }
-}
     public bool IsDead()
     {
         return isDead;

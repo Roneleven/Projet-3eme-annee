@@ -9,6 +9,7 @@ public class PlayerMovementsRB : MonoBehaviour
 {
     [Header("Player Settings")]
     public float speed;
+    public float currentSpeed;
     public Transform groundCheck;
     public float groundDistance;
     public List<LayerMask> groundMasks;
@@ -120,6 +121,7 @@ public class PlayerMovementsRB : MonoBehaviour
         }
 
         Vector3 move = new Vector3(movementX, 0f, movementY);
+
         move = transform.TransformDirection(move);
         rb.velocity = new Vector3(move.x * speed, rb.velocity.y, move.z * speed);
 
@@ -127,6 +129,8 @@ public class PlayerMovementsRB : MonoBehaviour
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Footsteps");
         }
+
+        currentSpeed = rb.velocity.magnitude;
     }
 
 

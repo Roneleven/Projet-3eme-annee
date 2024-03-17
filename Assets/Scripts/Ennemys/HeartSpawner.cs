@@ -27,6 +27,8 @@ public class HeartSpawner : MonoBehaviour
     private int maxPalier = 5;
     public float timeNextPalier;
     public float timeSincePalierStart = 0f;
+    public delegate void PalierChangeAction(int newPalier);
+    public event PalierChangeAction OnPalierChange;
 
 
     private FMOD.Studio.EventInstance BreakingHeart;
@@ -370,22 +372,28 @@ public class HeartSpawner : MonoBehaviour
 
     #region PALIER BEHAVIOURS
     public void ChangePalierOnTeleport()
+{
+    if (isCooldownActive || currentPalier >= maxPalier)
+        return;
+
+    if (heartHealth != null)
     {
-        if (isCooldownActive || currentPalier >= maxPalier)
-            return;
+        timer = defaultTimer;
 
-        if (heartHealth != null)
+        float newLevelUpValue = (currentPalier + 1) * 1.0f;
+        BreakingHeart.setParameterByName("LevelUp", newLevelUpValue);
+
+        timerActive = true;
+        StartCoroutine(ResetPalier());
+        timeSincePalierStart = 0f;
+
+        // Déclencher l'événement OnPalierChange avec le nouveau palier
+        if (OnPalierChange != null)
         {
-            timer = defaultTimer;
-
-            float newLevelUpValue = (currentPalier + 1) * 1.0f;
-            BreakingHeart.setParameterByName("LevelUp", newLevelUpValue);
-
-            timerActive = true;
-            StartCoroutine(ResetPalier());
-            timeSincePalierStart = 0f;
+            OnPalierChange(currentPalier + 1);
         }
     }
+}
 
     private IEnumerator ResetPalier()
     {
@@ -429,32 +437,38 @@ public class HeartSpawner : MonoBehaviour
         isCooldownActive = false;
     }
 
-    private void AdjustPalierValues(int palier)
+   private void AdjustPalierValues(int palier)
+{
+    float levelUpIncrement = 1.0f;
+
+    spawnRadius = palier * 4;
+
+    if (palier == 1)
     {
-        float levelUpIncrement = 1.0f;
-
-        spawnRadius = palier * 4;
-
-        if (palier == 1)
-        {
-            spawnCount = 6;
-            currentPatternState = PatternState.CageTracking;
-            //cubeTrackingScript.numberOfCubesToLaunch = 30;
-        }
-        else if (palier == 2)
-        {
-            spawnCount = 6 + ((palier - 1) * 6);
-            currentPatternState = PatternState.CubeLauncher;
-
-        }
-       
-        else
-        {
-            // Ajoutez des cas pour d'autres paliers si nécessaire
-        }
-
-        float newLevelUpValue = palier * levelUpIncrement;
+        spawnCount = 6;
+        currentPatternState = PatternState.CageTracking;
+        //cubeTrackingScript.numberOfCubesToLaunch = 30;
     }
+    else if (palier == 2)
+    {
+        spawnCount = 6 + ((palier - 1) * 6);
+        currentPatternState = PatternState.CubeLauncher;
+
+    }
+   
+    else
+    {
+        // Ajoutez des cas pour d'autres paliers si nécessaire
+    }
+
+    float newLevelUpValue = palier * levelUpIncrement;
+
+    // Déclencher l'événement OnPalierChange avec le nouveau palier
+    if (OnPalierChange != null)
+    {
+        OnPalierChange(palier);
+    }
+}
 
 
     private IEnumerator ChangePalierAutomatically()

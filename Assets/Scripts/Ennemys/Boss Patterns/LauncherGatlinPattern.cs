@@ -1,0 +1,140 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Linq;
+
+public class GatlinLauncherPattern : MonoBehaviour
+{
+    [Header("Launcher Pattern Properties")]
+    public float sphereRadiusMultiplier = 1.5f;
+    public float sphereHeightOffset = 5f;
+    public float sphereMovementDuration = 1f;
+    public float launchInterval = 0.2f;
+    public int cubesToLaunch = 25;
+    public float patternCooldown = 15f;
+
+    public HeartSpawner heartSpawner;
+    private bool isPatternActive = false;
+
+    private void Start()
+    {
+        StartCoroutine(StartPatternRoutine());
+    }
+
+    private IEnumerator StartPatternRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(patternCooldown);
+
+            if (!isPatternActive)
+            {
+                SphereLauncherPattern(cubesToLaunch);
+            }
+        }
+    }
+
+    public void SphereLauncherPattern(int numCubesToMove)
+    {
+        isPatternActive = true;
+
+        if (heartSpawner == null)
+        {
+            Debug.LogError("HeartSpawner is not assigned.");
+            isPatternActive = false;
+            return;
+        }
+
+        List<GameObject> generatedCubes = new List<GameObject>(GameObject.FindGameObjectsWithTag("HeartBlock"));
+
+        StartCoroutine(MoveCubesToSphere(generatedCubes, numCubesToMove, () => {
+            StartCoroutine(LaunchCubesOneByOne(generatedCubes));
+            StartCoroutine(ResetPattern());
+        }));
+    }
+
+    private IEnumerator ResetPattern()
+    {
+        yield return new WaitForSeconds(launchInterval * cubesToLaunch);
+        isPatternActive = false;
+    }
+
+    private IEnumerator MoveCubesToSphere(List<GameObject> cubes, int numCubes, System.Action onCompletion)
+    {
+        Vector3 sphereCenter = heartSpawner.transform.position + Vector3.up * sphereHeightOffset;
+
+        cubes = cubes.Where(cube => cube != null).ToList();
+
+        for (int i = 0; i < numCubes; i++)
+        {
+            if (i < cubes.Count)
+            {
+                GameObject cubeToMove = cubes[i];
+
+                float polarAngle = Random.Range(0f, 180f);
+                float azimuthAngle = Random.Range(0f, 360f);
+
+                Vector3 spherePosition = CalculateSpherePosition(sphereCenter, polarAngle, azimuthAngle);
+
+                StartCoroutine(MoveCubeToPosition(cubeToMove, spherePosition));
+                yield return new WaitForSeconds(launchInterval); // Attendre avant de déplacer le prochain cube
+            }
+        }
+
+        // Attendre que tous les cubes aient atteint la sphère avant de déclencher l'action suivante
+        yield return new WaitForSeconds(sphereMovementDuration);
+
+        onCompletion?.Invoke(); // Déclencher l'action suivante
+    }
+
+    private Vector3 CalculateSpherePosition(Vector3 center, float polarAngle, float azimuthAngle)
+    {
+        float radius = heartSpawner.spawnRadius * sphereRadiusMultiplier;
+
+        float x = center.x + radius * Mathf.Sin(Mathf.Deg2Rad * polarAngle) * Mathf.Cos(Mathf.Deg2Rad * azimuthAngle);
+        float y = center.y + radius * Mathf.Cos(Mathf.Deg2Rad * polarAngle);
+        float z = center.z + radius * Mathf.Sin(Mathf.Deg2Rad * polarAngle) * Mathf.Sin(Mathf.Deg2Rad * azimuthAngle);
+
+        return new Vector3(x, y, z);
+    }
+
+    private IEnumerator MoveCubeToPosition(GameObject cube, Vector3 targetPosition)
+    {
+        float elapsedTime = 0f;
+        Vector3 initialPosition = cube.transform.position;
+
+        while (elapsedTime < sphereMovementDuration)
+        {
+            cube.transform.position = Vector3.Lerp(initialPosition, targetPosition, elapsedTime / sphereMovementDuration);
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        cube.transform.position = targetPosition;
+    }
+
+    private IEnumerator LaunchCubesOneByOne(List<GameObject> cubes)
+    {
+        if (cubes == null || cubes.Count == 0)
+        {
+            Debug.LogError("List of cubes is null or empty.");
+            yield break;
+        }
+
+        foreach (GameObject cube in cubes)
+        {
+            Rigidbody cubeRigidbody = cube.AddComponent<Rigidbody>();
+            cubeRigidbody.useGravity = true;
+
+            Vector3 launchDirection = (heartSpawner.playerPosition - cube.transform.position).normalized;
+            cubeRigidbody.AddForce(launchDirection * heartSpawner.launchForce, ForceMode.Impulse);
+
+            Destroy(cube, heartSpawner.cubeDestroyDelay);
+
+            yield return new WaitForSeconds(launchInterval);
+        }
+
+        heartSpawner.cubesGeneratedDuringPalier = 0;
+    }
+}

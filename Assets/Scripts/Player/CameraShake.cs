@@ -18,8 +18,13 @@ public class CameraShake : MonoBehaviour
         // Sauvegarde de la rotation actuelle
         Quaternion currentRotation = transform.localRotation;
 
-        // Secousse de la caméra
-        transform.DOShakeRotation(duration, strength)
+        // Secousse de la caméra avec bruit
+        float noiseX = Mathf.PerlinNoise(Time.time, 0) * 2 - 1; // Génère une valeur de bruit entre -1 et 1
+        float noiseY = Mathf.PerlinNoise(0, Time.time) * 2 - 1;
+
+        Vector3 noiseVector = new Vector3(noiseX, noiseY, 0) * strength;
+
+        transform.DOShakeRotation(duration, noiseVector)
             .OnComplete(() => ResetRotation(currentRotation));
     }
 

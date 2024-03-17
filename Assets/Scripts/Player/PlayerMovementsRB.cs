@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class PlayerMovementsRB : MonoBehaviour
 {
     [Header("Player Settings")]
     public float speed;
+    public float currentSpeed;
     public Transform groundCheck;
     public float groundDistance;
     public List<LayerMask> groundMasks;
@@ -39,6 +41,14 @@ public class PlayerMovementsRB : MonoBehaviour
     private FMOD.Studio.EventInstance jetUse;
     private bool isJetUsePlaying = false;
     public HeartSpawner heartSpawner;
+    public float glideForce = 5f; // Valeur par défaut de la force de planeur
+
+    Vector3 moveDirection;
+    public Transform orientation;
+    public float airMultiplier;
+    private Vector3 velocityRef = Vector3.zero;
+    public float smoothTime;
+
 
     private void Start()
     {
@@ -50,6 +60,7 @@ public class PlayerMovementsRB : MonoBehaviour
 
     private void Update()
     {
+        SpeedControl();
         GetPlayerInput();
 
         if (isGrounded)
@@ -90,16 +101,7 @@ public class PlayerMovementsRB : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isGrounded = false;
-
-        foreach (LayerMask groundMask in groundMasks)
-        {
-            if (Physics.CheckSphere(groundCheck.position, groundDistance, groundMask))
-            {
-                isGrounded = true;
-                break;
-            }
-        }
+        isGrounded = CheckGround();
 
         if (jetUse.isValid())
         {
@@ -108,22 +110,90 @@ public class PlayerMovementsRB : MonoBehaviour
             isJetUsePlaying = state != FMOD.Studio.PLAYBACK_STATE.STOPPED;
         }
 
-
-        Vector3 move = new Vector3(movementX, 0f, movementY);
-        move = transform.TransformDirection(move);
-        rb.velocity = new Vector3(move.x * speed, rb.velocity.y, move.z * speed);  // Appliquez la vélocité au Rigidbody tout en conservant la composante Y
-
-
-        if (jetpack.action.IsPressed() && jetpackCharge > 0)
+        if (!isGrounded && jetpackCharge <= 0 && jetpack.action.IsPressed())
         {
-            UseJetpack();
+            rb.useGravity = false; 
+            rb.AddForce(Vector3.down * glideForce, ForceMode.Force); //force vers le bas sans gravité
+            //Physics.gravity = new Vector3(0f, glideForce, 0f); //utilisation de la gravité 
+        }
+        else
+        {
+            rb.useGravity = true;
+            Physics.gravity = new Vector3(0f, -9.81f, 0f);
+
+            // Gérer l'utilisation du jetpack
+            if (jetpackCharge > 0 && jetpack.action.IsPressed())
+            {
+                UseJetpack();
+            }
         }
 
         if (isGrounded && (Mathf.Abs(movementX) > 0 || Mathf.Abs(movementY) > 0))
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Footsteps");
         }
+
+        MovePlayer();
+
+        currentSpeed = rb.velocity.magnitude;
     }
+
+    /*private void MovePlayer()
+    {
+        // calculate movement direction
+        moveDirection = orientation.forward * movementY + orientation.right * movementX;
+
+        // on ground
+        if (isGrounded)
+            rb.AddForce(moveDirection.normalized * speed * 10f, ForceMode.Force);
+
+        // in air
+        else if (!isGrounded)
+            rb.AddForce(moveDirection.normalized * speed * 10f * airMultiplier, ForceMode.Force);
+    }*/
+
+    private void MovePlayer()
+    {
+        Vector3 move = new Vector3(movementX, 0f, movementY).normalized;
+        Vector3 localMove = transform.TransformDirection(move);
+
+        Vector3 targetVelocity = localMove * speed;
+        if (isGrounded)
+        {
+            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocityRef, smoothTime);
+        }
+        else 
+        {
+            rb.AddForce(targetVelocity - rb.velocity, ForceMode.Acceleration);
+        }
+    }
+
+
+
+    private void SpeedControl()
+    {
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        // limit velocity if needed
+        if (flatVel.magnitude > speed)
+        {
+            Vector3 limitedVel = flatVel.normalized * speed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
+    }
+
+    private bool CheckGround()
+    {
+        foreach (LayerMask groundMask in groundMasks)
+        {
+            if (Physics.CheckSphere(groundCheck.position, groundDistance, groundMask))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private void OnMove(InputValue movementValue)
     {
@@ -181,13 +251,4 @@ public class PlayerMovementsRB : MonoBehaviour
         heartSpawner.timer = 0;
     }
 
-    private void OnSpeedIncrement()
-    {
-        speed += 20;
-    }
-
-    private void OnSpeedDecrement()
-    {
-        speed = 17;
-    }
 }

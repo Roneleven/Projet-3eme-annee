@@ -28,41 +28,43 @@ public class CubeTracking : MonoBehaviour
             return;
         }
 
-        List<GameObject> cubesToLaunch = new List<GameObject>();
-        int numberOfCubes = Mathf.Min(numberOfCubesToLaunch, generatedCubes.Count);
+        StartCoroutine(LaunchWithDelay(generatedCubes));
+    }
 
-        for (int i = 0; i < numberOfCubes; i++)
+    private IEnumerator LaunchWithDelay(List<GameObject> cubes)
+    {
+        foreach (GameObject cube in cubes)
         {
-            int randomIndex = Random.Range(0, generatedCubes.Count);
-            cubesToLaunch.Add(generatedCubes[randomIndex]);
-            generatedCubes.RemoveAt(randomIndex);
-        }
-
-        foreach (GameObject cubeToLaunch in cubesToLaunch)
-        {
-            if (cubeToLaunch == null)
+            if (cube == null)
             {
                 Debug.LogWarning("Cube to launch is null.");
                 continue;
             }
 
-            // Ajoute un Rigidbody au cube à tête chercheuse
-            Rigidbody homingCubeRigidbody = cubeToLaunch.AddComponent<Rigidbody>();
-            homingCubeRigidbody.useGravity = true;
-
-
-            // Ajoute ou récupère le script HomingCube
-            HomingCube homingCubeScript = cubeToLaunch.GetComponent<HomingCube>();
-            if (homingCubeScript == null)
+            Renderer cubeRenderer = cube.GetComponent<Renderer>();
+            if (cubeRenderer != null)
             {
-                // Ajoute le script HomingCube s'il n'est pas déjà présent
-                homingCubeScript = cubeToLaunch.AddComponent<HomingCube>();
+                // Change la couleur du cube en noir
+                cubeRenderer.material.color = Color.black;
             }
 
-            // Configure le cube à tête chercheuse
+            // Attend 2 secondes avant de lancer le cube
+            yield return new WaitForSeconds(2f);
+
+            // Ensuite, lance le cube comme avant
+            Rigidbody homingCubeRigidbody = cube.AddComponent<Rigidbody>();
+            homingCubeRigidbody.useGravity = true;
+
+            HomingCube homingCubeScript = cube.GetComponent<HomingCube>();
+            if (homingCubeScript == null)
+            {
+                homingCubeScript = cube.AddComponent<HomingCube>();
+            }
+
             homingCubeScript.SetTarget(targetTransform);
-            homingCubeScript.SetDestroyDelay(5f);
+            homingCubeScript.SetDestroyDelay(destroyDelay);
             homingCubeScript.SetSpeed(homingCubeSpeed);
         }
     }
+
 }

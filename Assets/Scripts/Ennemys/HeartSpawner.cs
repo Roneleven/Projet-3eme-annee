@@ -85,8 +85,7 @@ public class HeartSpawner : MonoBehaviour
 
     private void Start()
     {
-        cubeLauncherPattern = new CubeLauncherPattern();
-        cubeLauncherPattern.heartSpawner = this;
+        cubeLauncherPattern = GetComponent<CubeLauncherPattern>();
         wallPattern = new WallPattern();
         StartCoroutine(SpawnCube());
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);

@@ -119,7 +119,7 @@ public class PlayerMovementsRB : MonoBehaviour
         else
         {
             rb.useGravity = true;
-            Physics.gravity = new Vector3(0f, -9.81f, 0f);
+            //Physics.gravity = new Vector3(0f, -9.81f, 0f);
 
             // Gérer l'utilisation du jetpack
             if (jetpackCharge > 0 && jetpack.action.IsPressed())

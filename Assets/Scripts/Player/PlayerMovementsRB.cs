@@ -158,13 +158,11 @@ public class PlayerMovementsRB : MonoBehaviour
         Vector3 localMove = transform.TransformDirection(move);
 
         Vector3 targetVelocity = localMove * speed;
-
-        // Si le joueur est au sol, utilisez SmoothDamp pour lisser le mouvement
         if (isGrounded)
         {
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocityRef, smoothTime);
         }
-        else // Si le joueur est dans les airs, appliquez directement une force
+        else 
         {
             rb.AddForce(targetVelocity - rb.velocity, ForceMode.Acceleration);
         }

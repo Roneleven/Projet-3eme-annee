@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -42,6 +43,12 @@ public class PlayerMovementsRB : MonoBehaviour
     public HeartSpawner heartSpawner;
     public float glideForce = 5f; // Valeur par défaut de la force de planeur
 
+    Vector3 moveDirection;
+    public Transform orientation;
+    public float airMultiplier;
+    private Vector3 velocityRef = Vector3.zero;
+    public float smoothTime;
+
 
     private void Start()
     {
@@ -53,6 +60,7 @@ public class PlayerMovementsRB : MonoBehaviour
 
     private void Update()
     {
+        SpeedControl();
         GetPlayerInput();
 
         if (isGrounded)
@@ -105,7 +113,7 @@ public class PlayerMovementsRB : MonoBehaviour
         if (!isGrounded && jetpackCharge <= 0 && jetpack.action.IsPressed())
         {
             rb.useGravity = false; 
-            rb.AddForce(Vector3.down * glideForce, ForceMode.Acceleration); //force vers le bas sans gravité
+            rb.AddForce(Vector3.down * glideForce, ForceMode.Force); //force vers le bas sans gravité
             //Physics.gravity = new Vector3(0f, glideForce, 0f); //utilisation de la gravité 
         }
         else
@@ -120,17 +128,51 @@ public class PlayerMovementsRB : MonoBehaviour
             }
         }
 
-        Vector3 move = new Vector3(movementX, 0f, movementY);
-
-        move = transform.TransformDirection(move);
-        rb.velocity = new Vector3(move.x * speed, rb.velocity.y, move.z * speed);
-
         if (isGrounded && (Mathf.Abs(movementX) > 0 || Mathf.Abs(movementY) > 0))
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Footsteps");
         }
 
+        MovePlayer();
+
         currentSpeed = rb.velocity.magnitude;
+    }
+
+    /*private void MovePlayer()
+    {
+        // calculate movement direction
+        moveDirection = orientation.forward * movementY + orientation.right * movementX;
+
+        // on ground
+        if (isGrounded)
+            rb.AddForce(moveDirection.normalized * speed * 10f, ForceMode.Force);
+
+        // in air
+        else if (!isGrounded)
+            rb.AddForce(moveDirection.normalized * speed * 10f * airMultiplier, ForceMode.Force);
+    }*/
+
+    private void MovePlayer()
+    {
+        Vector3 move = new Vector3(movementX, 0f, movementY).normalized;
+        Vector3 localMove = transform.TransformDirection(move);
+        Vector3 targetVelocity = localMove * speed;
+
+        rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocityRef, smoothTime);
+    }
+
+
+
+    private void SpeedControl()
+    {
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        // limit velocity if needed
+        if (flatVel.magnitude > speed)
+        {
+            Vector3 limitedVel = flatVel.normalized * speed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
     }
 
 

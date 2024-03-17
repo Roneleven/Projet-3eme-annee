@@ -156,9 +156,18 @@ public class PlayerMovementsRB : MonoBehaviour
     {
         Vector3 move = new Vector3(movementX, 0f, movementY).normalized;
         Vector3 localMove = transform.TransformDirection(move);
+
         Vector3 targetVelocity = localMove * speed;
 
-        rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocityRef, smoothTime);
+        // Si le joueur est au sol, utilisez SmoothDamp pour lisser le mouvement
+        if (isGrounded)
+        {
+            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocityRef, smoothTime);
+        }
+        else // Si le joueur est dans les airs, appliquez directement une force
+        {
+            rb.AddForce(targetVelocity - rb.velocity, ForceMode.Acceleration);
+        }
     }
 
 
@@ -174,12 +183,6 @@ public class PlayerMovementsRB : MonoBehaviour
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
     }
-
-
-
-
-
-
 
     private bool CheckGround()
     {
@@ -250,13 +253,4 @@ public class PlayerMovementsRB : MonoBehaviour
         heartSpawner.timer = 0;
     }
 
-    private void OnSpeedIncrement()
-    {
-        speed += 20;
-    }
-
-    private void OnSpeedDecrement()
-    {
-        speed = 17;
-    }
 }

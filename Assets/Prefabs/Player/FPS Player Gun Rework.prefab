@@ -6078,7 +6078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dcaacba706f73f4da878ed90c718463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 13
   currentSpeed: 0
   groundCheck: {fileID: 7463014139835152866}
   groundDistance: 0.2
@@ -6096,13 +6096,13 @@ MonoBehaviour:
   jetpack: {fileID: -2807530785661849503, guid: 6e6fe52b9edf0994fab010aae1aa7e18, type: 3}
   jetpackEffect: {fileID: 2098505437709448548}
   shakeDuration: 0.5
-  shakeForce: 0.2
+  shakeForce: 0
   jetpackChargeImage: {fileID: 1308860844146114820}
   heartSpawner: {fileID: 0}
-  glideForce: 23
+  glideForce: 1.2
   orientation: {fileID: 8136833169645445766}
-  airMultiplier: 0.4
-  smoothTime: 0.15
+  airMultiplier: 2
+  smoothTime: 0.12
 --- !u!114 &8347870928131129040
 MonoBehaviour:
   m_ObjectHideFlags: 0

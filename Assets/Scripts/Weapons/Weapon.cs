@@ -114,11 +114,11 @@ public class Weapon : MonoBehaviour
         if (bulletTrailVFX != null)
         {
             bulletTrailVFX.Stop(); // Ensure the particle system is stopped before playing
-            bulletTrailVFX.transform.position = transform.position;
+            //bulletTrailVFX.transform.position = transform.position;
 
             // Apply rotation to the particle system
-            Quaternion lookRotation = Quaternion.LookRotation(shotDirection, Vector3.up);
-            bulletTrailVFX.transform.rotation = lookRotation;
+            //Quaternion lookRotation = Quaternion.LookRotation(shotDirection, Vector3.up);
+            //bulletTrailVFX.transform.rotation = lookRotation;
 
             // Play the particle system
             bulletTrailVFX.Play();

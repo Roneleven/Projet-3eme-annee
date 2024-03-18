@@ -3779,6 +3779,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1491198872}
     - target: {fileID: 384531942949102673, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: m_Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 384531942949102673, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: m_Positions.Array.data[1].x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 384531942949102673, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: m_Positions.Array.data[1].y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 384531942949102673, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: m_Parameters.colorGradient.atime0
       value: 54972
       objectReference: {fileID: 0}
@@ -3801,6 +3813,14 @@ PrefabInstance:
     - target: {fileID: 4805179598088156730, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: m_Name
       value: Weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850474457665193327, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850474457665193327, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: emitterVelocityMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7616929701851145350, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: m_LocalScale.x

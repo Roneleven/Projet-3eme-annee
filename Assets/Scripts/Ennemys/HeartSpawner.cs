@@ -100,7 +100,7 @@ public class HeartSpawner : MonoBehaviour
 
         if (currentPalier == 1)
         {
-            currentPatternState = PatternState.MeteorPattern;
+            currentPatternState = PatternState.BigWallPattern;
             StartCoroutine(StartCubeTrackingPattern());
         }
         else

@@ -81,6 +81,10 @@ public class HeartSpawner : MonoBehaviour
     public float timeBetweenPatterns; // Temps entre chaque changement de pattern (en secondes)
     private float patternTimer = 0f;
     public CubeTracking cubeTrackingScript;
+    public AerialMinesPattern aerialMinesPattern;
+    public BigWallPattern bigWallPattern;
+    public ExplosivePillarPattern explosivePillarPattern;
+    public MeteorPattern meteorPattern;
 
 
     private void Start()
@@ -97,7 +101,7 @@ public class HeartSpawner : MonoBehaviour
 
         if (currentPalier == 1)
         {
-            currentPatternState = PatternState.CubeTracking;
+            currentPatternState = PatternState.MeteorPattern;
             StartCoroutine(StartCubeTrackingPattern());
         }
         else
@@ -112,6 +116,10 @@ public class HeartSpawner : MonoBehaviour
         CubeTracking,
         CubeLauncher,
         CageTracking,
+        BigWallPattern,
+        ExplosivePillarPattern,
+        AerialMinesPattern,
+        MeteorPattern,
         //state à ajouter ici
     }
 
@@ -197,6 +205,26 @@ public class HeartSpawner : MonoBehaviour
                 currentPatternState = PatternState.CageTracking; // Reste dans le même état
                 break;
 
+            case PatternState.AerialMinesPattern:
+                StartCoroutine(StartAerialMinesPattern());
+                currentPatternState = PatternState.AerialMinesPattern; // Reste dans le même état
+                break;
+
+            case PatternState.BigWallPattern:
+                StartCoroutine(StartBigWallPattern());
+                currentPatternState = PatternState.BigWallPattern; // Reste dans le même état
+                break;
+
+            case PatternState.ExplosivePillarPattern:
+                StartCoroutine(StartExplosivePillarPattern());
+                currentPatternState = PatternState.ExplosivePillarPattern; // Reste dans le même état
+                break;    
+
+            case PatternState.MeteorPattern:
+                StartCoroutine(StartMeteorPattern());
+                currentPatternState = PatternState.MeteorPattern; // Reste dans le même état
+                break; 
+
                 // Ajoutez d'autres cas pour d'autres états au besoin
         }
     }
@@ -221,6 +249,34 @@ public class HeartSpawner : MonoBehaviour
 
         // Appel de la méthode LauncherPattern manuellement
         cubeLauncherPattern.LauncherPattern();
+
+        yield return null;
+    }
+
+    private IEnumerator StartAerialMinesPattern()
+    {
+         aerialMinesPattern.LaunchAerialPattern();
+
+        yield return null;
+    }
+
+    private IEnumerator StartBigWallPattern()
+    {
+         bigWallPattern.LaunchWallPattern();
+
+        yield return null;
+    }
+
+    private IEnumerator StartExplosivePillarPattern()
+    {
+         explosivePillarPattern.LaunchExplosivePillar();
+
+        yield return null;
+    }
+
+    private IEnumerator StartMeteorPattern()
+    {
+         meteorPattern.LaunchMeteorPattern();
 
         yield return null;
     }

@@ -4,28 +4,17 @@ public class ExplosivePillarPattern : MonoBehaviour
 {
     public GameObject emptyPrefab;
     public float spawnRadius = 10f;
-    public float spawnInterval = 7f;
-
-    private GameObject playerObject;
+    //public float spawnInterval = 7f;
     private LayerMask groundLayerMask;
 
-    private void Start()
+    public void LaunchExplosivePillar()
     {
-        playerObject = GameObject.FindGameObjectWithTag("Player");
-        if (playerObject == null)
-        {
-            Debug.LogError("Player not found with tag: Player");
-            return;
-        }
 
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         groundLayerMask = LayerMask.GetMask("Ground");
-        InvokeRepeating("SpawnEmptyObject", 0f, spawnInterval);
-    }
 
-    private void SpawnEmptyObject()
-    {
         Vector2 randomPoint2D = Random.insideUnitCircle * spawnRadius;
-        Vector3 randomPoint = new Vector3(randomPoint2D.x, 0f, randomPoint2D.y) + playerObject.transform.position;
+        Vector3 randomPoint = new Vector3(randomPoint2D.x, 0f, randomPoint2D.y) + player.transform.position;
         randomPoint.z += Random.Range(-spawnRadius, spawnRadius);
 
         Collider[] colliders = Physics.OverlapSphere(randomPoint, 20f, groundLayerMask);
@@ -42,7 +31,7 @@ public class ExplosivePillarPattern : MonoBehaviour
         }
 
         GameObject emptyObject = Instantiate(emptyPrefab, hit.point, Quaternion.identity);
-        Vector3 direction = playerObject.transform.position - hit.point;
+        Vector3 direction = player.transform.position - hit.point;
         direction.y = 0f;
         emptyObject.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
     }

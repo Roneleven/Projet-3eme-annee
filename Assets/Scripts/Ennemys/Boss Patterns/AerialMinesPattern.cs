@@ -7,28 +7,8 @@ public class AerialMinesPattern : MonoBehaviour
     public int numberOfCubes;
     public float radius;
     public float journeyDuration = 40.0f;
-    public float launchInterval = 5f; // Interval between each launch
 
-    void Start()
-    {
-        StartPattern();
-    }
-
-    void StartPattern()
-    {
-        StartCoroutine(LaunchPatternRoutine());
-    }
-
-    IEnumerator LaunchPatternRoutine()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(launchInterval);
-            LaunchAerialPattern();
-        }
-    }
-
-    void LaunchAerialPattern()
+    public void LaunchAerialPattern()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 

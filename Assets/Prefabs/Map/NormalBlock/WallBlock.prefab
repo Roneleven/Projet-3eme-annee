@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7173625961838439358}
   - component: {fileID: 462281091523132872}
   - component: {fileID: -5327043058665860593}
+  - component: {fileID: 6800457100573174941}
   m_Layer: 3
   m_Name: WallBlock
   m_TagString: Block
@@ -125,3 +126,16 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 4016d2b27bc782a40b44742b7dce2204, type: 2}
   - {fileID: 2100000, guid: f66327c6633685240adb0536f7329079, type: 2}
   - {fileID: 2100000, guid: 3837bc8960c237e4eb1e6470195de3a5, type: 2}
+--- !u!114 &6800457100573174941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230891745418371966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b91e28b5ad200f2489c6a2228a9a36ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  repulsionForce: 50

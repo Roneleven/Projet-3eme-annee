@@ -61,6 +61,7 @@ MonoBehaviour:
   resetSmooth: 11.75
   scopePos: {x: -0.4965, y: 0.09, z: -0.03}
   spreadAngle: 2
+  cameraKickForce: 2.87
   bulletTrailVFX: {fileID: 4850474457665193327}
   weaponGfxLayer: 12
   weaponGfxs:

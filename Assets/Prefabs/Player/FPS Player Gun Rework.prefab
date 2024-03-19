@@ -1,5 +1,56 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1439409374943945034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7655291500455575883}
+  - component: {fileID: 5612328977609180829}
+  m_Layer: 10
+  m_Name: CameraRecoil
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7655291500455575883
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439409374943945034}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5942082336240990541}
+  - {fileID: 5207891201020567820}
+  m_Father: {fileID: 4764429766740811625}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5612328977609180829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439409374943945034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4764ed21d3379ef428aef31db45ceefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recoilX: -2
+  recoilY: 2
+  recoilZ: 0.35
+  snappiness: 6
+  resetSpeed: 2
 --- !u!1 &1589906880248410510
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +188,7 @@ Transform:
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4764429766740811625}
+  m_Father: {fileID: 7655291500455575883}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &2649904338549692574
 Camera:
@@ -201,7 +252,7 @@ GameObject:
   - component: {fileID: 4764429766740811625}
   - component: {fileID: 7862538914596490753}
   m_Layer: 10
-  m_Name: Camera Holder
+  m_Name: CameraRot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -220,8 +271,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5942082336240990541}
-  - {fileID: 5207891201020567820}
+  - {fileID: 7655291500455575883}
   m_Father: {fileID: 7720814548836648889}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7862538914596490753
@@ -969,15 +1019,15 @@ RectTransform:
   m_GameObject: {fileID: 4899535533133680703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.24, y: 0.24, z: 0.24}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3217633168446887420}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 60, y: 0}
-  m_SizeDelta: {x: 22, y: 183}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 662, y: 662}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6648122213892303857
 CanvasRenderer:
@@ -1007,11 +1057,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 34b958ffe417e3b40ace5ec4d5a30f50, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a9bbf6bb8e8eb4b4d9d53f5e454a6a3d, type: 3}
   m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
-  m_FillMethod: 1
+  m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -6004,7 +6054,6 @@ GameObject:
   - component: {fileID: 7720814548836648889}
   - component: {fileID: 4659278818703242318}
   - component: {fileID: 1662342133783437384}
-  - component: {fileID: 8347870928131129040}
   - component: {fileID: 61527043887695792}
   - component: {fileID: 5729225776423105573}
   - component: {fileID: 1410426708537084780}
@@ -6103,40 +6152,6 @@ MonoBehaviour:
   orientation: {fileID: 8136833169645445766}
   airMultiplier: 2
   smoothTime: 0.12
---- !u!114 &8347870928131129040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6232101016860361905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc85c046cb8cb2e4c8f2a32055c9bc50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxAmmo: 999999
-  fireRate: 3
-  recoilForce: 1
-  reloadTime: 0.7
-  shootingSoundEvent: event:/Guns/BasicGun/Shoot
-  reloadSoundEvent: event:/Guns/BasicGun/Reload
-  mustUseAllAmmoBeforeReload: 0
-  gunObject: {fileID: 0}
-  shootingPoint: {fileID: 0}
-  bulletsPerShot: 1
-  spreadAmount: 0
-  bulletPrefab: {fileID: 6786013472321727789, guid: 005c8ad54fbad8b4295133ac2f24f610, type: 3}
-  bulletSpeed: 100
-  bulletLifeTime: 3
-  bulletDamage: 6
-  bulletPenetrationCount: 0
-  currentAmmo: 0
-  explosiveEnabled: 0
-  explosionRadius: 2
-  explosiveBulletPrefab: {fileID: 6786013472321727789, guid: 4dc8e733a05b1284d919c77fb115d568, type: 3}
-  explosionPrefab: {fileID: 191186, guid: 517c65f5c21a00340b7af8423976621c, type: 3}
-  cubeDeath: {fileID: 2061751337493195821, guid: f45478f9f08d3b6429ec187c2f9e0bc9, type: 3}
 --- !u!114 &61527043887695792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6363,7 +6378,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 26e5b01487b82c04cb4a736462a8417a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b74b90e44b0cc3941a40ed76f0363ef5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6438,7 +6453,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5328523387707316578}
-  m_Father: {fileID: 4764429766740811625}
+  m_Father: {fileID: 7655291500455575883}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &4676258182735163754
 Camera:
@@ -6528,7 +6543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba45e5ab1293a245b5f14f001690f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiltAngle: 1.2
+  tiltAngle: 1
   smooth: 5
 --- !u!1 &8925450854511973420
 GameObject:

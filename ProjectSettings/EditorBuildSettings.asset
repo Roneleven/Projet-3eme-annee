@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LD_Soutenance_S1.unity
     guid: f058d119d368aad4381034192dd82326
+  - enabled: 1
+    path: Assets/Scenes/Jeu.unity
+    guid: e8c88fff68326ea44bbb1aecf2b57054
   m_configObjects: {}

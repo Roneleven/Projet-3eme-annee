@@ -48,12 +48,14 @@ public class Weapon : MonoBehaviour
     private TMP_Text _ammoText;
     private Vector3 _startPosition;
     private Quaternion _startRotation;
+    public Recoil Recoil_Script;
 
     private void Start()
     {
         _rb = gameObject.AddComponent<Rigidbody>();
         _rb.mass = 0.1f;
         _ammo = maxAmmo;
+        Recoil_Script = transform.Find("FPS Player Gun Rework/CameraRot/CameraRecoil").GetComponent<Recoil>();
     }
 
     private void Update()
@@ -113,12 +115,9 @@ public class Weapon : MonoBehaviour
         // Play bullet trail VFX regardless of hitting something or not
         if (bulletTrailVFX != null)
         {
-            bulletTrailVFX.Stop(); // Ensure the particle system is stopped before playing
-            //bulletTrailVFX.transform.position = transform.position;
-
             // Apply rotation to the particle system
-            //Quaternion lookRotation = Quaternion.LookRotation(shotDirection, Vector3.up);
-            //bulletTrailVFX.transform.rotation = lookRotation;
+            Quaternion lookRotation = Quaternion.LookRotation(shotDirection, Vector3.up);
+            bulletTrailVFX.transform.rotation = lookRotation;
 
             // Play the particle system
             bulletTrailVFX.Play();
@@ -139,6 +138,7 @@ public class Weapon : MonoBehaviour
                 HandleHitObject(hitInfo);
             }
         }
+        Recoil_Script.RecoilFire();
     }
 
     private void HandleHitObject(RaycastHit hitInfo)

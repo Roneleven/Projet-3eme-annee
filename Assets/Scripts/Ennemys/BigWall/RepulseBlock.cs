@@ -2,38 +2,29 @@ using UnityEngine;
 
 public class RepulseObject : MonoBehaviour
 {
-    // Force de répulsion
-    public float repulsionForce = 10f;
+    // Forces de répulsion
+    public float repulsionForce = 1f;
+    public float backwardForce = 10f;
+    public float upwardForce = 1f;
 
-    // Rayon de détection du joueur
-    public float playerDetectionRadius = 1.5f;
-
-    void Update()
+    // Fonction appelée lorsqu'une collision se produit
+    private void OnCollisionEnter(Collision collision)
     {
-        // Vérifier si le joueur est en contact avec l'objet
-        Collider[] colliders = Physics.OverlapSphere(transform.position, playerDetectionRadius);
-        foreach (Collider collider in colliders)
+        if (collision.gameObject.CompareTag("Player"))
         {
-            // Vérifier si le collider appartient au joueur
-            if (collider.CompareTag("Player"))
-            {
-                // Calculer la direction du joueur par rapport à l'objet
-                Vector3 repulsionDirection = (collider.transform.position - transform.position).normalized;
+            // Calculer la direction de la répulsion
+            Vector3 repulsionDirection = (collision.transform.position - transform.position).normalized;
 
-                // Appliquer la force de répulsion au joueur
-                Rigidbody playerRigidbody = collider.GetComponent<Rigidbody>();
-                if (playerRigidbody != null)
-                {
-                    playerRigidbody.AddForce(repulsionDirection * repulsionForce, ForceMode.Impulse);
-                }
+            // Ajouter les forces de répulsion
+            repulsionDirection -= transform.forward * backwardForce;
+            repulsionDirection += transform.up * upwardForce;
+
+            // Appliquer la force de répulsion au joueur
+            Rigidbody playerRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+            if (playerRigidbody != null)
+            {
+                playerRigidbody.AddForce(repulsionDirection * repulsionForce, ForceMode.Impulse);
             }
         }
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        // Dessiner une sphère de détection pour visualiser la portée de l'objet
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, playerDetectionRadius);
     }
 }

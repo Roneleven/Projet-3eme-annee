@@ -18,8 +18,8 @@ public class CubeLauncherPattern : MonoBehaviour
 
             Rigidbody cubeRigidbody = cubeToLaunch.AddComponent<Rigidbody>();
             cubeRigidbody.useGravity = true;
-
-            Vector3 launchDirection = (heartSpawner.playerPosition - cubeToLaunch.transform.position).normalized;
+            Vector3 playerPositionWithOffset = heartSpawner.playerPosition + Vector3.up * 3.15f;
+            Vector3 launchDirection = (playerPositionWithOffset - cubeToLaunch.transform.position).normalized;
             cubeRigidbody.AddForce(launchDirection * heartSpawner.launchForce, ForceMode.Impulse);
 
             Destroy(cubeToLaunch, heartSpawner.cubeDestroyDelay);

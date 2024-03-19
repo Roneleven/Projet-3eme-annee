@@ -276,6 +276,10 @@ PrefabInstance:
       propertyPath: m_Interpolate
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5729225776423105573, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6232101016860361905, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_Name
       value: FPS Player Gun Rework
@@ -772,6 +776,50 @@ PrefabInstance:
     - target: {fileID: 4805179598088156730, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: m_Name
       value: Weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850474457665193327, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: TrailModule.lifetime.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850474457665193327, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850474457665193327, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850474457665193327, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.b
+      value: 0.89433956
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850474457665193327, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.g
+      value: 0.89433956
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850474457665193327, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.r
+      value: 0.89433956
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850474457665193327, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.minMaxState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850474457665193327, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxGradient.key0.b
+      value: 0.19433957
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850474457665193327, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxGradient.key0.g
+      value: 0.94729626
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850474457665193327, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850474457665193327, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxGradient.m_ColorSpace
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7616929701851145350, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: m_LocalScale.x

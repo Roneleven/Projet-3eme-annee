@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad31aa5632d79e43b5190aac85716c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubePrefab: {fileID: 1230891745418371966, guid: 7df661f8484f9004fb74b80a98a28738, type: 3}
+  cubePrefab: {fileID: 1230891745418371966, guid: 01dc6f45429835e41bc7453bb3dbbb1d, type: 3}
   spawnInterval: 2
   spawnRadius: 0
   spawnContainer: {fileID: 0}

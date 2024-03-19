@@ -49,7 +49,7 @@ public class CubeTracking : MonoBehaviour
             }
 
             // Attend 2 secondes avant de lancer le cube
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.5f);
 
             // Ensuite, lance le cube comme avant
             Rigidbody homingCubeRigidbody = cube.AddComponent<Rigidbody>();

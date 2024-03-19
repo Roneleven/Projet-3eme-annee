@@ -120,11 +120,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
-  lvl1: {fileID: 2100000, guid: a15f1bcbe6cf0ad429f90c21060c677a, type: 2}
-  lvl2: {fileID: 2100000, guid: 48043cb81bf4b4943a1e524d09f0b15d, type: 2}
-  lvl3: {fileID: 2100000, guid: 4016d2b27bc782a40b44742b7dce2204, type: 2}
-  lvl4: {fileID: 2100000, guid: f66327c6633685240adb0536f7329079, type: 2}
-  lvl5: {fileID: 2100000, guid: 3837bc8960c237e4eb1e6470195de3a5, type: 2}
+  healthMaterials:
+  - {fileID: 2100000, guid: a15f1bcbe6cf0ad429f90c21060c677a, type: 2}
+  - {fileID: 2100000, guid: 48043cb81bf4b4943a1e524d09f0b15d, type: 2}
+  - {fileID: 2100000, guid: 4016d2b27bc782a40b44742b7dce2204, type: 2}
+  - {fileID: 2100000, guid: f66327c6633685240adb0536f7329079, type: 2}
+  - {fileID: 2100000, guid: 3837bc8960c237e4eb1e6470195de3a5, type: 2}
 --- !u!54 &6886959891914439623
 Rigidbody:
   m_ObjectHideFlags: 0

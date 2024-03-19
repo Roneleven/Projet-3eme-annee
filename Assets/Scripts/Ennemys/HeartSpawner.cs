@@ -85,6 +85,7 @@ public class HeartSpawner : MonoBehaviour
     public BigWallPattern bigWallPattern;
     public ExplosivePillarPattern explosivePillarPattern;
     public MeteorPattern meteorPattern;
+    public GatlinLauncherPattern gatlinLauncherPattern;
 
 
     private void Start()
@@ -94,6 +95,7 @@ public class HeartSpawner : MonoBehaviour
         bigWallPattern = GetComponent<BigWallPattern>();
         meteorPattern = GetComponent<MeteorPattern>();
         aerialMinesPattern = GetComponent<AerialMinesPattern>();
+        gatlinLauncherPattern = GetComponent<GatlinLauncherPattern>();
        
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);
         BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/UX/Ambience/BreakingTheHeart");
@@ -124,6 +126,7 @@ public class HeartSpawner : MonoBehaviour
         ExplosivePillarPattern,
         AerialMinesPattern,
         MeteorPattern,
+        GatlinLauncher,
         //state à ajouter ici
     }
 
@@ -187,49 +190,52 @@ public class HeartSpawner : MonoBehaviour
         switch (currentPatternState)
         {
             case PatternState.CubeTracking:
-                if (currentPalier == 1)  // Ajoutez cette condition pour le premier palier
+                if (currentPalier == 1) 
                 {
                     StartCoroutine(StartCubeLauncherPattern());
-                    currentPatternState = PatternState.CubeTracking; // Reste dans le même état
+                    currentPatternState = PatternState.CubeTracking;
                 }
                 else
                 {
                     StartCoroutine(StartCubeTrackingPattern());
-                    currentPatternState = PatternState.CubeLauncher; // Passe à l'état suivant
+                    currentPatternState = PatternState.CubeLauncher; 
                 }
                 break;
 
             case PatternState.CubeLauncher:
                 StartCoroutine(StartCubeLauncherPattern());
-                currentPatternState = PatternState.CubeTracking; // Passe à l'état suivant
+                currentPatternState = PatternState.CubeTracking; 
                 break;
 
             case PatternState.CageTracking:
                 //StartCoroutine(GenerateCagePattern());
-                currentPatternState = PatternState.CageTracking; // Reste dans le même état
+                currentPatternState = PatternState.CageTracking; 
                 break;
 
             case PatternState.AerialMinesPattern:
                 StartCoroutine(StartAerialMinesPattern());
-                currentPatternState = PatternState.AerialMinesPattern; // Reste dans le même état
+                currentPatternState = PatternState.AerialMinesPattern; 
                 break;
 
             case PatternState.BigWallPattern:
                 StartCoroutine(StartBigWallPattern());
-                currentPatternState = PatternState.BigWallPattern; // Reste dans le même état
+                currentPatternState = PatternState.BigWallPattern;
                 break;
 
             case PatternState.ExplosivePillarPattern:
                 StartCoroutine(StartExplosivePillarPattern());
-                currentPatternState = PatternState.ExplosivePillarPattern; // Reste dans le même état
+                currentPatternState = PatternState.ExplosivePillarPattern;
                 break;    
 
             case PatternState.MeteorPattern:
                 StartCoroutine(StartMeteorPattern());
-                currentPatternState = PatternState.MeteorPattern; // Reste dans le même état
-                break; 
+                currentPatternState = PatternState.MeteorPattern; 
+                break;
 
-                // Ajoutez d'autres cas pour d'autres états au besoin
+            case PatternState.GatlinLauncher:
+                StartCoroutine(StartGatlinLauncherPattern());
+                currentPatternState = PatternState.GatlinLauncher;
+                break;
         }
     }
 
@@ -250,38 +256,37 @@ public class HeartSpawner : MonoBehaviour
 
     private IEnumerator StartCubeLauncherPattern()
     {
-
-        // Appel de la méthode LauncherPattern manuellement
         cubeLauncherPattern.LauncherPattern();
-
         yield return null;
     }
 
     private IEnumerator StartAerialMinesPattern()
     {
-         aerialMinesPattern.LaunchAerialPattern();
-
+        aerialMinesPattern.LaunchAerialPattern();
         yield return null;
     }
 
     private IEnumerator StartBigWallPattern()
     {
-         bigWallPattern.LaunchWallPattern();
-
+        bigWallPattern.LaunchWallPattern();
         yield return null;
     }
 
     private IEnumerator StartExplosivePillarPattern()
     {
-         explosivePillarPattern.LaunchExplosivePillar();
-
+        explosivePillarPattern.LaunchExplosivePillar();
         yield return null;
     }
 
     private IEnumerator StartMeteorPattern()
     {
-         meteorPattern.LaunchMeteorPattern();
+        meteorPattern.LaunchMeteorPattern();
+        yield return null;
+    }
 
+    private IEnumerator StartGatlinLauncherPattern()
+    {
+        //GatlinLauncherPattern.SphereLauncherPattern(gatlinLauncherPattern.cubesToLaunch);
         yield return null;
     }
 

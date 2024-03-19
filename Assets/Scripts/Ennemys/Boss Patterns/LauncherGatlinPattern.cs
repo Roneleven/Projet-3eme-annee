@@ -65,6 +65,8 @@ public class GatlinLauncherPattern : MonoBehaviour
 
         cubes = cubes.Where(cube => cube != null).ToList();
 
+        List<GameObject> cubesToRemove = new List<GameObject>(); // Liste pour stocker les cubes à retirer de la liste principale
+
         for (int i = 0; i < numCubes; i++)
         {
             if (i < cubes.Count)
@@ -77,8 +79,16 @@ public class GatlinLauncherPattern : MonoBehaviour
                 Vector3 spherePosition = CalculateSpherePosition(sphereCenter, polarAngle, azimuthAngle);
 
                 StartCoroutine(MoveCubeToPosition(cubeToMove, spherePosition));
+
+                cubesToRemove.Add(cubeToMove); // Ajoute le cube à la liste des cubes à retirer
                 yield return new WaitForSeconds(launchInterval); // Attendre avant de déplacer le prochain cube
             }
+        }
+
+        // Retire les cubes sélectionnés pour le lancement de la liste principale
+        foreach (var cubeToRemove in cubesToRemove)
+        {
+            cubes.Remove(cubeToRemove);
         }
 
         // Attendre que tous les cubes aient atteint la sphère avant de déclencher l'action suivante
@@ -100,19 +110,26 @@ public class GatlinLauncherPattern : MonoBehaviour
 
     private IEnumerator MoveCubeToPosition(GameObject cube, Vector3 targetPosition)
     {
+        if (cube == null) yield break; // Vérifie si le cube a été détruit
+
         float elapsedTime = 0f;
         Vector3 initialPosition = cube.transform.position;
 
         while (elapsedTime < sphereMovementDuration)
         {
+            if (cube == null) yield break; // Vérifie si le cube a été détruit
+
             cube.transform.position = Vector3.Lerp(initialPosition, targetPosition, elapsedTime / sphereMovementDuration);
             elapsedTime += Time.deltaTime;
 
             yield return null;
         }
 
+        if (cube == null) yield break; // Vérifie si le cube a été détruit
+
         cube.transform.position = targetPosition;
     }
+
 
     private IEnumerator LaunchCubesOneByOne(List<GameObject> cubes)
     {
@@ -127,7 +144,10 @@ public class GatlinLauncherPattern : MonoBehaviour
             Rigidbody cubeRigidbody = cube.AddComponent<Rigidbody>();
             cubeRigidbody.useGravity = true;
 
-            Vector3 playerPositionWithOffset = heartSpawner.playerPosition + Vector3.up * 3.15f; 
+            // Ajouter le script CubeDestroyer
+            DestroyOnColPlayerGround destroyer = cube.AddComponent<DestroyOnColPlayerGround>();
+
+            Vector3 playerPositionWithOffset = heartSpawner.playerPosition + Vector3.up * 3.15f;
             Vector3 launchDirection = (playerPositionWithOffset - cube.transform.position).normalized;
 
             cubeRigidbody.AddForce(launchDirection * heartSpawner.launchForce, ForceMode.Impulse);
@@ -139,4 +159,5 @@ public class GatlinLauncherPattern : MonoBehaviour
 
         heartSpawner.cubesGeneratedDuringPalier = 0;
     }
+
 }

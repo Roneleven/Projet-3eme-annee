@@ -6,7 +6,6 @@ public class SelfDestruct : MonoBehaviour
 
     void Start()
     {
-        // Appel de la fonction Destroy après le délai spécifié
         Destroy(gameObject, delayInSeconds);
     }
 }

@@ -90,11 +90,16 @@ public class HeartSpawner : MonoBehaviour
     private void Start()
     {
         cubeLauncherPattern = GetComponent<CubeLauncherPattern>();
-        wallPattern = new WallPattern();
-        StartCoroutine(SpawnCube());
+        explosivePillarPattern = GetComponent<ExplosivePillarPattern>();
+        bigWallPattern = GetComponent<BigWallPattern>();
+        meteorPattern = GetComponent<MeteorPattern>();
+        aerialMinesPattern = GetComponent<AerialMinesPattern>();
+       
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);
         BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/UX/Ambience/BreakingTheHeart");
         BreakingHeart.start();
+
+        StartCoroutine(SpawnCube());
 
         //condition pour changement de state et appel de fonction pour lancer le pattern en question
 

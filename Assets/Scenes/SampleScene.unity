@@ -189,6 +189,65 @@ MonoBehaviour:
   cubesToLaunch: 25
   patternCooldown: 10
   heartSpawner: {fileID: 97876274}
+--- !u!114 &97876287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97876270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8715d30ae5aaf1499f59b2cf1d8ef2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 8124634591630642829, guid: 79790fe4d73093c4d8ed34335c29b87b, type: 3}
+  spawnDistance: 20
+  spawnHeight: 20
+  moveSpeed: 10
+--- !u!114 &97876288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97876270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fd576a4c430dc243ba3062a1e29da27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cubePrefab: {fileID: 1230891745418371966, guid: 84298ffa45b86bd44a293d38649bea51, type: 3}
+  numberOfCubes: 0
+  radius: 0
+  journeyDuration: 40
+--- !u!114 &97876289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97876270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8bd4b67db1abb94385287ecc6cf365a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emptyPrefab: {fileID: 1413787942626273727, guid: 63dbea012cb6cb740b5aee43bb62af8f, type: 3}
+  spawnRadius: 10
+--- !u!114 &97876290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97876270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39e4bbc2af99c1945831ef3d1d1ce1d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallPatternPrefab: {fileID: 4010771748805353341, guid: 7c10a8ad32a982641811b21c33623f4f, type: 3}
 --- !u!4 &136521308 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3631539435367023069, guid: af7794b501cd5ca42be8813c53dd0de9, type: 3}
@@ -1257,10 +1316,22 @@ PrefabInstance:
       addedObject: {fileID: 97876280}
     - targetCorrespondingSourceObject: {fileID: 5743461851523346344, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 97876290}
+    - targetCorrespondingSourceObject: {fileID: 5743461851523346344, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 97876289}
+    - targetCorrespondingSourceObject: {fileID: 5743461851523346344, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 97876288}
+    - targetCorrespondingSourceObject: {fileID: 5743461851523346344, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 97876272}
     - targetCorrespondingSourceObject: {fileID: 5743461851523346344, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       insertIndex: -1
       addedObject: {fileID: 97876281}
+    - targetCorrespondingSourceObject: {fileID: 5743461851523346344, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 97876287}
   m_SourcePrefab: {fileID: 100100000, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
 --- !u!1 &1799073417
 GameObject:

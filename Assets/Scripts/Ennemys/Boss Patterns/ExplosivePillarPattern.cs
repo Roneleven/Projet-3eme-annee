@@ -4,7 +4,6 @@ public class ExplosivePillarPattern : MonoBehaviour
 {
     public GameObject emptyPrefab;
     public float spawnRadius = 10f;
-    //public float spawnInterval = 7f;
     private LayerMask groundLayerMask;
 
     public void LaunchExplosivePillar()

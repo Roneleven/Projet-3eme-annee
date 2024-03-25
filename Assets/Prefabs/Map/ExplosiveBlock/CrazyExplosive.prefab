@@ -147,4 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 3810439456834575818, guid: 2e43e7ba74c5590449a91b647d126f11, type: 3}
-  bounceForce: 10
+  minBounceForce: 10
+  maxBounceForce: 20
+  maxHorizontalSpeed: 1
+  bounceForce: 30

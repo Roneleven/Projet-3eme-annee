@@ -1,58 +1,74 @@
 using UnityEngine;
-using System.Collections;
 
 public class MeteorPattern : MonoBehaviour
 {
-    public GameObject objectToSpawn; // Le Game object à instancier
-    public float spawnDistance = 20f; // Distance entre le joueur et le point de spawn
-    public float spawnHeight = 20f; // La hauteur à laquelle instancier l'objet
-    public float moveSpeed = 10f; // Vitesse de déplacement de l'objet
-    private float spawnAngleRange = 30f;
-    private LayerMask groundLayerMask;
+    public GameObject meteorPrefab; // Référence à l'objet que vous voulez instancier
+    public float horizontalDistance = 20f; // Distance horizontale fixe entre le joueur et l'objet
+    public float verticalDistance = 20f; // Distance verticale par rapport au sol
+    public float meteorSpeed = 10f; // Vitesse du météore
 
-
-public void LaunchMeteorPattern()
-{
-    GameObject player = GameObject.FindGameObjectWithTag("Player");
-    groundLayerMask = LayerMask.GetMask("Ground");
-
-        // Obtenir la position du sol sous le joueur
+    // Méthode pour obtenir la position du sol sous le joueur
+    Vector3 GetGroundPosition(GameObject player)
+    {
         RaycastHit hit;
         Vector3 groundPosition = player.transform.position;
-        if (Physics.Raycast(player.transform.position, Vector3.down, out hit) && hit.collider.CompareTag("Ground"))
+        if (Physics.Raycast(player.transform.position, Vector3.down, out hit, Mathf.Infinity))
         {
             groundPosition = hit.point; // Position précise du sol sous le joueur
         }
+        return groundPosition;
+    }
 
-        // Obtenir la direction dans laquelle le joueur regarde
-        Vector3 spawnDirection = player.transform.forward;
-
-        // Calculer un angle aléatoire dans une fourchette donnée
-        float randomAngle = Random.Range(-spawnAngleRange, spawnAngleRange);
-
-        // Appliquer cet angle à la direction de spawn
-        Quaternion spawnRotation = Quaternion.AngleAxis(randomAngle, Vector3.up);
-        spawnDirection = spawnRotation * spawnDirection;
-
-        // Calculer la position de spawn devant le joueur
-        Vector3 spawnPosition = player.transform.position + spawnDirection * spawnDistance + Vector3.up * spawnHeight;
-
-        // Instancier l'objet à la nouvelle position
-        GameObject spawnedObject = Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
-
-        // Calculer la direction vers le sol sous le joueur
-        Vector3 moveDirection = (groundPosition - spawnPosition).normalized;
-
-        // Donner une vitesse à l'objet en direction du sol
-        Rigidbody rb = spawnedObject.GetComponent<Rigidbody>();
-        if (rb != null)
+    public void LaunchMeteorPattern()
+    {
+        // Trouver la position du joueur
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
         {
-            // Appliquer la vitesse de déplacement
-            rb.velocity = moveDirection * moveSpeed;
-
-            // Désactiver la gravité
-            rb.useGravity = false;
+            Debug.LogError("Player not found!");
+            return;
         }
-    
-}
+
+        // Trouver la direction dans laquelle le joueur est orienté
+        Vector3 playerDirection = player.transform.forward;
+
+        // Ajuster la position du joueur en fonction de la distance horizontale
+        Vector3 playerPosition = player.transform.position;
+        Vector3 spawnOffset = playerDirection * horizontalDistance;
+        playerPosition += spawnOffset;
+
+        // Trouver la position du sol sous le joueur ajusté
+        RaycastHit hit;
+        if (Physics.Raycast(playerPosition, Vector3.down, out hit))
+        {
+            // Vérifie si le tag du collider est "Sol". Assurez-vous que votre sol a le bon tag.
+            if (hit.collider.CompareTag("Ground"))
+            {
+                // Calculer la position de l'objet à instancier
+                Vector3 spawnPosition = hit.point + playerDirection * horizontalDistance + Vector3.up * verticalDistance;
+                GameObject meteor = Instantiate(meteorPrefab, spawnPosition, Quaternion.identity);
+
+                // Obtenir la position du sol sous le joueur
+                Vector3 groundPosition = GetGroundPosition(player);
+
+                // Calculer la direction vers le sol sous le joueur
+                Vector3 moveDirection = (groundPosition - spawnPosition).normalized;
+
+                // Donner une vitesse à l'objet en direction du sol
+                Rigidbody rb = meteor.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    // Appliquer la vitesse de déplacement
+                    rb.velocity = moveDirection * meteorSpeed;
+
+                    // Désactiver la gravité
+                    rb.useGravity = false;
+                }
+                else
+                {
+                    Debug.LogError("Meteor prefab does not have a Rigidbody component!");
+                }
+            }
+        }
+    }
 }

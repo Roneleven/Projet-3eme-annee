@@ -98,7 +98,7 @@ public class HeartSpawner : MonoBehaviour
         gatlinLauncherPattern = GetComponent<GatlinLauncherPattern>();
        
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);
-        BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/UX/Ambience/BreakingTheHeart");
+        BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/UX/Ambience/CoreBreaked");
         BreakingHeart.start();
 
         StartCoroutine(SpawnCube());
@@ -107,7 +107,7 @@ public class HeartSpawner : MonoBehaviour
 
         if (currentPalier == 1)
         {
-            currentPatternState = PatternState.BigWallPattern;
+            currentPatternState = PatternState.MeteorPattern;
             StartCoroutine(StartCubeTrackingPattern());
         }
         else
@@ -446,7 +446,7 @@ public class HeartSpawner : MonoBehaviour
         timer = defaultTimer;
 
         float newLevelUpValue = (currentPalier + 1) * 1.0f;
-        BreakingHeart.setParameterByName("LevelUp", newLevelUpValue);
+        BreakingHeart.setParameterByName("LevelUp 2", newLevelUpValue);
 
         timerActive = true;
         StartCoroutine(ResetPalier());

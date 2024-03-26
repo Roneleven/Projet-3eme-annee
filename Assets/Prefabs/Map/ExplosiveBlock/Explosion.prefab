@@ -119,3 +119,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayBeforeDisappear: 1
+  repulsionForce: 10
+  backwardForce: 10
+  upwardForce: 1

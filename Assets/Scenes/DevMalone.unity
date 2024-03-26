@@ -185,7 +185,7 @@ MonoBehaviour:
   meteorPrefab: {fileID: 8124634591630642829, guid: 79790fe4d73093c4d8ed34335c29b87b, type: 3}
   horizontalDistance: 20
   verticalDistance: 20
-  meteorSpeed: 80
+  meteorSpeed: 50
 --- !u!114 &97876300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1214,6 +1214,10 @@ PrefabInstance:
       propertyPath: timeNextPalier
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: CageBlockPrefab
+      value: 
+      objectReference: {fileID: 1230891745418371966, guid: 345b0ae9498e327478767960ee2fd6fd, type: 3}
     - target: {fileID: -1437274018121235859, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: cageTriggerTime
       value: 5

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8486602473732441194}
   m_Layer: 3
   m_Name: CageBlock
-  m_TagString: Block
+  m_TagString: DestroyableBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

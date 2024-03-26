@@ -426,7 +426,7 @@ public class HeartSpawner : MonoBehaviour
                         Vector3 cubePosition = new Vector3(x, y, z);
                         if (Mathf.Abs(x - playerPosition.x) >= 3 || Mathf.Abs(y - playerPosition.y) >= 3 || Mathf.Abs(z - playerPosition.z) >= 3)
                         {
-                            Instantiate(cubePrefab, cubePosition, Quaternion.identity, spawnContainer.transform);
+                            Instantiate(CageBlockPrefab, cubePosition, Quaternion.identity, spawnContainer.transform);
                             FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Cage/Traped");
                         }
                     }

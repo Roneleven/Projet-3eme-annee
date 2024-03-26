@@ -16,8 +16,8 @@ public class PlayerMovementsRB : MonoBehaviour
     public List<LayerMask> groundMasks;
 
     [Header("Respawn Settings")]
-    public Transform respawnPoint;
-    public float respawnPositionY;
+    /*public Transform respawnPoint;
+    public float respawnPositionY;*/
 
     [Header("Jetpack Settings")]
     public float jetpackForce = 10f;
@@ -88,10 +88,10 @@ public class PlayerMovementsRB : MonoBehaviour
 
         UpdateJetpackChargeUI();
 
-        if (transform.position.y < respawnPositionY)
+        /*if (transform.position.y < respawnPositionY)
         {
             Respawn();
-        }
+        }*/
 
         if (isGrounded)
         {
@@ -229,10 +229,10 @@ public class PlayerMovementsRB : MonoBehaviour
         movementY = Input.GetAxis("Vertical");
     }
 
-    private void Respawn()
+    /*private void Respawn()
     {
         transform.position = respawnPoint.position;
-    }
+    }*/
 
     private void UpdateJetpackChargeUI()
     {

@@ -165,6 +165,12 @@ public class Weapon : MonoBehaviour
                 Destroy(hitInfo.transform.gameObject);
             }
         }
+
+        if (hitInfo.transform.CompareTag("DestroyableBlock"))
+    {
+        // Destroy the hit object
+        Destroy(hitInfo.transform.gameObject);
+    }
     }
 
     private IEnumerator ShootingCooldown()

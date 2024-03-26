@@ -69,6 +69,7 @@ public class HeartSpawner : MonoBehaviour
     public CubeLauncherPattern cubeLauncherPattern;
 
     [Header("Cage Tracking Properties")]
+    public GameObject CageBlockPrefab;
     public float cageRadius;
     private bool cagePatternActive = false;
     private float cageTimer = 0f;
@@ -103,11 +104,11 @@ public class HeartSpawner : MonoBehaviour
 
         StartCoroutine(SpawnCube());
 
-        //condition pour changement de state et appel de fonction pour lancer le pattern en question
+        //condition pour changement de state et appel de fonction pour lancer le pattern en question < < < < <
 
         if (currentPalier == 1)
         {
-            currentPatternState = PatternState.MeteorPattern;
+            currentPatternState = PatternState.ExplosivePillarPattern;
             StartCoroutine(StartCubeTrackingPattern());
         }
         else
@@ -602,7 +603,7 @@ public class HeartSpawner : MonoBehaviour
                         Vector3 cageSpawnPosition = new Vector3(x, y, z);
                         if (Mathf.Abs(x - playerGridPosition.x) >= cageSizeXZ || Mathf.Abs(y - playerGridPosition.y) >= cageSizeXZ || Mathf.Abs(z - playerGridPosition.z) >= cageSizeXZ)
                         {
-                            Instantiate(cubePrefab, cageSpawnPosition, Quaternion.identity, spawnContainer.transform);
+                            Instantiate(CageBlockPrefab, cageSpawnPosition, Quaternion.identity, spawnContainer.transform);
                             FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Cage/Traped");
                         }
                     }

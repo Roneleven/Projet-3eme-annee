@@ -9,6 +9,7 @@ TagManager:
   - TransparentBlock
   - HeartBlock
   - Ground
+  - DestroyableBlock
   layers:
   - Default
   - TransparentFX

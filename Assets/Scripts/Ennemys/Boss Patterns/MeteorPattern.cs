@@ -1,60 +1,55 @@
 using UnityEngine;
+using System.Collections;
 
 public class MeteorPattern : MonoBehaviour
 {
     public GameObject meteorPrefab;
-    public float horizontalDistance = 20f; 
-    public float verticalDistance = 20f;
-    public float meteorSpeed = 10f; 
-
-    Vector3 GetGroundPosition(GameObject player)
-    {
-        RaycastHit hit;
-        Vector3 groundPosition = player.transform.position;
-        if (Physics.Raycast(player.transform.position, Vector3.down, out hit, Mathf.Infinity))
-        {
-            groundPosition = hit.point;
-        }
-        return groundPosition;
-    }
+    public float meteorSpeed = 50f;
+    public float spawnRadius = 20f; // Rayon de spawn
+    public float spawnHeight = 100f; // Hauteur de spawn
 
     public void LaunchMeteorPattern()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null)
+        StartCoroutine(SpawnMeteors());
+    }
+
+    IEnumerator SpawnMeteors()
+    {
+        for (int i = 0; i < 5; i++)
         {
-            Debug.LogError("Player not found!");
-            return;
-        }
+            float randomDelay = Random.Range(0f, 1f);
+            yield return new WaitForSeconds(randomDelay);
 
-        Vector3 playerDirection = player.transform.forward;
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-        Vector3 playerPosition = player.transform.position;
-        Vector3 spawnOffset = playerDirection * horizontalDistance;
-        playerPosition += spawnOffset;
-
-        RaycastHit hit;
-        if (Physics.Raycast(playerPosition, Vector3.down, out hit))
-        {
-            if (hit.collider.CompareTag("Ground"))
+            if (player != null)
             {
-                Vector3 spawnPosition = hit.point + playerDirection * horizontalDistance + Vector3.up * verticalDistance;
-                GameObject meteor = Instantiate(meteorPrefab, spawnPosition, Quaternion.identity);
+                // Obtenir une position aléatoire dans un rayon autour du joueur
+                Vector3 randomOffset = Random.insideUnitSphere * spawnRadius;
 
-                Vector3 groundPosition = GetGroundPosition(player);
+                // Position de spawn aléatoire autour du joueur
+                Vector3 spawnPosition = player.transform.position + randomOffset;
 
-                Vector3 moveDirection = (groundPosition - spawnPosition).normalized;
-
-                Rigidbody rb = meteor.GetComponent<Rigidbody>();
-                if (rb != null)
+                // Cast vers le bas pour obtenir la position du sol
+                RaycastHit hit;
+                if (Physics.Raycast(spawnPosition, Vector3.down, out hit))
                 {
-                    rb.velocity = moveDirection * meteorSpeed;
+                    // S'assurer que la position de spawn est au-dessus du sol
+                    if (hit.collider.CompareTag("Ground"))
+                    {
+                        // Position de spawn avec une hauteur fixe au-dessus du sol
+                        Vector3 meteorPosition = hit.point + Vector3.up * spawnHeight;
 
-                    rb.useGravity = false;
-                }
-                else
-                {
-                    Debug.LogError("Meteor prefab does not have a Rigidbody component!");
+                        // Instantiation de la météorite
+                        GameObject meteor = Instantiate(meteorPrefab, meteorPosition, Quaternion.identity);
+                        Rigidbody meteorRb = meteor.GetComponent<Rigidbody>();
+
+                        // Ajout de la force vers le bas à la météorite
+                        if (meteorRb != null)
+                        {
+                            meteorRb.AddForce(Vector3.down * meteorSpeed, ForceMode.VelocityChange);
+                        }
+                    }
                 }
             }
         }

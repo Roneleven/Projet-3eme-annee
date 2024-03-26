@@ -119,8 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a79211b29f40604fb9aaad07c460db9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructionRadius: 10
   objectToSpawnOnImpact: {fileID: 2572278838447988762, guid: bec44aac7fbb7344cbdba18651f1c50d, type: 3}
+  feedbackPrefab: {fileID: 2751100251518416, guid: e270576d61d2b784582b8db1cc980d8d, type: 3}
+  explosionRadius: 1.5
 --- !u!54 &-8739809017272414728
 Rigidbody:
   m_ObjectHideFlags: 0

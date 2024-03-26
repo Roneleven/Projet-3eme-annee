@@ -183,9 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meteorPrefab: {fileID: 8124634591630642829, guid: 79790fe4d73093c4d8ed34335c29b87b, type: 3}
-  horizontalDistance: 20
-  verticalDistance: 20
-  meteorSpeed: 50
+  meteorSpeed: 20
 --- !u!114 &97876300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,6 +791,10 @@ PrefabInstance:
       propertyPath: damage
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: Recoil_Script
+      value: 
+      objectReference: {fileID: 1940570660}
     - target: {fileID: 4805179598088156730, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: m_Name
       value: Weapon
@@ -1725,6 +1727,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1940570660 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5612328977609180829, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+  m_PrefabInstance: {fileID: 134362701}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4764ed21d3379ef428aef31db45ceefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2832440613034047865
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -15,9 +15,9 @@ public class MeteorPattern : MonoBehaviour
 
     IEnumerator SpawnMeteors()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 10; i++)
         {
-            float randomDelay = Random.Range(0f, 1f);
+            float randomDelay = Random.Range(0f, 0.5f);
             yield return new WaitForSeconds(randomDelay);
 
             GameObject player = GameObject.FindGameObjectWithTag("Player");

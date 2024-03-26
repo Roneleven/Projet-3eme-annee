@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawnOnImpact: {fileID: 2572278838447988762, guid: bec44aac7fbb7344cbdba18651f1c50d, type: 3}
-  feedbackPrefab: {fileID: 2751100251518416, guid: e270576d61d2b784582b8db1cc980d8d, type: 3}
+  feedbackObject: {fileID: 2590338932552517828, guid: 7a0e75e1b43394d48babd8835e6222bb, type: 3}
   explosionRadius: 1.5
 --- !u!54 &-8739809017272414728
 Rigidbody:

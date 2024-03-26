@@ -183,7 +183,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meteorPrefab: {fileID: 8124634591630642829, guid: 79790fe4d73093c4d8ed34335c29b87b, type: 3}
-  meteorSpeed: 20
+  meteorSpeed: 30
+  spawnRadius: 20
+  spawnHeight: 50
 --- !u!114 &97876300
 MonoBehaviour:
   m_ObjectHideFlags: 0

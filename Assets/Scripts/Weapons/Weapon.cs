@@ -168,7 +168,6 @@ public class Weapon : MonoBehaviour
 
         if (hitInfo.transform.CompareTag("DestroyableBlock"))
     {
-        // Destroy the hit object
         Destroy(hitInfo.transform.gameObject);
     }
     }

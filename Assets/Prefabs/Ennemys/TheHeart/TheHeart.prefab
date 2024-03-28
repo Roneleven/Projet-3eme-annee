@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5743461851523346344
+--- !u!1 &6544138239093614417
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,12 +8,19 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6715274798009452715}
-  - component: {fileID: 2347755179319362466}
-  - component: {fileID: 8869519526867607393}
-  - component: {fileID: 977420063153213807}
-  - component: {fileID: -1437274018121235859}
-  - component: {fileID: 2264444207413364211}
+  - component: {fileID: 6230881640351154849}
+  - component: {fileID: 808981041500536545}
+  - component: {fileID: 724554092674932401}
+  - component: {fileID: 1805856403678287906}
+  - component: {fileID: 3170013866389594440}
+  - component: {fileID: 277926210817746683}
+  - component: {fileID: 6277341940873764406}
+  - component: {fileID: 6904513585282244537}
+  - component: {fileID: 1618190085243263769}
+  - component: {fileID: 5219653631833151345}
+  - component: {fileID: 1045188395168788628}
+  - component: {fileID: 9099245513585051315}
+  - component: {fileID: 3873776162744388889}
   m_Layer: 0
   m_Name: TheHeart
   m_TagString: Untagged
@@ -21,36 +28,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6715274798009452715
+--- !u!4 &6230881640351154849
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5743461851523346344}
+  m_GameObject: {fileID: 6544138239093614417}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 33, z: 0}
+  m_LocalPosition: {x: -24.25, y: 9, z: 5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2347755179319362466
+--- !u!33 &808981041500536545
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5743461851523346344}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8869519526867607393
+--- !u!23 &724554092674932401
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5743461851523346344}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -86,13 +93,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &977420063153213807
+--- !u!135 &1805856403678287906
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5743461851523346344}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -107,13 +114,13 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-1437274018121235859
+--- !u!114 &3170013866389594440
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5743461851523346344}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59179447d2eeb694eabcb5d21a81fcd3, type: 3}
@@ -127,22 +134,28 @@ MonoBehaviour:
   exclusionRadius: 2
   spawnCount: 4
   spawnContainer: {fileID: 0}
-  heartHealth: {fileID: 2264444207413364211}
+  heartHealth: {fileID: 6277341940873764406}
   previousPalier: 1
   currentPalier: 1
   temporarySpawnCount: 40
   temporarySpawnInterval: 0.1
   timeTemporaryPalier: 3
+  timeNextPalier: 45
+  timeSincePalierStart: 0
   timer: 60
   defaultTimer: 60
   timerText: {fileID: 0}
   blackFade: {fileID: 0}
   anim: {fileID: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
   cubesGeneratedDuringPalier: 24
   offensivePatternThreshold: 50
   cubeDestroyDelay: 3
-  launchForce: 0
+  launchForce: 40
   percentageToLaunch: 5
+  cubesToLaunch: 5
+  cubePatternTimer: 0
+  cubePatternInterval: 5
   wallSpawnInterval: 555555
   wallPrefab: {fileID: 6557921315865226379, guid: 83d25b5cb38d8c040b363310469a5b2a, type: 3}
   wallDistance: 10
@@ -150,13 +163,40 @@ MonoBehaviour:
   wallHeight: 3
   wallSpeed: 10
   mouseLookScript: {fileID: 0}
---- !u!114 &2264444207413364211
+  cubeLauncherPattern: {fileID: 277926210817746683}
+  CageBlockPrefab: {fileID: 1230891745418371966, guid: 345b0ae9498e327478767960ee2fd6fd, type: 3}
+  cageRadius: 2.3
+  cageTriggerTime: 5
+  cageSpawnTime: 2.1
+  cageTransparentScale: 4
+  currentPatternState: 0
+  timeBetweenPatterns: 5
+  cubeTrackingScript: {fileID: 6904513585282244537}
+  aerialMinesPattern: {fileID: 3873776162744388889}
+  bigWallPattern: {fileID: 1045188395168788628}
+  explosivePillarPattern: {fileID: 9099245513585051315}
+  meteorPattern: {fileID: 1618190085243263769}
+  gatlinLauncherPattern: {fileID: 0}
+--- !u!114 &277926210817746683
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5743461851523346344}
+  m_GameObject: {fileID: 6544138239093614417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dd25dadca2ece04ea790be2582423e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartSpawner: {fileID: 3170013866389594440}
+--- !u!114 &6277341940873764406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2547ce751589b89479e419e3366a37a0, type: 3}
@@ -164,286 +204,110 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   health: 3
-  currentPalier: 0
   teleportPositions:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  teleportPointBoxSpawnerPairs:
-  - teleportPointIndex: 0
-    boxSpawners:
-    - {fileID: 0}
-    - {fileID: 0}
-    boxSpawnersNoHP: []
-  - teleportPointIndex: 1
-    boxSpawners:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    boxSpawnersNoHP: []
-  - teleportPointIndex: 2
-    boxSpawners:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    boxSpawnersNoHP: []
-  - teleportPointIndex: 3
-    boxSpawners: []
-    boxSpawnersNoHP:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  - teleportPointIndex: 4
-    boxSpawners:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    boxSpawnersNoHP:
-    - {fileID: 0}
-    - {fileID: 0}
-  - teleportPointIndex: 5
-    boxSpawners:
-    - {fileID: 0}
-    - {fileID: 0}
-    boxSpawnersNoHP: []
+  teleportPointBoxSpawnerPairs: []
   accessibleTeleportPoints: 
+--- !u!114 &6904513585282244537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544138239093614417}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad4f91a81e412142b41b2b50462d008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartSpawner: {fileID: 3170013866389594440}
+  numberOfCubesToLaunch: 5
+  homingCubeSpeed: 20
+  destroyDelay: 5
+  cubeTimer: 5
+  targetTransform: {fileID: 0}
+--- !u!114 &1618190085243263769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544138239093614417}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8715d30ae5aaf1499f59b2cf1d8ef2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meteorPrefab: {fileID: 8124634591630642829, guid: 79790fe4d73093c4d8ed34335c29b87b, type: 3}
+  meteorSpeed: 30
+  spawnRadius: 20
+  spawnHeight: 50
+--- !u!114 &5219653631833151345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544138239093614417}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 555a21274a7d3ed4ab9d946f2cdfcc7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartSpawner: {fileID: 3170013866389594440}
+  wallPatternPrefab: {fileID: 4010771748805353341, guid: 7c10a8ad32a982641811b21c33623f4f, type: 3}
+  wallSpawnInterval: 6
+  cubePrefab: {fileID: 1230891745418371966, guid: 84298ffa45b86bd44a293d38649bea51, type: 3}
+  numberOfCubes: 10
+  radius: 10
+  journeyDuration: 40
+  launchInterval: 5
+  emptyPrefab: {fileID: 1413787942626273727, guid: 63dbea012cb6cb740b5aee43bb62af8f, type: 3}
+  spawnRadius: 10
+  spawnInterval: 7
+--- !u!114 &1045188395168788628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544138239093614417}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39e4bbc2af99c1945831ef3d1d1ce1d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallPatternPrefab: {fileID: 4010771748805353341, guid: 7c10a8ad32a982641811b21c33623f4f, type: 3}
+--- !u!114 &9099245513585051315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544138239093614417}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8bd4b67db1abb94385287ecc6cf365a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emptyPrefab: {fileID: 1413787942626273727, guid: 2c182cace24434a458c6378810dbff50, type: 3}
+  spawnRadius: 10
+--- !u!114 &3873776162744388889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544138239093614417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fd576a4c430dc243ba3062a1e29da27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cubePrefab: {fileID: 1230891745418371966, guid: 84298ffa45b86bd44a293d38649bea51, type: 3}
+  numberOfCubes: 100
+  radius: 30
+  journeyDuration: 40

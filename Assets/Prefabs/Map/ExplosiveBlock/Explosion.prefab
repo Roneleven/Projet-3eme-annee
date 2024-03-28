@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f7807ec18cab546aac220794c3aae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayBeforeDisappear: 0.4
+  delayBeforeDisappear: 1
   scaleFactor: 5
   repulsionForce: 50
   backwardForce: 10

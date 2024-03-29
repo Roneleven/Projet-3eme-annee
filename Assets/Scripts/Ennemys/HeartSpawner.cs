@@ -105,33 +105,22 @@ public class HeartSpawner : MonoBehaviour
         StartCoroutine(SpawnCube());
 
         //condition pour changement de state et appel de fonction pour lancer le pattern en question < < < < <
-
-        if (currentPalier == 1)
-        {
-            currentPatternState = PatternState.AerialMinesPattern;
-            StartCoroutine(StartCubeTrackingPattern());
-        }
-        else
-        {
-            currentPatternState = PatternState.CubeLauncher;
-            StartCoroutine(StartCubeLauncherPattern());
-        }
     }
+
 
     public enum PatternState
     {
-        CubeTracking,
-        CubeLauncher,
-        CageTracking,
-        BigWallPattern,
-        ExplosivePillarPattern,
-        AerialMinesPattern,
-        MeteorPattern,
-        GatlinLauncher,
-        //state à ajouter ici
+        Palier1,
+        Palier2,
+        Palier3,
+        Palier4,
+        Palier5,
+        Palier6,
+        Palier7
     }
 
-    private void Update()
+
+private void Update()
     {
         if (timerActive)
         {
@@ -190,55 +179,70 @@ public class HeartSpawner : MonoBehaviour
     {
         switch (currentPatternState)
         {
-            case PatternState.CubeTracking:
-                if (currentPalier == 1) 
+            case PatternState.Palier1:
+                if (currentPalier == 1)
                 {
                     StartCoroutine(StartCubeLauncherPattern());
-                    currentPatternState = PatternState.CubeTracking;
+                    currentPatternState = PatternState.Palier1;
                 }
                 else
                 {
                     StartCoroutine(StartCubeTrackingPattern());
-                    currentPatternState = PatternState.CubeLauncher; 
+                    currentPatternState = PatternState.Palier2;
                 }
                 break;
 
-            case PatternState.CubeLauncher:
-                StartCoroutine(StartCubeLauncherPattern());
-                currentPatternState = PatternState.CubeTracking; 
+            case PatternState.Palier2:
+                if (currentPalier == 2)
+                {
+                    StartCoroutine(StartCubeLauncherPattern());
+                    currentPatternState = PatternState.Palier1;
+                }
+                else if (currentPalier == 3)
+                {
+                    StartCoroutine(StartBigWallPattern());
+                    currentPatternState = PatternState.Palier3;
+                }
                 break;
 
-            case PatternState.CageTracking:
-                //StartCoroutine(GenerateCagePattern());
-                currentPatternState = PatternState.CageTracking; 
+            case PatternState.Palier3:
+                if (currentPalier == 3)
+                {
+                    StartCoroutine(StartBigWallPattern());
+                    currentPatternState = PatternState.Palier3;
+                }
+                else if (currentPalier == 4)
+                {
+                    StartCoroutine(StartMeteorPattern());
+                    currentPatternState = PatternState.Palier4;
+                }
                 break;
 
-            case PatternState.AerialMinesPattern:
-                StartCoroutine(StartAerialMinesPattern());
-                currentPatternState = PatternState.AerialMinesPattern; 
+            case PatternState.Palier4:
+                if (currentPalier == 4)
+                {
+                    StartCoroutine(StartMeteorPattern());
+                    currentPatternState = PatternState.Palier4;
+                }
+                else if (currentPalier == 5)
+                {
+                    StartCoroutine(StartAerialMinesPattern());
+                    currentPatternState = PatternState.Palier5;
+                }
                 break;
 
-            case PatternState.BigWallPattern:
-                StartCoroutine(StartBigWallPattern());
-                currentPatternState = PatternState.BigWallPattern;
-                break;
-
-            case PatternState.ExplosivePillarPattern:
-                StartCoroutine(StartExplosivePillarPattern());
-                currentPatternState = PatternState.ExplosivePillarPattern;
-                break;    
-
-            case PatternState.MeteorPattern:
-                StartCoroutine(StartMeteorPattern());
-                currentPatternState = PatternState.MeteorPattern; 
-                break;
-
-            case PatternState.GatlinLauncher:
-                StartCoroutine(StartGatlinLauncherPattern());
-                currentPatternState = PatternState.GatlinLauncher;
+            case PatternState.Palier5:
+                if (currentPalier == 5)
+                {
+                    StartCoroutine(StartAerialMinesPattern());
+                    currentPatternState = PatternState.Palier5;
+                }
                 break;
         }
     }
+
+
+
 
 
 

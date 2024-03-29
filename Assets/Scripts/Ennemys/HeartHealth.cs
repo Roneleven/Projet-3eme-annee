@@ -14,6 +14,7 @@ public class HeartHealth : MonoBehaviour
 {
     public int maxHealth;
     public int health;
+    public float destroySpeed;
     public Transform[] teleportPositions;
     private int lastTeleportIndex = -1;
     private HeartSpawner heartSpawner;
@@ -189,8 +190,8 @@ public class HeartHealth : MonoBehaviour
     private void DestroyCubesBeforeTeleport()
     {
         GameObject[] heartGeneratedCubes = GameObject.FindGameObjectsWithTag("HeartBlock");
-        int cubesToDestroy = Mathf.CeilToInt(heartGeneratedCubes.Length * 0.6f);
-        StartCoroutine(DestroyCubesGradually(heartGeneratedCubes, 5f / cubesToDestroy)); // Changez la valeur 5f selon vos besoins
+        int cubesToDestroy = Mathf.CeilToInt(heartGeneratedCubes.Length * 2f);
+        StartCoroutine(DestroyCubesGradually(heartGeneratedCubes, destroySpeed / cubesToDestroy)); // Changez la valeur 5f selon vos besoins
 
         foreach (var pair in teleportPointBoxSpawnerPairs)
         {

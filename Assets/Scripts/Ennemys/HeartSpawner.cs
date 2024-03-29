@@ -443,28 +443,29 @@ private void Update()
 
     #region PALIER BEHAVIOURS
     public void ChangePalierOnTeleport()
-{
-    if (isCooldownActive || currentPalier >= maxPalier)
-        return;
-
-    if (heartHealth != null)
     {
-        timer = defaultTimer;
+        if (isCooldownActive || currentPalier >= maxPalier)
+            return;
 
-        float newLevelUpValue = (currentPalier + 1) * 1.0f;
-        BreakingHeart.setParameterByName("LevelUp 2", newLevelUpValue);
-
-        timerActive = true;
-        StartCoroutine(ResetPalier());
-        timeSincePalierStart = 0f;
-
-        // Déclencher l'événement OnPalierChange avec le nouveau palier
-        if (OnPalierChange != null)
+        if (heartHealth != null)
         {
-            OnPalierChange(currentPalier + 1);
+            timer = defaultTimer;
+
+            float newLevelUpValue = (currentPalier + 1) * 1.0f;
+            BreakingHeart.setParameterByName("LevelUp 2", newLevelUpValue);
+
+            timerActive = true;
+            StartCoroutine(ResetPalier());
+            timeSincePalierStart = 0f;
+            patternTimer = 0f;
+
+            // Déclencher l'événement OnPalierChange avec le nouveau palier
+            if (OnPalierChange != null)
+            {
+                OnPalierChange(currentPalier + 1);
+            }
         }
     }
-}
 
     private IEnumerator ResetPalier()
     {

@@ -208,11 +208,13 @@ private void Update()
             case PatternState.Palier3:
                 if (currentPalier == 3)
                 {
+                    timeBetweenPatterns = 10f;
                     StartCoroutine(StartBigWallPattern());
                     currentPatternState = PatternState.Palier3;
                 }
                 else if (currentPalier == 4)
                 {
+                    timeBetweenPatterns = 10f;
                     StartCoroutine(StartMeteorPattern());
                     currentPatternState = PatternState.Palier4;
                 }
@@ -221,6 +223,7 @@ private void Update()
             case PatternState.Palier4:
                 if (currentPalier == 4)
                 {
+                    timeBetweenPatterns = 10f;
                     StartCoroutine(StartMeteorPattern());
                     currentPatternState = PatternState.Palier4;
                 }
@@ -238,23 +241,21 @@ private void Update()
                     currentPatternState = PatternState.Palier5;
                 }
                 break;
+
+            case PatternState.Palier6:
+                if (currentPalier == 6)
+                {
+                    StartCoroutine(StartExplosivePillarPattern());
+                    currentPatternState = PatternState.Palier6;
+                }
+                break;
+
         }
     }
 
-
-
-
-
-
     private IEnumerator StartCubeTrackingPattern()
     {
-        // Vérifier le palier avant de lancer le pattern
-        if (currentPalier > 1)
-        {
-            // Appelez la fonction StartHomingCubePattern ici
-            cubeTrackingScript.LaunchHomingCubes();
-        }
-
+        cubeTrackingScript.LaunchHomingCubes();
         yield return null;
     }
 
@@ -516,19 +517,12 @@ private void Update()
     if (palier == 1)
     {
         spawnCount = 6;
-        currentPatternState = PatternState.CageTracking;
         //cubeTrackingScript.numberOfCubesToLaunch = 30;
     }
     else if (palier == 2)
     {
         spawnCount = 6 + ((palier - 1) * 6);
-        currentPatternState = PatternState.CubeLauncher;
 
-    }
-   
-    else
-    {
-        // Ajoutez des cas pour d'autres paliers si nécessaire
     }
 
     float newLevelUpValue = palier * levelUpIncrement;

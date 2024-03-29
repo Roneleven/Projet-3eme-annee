@@ -200,6 +200,7 @@ private void Update()
                 }
                 else if (currentPalier == 3)
                 {
+                    timeBetweenPatterns = 10f;
                     StartCoroutine(StartBigWallPattern());
                     currentPatternState = PatternState.Palier3;
                 }

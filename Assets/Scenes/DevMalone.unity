@@ -1511,6 +1511,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6277341940873764406, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: destroySpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6277341940873764406, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: teleportPositions.Array.data[0]
       value: 
       objectReference: {fileID: 303000850}

@@ -24,7 +24,7 @@ public class HeartSpawner : MonoBehaviour
     public float temporarySpawnCount; //le spawncount pendant le changement de palier
     public float temporarySpawnInterval;//le spawninterval pendant le changement de palier
     public float timeTemporaryPalier; //la durée du changement de palier
-    private int maxPalier = 5;
+    public int maxPalier;
     public float timeNextPalier;
     public float timeSincePalierStart = 0f;
     public delegate void PalierChangeAction(int newPalier);
@@ -116,7 +116,10 @@ public class HeartSpawner : MonoBehaviour
         Palier4,
         Palier5,
         Palier6,
-        Palier7
+        Palier7,
+        Palier8,
+        Palier9,
+        Palier10
     }
 
 
@@ -177,82 +180,111 @@ private void Update()
     //Fonction a changer pour les changements de patterns (les states)
     private void SwitchToNextPattern()
     {
-        switch (currentPatternState)
+        switch (currentPalier)
         {
-            case PatternState.Palier1:
-                if (currentPalier == 1)
-                {
-                    StartCoroutine(StartCubeLauncherPattern());
-                    currentPatternState = PatternState.Palier1;
-                }
-                else
-                {
-                    StartCoroutine(StartCubeTrackingPattern());
-                    currentPatternState = PatternState.Palier2;
-                }
+            case 1:
+                StartPalier1();
                 break;
-
-            case PatternState.Palier2:
-                if (currentPalier == 2)
-                {
-                    StartCoroutine(StartCubeLauncherPattern());
-                    currentPatternState = PatternState.Palier1;
-                }
-                else if (currentPalier == 3)
-                {
-                    timeBetweenPatterns = 10f;
-                    StartCoroutine(StartBigWallPattern());
-                    currentPatternState = PatternState.Palier3;
-                }
+            case 2:
+                StartPalier2();
                 break;
-
-            case PatternState.Palier3:
-                if (currentPalier == 3)
-                {
-                    timeBetweenPatterns = 10f;
-                    StartCoroutine(StartBigWallPattern());
-                    currentPatternState = PatternState.Palier3;
-                }
-                else if (currentPalier == 4)
-                {
-                    timeBetweenPatterns = 10f;
-                    StartCoroutine(StartMeteorPattern());
-                    currentPatternState = PatternState.Palier4;
-                }
+            case 3:
+                StartPalier3();
                 break;
-
-            case PatternState.Palier4:
-                if (currentPalier == 4)
-                {
-                    timeBetweenPatterns = 10f;
-                    StartCoroutine(StartMeteorPattern());
-                    currentPatternState = PatternState.Palier4;
-                }
-                else if (currentPalier == 5)
-                {
-                    StartCoroutine(StartAerialMinesPattern());
-                    currentPatternState = PatternState.Palier5;
-                }
+            case 4:
+                StartPalier4();
                 break;
-
-            case PatternState.Palier5:
-                if (currentPalier == 5)
-                {
-                    StartCoroutine(StartAerialMinesPattern());
-                    currentPatternState = PatternState.Palier5;
-                }
+            case 5:
+                StartPalier5();
                 break;
-
-            case PatternState.Palier6:
-                if (currentPalier == 6)
-                {
-                    StartCoroutine(StartExplosivePillarPattern());
-                    currentPatternState = PatternState.Palier6;
-                }
+            case 6:
+                StartPalier6();
                 break;
-
+            case 7:
+                StartPalier7();
+                break;
+            case 8:
+                StartPalier8();
+                break;
+            case 9:
+                StartPalier9();
+                break;
+            case 10:
+                StartPalier10();
+                break;
+            default:
+                break;
         }
     }
+
+    private void StartPalier1()
+    {
+        StartCoroutine(StartCubeLauncherPattern());
+    }
+
+    private void StartPalier2()
+    {
+        StartCoroutine(StartCubeTrackingPattern());
+        StartCoroutine(StartBigWallPattern());
+    }
+
+    private void StartPalier3()
+    {
+        StartCoroutine(StartCubeTrackingPattern());
+    }
+
+    private void StartPalier4()
+    {
+        StartCoroutine(StartBigWallPattern());
+        StartCoroutine(StartCubeTrackingPattern());
+        StartCoroutine(StartCubeLauncherPattern());
+    }
+
+    private void StartPalier5()
+    {
+        StartCoroutine(StartCubeLauncherPattern());
+    }
+
+    private void StartPalier6()
+    {
+        StartCoroutine(StartBigWallPattern());
+        StartCoroutine(StartCubeTrackingPattern());
+        StartCoroutine(StartCubeLauncherPattern());
+    }
+
+    private void StartPalier7()
+    {
+        StartCoroutine(StartCubeTrackingPattern());
+        StartCoroutine(StartExplosivePillarPattern());
+        StartCoroutine(StartMeteorPattern());
+        StartCoroutine(StartAerialMinesPattern());
+    }
+
+    private void StartPalier8()
+    {
+        StartCoroutine(StartBigWallPattern());
+        StartCoroutine(StartCubeLauncherPattern());
+        StartCoroutine(StartMeteorPattern());
+    }
+
+    private void StartPalier9()
+    {
+        StartCoroutine(StartCubeLauncherPattern());
+        StartCoroutine(StartCubeTrackingPattern());
+        StartCoroutine(StartAerialMinesPattern());
+    }
+
+    private void StartPalier10()
+    {
+        StartCoroutine(StartBigWallPattern());
+        StartCoroutine(StartCubeTrackingPattern());
+        StartCoroutine(StartCubeLauncherPattern());
+        StartCoroutine(StartExplosivePillarPattern());
+        StartCoroutine(StartMeteorPattern());
+        StartCoroutine(StartAerialMinesPattern());
+    }
+
+
 
     private IEnumerator StartCubeTrackingPattern()
     {
@@ -511,30 +543,30 @@ private void Update()
     }
 
    private void AdjustPalierValues(int palier)
-{
-    float levelUpIncrement = 1.0f;
-
-    spawnRadius = palier * 4;
-
-    if (palier == 1)
     {
-        spawnCount = 6;
-        //cubeTrackingScript.numberOfCubesToLaunch = 30;
-    }
-    else if (palier == 2)
-    {
-        spawnCount = 6 + ((palier - 1) * 6);
+        float levelUpIncrement = 1.0f;
 
-    }
+        spawnRadius = palier * 4;
 
-    float newLevelUpValue = palier * levelUpIncrement;
+        if (palier == 1)
+        {
+            spawnCount = 6;
+            //cubeTrackingScript.numberOfCubesToLaunch = 30;
+        }
+        else if (palier == 2)
+        {
+            spawnCount = 6 + ((palier - 1) * 4);
 
-    // Déclencher l'événement OnPalierChange avec le nouveau palier
-    if (OnPalierChange != null)
-    {
-        OnPalierChange(palier);
+        }
+
+        float newLevelUpValue = palier * levelUpIncrement;
+
+        // Déclencher l'événement OnPalierChange avec le nouveau palier
+        if (OnPalierChange != null)
+        {
+            OnPalierChange(palier);
+        }
     }
-}
 
 
     private IEnumerator ChangePalierAutomatically()

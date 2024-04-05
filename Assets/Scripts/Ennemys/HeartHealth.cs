@@ -20,7 +20,7 @@ public class HeartHealth : MonoBehaviour
     private HeartSpawner heartSpawner;
     [SerializeField] private List<TeleportPointBoxSpawnerPair> teleportPointBoxSpawnerPairs = new List<TeleportPointBoxSpawnerPair>();
 
-    // Nouvelle variable pour stocker les points de t�l�portation accessibles apr�s chaque t�l�portation
+    // Nouvelle variable pour stocker les points de téléportation accessibles après chaque téléportation
     public List<int> accessibleTeleportPoints = new List<int>();
 
     private void Start()
@@ -31,7 +31,7 @@ public class HeartHealth : MonoBehaviour
 
     private void InitializeAccessibleTeleportPoints()
     {
-        // Initialiser la liste des points de t�l�portation accessibles au d�but
+        // Initialiser la liste des points de téléportation accessibles au début
         accessibleTeleportPoints.Clear();
         for (int i = 0; i < teleportPositions.Length; i++)
         {
@@ -59,7 +59,7 @@ public class HeartHealth : MonoBehaviour
             int newTeleportIndex;
             do
             {
-                // Choisir un point de t�l�portation parmi ceux qui sont accessibles
+                // Choisir un point de téléportation parmi ceux qui sont accessibles
                 newTeleportIndex = accessibleTeleportPoints[Random.Range(0, accessibleTeleportPoints.Count)];
             } while (newTeleportIndex == lastTeleportIndex);
 
@@ -191,7 +191,7 @@ public class HeartHealth : MonoBehaviour
     {
         GameObject[] heartGeneratedCubes = GameObject.FindGameObjectsWithTag("HeartBlock");
         int cubesToDestroy = Mathf.CeilToInt(heartGeneratedCubes.Length * 2f);
-        StartCoroutine(DestroyCubesGradually(heartGeneratedCubes, destroySpeed / cubesToDestroy)); // Changez la valeur 5f selon vos besoins
+        StartCoroutine(DestroyCubesGradually(heartGeneratedCubes, destroySpeed / cubesToDestroy)); 
 
         foreach (var pair in teleportPointBoxSpawnerPairs)
         {
@@ -219,7 +219,7 @@ public class HeartHealth : MonoBehaviour
                     foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
                     {
                         GameObject[] generatedCubes = GameObject.FindGameObjectsWithTag("Block");
-                        float percentageToRemove = 0.6f; // Changer la valeur selon vos besoins
+                        float percentageToRemove = 0.6f; 
                         float delayBetweenCubes = 5f / generatedCubes.Length;
                         StartCoroutine(DestroyPercentageOfCubesGradually(generatedCubes, percentageToRemove, delayBetweenCubes));
                     }
@@ -227,11 +227,4 @@ public class HeartHealth : MonoBehaviour
             }
         }
     }
-
-
-
-
-
-
-
 }

@@ -24,7 +24,7 @@ public class HeartSpawner : MonoBehaviour
     public float temporarySpawnCount; //le spawncount pendant le changement de palier
     public float temporarySpawnInterval;//le spawninterval pendant le changement de palier
     public float timeTemporaryPalier; //la durée du changement de palier
-    public int maxPalier;
+    public int maxPalier = 10;
     public float timeNextPalier;
     public float timeSincePalierStart = 0f;
     public delegate void PalierChangeAction(int newPalier);
@@ -97,7 +97,7 @@ public class HeartSpawner : MonoBehaviour
         meteorPattern = GetComponent<MeteorPattern>();
         aerialMinesPattern = GetComponent<AerialMinesPattern>();
         gatlinLauncherPattern = GetComponent<GatlinLauncherPattern>();
-       
+
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);
         BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/UX/Ambience/CoreBreaked");
         BreakingHeart.start();
@@ -123,7 +123,7 @@ public class HeartSpawner : MonoBehaviour
     }
 
 
-private void Update()
+    private void Update()
     {
         if (timerActive)
         {
@@ -183,105 +183,165 @@ private void Update()
         switch (currentPalier)
         {
             case 1:
-                StartPalier1();
+                StartCoroutine(StartCubeLauncherPattern());
+                currentPatternState = PatternState.Palier1;
                 break;
+
             case 2:
-                StartPalier2();
+                if (currentPatternState == PatternState.Palier1)
+                {
+                    StartCoroutine(StartCubeLauncherPattern());
+                    currentPatternState = PatternState.Palier2;
+                }
+                else if (currentPatternState == PatternState.Palier2)
+                {
+                    StartCoroutine(StartCubeTrackingPattern());
+                    currentPatternState = PatternState.Palier1;
+                }
                 break;
+
             case 3:
-                StartPalier3();
+                StartCoroutine(StartCubeTrackingPattern());
+                currentPatternState = PatternState.Palier3;
                 break;
+
             case 4:
-                StartPalier4();
+                if (currentPatternState == PatternState.Palier1)
+                {
+                    StartCoroutine(StartCubeLauncherPattern());
+                    currentPatternState = PatternState.Palier2;
+                }
+                else if (currentPatternState == PatternState.Palier2)
+                {
+                    StartCoroutine(StartBigWallPattern());
+                    currentPatternState = PatternState.Palier3;
+                }
+                else if (currentPatternState == PatternState.Palier3)
+                {
+                    StartCoroutine(StartCubeTrackingPattern());
+                    currentPatternState = PatternState.Palier1;
+                }
                 break;
+
             case 5:
-                StartPalier5();
+                StartCoroutine(StartCubeLauncherPattern());
+                currentPatternState = PatternState.Palier5;
                 break;
+
             case 6:
-                StartPalier6();
+                if (currentPatternState == PatternState.Palier1)
+                {
+                    StartCoroutine(StartCubeLauncherPattern());
+                    currentPatternState = PatternState.Palier2;
+                }
+                else if (currentPatternState == PatternState.Palier2)
+                {
+                    StartCoroutine(StartBigWallPattern());
+                    currentPatternState = PatternState.Palier3;
+                }
+                else if (currentPatternState == PatternState.Palier3)
+                {
+                    StartCoroutine(StartCubeTrackingPattern());
+                    currentPatternState = PatternState.Palier1;
+                }
                 break;
+
             case 7:
-                StartPalier7();
+                if (currentPatternState == PatternState.Palier1)
+                {
+                    StartCoroutine(StartCubeTrackingPattern());
+                    currentPatternState = PatternState.Palier2;
+                }
+                else if (currentPatternState == PatternState.Palier2)
+                {
+                    StartCoroutine(StartExplosivePillarPattern());
+                    currentPatternState = PatternState.Palier3;
+                }
+                else if (currentPatternState == PatternState.Palier3)
+                {
+                    StartCoroutine(StartMeteorPattern());
+                    currentPatternState = PatternState.Palier4;
+                }
+                else if (currentPatternState == PatternState.Palier4)
+                {
+                    StartCoroutine(StartAerialMinesPattern());
+                    currentPatternState = PatternState.Palier5;
+                }
                 break;
+
             case 8:
-                StartPalier8();
+                if (currentPatternState == PatternState.Palier1)
+                {
+                    StartCoroutine(StartBigWallPattern());
+                    currentPatternState = PatternState.Palier2;
+                }
+                else if (currentPatternState == PatternState.Palier2)
+                {
+                    StartCoroutine(StartCubeLauncherPattern());
+                    currentPatternState = PatternState.Palier3;
+                }
+                else if (currentPatternState == PatternState.Palier3)
+                {
+                    StartCoroutine(StartMeteorPattern());
+                    currentPatternState = PatternState.Palier1;
+                }
                 break;
+
             case 9:
-                StartPalier9();
+                if (currentPatternState == PatternState.Palier1)
+                {
+                    StartCoroutine(StartCubeLauncherPattern());
+                    currentPatternState = PatternState.Palier2;
+                }
+                else if (currentPatternState == PatternState.Palier2)
+                {
+                    StartCoroutine(StartCubeTrackingPattern());
+                    currentPatternState = PatternState.Palier3;
+                }
+                else if (currentPatternState == PatternState.Palier3)
+                {
+                    StartCoroutine(StartAerialMinesPattern());
+                    currentPatternState = PatternState.Palier1;
+                }
                 break;
+
             case 10:
-                StartPalier10();
+                if (currentPatternState == PatternState.Palier1)
+                {
+                    StartCoroutine(StartBigWallPattern());
+                    currentPatternState = PatternState.Palier2;
+                }
+                else if (currentPatternState == PatternState.Palier2)
+                {
+                    StartCoroutine(StartCubeTrackingPattern());
+                    currentPatternState = PatternState.Palier3;
+                }
+                else if (currentPatternState == PatternState.Palier3)
+                {
+                    StartCoroutine(StartCubeLauncherPattern());
+                    currentPatternState = PatternState.Palier4;
+                }
+                else if (currentPatternState == PatternState.Palier4)
+                {
+                    StartCoroutine(StartExplosivePillarPattern());
+                    currentPatternState = PatternState.Palier5;
+                }
+                else if (currentPatternState == PatternState.Palier5)
+                {
+                    StartCoroutine(StartMeteorPattern());
+                    currentPatternState = PatternState.Palier6;
+                }
+                else if (currentPatternState == PatternState.Palier6)
+                {
+                    StartCoroutine(StartAerialMinesPattern());
+                    currentPatternState = PatternState.Palier7;
+                }
                 break;
+
             default:
+                Debug.LogError("Palier out of range!");
                 break;
         }
-    }
-
-    private void StartPalier1()
-    {
-        StartCoroutine(StartCubeLauncherPattern());
-    }
-
-    private void StartPalier2()
-    {
-        StartCoroutine(StartCubeTrackingPattern());
-        StartCoroutine(StartBigWallPattern());
-    }
-
-    private void StartPalier3()
-    {
-        StartCoroutine(StartCubeTrackingPattern());
-    }
-
-    private void StartPalier4()
-    {
-        StartCoroutine(StartBigWallPattern());
-        StartCoroutine(StartCubeTrackingPattern());
-        StartCoroutine(StartCubeLauncherPattern());
-    }
-
-    private void StartPalier5()
-    {
-        StartCoroutine(StartCubeLauncherPattern());
-    }
-
-    private void StartPalier6()
-    {
-        StartCoroutine(StartBigWallPattern());
-        StartCoroutine(StartCubeTrackingPattern());
-        StartCoroutine(StartCubeLauncherPattern());
-    }
-
-    private void StartPalier7()
-    {
-        StartCoroutine(StartCubeTrackingPattern());
-        StartCoroutine(StartExplosivePillarPattern());
-        StartCoroutine(StartMeteorPattern());
-        StartCoroutine(StartAerialMinesPattern());
-    }
-
-    private void StartPalier8()
-    {
-        StartCoroutine(StartBigWallPattern());
-        StartCoroutine(StartCubeLauncherPattern());
-        StartCoroutine(StartMeteorPattern());
-    }
-
-    private void StartPalier9()
-    {
-        StartCoroutine(StartCubeLauncherPattern());
-        StartCoroutine(StartCubeTrackingPattern());
-        StartCoroutine(StartAerialMinesPattern());
-    }
-
-    private void StartPalier10()
-    {
-        StartCoroutine(StartBigWallPattern());
-        StartCoroutine(StartCubeTrackingPattern());
-        StartCoroutine(StartCubeLauncherPattern());
-        StartCoroutine(StartExplosivePillarPattern());
-        StartCoroutine(StartMeteorPattern());
-        StartCoroutine(StartAerialMinesPattern());
     }
 
 
@@ -542,7 +602,7 @@ private void Update()
         isCooldownActive = false;
     }
 
-   private void AdjustPalierValues(int palier)
+    private void AdjustPalierValues(int palier)
     {
         float levelUpIncrement = 1.0f;
 
@@ -551,11 +611,10 @@ private void Update()
         if (palier == 1)
         {
             spawnCount = 6;
-            //cubeTrackingScript.numberOfCubesToLaunch = 30;
         }
         else if (palier == 2)
         {
-            spawnCount = 6 + ((palier - 1) * 4);
+            spawnCount = 6 + ((palier - 1) * 6);
 
         }
 
@@ -573,7 +632,6 @@ private void Update()
     {
         if (currentPalier < maxPalier)
         {
-            // Augmenter le palier automatiquement
             currentPalier++;
             AdjustPalierValues(currentPalier);
 

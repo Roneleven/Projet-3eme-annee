@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1662342133783437384, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: speed
-      value: 13
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1662342133783437384, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_Enabled
@@ -154,6 +154,10 @@ PrefabInstance:
     - target: {fileID: 1662342133783437384, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: smoothTime
       value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662342133783437384, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: fallAccelerationForce
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4239171444264417582, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_IsActive
@@ -1467,9 +1471,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: maxPalier
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: spawnContainer
       value: 
       objectReference: {fileID: 177016507}
+    - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: timeBetweenPatterns
+      value: 7.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6230881640351154849, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24.25

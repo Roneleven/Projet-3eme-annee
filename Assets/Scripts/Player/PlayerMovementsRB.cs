@@ -11,6 +11,7 @@ public class PlayerMovementsRB : MonoBehaviour
     [Header("Player Settings")]
     public float speed;
     public float currentSpeed;
+    public float fallAccelerationForce;
     public Transform groundCheck;
     public float groundDistance;
     public List<LayerMask> groundMasks;
@@ -103,6 +104,11 @@ public class PlayerMovementsRB : MonoBehaviour
     {
         isGrounded = CheckGround();
 
+        if (!isGrounded)
+        {
+            rb.AddForce(Vector3.down * fallAccelerationForce, ForceMode.Acceleration);
+        }
+
         if (jetUse.isValid())
         {
             FMOD.Studio.PLAYBACK_STATE state;
@@ -114,6 +120,7 @@ public class PlayerMovementsRB : MonoBehaviour
         {
             rb.useGravity = false; 
             rb.AddForce(Vector3.down * glideForce, ForceMode.Force); //force vers le bas sans gravité
+            rb.AddForce(Vector3.up * fallAccelerationForce, ForceMode.Acceleration);
             //Physics.gravity = new Vector3(0f, glideForce, 0f); //utilisation de la gravité 
         }
         else

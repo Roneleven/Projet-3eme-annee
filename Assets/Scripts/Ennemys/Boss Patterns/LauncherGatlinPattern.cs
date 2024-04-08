@@ -156,8 +156,6 @@ public class GatlinLauncherPattern : MonoBehaviour
 
             yield return new WaitForSeconds(launchInterval);
         }
-
-        heartSpawner.cubesGeneratedDuringPalier = 0;
     }
 
 }

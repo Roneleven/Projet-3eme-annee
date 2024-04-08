@@ -26,7 +26,5 @@ public class CubeLauncherPattern : MonoBehaviour
 
             Destroy(cubeToLaunch, heartSpawner.cubeDestroyDelay);
         }
-
-        heartSpawner.cubesGeneratedDuringPalier = 0;   
     }
 }

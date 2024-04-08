@@ -47,25 +47,10 @@ public class HeartSpawner : MonoBehaviour
     public Vector3 playerPosition;
 
     [Header("Throw cube pattern Properties")]
-    public int cubesGeneratedDuringPalier;
-    public int offensivePatternThreshold; //multiple de la variable spawnCount
     public float cubeDestroyDelay;
     public float launchForce;
     public float percentageToLaunch;
     public int cubesToLaunch;
-    public float cubePatternTimer = 0f;
-    public float cubePatternInterval = 10f;
-
-    [Header("Wall pattern Properties")]
-    public float wallSpawnInterval = 10f;
-    public GameObject wallPrefab;
-    public float wallDistance = 10f;
-    public float wallWidth = 3f;
-    public float wallHeight = 3f;
-    public float wallSpeed = 10f;
-    public MouseLook mouseLookScript;
-
-    private WallPattern wallPattern;
     public CubeLauncherPattern cubeLauncherPattern;
 
     [Header("Cage Tracking Properties")]
@@ -445,9 +430,6 @@ public class HeartSpawner : MonoBehaviour
                 {
                     StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
                 }
-
-                // Incrémente le compteur de cubes générés
-                cubesGeneratedDuringPalier++;
             }
 
             yield return new WaitForSeconds(spawnInterval);

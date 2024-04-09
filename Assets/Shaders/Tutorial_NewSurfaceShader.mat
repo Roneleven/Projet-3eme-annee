@@ -26,7 +26,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _EmissiveIntensity: 1
-    - _Glossiness: 0.493
+    - _Glossiness: 0
     - _Metallic: 0
     - _OutlineWidth: 3
     m_Colors:

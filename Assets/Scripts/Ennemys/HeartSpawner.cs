@@ -46,6 +46,7 @@ public class HeartSpawner : MonoBehaviour
     private bool playerInPosition;
     public Vector3 playerPosition;
 
+
     [Header("Throw cube pattern Properties")]
     public int cubesGeneratedDuringPalier;
     public int offensivePatternThreshold; //multiple de la variable spawnCount
@@ -101,6 +102,8 @@ public class HeartSpawner : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);
         BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/UX/Ambience/CoreBreaked");
         BreakingHeart.start();
+
+        //dissolve = gameObject.GetComponent<Animation>();
 
         StartCoroutine(SpawnCube());
 

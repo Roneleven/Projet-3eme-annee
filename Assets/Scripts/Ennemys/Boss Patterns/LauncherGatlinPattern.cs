@@ -6,48 +6,26 @@ using System.Linq;
 public class GatlinLauncherPattern : MonoBehaviour
 {
     [Header("Launcher Pattern Properties")]
-    public float sphereRadiusMultiplier = 1.5f;
-    public float sphereHeightOffset = 5f;
-    public float sphereMovementDuration = 1f;
-    public float launchInterval = 0.2f;
-    public int cubesToLaunch = 25;
-    public float patternCooldown = 15f;
+    public float sphereRadius;
+    public float sphereHeightOffset;
+    public float sphereMovementDuration;
+    public float launchInterval;
+    public int cubesToLaunch;
 
     public HeartSpawner heartSpawner;
-    private bool isPatternActive = false;
 
-    private void Start()
+
+    public void SphereLauncherPattern()  // No longer takes numCubesToMove as an argument
     {
-        StartCoroutine(StartPatternRoutine());
-    }
-
-    private IEnumerator StartPatternRoutine()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(patternCooldown);
-
-            if (!isPatternActive)
-            {
-                SphereLauncherPattern(cubesToLaunch);
-            }
-        }
-    }
-
-    public void SphereLauncherPattern(int numCubesToMove)
-    {
-        isPatternActive = true;
-
         if (heartSpawner == null)
         {
             Debug.LogError("HeartSpawner is not assigned.");
-            isPatternActive = false;
             return;
         }
 
         List<GameObject> generatedCubes = new List<GameObject>(GameObject.FindGameObjectsWithTag("HeartBlock"));
 
-        StartCoroutine(MoveCubesToSphere(generatedCubes, numCubesToMove, () => {
+        StartCoroutine(MoveCubesToSphere(generatedCubes, cubesToLaunch, () => {  // Use cubesToLaunch directly
             StartCoroutine(LaunchCubesOneByOne(generatedCubes));
             StartCoroutine(ResetPattern());
         }));
@@ -56,7 +34,6 @@ public class GatlinLauncherPattern : MonoBehaviour
     private IEnumerator ResetPattern()
     {
         yield return new WaitForSeconds(launchInterval * cubesToLaunch);
-        isPatternActive = false;
     }
 
     private IEnumerator MoveCubesToSphere(List<GameObject> cubes, int numCubes, System.Action onCompletion)
@@ -99,7 +76,7 @@ public class GatlinLauncherPattern : MonoBehaviour
 
     private Vector3 CalculateSpherePosition(Vector3 center, float polarAngle, float azimuthAngle)
     {
-        float radius = heartSpawner.spawnRadius * sphereRadiusMultiplier;
+        float radius = sphereRadius;
 
         float x = center.x + radius * Mathf.Sin(Mathf.Deg2Rad * polarAngle) * Mathf.Cos(Mathf.Deg2Rad * azimuthAngle);
         float y = center.y + radius * Mathf.Cos(Mathf.Deg2Rad * polarAngle);

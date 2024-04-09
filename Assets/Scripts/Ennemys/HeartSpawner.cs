@@ -186,7 +186,7 @@ public class HeartSpawner : MonoBehaviour
                 break;
 
             case 3:
-                StartCoroutine(StartCubeTrackingPattern());
+                StartCoroutine(StartGatlinLauncherPattern());
                 currentPatternState = PatternState.Palier3;
                 break;
 
@@ -370,7 +370,7 @@ public class HeartSpawner : MonoBehaviour
 
     private IEnumerator StartGatlinLauncherPattern()
     {
-        //GatlinLauncherPattern.SphereLauncherPattern(gatlinLauncherPattern.cubesToLaunch);
+        gatlinLauncherPattern.SphereLauncherPattern();
         yield return null;
     }
 

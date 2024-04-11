@@ -84,7 +84,7 @@ public class HeartSpawner : MonoBehaviour
         gatlinLauncherPattern = GetComponent<GatlinLauncherPattern>();
 
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Idle", GetComponent<Transform>().position);
-        BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/UX/Ambience/CoreBreaked");
+        //BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/V1/UX/Ambience/CoreBreaked");  INTéGRER LA MUSIQUE ICI
         BreakingHeart.start();
 
         StartCoroutine(SpawnCube());

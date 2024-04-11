@@ -27,6 +27,12 @@ public class PlayerMovementsRB : MonoBehaviour
     public float jetpackCharge;
     public InputActionReference jetpack;
     public ParticleSystem jetpackEffect;
+    private bool isJetpackPressed = false;
+    private bool isJetpackEmptySoundPlayed = false;
+    private bool isGroundedSoundPlayed = false;
+    private bool isPlanningSoundPlayed = false;
+    private FMOD.Studio.EventInstance planning;
+    private bool isPlanningPlaying = false;
 
     [Header("Jetpack Shake Settings")]
     public float shakeDuration;
@@ -56,7 +62,8 @@ public class PlayerMovementsRB : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         jetpackCharge = maxJetpackCharge;
-        jetUse = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Locomotion/JetUse");
+        jetUse = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Locomotion/JetpackUsing");
+        planning = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Locomotion/Planning");
     }
 
     private void Update()
@@ -98,6 +105,12 @@ public class PlayerMovementsRB : MonoBehaviour
         {
             jetpackEffect.Stop();
         }
+
+        if (jetpackCharge <= 0 && !isJetpackEmptySoundPlayed)
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/JetpackEmpty");
+        isJetpackEmptySoundPlayed = true;
+    }
     }
 
     private void FixedUpdate()
@@ -107,6 +120,7 @@ public class PlayerMovementsRB : MonoBehaviour
         if (!isGrounded)
         {
             rb.AddForce(Vector3.down * fallAccelerationForce, ForceMode.Acceleration);
+            isGroundedSoundPlayed = false;
         }
 
         if (jetUse.isValid())
@@ -121,11 +135,13 @@ public class PlayerMovementsRB : MonoBehaviour
             rb.useGravity = false; 
             rb.AddForce(Vector3.down * glideForce, ForceMode.Force); //force vers le bas sans gravité
             rb.AddForce(Vector3.up * fallAccelerationForce, ForceMode.Acceleration);
+            isPlanningSoundPlayed = true;
             //Physics.gravity = new Vector3(0f, glideForce, 0f); //utilisation de la gravité 
         }
         else
         {
             rb.useGravity = true;
+            isPlanningSoundPlayed = false;
             //Physics.gravity = new Vector3(0f, -9.81f, 0f);
 
             // Gérer l'utilisation du jetpack
@@ -135,6 +151,21 @@ public class PlayerMovementsRB : MonoBehaviour
             }
         }
 
+        
+
+    if (isPlanningSoundPlayed && !isPlanningPlaying)
+    {
+        planning.start();
+        isPlanningPlaying = true;
+    }
+    else if (!isPlanningSoundPlayed && isPlanningPlaying)
+    {
+        planning.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        isPlanningPlaying = false;
+    }
+
+
+
         if (isGrounded && (Mathf.Abs(movementX) > 0 || Mathf.Abs(movementY) > 0))
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Footsteps");
@@ -143,6 +174,12 @@ public class PlayerMovementsRB : MonoBehaviour
         MovePlayer();
 
         currentSpeed = rb.velocity.magnitude;
+
+        if (isGrounded && !isGroundedSoundPlayed)
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Grounded");
+        isGroundedSoundPlayed = true;
+    }
     }
 
     /*private void MovePlayer()
@@ -222,6 +259,7 @@ public class PlayerMovementsRB : MonoBehaviour
             }
 
             CameraShake.Shake(shakeDuration, shakeForce);
+            isJetpackEmptySoundPlayed = false;
         }
         else
         {
@@ -234,6 +272,8 @@ public class PlayerMovementsRB : MonoBehaviour
     {
         movementX = Input.GetAxis("Horizontal");
         movementY = Input.GetAxis("Vertical");
+
+        isJetpackPressed = jetpack.action.triggered;
     }
 
     /*private void Respawn()

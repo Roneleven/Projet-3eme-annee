@@ -840,12 +840,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2b5357cd3c9684391c33dafd359465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphereRadiusMultiplier: 3
+  sphereRadius: 0
   sphereHeightOffset: 10
   sphereMovementDuration: 0.25
   launchInterval: 0.2
   cubesToLaunch: 7
   heartSpawner: {fileID: 694543561}
+--- !u!114 &694543579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694543552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71bf244ec5768f04ebb65096ee4d1b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartSpawner: {fileID: 0}
+  cubeLauncherPattern: {fileID: 0}
+  cubeTrackingScript: {fileID: 0}
+  aerialMinesPattern: {fileID: 0}
+  bigWallPattern: {fileID: 0}
+  explosivePillarPattern: {fileID: 0}
+  meteorPattern: {fileID: 0}
+  gatlinLauncherPattern: {fileID: 0}
+  paliers:
+  - patterns: 
+  - patterns: 
+  - patterns: 
+  - patterns: 
+  - patterns: 
+  - patterns: 
+  - patterns: 
+  - patterns: 
+  - patterns: 
+  - patterns: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,6 +1544,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 177016507}
     - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: bossPatternManager
+      value: 
+      objectReference: {fileID: 694543579}
+    - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: timeBetweenPatterns
       value: 8
       objectReference: {fileID: 0}
@@ -1584,10 +1619,14 @@ PrefabInstance:
       propertyPath: targetTransform
       value: 
       objectReference: {fileID: 295931649}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5219653631833151345, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6544138239093614417, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      insertIndex: 7
+      addedObject: {fileID: 694543579}
     - targetCorrespondingSourceObject: {fileID: 6544138239093614417, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       insertIndex: -1
       addedObject: {fileID: 694543566}

@@ -370,7 +370,7 @@ public class HeartSpawner : MonoBehaviour
     {
         float levelUpIncrement = 1.0f;
 
-        spawnRadius = palier * 2;
+        spawnRadius = palier * 4;
 
         if (palier == 1)
         {

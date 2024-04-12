@@ -15,12 +15,13 @@ GameObject:
   - component: {fileID: 3170013866389594440}
   - component: {fileID: 277926210817746683}
   - component: {fileID: 6277341940873764406}
+  - component: {fileID: 5580623725386259408}
   - component: {fileID: 6904513585282244537}
   - component: {fileID: 1618190085243263769}
-  - component: {fileID: 5219653631833151345}
   - component: {fileID: 1045188395168788628}
   - component: {fileID: 9099245513585051315}
   - component: {fileID: 3873776162744388889}
+  - component: {fileID: 7240667544584951262}
   m_Layer: 0
   m_Name: TheHeart
   m_TagString: Untagged
@@ -37,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 6544138239093614417}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.25, y: 9, z: 5.5}
+  m_LocalPosition: {x: -24.25, y: 11, z: 5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -137,46 +138,36 @@ MonoBehaviour:
   heartHealth: {fileID: 6277341940873764406}
   previousPalier: 1
   currentPalier: 1
-  temporarySpawnCount: 40
+  temporarySpawnCount: 35
   temporarySpawnInterval: 0.1
   timeTemporaryPalier: 3
+  maxPalier: 10
   timeNextPalier: 45
   timeSincePalierStart: 0
-  timer: 60
-  defaultTimer: 60
+  timer: 10000
+  defaultTimer: 10000
   timerText: {fileID: 0}
   blackFade: {fileID: 0}
   anim: {fileID: 0}
   playerPosition: {x: 0, y: 0, z: 0}
-  cubesGeneratedDuringPalier: 24
-  offensivePatternThreshold: 50
   cubeDestroyDelay: 3
   launchForce: 40
   percentageToLaunch: 5
   cubesToLaunch: 5
-  cubePatternTimer: 0
-  cubePatternInterval: 5
-  wallSpawnInterval: 555555
-  wallPrefab: {fileID: 6557921315865226379, guid: 83d25b5cb38d8c040b363310469a5b2a, type: 3}
-  wallDistance: 10
-  wallWidth: 3
-  wallHeight: 3
-  wallSpeed: 10
-  mouseLookScript: {fileID: 0}
   cubeLauncherPattern: {fileID: 277926210817746683}
   CageBlockPrefab: {fileID: 1230891745418371966, guid: 345b0ae9498e327478767960ee2fd6fd, type: 3}
   cageRadius: 2.3
   cageTriggerTime: 5
   cageSpawnTime: 2.1
   cageTransparentScale: 4
-  currentPatternState: 0
-  timeBetweenPatterns: 5
+  timeBetweenPatterns: 8
   cubeTrackingScript: {fileID: 6904513585282244537}
   aerialMinesPattern: {fileID: 3873776162744388889}
   bigWallPattern: {fileID: 1045188395168788628}
   explosivePillarPattern: {fileID: 9099245513585051315}
   meteorPattern: {fileID: 1618190085243263769}
   gatlinLauncherPattern: {fileID: 0}
+  bossPatternManager: {fileID: 5580623725386259408}
 --- !u!114 &277926210817746683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   health: 3
+  destroySpeed: 0.5
   teleportPositions:
   - {fileID: 0}
   - {fileID: 0}
@@ -211,6 +203,48 @@ MonoBehaviour:
   - {fileID: 0}
   teleportPointBoxSpawnerPairs: []
   accessibleTeleportPoints: 
+--- !u!114 &5580623725386259408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544138239093614417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71bf244ec5768f04ebb65096ee4d1b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartSpawner: {fileID: 0}
+  cubeLauncherPattern: {fileID: 0}
+  cubeTrackingScript: {fileID: 0}
+  aerialMinesPattern: {fileID: 0}
+  bigWallPattern: {fileID: 0}
+  explosivePillarPattern: {fileID: 0}
+  meteorPattern: {fileID: 0}
+  gatlinLauncherPattern: {fileID: 0}
+  paliers:
+  - patterns: 
+  - patterns: 
+  - patterns: 
+  - patterns: 
+  - patterns: 
+  - patterns: 
+  - patterns: 
+  - patterns: 
+  - patterns: 
+  - patterns: 
+  nextPatternTimes:
+  - 5
+  - 10
+  - 6
+  - 12
+  - 55
+  - 12
+  - 13
+  - 15
+  - 15
+  - 15
 --- !u!114 &6904513585282244537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heartSpawner: {fileID: 3170013866389594440}
   numberOfCubesToLaunch: 5
-  homingCubeSpeed: 20
+  homingCubeSpeed: 15
   destroyDelay: 5
   cubeTimer: 5
   targetTransform: {fileID: 0}
@@ -245,29 +279,6 @@ MonoBehaviour:
   meteorSpeed: 30
   spawnRadius: 20
   spawnHeight: 50
---- !u!114 &5219653631833151345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6544138239093614417}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 555a21274a7d3ed4ab9d946f2cdfcc7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heartSpawner: {fileID: 3170013866389594440}
-  wallPatternPrefab: {fileID: 4010771748805353341, guid: 7c10a8ad32a982641811b21c33623f4f, type: 3}
-  wallSpawnInterval: 6
-  cubePrefab: {fileID: 1230891745418371966, guid: 84298ffa45b86bd44a293d38649bea51, type: 3}
-  numberOfCubes: 10
-  radius: 10
-  journeyDuration: 40
-  launchInterval: 5
-  emptyPrefab: {fileID: 1413787942626273727, guid: 63dbea012cb6cb740b5aee43bb62af8f, type: 3}
-  spawnRadius: 10
-  spawnInterval: 7
 --- !u!114 &1045188395168788628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyPrefab: {fileID: 1413787942626273727, guid: 2c182cace24434a458c6378810dbff50, type: 3}
-  spawnRadius: 10
+  spawnRadius: 15
 --- !u!114 &3873776162744388889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,6 +319,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubePrefab: {fileID: 1230891745418371966, guid: 84298ffa45b86bd44a293d38649bea51, type: 3}
-  numberOfCubes: 100
-  radius: 30
+  numberOfCubes: 25
+  radius: 15
   journeyDuration: 40
+--- !u!114 &7240667544584951262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544138239093614417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2b5357cd3c9684391c33dafd359465, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sphereRadius: 5
+  sphereHeightOffset: 15
+  sphereMovementDuration: 0.5
+  launchInterval: 0.15
+  cubesToLaunch: 7
+  heartSpawner: {fileID: 3170013866389594440}

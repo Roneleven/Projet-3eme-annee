@@ -812,82 +812,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &694543552 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6544138239093614417, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-  m_PrefabInstance: {fileID: 5199419156997336879}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &694543561 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-  m_PrefabInstance: {fileID: 5199419156997336879}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 694543552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59179447d2eeb694eabcb5d21a81fcd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &694543566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 694543552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee2b5357cd3c9684391c33dafd359465, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sphereRadius: 5
-  sphereHeightOffset: 15
-  sphereMovementDuration: 0.5
-  launchInterval: 0.15
-  cubesToLaunch: 7
-  heartSpawner: {fileID: 694543561}
---- !u!114 &694543579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 694543552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71bf244ec5768f04ebb65096ee4d1b1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heartSpawner: {fileID: 0}
-  cubeLauncherPattern: {fileID: 0}
-  cubeTrackingScript: {fileID: 0}
-  aerialMinesPattern: {fileID: 0}
-  bigWallPattern: {fileID: 0}
-  explosivePillarPattern: {fileID: 0}
-  meteorPattern: {fileID: 0}
-  gatlinLauncherPattern: {fileID: 0}
-  paliers:
-  - patterns: 
-  - patterns: 
-  - patterns: 
-  - patterns: 
-  - patterns: 
-  - patterns: 
-  - patterns: 
-  - patterns: 
-  - patterns: 
-  - patterns: 
-  nextPatternTimes:
-  - 5
-  - 10
-  - 6
-  - 12
-  - 55
-  - 12
-  - 13
-  - 15
-  - 15
-  - 15
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,41 +1471,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: timer
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: maxPalier
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: defaultTimer
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: spawnContainer
       value: 
       objectReference: {fileID: 177016507}
-    - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: bossPatternManager
-      value: 
-      objectReference: {fileID: 694543579}
-    - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: temporarySpawnCount
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: timeBetweenPatterns
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873776162744388889, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: radius
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873776162744388889, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: numberOfCubes
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 6230881640351154849, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24.25
@@ -1623,10 +1515,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6277341940873764406, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: destroySpeed
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6277341940873764406, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: teleportPositions.Array.data[0]
       value: 
       objectReference: {fileID: 303000850}
@@ -1647,28 +1535,13 @@ PrefabInstance:
       value: TheHeart
       objectReference: {fileID: 0}
     - target: {fileID: 6904513585282244537, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: homingCubeSpeed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6904513585282244537, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: targetTransform
       value: 
       objectReference: {fileID: 295931649}
-    - target: {fileID: 9099245513585051315, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      propertyPath: spawnRadius
-      value: 15
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5219653631833151345, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6544138239093614417, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      insertIndex: 7
-      addedObject: {fileID: 694543579}
-    - targetCorrespondingSourceObject: {fileID: 6544138239093614417, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 694543566}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
 --- !u!1001 &6226500792527667207
 PrefabInstance:

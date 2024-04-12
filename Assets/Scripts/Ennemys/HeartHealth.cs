@@ -19,6 +19,7 @@ public class HeartHealth : MonoBehaviour
     private int lastTeleportIndex = -1;
     private HeartSpawner heartSpawner;
     [SerializeField] private List<TeleportPointBoxSpawnerPair> teleportPointBoxSpawnerPairs = new List<TeleportPointBoxSpawnerPair>();
+    private FMOD.Studio.EventInstance Idle;
 
     // Nouvelle variable pour stocker les points de téléportation accessibles après chaque téléportation
     public List<int> accessibleTeleportPoints = new List<int>();
@@ -27,6 +28,8 @@ public class HeartHealth : MonoBehaviour
     {
         heartSpawner = FindObjectOfType<HeartSpawner>();
         InitializeAccessibleTeleportPoints();
+        Idle = FMODUnity.RuntimeManager.CreateInstance("event:/Heart/Behaviours/Idle");
+        Idle.start();
     }
 
     private void InitializeAccessibleTeleportPoints()
@@ -45,7 +48,9 @@ public class HeartHealth : MonoBehaviour
 
         if (health <= 0)
         {
+            Idle.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             TeleportHeart();
+            Idle.start();
         }
     }
 

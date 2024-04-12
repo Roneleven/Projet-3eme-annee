@@ -28,10 +28,10 @@ public class BossPatternManager : MonoBehaviour
         ExplosivePillar,
         Meteor,
         GatlinLauncher
-        // Ajoutez d'autres types de patterns si nécessaire
     }
 
     public List<Palier> paliers;
+    public List<float> nextPatternTimes;
     private int currentPalierIndex = 0;
     private System.Random rand = new System.Random();
 
@@ -47,11 +47,11 @@ public class BossPatternManager : MonoBehaviour
         gatlinLauncherPattern = GetComponent<GatlinLauncherPattern>();
         meteorPattern = GetComponent<MeteorPattern>();
 
-        paliers[0].patterns.Add(PatternType.CubeLauncher);
-        paliers[0].patterns.Add(PatternType.CubeTracking);
         paliers[1].patterns.Add(PatternType.CubeLauncher);
-        paliers[1].patterns.Add(PatternType.BigWall);
-        paliers[2].patterns.Add(PatternType.ExplosivePillar);
+        paliers[1].patterns.Add(PatternType.CubeTracking);
+        paliers[2].patterns.Add(PatternType.CubeLauncher);
+        paliers[2].patterns.Add(PatternType.BigWall);
+        paliers[3].patterns.Add(PatternType.ExplosivePillar);
         paliers[3].patterns.Add(PatternType.GatlinLauncher);
         paliers[4].patterns.Add(PatternType.Meteor);
         paliers[5].patterns.Add(PatternType.AerialMines);
@@ -60,6 +60,7 @@ public class BossPatternManager : MonoBehaviour
         paliers[8].patterns.Add(PatternType.AerialMines);
         paliers[9].patterns.Add(PatternType.AerialMines);
         paliers[10].patterns.Add(PatternType.AerialMines);
+
 
         // Démarrez les patterns pour le premier palier
         int currentPalier = heartSpawner.currentPalier;
@@ -83,9 +84,6 @@ public class BossPatternManager : MonoBehaviour
         // Lancez le pattern choisi
         StartCoroutine(StartPattern(randomPattern));
 
-        // Vous pouvez ajouter d'autres logiques ici, par exemple
-        // si vous voulez mettre à jour d'autres éléments de jeu
-        // en fonction du pattern choisi
     }
 
     public IEnumerator StartPattern(PatternType patternType)
@@ -120,27 +118,35 @@ public class BossPatternManager : MonoBehaviour
 
     public void StartPatternsForCurrentPalier()
     {
-        // Obtenez le palier actuel depuis HeartSpawner
+        // Efface toutes les coroutines actives pour les patterns des paliers précédents
+        StopAllCoroutines();
+
+        // Obtient le palier actuel depuis HeartSpawner
         int currentPalier = heartSpawner.currentPalier;
 
-        // Obtenez les patterns pour ce palier
+        // Obtient les patterns pour ce palier
         List<PatternType> patternsForCurrentPalier = paliers[currentPalier].patterns;
 
-        // Lancez les patterns en boucle toutes les 5 secondes
-        StartCoroutine(LoopPatterns(patternsForCurrentPalier));
+        // Récupère la valeur nextPatternTime pour ce palier
+        float interval = nextPatternTimes[currentPalier];
+
+        // Lance les patterns en boucle avec l'intervalle correspondant
+        StartCoroutine(LoopPatterns(patternsForCurrentPalier, interval));
     }
 
-    private IEnumerator LoopPatterns(List<PatternType> patterns)
+
+    private IEnumerator LoopPatterns(List<PatternType> patterns, float interval)
     {
         while (true)
         {
             foreach (PatternType patternType in patterns)
             {
                 StartCoroutine(StartPattern(patternType));
-                yield return new WaitForSeconds(5f);
+                yield return new WaitForSeconds(interval);
             }
         }
     }
+
 
 
 }

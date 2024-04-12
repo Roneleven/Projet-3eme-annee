@@ -156,56 +156,6 @@ public class HeartSpawner : MonoBehaviour
         patternTimer += Time.deltaTime;
     }
 
-    //Fonction a changer pour les changements de patterns (les states)
-
-
-
-
-    private IEnumerator StartCubeTrackingPattern()
-    {
-        cubeTrackingScript.LaunchHomingCubes();
-        yield return null;
-    }
-
-
-    private IEnumerator StartCubeLauncherPattern()
-    {
-        cubeLauncherPattern.LauncherPattern();
-        yield return null;
-    }
-
-    private IEnumerator StartAerialMinesPattern()
-    {
-        aerialMinesPattern.LaunchAerialPattern();
-        yield return null;
-    }
-
-    private IEnumerator StartBigWallPattern()
-    {
-        bigWallPattern.LaunchWallPattern();
-        yield return null;
-    }
-
-    private IEnumerator StartExplosivePillarPattern()
-    {
-        explosivePillarPattern.LaunchExplosivePillar();
-        yield return null;
-    }
-
-    private IEnumerator StartMeteorPattern()
-    {
-        meteorPattern.LaunchMeteorPattern();
-        yield return null;
-    }
-
-    private IEnumerator StartGatlinLauncherPattern()
-    {
-        gatlinLauncherPattern.SphereLauncherPattern();
-        yield return null;
-    }
-
-    //creer fonction IEnumerator pour lancer ton pattern
-
     #region CUBES SPAWN
     private IEnumerator SpawnCube()
     {
@@ -420,7 +370,7 @@ public class HeartSpawner : MonoBehaviour
     {
         float levelUpIncrement = 1.0f;
 
-        spawnRadius = palier * 4;
+        spawnRadius = palier * 2;
 
         if (palier == 1)
         {

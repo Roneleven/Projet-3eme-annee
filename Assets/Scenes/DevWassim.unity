@@ -840,10 +840,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2b5357cd3c9684391c33dafd359465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphereRadius: 0
-  sphereHeightOffset: 10
-  sphereMovementDuration: 0.25
-  launchInterval: 0.2
+  sphereRadius: 5
+  sphereHeightOffset: 15
+  sphereMovementDuration: 0.5
+  launchInterval: 0.15
   cubesToLaunch: 7
   heartSpawner: {fileID: 694543561}
 --- !u!114 &694543579
@@ -877,6 +877,17 @@ MonoBehaviour:
   - patterns: 
   - patterns: 
   - patterns: 
+  nextPatternTimes:
+  - 5
+  - 10
+  - 6
+  - 12
+  - 55
+  - 12
+  - 13
+  - 15
+  - 15
+  - 15
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,8 +1547,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: timer
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: maxPalier
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: defaultTimer
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: spawnContainer
@@ -1548,8 +1567,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 694543579}
     - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: temporarySpawnCount
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: timeBetweenPatterns
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3873776162744388889, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: radius
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3873776162744388889, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: numberOfCubes
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6230881640351154849, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1616,9 +1647,17 @@ PrefabInstance:
       value: TheHeart
       objectReference: {fileID: 0}
     - target: {fileID: 6904513585282244537, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: homingCubeSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6904513585282244537, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: targetTransform
       value: 
       objectReference: {fileID: 295931649}
+    - target: {fileID: 9099245513585051315, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: spawnRadius
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5219653631833151345, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
     m_RemovedGameObjects: []

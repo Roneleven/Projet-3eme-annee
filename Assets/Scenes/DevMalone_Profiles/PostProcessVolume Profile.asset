@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11a1b3c4aed95041a848043bbe52b0a, type: 3}
   m_Name: OutlinePPSSettings
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -21,7 +21,7 @@ MonoBehaviour:
     value: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 0}
   _ScaleBias:
     overrideState: 1
-    value: 0.46
+    value: 0.14
 --- !u!114 &-63059718153429777
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1361,7 +1361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f161f1bfe8d69542a86f8d442c273b8, type: 3}
   m_Name: PostProcessOutline
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
@@ -1379,7 +1379,7 @@ MonoBehaviour:
     value: 0
   depthNormalThresholdScale:
     overrideState: 1
-    value: -0.54
+    value: -0.23
   normalThreshold:
     overrideState: 1
     value: 0.4

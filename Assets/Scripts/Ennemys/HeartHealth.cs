@@ -23,7 +23,7 @@ public class HeartHealth : MonoBehaviour
     // Nouvelle variable pour stocker les points de téléportation accessibles après chaque téléportation
     public List<int> accessibleTeleportPoints = new List<int>();
 
-    public Animator TheHeart;
+    public Animator animator;
 
     private void Start()
     {
@@ -47,14 +47,14 @@ public class HeartHealth : MonoBehaviour
 
         if (health <= 0)
         {
-            TheHeart.SetBool("TP", true);
+            animator.SetBool("TP", true);
             TeleportHeart();
         }
     }
 
     private void TeleportHeart()
     {
-        TheHeart.SetBool("TP", false);
+        //animator.SetBool("TP", false);
         DestroyCubesBeforeTeleport();
         DeactivateLinkedBoxSpawners();
 

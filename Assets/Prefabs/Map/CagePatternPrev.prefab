@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4013107067226470813}
   m_Layer: 0
   m_Name: CubeInc 1
-  m_TagString: TransparentBlock
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7691197422565046864}
   m_Layer: 0
   m_Name: CubeInc
-  m_TagString: TransparentBlock
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 1396260125527211338}
   m_Layer: 0
   m_Name: CagePatternPrev
-  m_TagString: TransparentBlock
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

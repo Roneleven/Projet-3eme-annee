@@ -472,7 +472,6 @@ public class HeartSpawner : MonoBehaviour
         //GameObject transparentCube = transparentCubesPool.GetObject(); nstantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
         // transparentCube.transform.position = spawnPosition;
         // transparentCube.transform.setParent(spawnContainer.transform);
-        FMODUnity.RuntimeManager.PlayOneShot("event:/DestructibleBlock/Behaviours/Spawning", GetComponent<Transform>().position);
         yield return new WaitForSeconds(spawnInterval);
 
         Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
@@ -500,6 +499,8 @@ public class HeartSpawner : MonoBehaviour
             playerPosition /= gridSize;
             playerPosition = new Vector3(Mathf.Round(playerPosition.x), Mathf.Round(playerPosition.y), Mathf.Round(playerPosition.z));
             playerPosition *= gridSize;
+            warning.setParameterByName("Cage", 1.0F);
+            warning.start();
 
             for (float x = playerPosition.x - 3; x <= playerPosition.x + 3; x += gridSize)
             {

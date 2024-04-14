@@ -47,21 +47,6 @@ public class BossPatternManager : MonoBehaviour
         gatlinLauncherPattern = GetComponent<GatlinLauncherPattern>();
         meteorPattern = GetComponent<MeteorPattern>();
 
-        paliers[1].patterns.Add(PatternType.CubeLauncher);
-        paliers[1].patterns.Add(PatternType.CubeTracking);
-        paliers[2].patterns.Add(PatternType.CubeLauncher);
-        paliers[2].patterns.Add(PatternType.BigWall);
-        paliers[3].patterns.Add(PatternType.ExplosivePillar);
-        paliers[3].patterns.Add(PatternType.GatlinLauncher);
-        paliers[4].patterns.Add(PatternType.Meteor);
-        paliers[5].patterns.Add(PatternType.AerialMines);
-        paliers[6].patterns.Add(PatternType.CubeTracking);
-        paliers[7].patterns.Add(PatternType.GatlinLauncher);
-        paliers[8].patterns.Add(PatternType.AerialMines);
-        paliers[9].patterns.Add(PatternType.AerialMines);
-        paliers[10].patterns.Add(PatternType.AerialMines);
-
-
         // Démarrez les patterns pour le premier palier
         int currentPalier = heartSpawner.currentPalier;
 

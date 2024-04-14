@@ -7,6 +7,7 @@ public class MeteorPattern : MonoBehaviour
     public float meteorSpeed = 50f;
     public float spawnRadius = 20f; // Rayon de spawn
     public float spawnHeight = 100f; // Hauteur de spawn
+    public int numbersOfMeteors = 3;
 
     public void LaunchMeteorPattern()
     {
@@ -15,7 +16,7 @@ public class MeteorPattern : MonoBehaviour
 
     IEnumerator SpawnMeteors()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < numbersOfMeteors; i++)
         {
             float randomDelay = Random.Range(0f, 0.5f);
             yield return new WaitForSeconds(randomDelay);

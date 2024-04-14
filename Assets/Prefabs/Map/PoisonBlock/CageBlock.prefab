@@ -118,6 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9dc039ff93fb5f478fe024709503139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  repulsionForce: 1
-  backwardForce: 10
-  upwardForce: 1
+  repulsionForce: 0
+  backwardForce: 0
+  upwardForce: 0

@@ -32,6 +32,11 @@ public class HeartHealth : MonoBehaviour
         Idle.start();
     }
 
+    void Update()
+    {
+        Idle.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+    }
+
     private void InitializeAccessibleTeleportPoints()
     {
         // Initialiser la liste des points de téléportation accessibles au début
@@ -44,12 +49,14 @@ public class HeartHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Hitmarker");
         health -= damage;
 
         if (health <= 0)
         {
             Idle.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             TeleportHeart();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Teleport");
             Idle.start();
         }
     }

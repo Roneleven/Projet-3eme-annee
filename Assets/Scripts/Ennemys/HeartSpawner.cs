@@ -617,6 +617,7 @@ public class HeartSpawner : MonoBehaviour
 
             // Réinitialiser le temps pour le nouveau palier
             timeSincePalierStart = 0f;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/AutoLevelUp");
 
             // Attendre avant de déclencher à nouveau le changement automatique (30 secondes)
             yield return new WaitForSeconds(timeNextPalier);

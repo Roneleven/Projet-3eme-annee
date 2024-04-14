@@ -91,7 +91,7 @@ public class HeartSpawner : MonoBehaviour
 
         StartCoroutine(SpawnCube());
 
-        //condition pour changement de state et appel de fonction pour lancer le pattern en question < < < < <
+        //condition pour changement de state et appel de fonction pour lancer le pattern en question
     }
 
 
@@ -172,19 +172,19 @@ public class HeartSpawner : MonoBehaviour
         switch (currentPalier)
         {
             case 1:
-                StartCoroutine(StartCubeLauncherPattern());
+                StartCoroutine(StartAerialMinesPattern());
                 currentPatternState = PatternState.Palier1;
                 break;
 
             case 2:
                 if (currentPatternState == PatternState.Palier1)
                 {
-                    StartCoroutine(StartCubeLauncherPattern());
+                    StartCoroutine(StartAerialMinesPattern());
                     currentPatternState = PatternState.Palier2;
                 }
                 else if (currentPatternState == PatternState.Palier2)
                 {
-                    StartCoroutine(StartCubeTrackingPattern());
+                    StartCoroutine(StartAerialMinesPattern());
                     currentPatternState = PatternState.Palier1;
                 }
                 break;

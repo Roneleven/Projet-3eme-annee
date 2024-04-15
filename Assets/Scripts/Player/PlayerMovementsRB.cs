@@ -197,8 +197,9 @@ public class PlayerMovementsRB : MonoBehaviour
     }*/
 
     private void MovePlayer()
-    {
-        Vector3 move = new Vector3(movementX, 0f, movementY).normalized;
+    { 
+        //Vector3 move = new Vector3(movementX, 0f, movementY).normalized;
+        Vector3 move = new Vector3(movementX, 0f, movementY);
         Vector3 localMove = transform.TransformDirection(move);
 
         Vector3 targetVelocity = localMove * speed;

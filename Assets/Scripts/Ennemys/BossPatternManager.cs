@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class BossPatternManager : MonoBehaviour
 {
-    public HeartSpawner heartSpawner;
-    public CubeLauncherPattern cubeLauncherPattern;
-    public CubeTracking cubeTrackingScript;
-    public AerialMinesPattern aerialMinesPattern;
-    public BigWallPattern bigWallPattern;
-    public ExplosivePillarPattern explosivePillarPattern;
-    public MeteorPattern meteorPattern;
-    public GatlinLauncherPattern gatlinLauncherPattern;
+    private HeartSpawner heartSpawner;
+    private CubeLauncherPattern cubeLauncherPattern;
+    private CubeTracking cubeTrackingScript;
+    private AerialMinesPattern aerialMinesPattern;
+    private BigWallPattern bigWallPattern;
+    private ExplosivePillarPattern explosivePillarPattern;
+    private MeteorPattern meteorPattern;
+    private GatlinLauncherPattern gatlinLauncherPattern;
     [Serializable]
     public class Palier
     {
@@ -32,7 +32,6 @@ public class BossPatternManager : MonoBehaviour
 
     public List<Palier> paliers;
     public List<float> nextPatternTimes;
-    private int currentPalierIndex = 0;
     private System.Random rand = new System.Random();
 
     private void Start()
@@ -57,7 +56,7 @@ public class BossPatternManager : MonoBehaviour
 
     public void SwitchToNextPattern()
     {
-        // Obtenez le palier actuel depuis HeartSpawner
+        // Obtenez le palier actuel
         int currentPalier = heartSpawner.currentPalier;
 
         // Obtenez les patterns pour ce palier
@@ -73,7 +72,6 @@ public class BossPatternManager : MonoBehaviour
 
     public IEnumerator StartPattern(PatternType patternType)
     {
-        // Démarrez le pattern approprié en fonction du type de pattern
         switch (patternType)
         {
             case PatternType.CubeTracking:
@@ -131,7 +129,4 @@ public class BossPatternManager : MonoBehaviour
             }
         }
     }
-
-
-
 }

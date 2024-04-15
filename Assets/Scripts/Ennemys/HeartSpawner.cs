@@ -51,7 +51,6 @@ public class HeartSpawner : MonoBehaviour
     public float launchForce;
     public float percentageToLaunch;
     public int cubesToLaunch;
-    public CubeLauncherPattern cubeLauncherPattern;
 
     [Header("Cage Tracking Properties")]
     public GameObject CageBlockPrefab;
@@ -66,8 +65,7 @@ public class HeartSpawner : MonoBehaviour
 
 
     [Header("Patterns Properties")]
-    public float timeBetweenPatterns; // Temps entre chaque changement de pattern (en secondes)
-    private float patternTimer = 0f;
+    public CubeLauncherPattern cubeLauncherPattern;
     public CubeTracking cubeTrackingScript;
     public AerialMinesPattern aerialMinesPattern;
     public BigWallPattern bigWallPattern;
@@ -153,9 +151,6 @@ public class HeartSpawner : MonoBehaviour
         {
             cageTimer = 0f; // Reset the timer if the player exits the zone
         }
-
-        // Condition pour changer d'état après le délai spécifié
-        patternTimer += Time.deltaTime;
     }
 
 
@@ -315,7 +310,6 @@ public class HeartSpawner : MonoBehaviour
             timerActive = true;
             StartCoroutine(ResetPalier());
             timeSincePalierStart = 0f;
-            patternTimer = 0f;
 
             // Déclencher l'événement OnPalierChange avec le nouveau palier
             if (OnPalierChange != null)

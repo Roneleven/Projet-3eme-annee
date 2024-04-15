@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: OutlineAMPLIFY
+  m_Name: OutlineAMPLIFY 2
   m_Shader: {fileID: 4800000, guid: 220de6de1f7da2249852b0e7a60a0705, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -46,6 +46,6 @@ Material:
     m_Colors:
     - _ASEOutlineColor: {r: 0, g: 0, b: 0, a: 0}
     - _Color0: {r: 1, g: 0, b: 0, a: 0}
-    - _Color1: {r: 0.745283, g: 0.745283, b: 0.745283, a: 0}
+    - _Color1: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 0}
     - _Specular: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []

@@ -7,11 +7,15 @@ public class CubeHealth : MonoBehaviour
     private bool isDead = false;
 
     // Matériaux pour différents niveaux de santé
-    public Material[] healthMaterials;
+    public Transform visualRoot;
+    Transform activeStateVisual;
+    int maxVisualStates = 5;
 
     private void Start()
     {
         cubeRenderer = GetComponent<Renderer>();
+        activeStateVisual = visualRoot.Find("state_0");
+        maxVisualStates = visualRoot.childCount;
         UpdateMaterial();
     }
 
@@ -28,10 +32,18 @@ public class CubeHealth : MonoBehaviour
         }
     }
 
+    [ContextMenu("Update Visual")]
     private void UpdateMaterial()
     {
-        int materialIndex = Mathf.Clamp(health - 1, 0, healthMaterials.Length - 1);
-        cubeRenderer.material = healthMaterials[materialIndex];
+        int materialIndex = Mathf.Clamp(health - 1, 0, maxVisualStates - 1);
+        //cubeRenderer.material = healthMaterials[materialIndex];
+        Transform desiredState = visualRoot.Find("state_" + materialIndex);
+        if(desiredState != null)
+        {
+            activeStateVisual.gameObject.SetActive(false);
+            desiredState.gameObject.SetActive(true);
+            activeStateVisual = desiredState;
+        }
     }
 
     private void Die()

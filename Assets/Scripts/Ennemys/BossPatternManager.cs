@@ -60,7 +60,17 @@ public class BossPatternManager : MonoBehaviour
         int currentPalier = heartSpawner.currentPalier;
 
         // Obtenez les patterns pour ce palier
-        List<PatternType> patternsForCurrentPalier = paliers[currentPalier].patterns;
+        List<PatternType> patternsForCurrentPalier = new List<PatternType>();
+        patternsForCurrentPalier.AddRange(paliers[currentPalier].patterns);
+
+        // exclusion
+        Transform tp = FindObjectOfType<HeartHealth>().getCurrentTeleportPoint();
+        List<PatternType> tpPointExlusionList = tp.GetComponent<TeleportPoint>().exclusionList;
+
+        foreach (PatternType pattern in tpPointExlusionList)
+        {
+            patternsForCurrentPalier.Remove(pattern);
+        }
 
         // Choisissez un pattern aléatoire dans la liste des patterns pour ce palier
         PatternType randomPattern = patternsForCurrentPalier[rand.Next(patternsForCurrentPalier.Count)];

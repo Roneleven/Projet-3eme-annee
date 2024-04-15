@@ -124,7 +124,7 @@ public class HeartSpawner : MonoBehaviour
 
         // Condition pour déclencher le changement de palier automatique
         timeSincePalierStart += Time.deltaTime;
-        if (timeSincePalierStart >= timeNextPalier) // 30 secondes
+        if (timeSincePalierStart >= timeNextPalier)
         {
             StartCoroutine(ChangePalierAutomatically());
         }
@@ -191,6 +191,7 @@ public class HeartSpawner : MonoBehaviour
                             if (cubeHealth.health < 6)
                             {
                                 cubeHealth.health += 1;
+                                cubeHealth.UpdateMaterial();
                                 break;
                             }
                             else

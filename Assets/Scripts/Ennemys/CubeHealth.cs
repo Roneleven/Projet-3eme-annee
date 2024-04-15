@@ -9,11 +9,19 @@ public class CubeHealth : MonoBehaviour
     // Matériaux pour différents niveaux de santé
     public Material[] healthMaterials;
 
-    private void Start()
+    private void Awake()
     {
         cubeRenderer = GetComponent<Renderer>();
-        UpdateMaterial();
+        if (cubeRenderer == null)
+        {
+            Debug.LogError("CubeHealth: Renderer component not found!");
+        }
+        else
+        {
+            UpdateMaterial();
+        }
     }
+
 
     public void TakeDamage(int damage)
     {
@@ -28,8 +36,9 @@ public class CubeHealth : MonoBehaviour
         }
     }
 
-    private void UpdateMaterial()
+    public void UpdateMaterial()
     {
+        //Debug.Log($"Updating material for cube {name}", this);
         int materialIndex = Mathf.Clamp(health - 1, 0, healthMaterials.Length - 1);
         cubeRenderer.material = healthMaterials[materialIndex];
     }

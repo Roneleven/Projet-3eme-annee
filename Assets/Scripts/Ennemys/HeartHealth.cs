@@ -239,4 +239,19 @@ public class HeartHealth : MonoBehaviour
             }
         }
     }
+
+    public Transform getCurrentTeleportPoint()
+    {
+        // Assurez-vous que lastTeleportIndex est valide
+        if (lastTeleportIndex >= 0 && lastTeleportIndex < teleportPositions.Length)
+        {
+            // Renvoie le transform du point de téléportation correspondant
+            return teleportPositions[lastTeleportIndex];
+        }
+        else
+        {
+            // S'il n'y a pas de dernier index de téléportation valide, renvoie null
+            return null;
+        }
+    }
 }

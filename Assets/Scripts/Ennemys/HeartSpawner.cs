@@ -172,22 +172,19 @@ public class HeartSpawner : MonoBehaviour
         switch (currentPalier)
         {
             case 1:
-                //StartCoroutine(StartCubeLauncherPattern());
-                StartCoroutine(StartBigWallPattern());
+                StartCoroutine(StartCubeLauncherPattern());
                 currentPatternState = PatternState.Palier1;
                 break;
 
             case 2:
                 if (currentPatternState == PatternState.Palier1)
                 {
-                    //StartCoroutine(StartCubeLauncherPattern());
-                    StartCoroutine(StartBigWallPattern());
+                    StartCoroutine(StartCubeLauncherPattern());
                     currentPatternState = PatternState.Palier2;
                 }
                 else if (currentPatternState == PatternState.Palier2)
                 {
-                    //StartCoroutine(StartCubeTrackingPattern());
-                    StartCoroutine(StartBigWallPattern());
+                    StartCoroutine(StartCubeTrackingPattern());
                     currentPatternState = PatternState.Palier1;
                 }
                 break;

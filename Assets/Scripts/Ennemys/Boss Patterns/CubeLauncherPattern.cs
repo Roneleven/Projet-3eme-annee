@@ -13,6 +13,8 @@ public class CubeLauncherPattern : MonoBehaviour
         List<GameObject> generatedCubes = new List<GameObject>(GameObject.FindGameObjectsWithTag("HeartBlock"));
         int cubesToLaunch = heartSpawner.cubesToLaunch;
 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Patterns/CubeLauncher_Start");
+
         for (int i = 0; i < cubesToLaunch; i++)
         {
             GameObject cubeToLaunch = generatedCubes[i];

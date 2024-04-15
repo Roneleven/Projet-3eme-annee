@@ -79,6 +79,7 @@ public class Weapon : MonoBehaviour
 
         if (_reloading)
         {
+
             _rotationTime += Time.deltaTime;
             var spinDelta = -(Mathf.Cos(Mathf.PI * (_rotationTime / reloadSpeed)) - 1f) / 2f;
             transform.localRotation = Quaternion.Euler(new Vector3(spinDelta * 360f, 0, 0));
@@ -87,6 +88,7 @@ public class Weapon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && !_reloading && _ammo < maxAmmo)
         {
             StartCoroutine(ReloadCooldown());
+            
         }
 
         if ((tapable ? Input.GetMouseButtonDown(0) : Input.GetMouseButton(0)) && !_shooting && !_reloading)
@@ -121,6 +123,7 @@ public class Weapon : MonoBehaviour
 
             // Play the particle system
             bulletTrailVFX.Play();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Guns/BasicGun/Shoot");
         }
 
         // Perform raycast to check for hit
@@ -181,6 +184,8 @@ public class Weapon : MonoBehaviour
 
     private IEnumerator ReloadCooldown()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Guns/BasicGun/Reload");
+
         _reloading = true;
         _ammoText.text = "RELOADING";
         _rotationTime = 0f;

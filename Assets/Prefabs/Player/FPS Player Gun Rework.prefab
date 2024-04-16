@@ -6105,12 +6105,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3217633168446887420}
   - {fileID: 1917333545979311897}
   - {fileID: 7463014139835152866}
   - {fileID: 4764429766740811625}
   - {fileID: 7222746860220633064}
   - {fileID: 8136833169645445766}
+  - {fileID: 3217633168446887420}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &4659278818703242318
@@ -6492,7 +6492,7 @@ Camera:
   m_GameObject: {fileID: 8902013439379412538}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2

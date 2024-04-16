@@ -21,6 +21,10 @@ public class HeartHealth : MonoBehaviour
     [SerializeField] private List<TeleportPointBoxSpawnerPair> teleportPointBoxSpawnerPairs = new List<TeleportPointBoxSpawnerPair>();
     private FMOD.Studio.EventInstance Idle;
 
+    public GameObject eyeRadius;
+    public float moveSpeed = 5f;
+    private Vector3 targetPosition;
+
     // Nouvelle variable pour stocker les points de téléportation accessibles après chaque téléportation
     public List<int> accessibleTeleportPoints = new List<int>();
 
@@ -30,11 +34,36 @@ public class HeartHealth : MonoBehaviour
         InitializeAccessibleTeleportPoints();
         Idle = FMODUnity.RuntimeManager.CreateInstance("event:/Heart/Behaviours/Idle");
         Idle.start();
+
+        SetRandomTarget();
     }
 
     void Update()
     {
         Idle.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+
+         MoveToTarget();
+
+        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+        {
+            SetRandomTarget();
+        }
+    }
+
+    void SetRandomTarget()
+    {
+        float angle = Random.Range(0f, Mathf.PI * 2f);
+    float radius = eyeRadius.transform.localScale.x * 1.5f;
+    float verticalOffset = Random.Range(-radius, radius);
+
+    Vector3 offset = new Vector3(Mathf.Cos(angle), verticalOffset, Mathf.Sin(angle)) * radius;
+    targetPosition = eyeRadius.transform.position + offset;
+    }
+
+    void MoveToTarget()
+    {
+        // Déplacer l'objet vers la position cible avec une vitesse constante
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
     }
 
     private void InitializeAccessibleTeleportPoints()
@@ -56,6 +85,7 @@ public class HeartHealth : MonoBehaviour
         {
             Idle.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             TeleportHeart();
+            TeleportEyeRadius(transform.position);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Teleport");
             Idle.start();
         }
@@ -65,6 +95,7 @@ public class HeartHealth : MonoBehaviour
     {
         DestroyCubesBeforeTeleport();
         DeactivateLinkedBoxSpawners();
+        
 
         if (accessibleTeleportPoints.Count > 0)
         {
@@ -141,6 +172,12 @@ public class HeartHealth : MonoBehaviour
             }
             UpdateAccessibleTeleportPoints();
         }
+    }
+
+    public void TeleportEyeRadius(Vector3 newPosition)
+    {
+        eyeRadius.transform.position = newPosition;
+        SetRandomTarget();
     }
 
     private void UpdateAccessibleTeleportPoints()

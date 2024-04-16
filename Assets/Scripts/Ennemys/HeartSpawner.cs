@@ -46,6 +46,7 @@ public class HeartSpawner : MonoBehaviour
     private bool playerInPosition;
     public Vector3 playerPosition;
 
+
     [Header("Throw cube pattern Properties")]
     public float cubeDestroyDelay;
     public float launchForce;
@@ -95,6 +96,8 @@ public class HeartSpawner : MonoBehaviour
         warning = FMODUnity.RuntimeManager.CreateInstance("event:/Heart/Patterns/Cage_Warning");
         //BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/V1/UX/Ambience/CoreBreaked");  INTéGRER LA MUSIQUE ICI
         BreakingHeart.start();
+
+        //dissolve = gameObject.GetComponent<Animation>();
 
         StartCoroutine(SpawnCube());
         bossPatternManager.StartPatternsForCurrentPalier();

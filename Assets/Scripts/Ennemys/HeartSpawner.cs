@@ -16,6 +16,7 @@ public class HeartSpawner : MonoBehaviour
     public float exclusionRadius;
     public float spawnCount;
     public GameObject spawnContainer;
+    public GameObject EyeRadius;
 
     [Header("Palier Properties")]
     public HeartHealth heartHealth;
@@ -141,7 +142,7 @@ public class HeartSpawner : MonoBehaviour
         BreakingHeart.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
 
         // Condition for spawn of the CageTracking pattern
-        if (currentPalier >= 3 && !cagePatternActive && Vector3.Distance(playerPosition, transform.position) < (spawnRadius * cageRadius))
+        if (currentPalier >= 3 && !cagePatternActive && Vector3.Distance(playerPosition, EyeRadius.transform.position) < (spawnRadius * cageRadius))
         {
             cageTimer += Time.deltaTime;
 
@@ -397,7 +398,7 @@ public class HeartSpawner : MonoBehaviour
                 spawnPosition = new Vector3(Mathf.Round(spawnPosition.x), Mathf.Round(spawnPosition.y), Mathf.Round(spawnPosition.z));
                 spawnPosition *= gridSize;
 
-                spawnPosition += transform.position;
+                spawnPosition += EyeRadius.transform.position;
 
                 Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
                 if (colliders.Length > 0)

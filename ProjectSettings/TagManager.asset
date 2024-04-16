@@ -10,6 +10,7 @@ TagManager:
   - HeartBlock
   - Ground
   - DestroyableBlock
+  - Teleport
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Player
   - Weapon
   - WeaponGFX
-  - 
+  - PostProcess
   - 
   - 
   - 

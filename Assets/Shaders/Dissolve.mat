@@ -33,8 +33,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Cutoff: 0.5
-    - _DissolveAmount: 0.068
+    - _Cutoff: 0
+    - _DissolveAmount: 0
     - __dirty: 0
     m_Colors: []
   m_BuildTextureStacks: []

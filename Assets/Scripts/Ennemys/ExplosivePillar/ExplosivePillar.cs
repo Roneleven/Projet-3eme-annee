@@ -14,8 +14,15 @@ public class ExplosivePillar : MonoBehaviour
     private Quaternion targetRotation;
     private bool isKinematicDisabled = false;
 
+    private FMOD.Studio.EventInstance pillar;
+
     private void Start()
     {
+
+        pillar = FMODUnity.RuntimeManager.CreateInstance("event:/Heart/Patterns/Pillar_Start");
+        pillar.setParameterByName("Pattern", 0.0F);
+        pillar.start();
+
         positions = new Transform[transform.childCount];
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -38,9 +45,12 @@ public class ExplosivePillar : MonoBehaviour
 
     private void Update()
     {
+        pillar.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+
         if (allCubesSpawned)
         {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            pillar.setParameterByName("Pattern", 1.0F);
             Destroy(gameObject, 20f);
         }
     }

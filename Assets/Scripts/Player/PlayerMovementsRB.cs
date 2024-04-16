@@ -164,12 +164,12 @@ public class PlayerMovementsRB : MonoBehaviour
         isPlanningPlaying = false;
     }
 
+    // POUR RAJOUTER LES FOOTSTEPS DU PERSO
 
-
-        if (isGrounded && (Mathf.Abs(movementX) > 0 || Mathf.Abs(movementY) > 0))
+        /*if (isGrounded && (Mathf.Abs(movementX) > 0 || Mathf.Abs(movementY) > 0))
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Footsteps");
-        }
+        }*/
 
         MovePlayer();
 

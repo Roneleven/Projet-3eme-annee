@@ -239,6 +239,7 @@ public class HeartSpawner : MonoBehaviour
             if (cubeHealth != null && cubeHealth.health < 6)
             {
                 cubeHealth.health += 1;
+                cubeHealth.UpdateMaterial();
                 break;
             }
         }

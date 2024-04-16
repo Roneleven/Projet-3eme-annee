@@ -34,18 +34,28 @@ public class CubeHealth : MonoBehaviour
     }
 
     [ContextMenu("Update Visual")]
-    private void UpdateMaterial()
+    public void UpdateMaterial()
     {
+        if (activeStateVisual == null)
+        {
+            Debug.LogWarning("activeStateVisual is null in CubeHealth.UpdateMaterial().");
+            return;
+        }
+
         int materialIndex = Mathf.Clamp(health - 1, 0, maxVisualStates - 1);
-        //cubeRenderer.material = healthMaterials[materialIndex];
         Transform desiredState = visualRoot.Find("state_" + materialIndex);
-        if(desiredState != null)
+        if (desiredState != null)
         {
             activeStateVisual.gameObject.SetActive(false);
             desiredState.gameObject.SetActive(true);
             activeStateVisual = desiredState;
         }
+        else
+        {
+            Debug.LogWarning("Desired visual state not found in CubeHealth.UpdateMaterial().");
+        }
     }
+
 
     private void Die()
     {

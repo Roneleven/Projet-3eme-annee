@@ -381,9 +381,9 @@ GameObject:
   - component: {fileID: 7884654537269272174}
   - component: {fileID: 4930251296460086626}
   - component: {fileID: 1366837735476708123}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LVL2_CUBE
-  m_TagString: Untagged
+  m_TagString: HeartBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

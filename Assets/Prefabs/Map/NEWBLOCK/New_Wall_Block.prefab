@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7404598875493099207}
   m_Layer: 0
   m_Name: New_Wall_Block
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
-  healthModels: []
+  visualRoot: {fileID: 0}
 --- !u!114 &7404598875493099207
 MonoBehaviour:
   m_ObjectHideFlags: 0

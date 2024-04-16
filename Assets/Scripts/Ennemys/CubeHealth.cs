@@ -36,10 +36,15 @@ public class CubeHealth : MonoBehaviour
     [ContextMenu("Update Visual")]
     public void UpdateMaterial()
     {
+        //Debug.Log($"Updating state for cube {name}", this);
         if (activeStateVisual == null)
         {
-            Debug.LogWarning("activeStateVisual is null in CubeHealth.UpdateMaterial().");
-            return;
+            activeStateVisual = visualRoot.Find("state_0");
+            if (activeStateVisual == null)
+            {
+                Debug.LogWarning("No initial visual state found in CubeHealth.UpdateMaterial().");
+                return;
+            }
         }
 
         int materialIndex = Mathf.Clamp(health - 1, 0, maxVisualStates - 1);
@@ -55,6 +60,7 @@ public class CubeHealth : MonoBehaviour
             Debug.LogWarning("Desired visual state not found in CubeHealth.UpdateMaterial().");
         }
     }
+
 
 
     private void Die()

@@ -985,7 +985,7 @@ GameObject:
   - component: {fileID: 1525676232}
   m_Layer: 0
   m_Name: TheHeart
-  m_TagString: Untagged
+  m_TagString: Heart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1504,6 +1504,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1525676232}
     m_Modifications:
     - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: spawnRadius
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3170013866389594440, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: spawnContainer
       value: 
       objectReference: {fileID: 177016507}
@@ -1511,6 +1515,14 @@ PrefabInstance:
       propertyPath: exclusionRadius
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3231437305137564045, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: ghost
+      value: 
+      objectReference: {fileID: 7083966063575631569, guid: 91ac55acb108f81439a22df1647e294e, type: 3}
+    - target: {fileID: 3231437305137564045, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 1525676232}
     - target: {fileID: 6230881640351154849, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1551,6 +1563,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6277341940873764406, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
+      propertyPath: parent
+      value: 
+      objectReference: {fileID: 1525676231}
     - target: {fileID: 6277341940873764406, guid: 1e8df026a115e734ead43352bf1ec110, type: 3}
       propertyPath: eyeRadius
       value: 

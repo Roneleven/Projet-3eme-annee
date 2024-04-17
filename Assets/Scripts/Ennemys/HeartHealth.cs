@@ -21,6 +21,7 @@ public class HeartHealth : MonoBehaviour
     [SerializeField] private List<TeleportPointBoxSpawnerPair> teleportPointBoxSpawnerPairs = new List<TeleportPointBoxSpawnerPair>();
     private FMOD.Studio.EventInstance Idle;
 
+    public GameObject parent;
     public GameObject eyeRadius;
     public float moveSpeed = 5f;
     private Vector3 targetPosition;
@@ -85,7 +86,6 @@ public class HeartHealth : MonoBehaviour
         {
             Idle.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             TeleportHeart();
-            TeleportEyeRadius(transform.position);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Teleport");
             Idle.start();
         }
@@ -108,7 +108,8 @@ public class HeartHealth : MonoBehaviour
 
             lastTeleportIndex = newTeleportIndex;
             Transform nextTeleportPosition = teleportPositions[lastTeleportIndex];
-            transform.position = nextTeleportPosition.position;
+            parent.transform.position = nextTeleportPosition.position;
+            SetRandomTarget();
             FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Locomotion/Teleport");
 
 
@@ -172,12 +173,6 @@ public class HeartHealth : MonoBehaviour
             }
             UpdateAccessibleTeleportPoints();
         }
-    }
-
-    public void TeleportEyeRadius(Vector3 newPosition)
-    {
-        eyeRadius.transform.position = newPosition;
-        SetRandomTarget();
     }
 
     private void UpdateAccessibleTeleportPoints()

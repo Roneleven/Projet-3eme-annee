@@ -115,6 +115,12 @@ public class PlayerMovementsRB : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        if (!isGrounded && rb.velocity.magnitude > 50f)
+    {
+        rb.velocity = rb.velocity.normalized * 50f;
+    }
+
         isGrounded = CheckGround();
 
         if (!isGrounded)
@@ -216,16 +222,23 @@ public class PlayerMovementsRB : MonoBehaviour
 
 
     private void SpeedControl()
-    {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+{
+    Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        // limit velocity if needed
-        if (flatVel.magnitude > speed)
-        {
-            Vector3 limitedVel = flatVel.normalized * speed;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
-        }
+    // limit velocity if needed
+    if (flatVel.magnitude > speed)
+    {
+        Vector3 limitedVel = flatVel.normalized * speed;
+        rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
     }
+
+    // Cap the currentSpeed at 50
+    if (flatVel.magnitude > 50f)
+    {
+        Vector3 limitedFlatVel = flatVel.normalized * 50f;
+        rb.velocity = new Vector3(limitedFlatVel.x, rb.velocity.y, limitedFlatVel.z);
+    }
+}
 
     private bool CheckGround()
     {

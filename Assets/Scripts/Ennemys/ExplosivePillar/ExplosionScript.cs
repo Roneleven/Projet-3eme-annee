@@ -4,9 +4,12 @@ public class ExplosionScript : MonoBehaviour
 {
     public float delayBeforeDisappear = 5f;
     public float scaleFactor = 1f;
-    public float repulsionForce = 2f;
+    
+    public GameObject eye;
+    public float oppositeForce = 2f;
     public float backwardForce = 10f;
     public float upwardForce = 1f;
+    public float repulsionForceHorizontal;
 
     private void Start()
     {
@@ -43,22 +46,30 @@ public class ExplosionScript : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter(Collision collision)
+        private void OnCollisionEnter(Collision collision)
+{
+    if (collision.gameObject.CompareTag("Player"))
     {
-        if (collision.gameObject.CompareTag("Player"))
+        Vector3 repulsionDirection = (collision.transform.position - transform.position).normalized;
+
+        if (eye != null)
         {
-            Vector3 repulsionDirection = (collision.transform.position - transform.position).normalized;
+            Vector3 oppositeDirection = (eye.transform.position - collision.transform.position).normalized;
+            repulsionDirection += oppositeDirection * oppositeForce;
+        }
 
-            repulsionDirection -= transform.forward * backwardForce;
-            repulsionDirection += transform.up * upwardForce;
+        Vector3 horizontalDirection = Vector3.ProjectOnPlane(repulsionDirection, Vector3.up).normalized;
+        Vector3 finalHorizontalDirection = horizontalDirection * repulsionForceHorizontal;
+        Vector3 backwardDirection = -collision.transform.forward * backwardForce;
+        Vector3 finalDirection = finalHorizontalDirection + Vector3.up * upwardForce + backwardDirection;
 
-            Rigidbody playerRigidbody = collision.gameObject.GetComponent<Rigidbody>();
-            if (playerRigidbody != null)
-            {
-                playerRigidbody.AddForce(repulsionDirection * repulsionForce, ForceMode.Impulse);
-            }
+        Rigidbody playerRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+        if (playerRigidbody != null)
+        {
+            playerRigidbody.AddForce(finalDirection, ForceMode.Impulse);
+        }
 
         Destroy(gameObject);
-        }
     }
+}
 }

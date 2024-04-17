@@ -50,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7083966063575631569}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -120,8 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagDuJoueur: Player
   vitesseDeDeplacement: 10
-  scaleSpeed: 10
-  repulsionForce: 10
+  scaleSpeed: 100
   oppositeForce: -100
   backwardForce: 0
   upwardForce: 20

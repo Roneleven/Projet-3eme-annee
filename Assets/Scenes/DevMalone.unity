@@ -131,6 +131,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 456966808919016548, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: newFOV
+      value: 170
+      objectReference: {fileID: 0}
+    - target: {fileID: 456966808919016548, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: newParent
+      value: 
+      objectReference: {fileID: 295931649}
     - target: {fileID: 1613122716386559989, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -195,6 +203,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7862538914596490753, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: newParent
+      value: 
+      objectReference: {fileID: 295931649}
+    - target: {fileID: 7862538914596490753, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1816959217}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1435,6 +1451,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1816959217 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4676258182735163754, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+  m_PrefabInstance: {fileID: 134362701}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1940570660 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5612328977609180829, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}

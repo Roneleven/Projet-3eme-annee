@@ -1,62 +1,86 @@
 using UnityEngine;
-using System.Collections;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform newParent; // Nouveau parent de la caméra après la transition
-    public float transitionDuration = 3f; // Durée de la transition en secondes
-    public float newFOV = 60f; // Nouveau champ de vision (FOV) de la caméra
+    public GameObject targetToFollow;
+    public float baseSpeed = 5f;
+    public float distanceThreshold = 0.5f;
+    public float dropCameraDelay = 0.5f;
+    public float speedMultiplier = 1.2f;
+    public float baseFOV = 60f;
+    public float maxFOV = 120f;
 
-    private Transform originalParent; // Parent original de la caméra
+    public GameObject mainCameraObject;
+
     private Camera mainCamera;
-    private float originalFOV;
+    private bool isFollowing = false;
+    private float dropCameraTime = 0f;
+    private Quaternion initialRotation;
+    private float rotationLerpDuration = 1f; // Durée en secondes pour le mouvement fluide vers la rotation nulle
+    private float rotationLerpStartTime;
+    private float fovLerpDuration = 3f; // Durée en secondes pour le mouvement fluide du FOV de base au FOV maximum
+    private float fovLerpStartTime;
 
     void Start()
     {
-        mainCamera = GetComponent<Camera>();
-        originalParent = transform.parent;
-        originalFOV = mainCamera.fieldOfView;
+        if (mainCameraObject != null)
+        {
+            mainCamera = mainCameraObject.GetComponent<Camera>();
+        }
     }
 
-    public void PerformTransition()
+    public void DropCamera()
     {
-        StartCoroutine(TransitionCoroutine());
+        if (transform.parent != null)
+        {
+            transform.parent = null;
+            isFollowing = true;
+            dropCameraTime = Time.time;
+        }
     }
 
-    IEnumerator TransitionCoroutine()
+    void Update()
     {
-        // Détacher la caméra de son parent
-        transform.SetParent(null);
-        Debug.Log("ok.");
-
-        // Attendre x secondes
-        yield return new WaitForSeconds(2f);
-
-        // Graduellement changer le FOV
-        float timer = 0f;
-        while (timer < transitionDuration)
+        if (isFollowing && targetToFollow != null)
         {
-            timer += Time.deltaTime;
-            float t = timer / transitionDuration;
-            mainCamera.fieldOfView = Mathf.Lerp(originalFOV, newFOV, t);
-            yield return null;
+            float distance = Vector3.Distance(transform.position, targetToFollow.transform.position);
+
+            if (Time.time >= dropCameraTime + dropCameraDelay && distance < distanceThreshold)
+            {
+                transform.parent = targetToFollow.transform;
+                isFollowing = false;
+
+                // Stocker la rotation initiale et le temps de début de l'interpolation
+                initialRotation = transform.localRotation;
+                rotationLerpStartTime = Time.time;
+
+                // Définir le temps de début de l'interpolation pour le FOV
+                fovLerpStartTime = Time.time;
+            }
+            else
+            {
+                float currentSpeed = baseSpeed * Mathf.Pow(speedMultiplier, Time.time - dropCameraTime);
+
+                Vector3 direction = targetToFollow.transform.position - transform.position;
+                direction.Normalize();
+                transform.position += direction * currentSpeed * Time.deltaTime;
+
+                // Interpolation continue du FOV
+                float t = (Time.time - fovLerpStartTime) / fovLerpDuration;
+                float currentFOV = Mathf.Lerp(baseFOV, maxFOV, t);
+                currentFOV = Mathf.Clamp(currentFOV, baseFOV, maxFOV);
+                if (mainCamera != null)
+                {
+                    mainCamera.fieldOfView = currentFOV;
+                }
+            }
         }
-
-        // Réattacher la caméra au nouveau parent
-        transform.SetParent(newParent);
-
-        // Revenir au FOV initial
-        timer = 0f;
-        while (timer < transitionDuration)
+        
+        // Interpolation de la rotation vers la rotation nulle
+        if (!isFollowing && !Mathf.Approximately(Time.time, rotationLerpStartTime) && Time.time <= rotationLerpStartTime + rotationLerpDuration)
         {
-            timer += Time.deltaTime;
-            float t = timer / transitionDuration;
-            mainCamera.fieldOfView = Mathf.Lerp(newFOV, originalFOV, t);
-            yield return null;
+            float t = (Time.time - rotationLerpStartTime) / rotationLerpDuration;
+            transform.localRotation = Quaternion.Slerp(initialRotation, Quaternion.identity, t);
         }
-
-        // Réattacher la caméra au parent d'origine
-        transform.SetParent(originalParent);
-        mainCamera.fieldOfView = originalFOV;
     }
 }

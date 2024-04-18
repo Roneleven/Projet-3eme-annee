@@ -16,6 +16,8 @@ public class PlayerMovementsRB : MonoBehaviour
     public float groundDistance;
     public List<LayerMask> groundMasks;
 
+    public CameraController cameraController;
+
     [Header("Respawn Settings")]
     /*public Transform respawnPoint;
     public float respawnPositionY;*/
@@ -310,6 +312,17 @@ public class PlayerMovementsRB : MonoBehaviour
     private void OnResetTimer()
     {
         heartSpawner.timer = 0;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ghost"))
+        {
+            if (cameraController != null)
+            {
+                cameraController.DropCamera();
+            }
+        }
     }
 
 }

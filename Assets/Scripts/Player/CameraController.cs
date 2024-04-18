@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
     public float maxFOV = 120f;
 
     public GameObject mainCameraObject;
+    public GameObject invincibility;
 
     private Camera mainCamera;
     private bool isFollowing = false;
@@ -33,6 +34,10 @@ public class CameraController : MonoBehaviour
     {
         if (transform.parent != null)
         {
+            if (invincibility != null)
+            {
+                invincibility.SetActive(true);
+            }
             transform.parent = null;
             isFollowing = true;
             dropCameraTime = Time.time;
@@ -56,6 +61,12 @@ public class CameraController : MonoBehaviour
 
                 // Définir le temps de début de l'interpolation pour le FOV
                 fovLerpStartTime = Time.time;
+
+                if (invincibility != null)
+                {
+                    invincibility.SetActive(false);
+                }
+
             }
             else
             {

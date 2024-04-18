@@ -15,6 +15,7 @@ public class PlayerMovementsRB : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance;
     public List<LayerMask> groundMasks;
+    public bool canMove = true;
 
     public CameraController cameraController;
 
@@ -206,6 +207,12 @@ public class PlayerMovementsRB : MonoBehaviour
 
     private void MovePlayer()
     { 
+
+         if (!canMove)
+        {
+            return;
+        }
+
         //Vector3 move = new Vector3(movementX, 0f, movementY).normalized;
         Vector3 move = new Vector3(movementX, 0f, movementY);
         Vector3 localMove = transform.TransformDirection(move);

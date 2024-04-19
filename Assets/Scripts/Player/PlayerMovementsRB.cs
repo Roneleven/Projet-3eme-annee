@@ -114,6 +114,8 @@ public class PlayerMovementsRB : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/JetpackEmpty");
         isJetpackEmptySoundPlayed = true;
     }
+
+
     }
 
     private void FixedUpdate()

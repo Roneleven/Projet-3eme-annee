@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public PlayerMovementsRB playerMovements;
+
     public GameObject targetToFollow;
     public float baseSpeed = 5f;
     public float distanceThreshold = 0.5f;
@@ -38,6 +40,8 @@ public class CameraController : MonoBehaviour
             {
                 invincibility.SetActive(true);
             }
+
+            playerMovements.canMove = false;
             transform.parent = null;
             isFollowing = true;
             dropCameraTime = Time.time;
@@ -66,6 +70,7 @@ public class CameraController : MonoBehaviour
                 {
                     invincibility.SetActive(false);
                 }
+                playerMovements.canMove = true;
 
             }
             else

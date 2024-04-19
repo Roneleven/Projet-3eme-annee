@@ -46,12 +46,12 @@ public class HeartSpawner : MonoBehaviour
     private bool playerInPosition;
     public Vector3 playerPosition;
 
+
     [Header("Throw cube pattern Properties")]
     public float cubeDestroyDelay;
     public float launchForce;
     public float percentageToLaunch;
     public int cubesToLaunch;
-    public CubeLauncherPattern cubeLauncherPattern;
 
     [Header("Cage Tracking Properties")]
     public GameObject CageBlockPrefab;
@@ -66,15 +66,23 @@ public class HeartSpawner : MonoBehaviour
 
 
     [Header("Patterns Properties")]
-    [SerializeField] private PatternState currentPatternState;
-    public float timeBetweenPatterns; // Temps entre chaque changement de pattern (en secondes)
-    private float patternTimer = 0f;
+    public CubeLauncherPattern cubeLauncherPattern;
     public CubeTracking cubeTrackingScript;
     public AerialMinesPattern aerialMinesPattern;
     public BigWallPattern bigWallPattern;
     public ExplosivePillarPattern explosivePillarPattern;
     public MeteorPattern meteorPattern;
     public GatlinLauncherPattern gatlinLauncherPattern;
+
+    public BossPatternManager bossPatternManager;
+    //creer une classeliste de palier (donc 10), faire une boucle dans le start pour un new palier et inserer dans la liste
+    //car la liste creer pas les objets tous seul, il faut en gros l'initialisé, en faite mettre en public
+    //classe palier system seriazable, dans cette classe liste de pattern
+    //creer enum de pattern (tous les pattern disponible) commec a palier font ref à x éléments de cet énum
+    //switchcurrentpalier etc la fonction, prendre la liste de palier, indexer avec current palier, pour recup le palier et faire .pattern pour avoir la liste des patterns
+    //on choisis un au hasard par exemple, une fois choisis on fait un switch qui va ressembler a ce que j'avais en un peu moins lourd
+    // case bigwall,case cubelauncher etc si on est dans le case cubetracking on startcoroutine cubetracking, et c'est déclencher en fonction du palier ou on est
+    //dans hearthealth mettre une list de pattern pour les exclusions, scrap la data et le code sera dans switch to next pattern en gros, c'est elle qui lance les pattern et recupere tout. random ou algo pour choisir qui appelle la bonne coroutine
 
 
     private void Start()
@@ -89,24 +97,16 @@ public class HeartSpawner : MonoBehaviour
         //BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/V1/UX/Ambience/CoreBreaked");  INTéGRER LA MUSIQUE ICI
         BreakingHeart.start();
 
-        StartCoroutine(SpawnCube());
+        //dissolve = gameObject.GetComponent<Animation>();
 
-        //condition pour changement de state et appel de fonction pour lancer le pattern en question
+        StartCoroutine(SpawnCube());
+        bossPatternManager.StartPatternsForCurrentPalier();
     }
 
 
-    public enum PatternState
+    public void OnCurrentPalierChanged()
     {
-        Palier1,
-        Palier2,
-        Palier3,
-        Palier4,
-        Palier5,
-        Palier6,
-        Palier7,
-        Palier8,
-        Palier9,
-        Palier10
+        bossPatternManager.StartPatternsForCurrentPalier();
     }
 
 
@@ -121,13 +121,13 @@ public class HeartSpawner : MonoBehaviour
             }
             else
             {
-                //timerText.text = Mathf.Round(timer).ToString() + "s";
+                timerText.text = Mathf.Round(timer).ToString() + "s";
             }
         }
 
         // Condition pour déclencher le changement de palier automatique
         timeSincePalierStart += Time.deltaTime;
-        if (timeSincePalierStart >= timeNextPalier) // 30 secondes
+        if (timeSincePalierStart >= timeNextPalier)
         {
             StartCoroutine(ChangePalierAutomatically());
         }
@@ -154,231 +154,8 @@ public class HeartSpawner : MonoBehaviour
         {
             cageTimer = 0f; // Reset the timer if the player exits the zone
         }
-
-        // Condition pour changer d'état après le délai spécifié
-        patternTimer += Time.deltaTime;
-        if (patternTimer >= timeBetweenPatterns)
-        {
-            patternTimer = 0f;  // Réinitialise le compteur de temps
-            SwitchToNextPattern();
-        }
-
-        warning.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
     }
 
-    //Fonction a changer pour les changements de patterns (les states)
-    private void SwitchToNextPattern()
-    {
-        switch (currentPalier)
-        {
-            case 1:
-                StartCoroutine(StartCubeLauncherPattern());
-                currentPatternState = PatternState.Palier1;
-                break;
-
-            case 2:
-                if (currentPatternState == PatternState.Palier1)
-                {
-                    StartCoroutine(StartCubeLauncherPattern());
-                    currentPatternState = PatternState.Palier2;
-                }
-                else if (currentPatternState == PatternState.Palier2)
-                {
-                    StartCoroutine(StartCubeTrackingPattern());
-                    currentPatternState = PatternState.Palier1;
-                }
-                break;
-
-            case 3:
-                StartCoroutine(StartGatlinLauncherPattern());
-                currentPatternState = PatternState.Palier3;
-                break;
-
-            case 4:
-                if (currentPatternState == PatternState.Palier1)
-                {
-                    StartCoroutine(StartCubeLauncherPattern());
-                    currentPatternState = PatternState.Palier2;
-                }
-                else if (currentPatternState == PatternState.Palier2)
-                {
-                    StartCoroutine(StartBigWallPattern());
-                    currentPatternState = PatternState.Palier3;
-                }
-                else if (currentPatternState == PatternState.Palier3)
-                {
-                    StartCoroutine(StartCubeTrackingPattern());
-                    currentPatternState = PatternState.Palier1;
-                }
-                break;
-
-            case 5:
-                StartCoroutine(StartCubeLauncherPattern());
-                currentPatternState = PatternState.Palier5;
-                break;
-
-            case 6:
-                if (currentPatternState == PatternState.Palier1)
-                {
-                    StartCoroutine(StartCubeLauncherPattern());
-                    currentPatternState = PatternState.Palier2;
-                }
-                else if (currentPatternState == PatternState.Palier2)
-                {
-                    StartCoroutine(StartBigWallPattern());
-                    currentPatternState = PatternState.Palier3;
-                }
-                else if (currentPatternState == PatternState.Palier3)
-                {
-                    StartCoroutine(StartCubeTrackingPattern());
-                    currentPatternState = PatternState.Palier1;
-                }
-                break;
-
-            case 7:
-                if (currentPatternState == PatternState.Palier1)
-                {
-                    StartCoroutine(StartCubeTrackingPattern());
-                    currentPatternState = PatternState.Palier2;
-                }
-                else if (currentPatternState == PatternState.Palier2)
-                {
-                    StartCoroutine(StartExplosivePillarPattern());
-                    currentPatternState = PatternState.Palier3;
-                }
-                else if (currentPatternState == PatternState.Palier3)
-                {
-                    StartCoroutine(StartMeteorPattern());
-                    currentPatternState = PatternState.Palier4;
-                }
-                else if (currentPatternState == PatternState.Palier4)
-                {
-                    StartCoroutine(StartAerialMinesPattern());
-                    currentPatternState = PatternState.Palier5;
-                }
-                break;
-
-            case 8:
-                if (currentPatternState == PatternState.Palier1)
-                {
-                    StartCoroutine(StartBigWallPattern());
-                    currentPatternState = PatternState.Palier2;
-                }
-                else if (currentPatternState == PatternState.Palier2)
-                {
-                    StartCoroutine(StartCubeLauncherPattern());
-                    currentPatternState = PatternState.Palier3;
-                }
-                else if (currentPatternState == PatternState.Palier3)
-                {
-                    StartCoroutine(StartMeteorPattern());
-                    currentPatternState = PatternState.Palier1;
-                }
-                break;
-
-            case 9:
-                if (currentPatternState == PatternState.Palier1)
-                {
-                    StartCoroutine(StartCubeLauncherPattern());
-                    currentPatternState = PatternState.Palier2;
-                }
-                else if (currentPatternState == PatternState.Palier2)
-                {
-                    StartCoroutine(StartCubeTrackingPattern());
-                    currentPatternState = PatternState.Palier3;
-                }
-                else if (currentPatternState == PatternState.Palier3)
-                {
-                    StartCoroutine(StartAerialMinesPattern());
-                    currentPatternState = PatternState.Palier1;
-                }
-                break;
-
-            case 10:
-                if (currentPatternState == PatternState.Palier1)
-                {
-                    StartCoroutine(StartBigWallPattern());
-                    currentPatternState = PatternState.Palier2;
-                }
-                else if (currentPatternState == PatternState.Palier2)
-                {
-                    StartCoroutine(StartCubeTrackingPattern());
-                    currentPatternState = PatternState.Palier3;
-                }
-                else if (currentPatternState == PatternState.Palier3)
-                {
-                    StartCoroutine(StartCubeLauncherPattern());
-                    currentPatternState = PatternState.Palier4;
-                }
-                else if (currentPatternState == PatternState.Palier4)
-                {
-                    StartCoroutine(StartExplosivePillarPattern());
-                    currentPatternState = PatternState.Palier5;
-                }
-                else if (currentPatternState == PatternState.Palier5)
-                {
-                    StartCoroutine(StartMeteorPattern());
-                    currentPatternState = PatternState.Palier6;
-                }
-                else if (currentPatternState == PatternState.Palier6)
-                {
-                    StartCoroutine(StartAerialMinesPattern());
-                    currentPatternState = PatternState.Palier7;
-                }
-                break;
-
-            default:
-                Debug.LogError("Palier out of range!");
-                break;
-        }
-    }
-
-
-
-    private IEnumerator StartCubeTrackingPattern()
-    {
-        cubeTrackingScript.LaunchHomingCubes();
-        yield return null;
-    }
-
-
-    private IEnumerator StartCubeLauncherPattern()
-    {
-        cubeLauncherPattern.LauncherPattern();
-        yield return null;
-    }
-
-    private IEnumerator StartAerialMinesPattern()
-    {
-        aerialMinesPattern.LaunchAerialPattern();
-        yield return null;
-    }
-
-    private IEnumerator StartBigWallPattern()
-    {
-        bigWallPattern.LaunchWallPattern();
-        yield return null;
-    }
-
-    private IEnumerator StartExplosivePillarPattern()
-    {
-        explosivePillarPattern.LaunchExplosivePillar();
-        yield return null;
-    }
-
-    private IEnumerator StartMeteorPattern()
-    {
-        meteorPattern.LaunchMeteorPattern();
-        yield return null;
-    }
-
-    private IEnumerator StartGatlinLauncherPattern()
-    {
-        gatlinLauncherPattern.SphereLauncherPattern();
-        yield return null;
-    }
-
-    //creer fonction IEnumerator pour lancer ton pattern
 
     #region CUBES SPAWN
     private IEnumerator SpawnCube()
@@ -417,6 +194,7 @@ public class HeartSpawner : MonoBehaviour
                             if (cubeHealth.health < 6)
                             {
                                 cubeHealth.health += 1;
+                                cubeHealth.UpdateMaterial();
                                 break;
                             }
                             else
@@ -461,6 +239,7 @@ public class HeartSpawner : MonoBehaviour
             if (cubeHealth != null && cubeHealth.health < 6)
             {
                 cubeHealth.health += 1;
+                cubeHealth.UpdateMaterial();
                 break;
             }
         }
@@ -469,7 +248,6 @@ public class HeartSpawner : MonoBehaviour
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {
         GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-        
         //GameObject transparentCube = transparentCubesPool.GetObject(); nstantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
         // transparentCube.transform.position = spawnPosition;
         // transparentCube.transform.setParent(spawnContainer.transform);
@@ -537,7 +315,6 @@ public class HeartSpawner : MonoBehaviour
             timerActive = true;
             StartCoroutine(ResetPalier());
             timeSincePalierStart = 0f;
-            patternTimer = 0f;
 
             // Déclencher l'événement OnPalierChange avec le nouveau palier
             if (OnPalierChange != null)
@@ -575,6 +352,8 @@ public class HeartSpawner : MonoBehaviour
 
         // Passer au palier suivant
         currentPalier++;
+        OnCurrentPalierChanged();
+
         if (currentPalier <= maxPalier)
         {
             AdjustPalierValues(currentPalier);
@@ -601,7 +380,7 @@ public class HeartSpawner : MonoBehaviour
         }
         else if (palier == 2)
         {
-            spawnCount = 6 + ((palier - 1) * 6);
+            spawnCount = 6 + ((palier - 1) * 4);
 
         }
 
@@ -620,6 +399,8 @@ public class HeartSpawner : MonoBehaviour
         if (currentPalier < maxPalier)
         {
             currentPalier++;
+            OnCurrentPalierChanged();
+
             AdjustPalierValues(currentPalier);
 
             // Réinitialiser le temps pour le nouveau palier

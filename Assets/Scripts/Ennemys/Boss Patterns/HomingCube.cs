@@ -11,12 +11,6 @@ public class HomingCube : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        Transform audioChild = transform.Find("Audio");
-        if (audioChild != null)
-        {
-            audioChild.gameObject.SetActive(true);
-        }
     }
 
     void FixedUpdate()
@@ -24,15 +18,24 @@ public class HomingCube : MonoBehaviour
         if (target != null)
         {
             Vector3 toTarget = target.position - rb.position;
+
+            // On normalise la direction pour obtenir une vitesse constante
             Vector3 direction = toTarget.normalized;
+
+            // On tourne le Rigidbody dans la direction de la cible à la vitesse rotationSpeed
             Quaternion targetRotation = Quaternion.RotateTowards(rb.rotation, Quaternion.LookRotation(direction), rotationSpeed * Time.deltaTime);
             rb.MoveRotation(targetRotation);
+
+            // On applique une force d'accélération dans la direction de la cible
             rb.velocity = direction * speed;
         }
         else
         {
+            // Si le script n'a pas de cible, le cube va simplement se déplacer tout droit :
             rb.velocity = transform.forward * speed;
         }
+
+        // Destruction après le délai spécifié
         destroyDelay -= Time.deltaTime;
         if (destroyDelay <= 0f)
         {
@@ -49,12 +52,14 @@ public class HomingCube : MonoBehaviour
         Gizmos.color = new Color(1f, 0.51f, 0.47f);
         Gizmos.DrawLine(transform.position, target.position);
     }
+
+    // Nouvelle fonction pour définir la cible
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
-        
     }
 
+    // Nouvelle fonction pour définir la vitesse
     public void SetSpeed(float newSpeed)
     {
         speed = newSpeed;

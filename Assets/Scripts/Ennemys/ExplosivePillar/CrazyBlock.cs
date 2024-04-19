@@ -60,7 +60,6 @@ public class CrazyBlock : MonoBehaviour
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
                 if (player != null)
                 {
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Patterns/Meteor_Bounce", GetComponent<Transform>().position);
                     Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
 
                     // Limit horizontal speed

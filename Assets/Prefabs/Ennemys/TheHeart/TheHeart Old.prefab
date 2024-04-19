@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &12015716547393459
+--- !u!1 &6544138239093614417
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,59 +8,59 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6812183649956168602}
-  - component: {fileID: 8210320888473315673}
-  - component: {fileID: 5639905057204216999}
-  - component: {fileID: 2853040211064636701}
-  - component: {fileID: 1380432832344173796}
-  - component: {fileID: 5459472322788609292}
-  - component: {fileID: 8146172639752520048}
-  - component: {fileID: 2249755692970071878}
-  - component: {fileID: 6558533012190280565}
-  - component: {fileID: 3571893575622429881}
-  - component: {fileID: 8496086104443576437}
-  - component: {fileID: 5643635420946936022}
-  - component: {fileID: 7142425487198719263}
-  - component: {fileID: 8950342144501615344}
-  - component: {fileID: 3860631658362292019}
-  - component: {fileID: 7917694089279008631}
+  - component: {fileID: 6230881640351154849}
+  - component: {fileID: 808981041500536545}
+  - component: {fileID: 724554092674932401}
+  - component: {fileID: 1805856403678287906}
+  - component: {fileID: 3170013866389594440}
+  - component: {fileID: 277926210817746683}
+  - component: {fileID: 6277341940873764406}
+  - component: {fileID: 5580623725386259408}
+  - component: {fileID: 6228569896811691751}
+  - component: {fileID: 6904513585282244537}
+  - component: {fileID: 1618190085243263769}
+  - component: {fileID: 1045188395168788628}
+  - component: {fileID: 9099245513585051315}
+  - component: {fileID: 3873776162744388889}
+  - component: {fileID: 7240667544584951262}
+  - component: {fileID: 3231437305137564045}
   m_Layer: 0
-  m_Name: TheHeart
+  m_Name: TheHeart Old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6812183649956168602
+--- !u!4 &6230881640351154849
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12015716547393459}
+  m_GameObject: {fileID: 6544138239093614417}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 5464548926497106743}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8210320888473315673
+--- !u!33 &808981041500536545
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12015716547393459}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &5639905057204216999
+--- !u!23 &724554092674932401
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12015716547393459}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -96,13 +96,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &2853040211064636701
+--- !u!135 &1805856403678287906
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12015716547393459}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -117,13 +117,13 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1380432832344173796
+--- !u!114 &3170013866389594440
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12015716547393459}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59179447d2eeb694eabcb5d21a81fcd3, type: 3}
@@ -134,10 +134,10 @@ MonoBehaviour:
   spawnInterval: 1.5
   spawnRadius: 4
   gridSize: 1
-  exclusionRadius: 3
+  exclusionRadius: 2
   spawnCount: 4
   spawnContainer: {fileID: 0}
-  heartHealth: {fileID: 8146172639752520048}
+  heartHealth: {fileID: 6277341940873764406}
   previousPalier: 1
   currentPalier: 1
   temporarySpawnCount: 35
@@ -162,34 +162,34 @@ MonoBehaviour:
   cageSpawnTime: 2.1
   cagePatternPreview: {fileID: 0}
   cageTransparentScale: 4
-  cubeLauncherPattern: {fileID: 5459472322788609292}
-  cubeTrackingScript: {fileID: 3571893575622429881}
-  aerialMinesPattern: {fileID: 8950342144501615344}
-  bigWallPattern: {fileID: 5643635420946936022}
-  explosivePillarPattern: {fileID: 7142425487198719263}
-  meteorPattern: {fileID: 8496086104443576437}
+  cubeLauncherPattern: {fileID: 277926210817746683}
+  cubeTrackingScript: {fileID: 6904513585282244537}
+  aerialMinesPattern: {fileID: 3873776162744388889}
+  bigWallPattern: {fileID: 1045188395168788628}
+  explosivePillarPattern: {fileID: 9099245513585051315}
+  meteorPattern: {fileID: 1618190085243263769}
   gatlinLauncherPattern: {fileID: 0}
-  bossPatternManager: {fileID: 2249755692970071878}
---- !u!114 &5459472322788609292
+  bossPatternManager: {fileID: 5580623725386259408}
+--- !u!114 &277926210817746683
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12015716547393459}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1dd25dadca2ece04ea790be2582423e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heartSpawner: {fileID: 1380432832344173796}
---- !u!114 &8146172639752520048
+  heartSpawner: {fileID: 3170013866389594440}
+--- !u!114 &6277341940873764406
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12015716547393459}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2547ce751589b89479e419e3366a37a0, type: 3}
@@ -204,17 +204,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   teleportPointBoxSpawnerPairs: []
-  parent: {fileID: 8374639144287423287}
-  eyeRadius: {fileID: 7289005239915659131}
-  moveSpeed: 2
+  eyeRadius: {fileID: 0}
+  moveSpeed: 5
   accessibleTeleportPoints: 
---- !u!114 &2249755692970071878
+--- !u!114 &5580623725386259408
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12015716547393459}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71bf244ec5768f04ebb65096ee4d1b1e, type: 3}
@@ -234,44 +233,44 @@ MonoBehaviour:
   - 6
   - 5.8
   - 5
---- !u!114 &6558533012190280565
+--- !u!114 &6228569896811691751
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12015716547393459}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7e11a1bf1c01da4d82a9e6b5adf4f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   exclusionList: 
---- !u!114 &3571893575622429881
+--- !u!114 &6904513585282244537
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12015716547393459}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cad4f91a81e412142b41b2b50462d008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heartSpawner: {fileID: 1380432832344173796}
+  heartSpawner: {fileID: 3170013866389594440}
   numberOfCubesToLaunch: 5
   homingCubeSpeed: 15
   destroyDelay: 5
   cubeTimer: 5
   targetTransform: {fileID: 0}
---- !u!114 &8496086104443576437
+--- !u!114 &1618190085243263769
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12015716547393459}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8715d30ae5aaf1499f59b2cf1d8ef2c, type: 3}
@@ -282,26 +281,26 @@ MonoBehaviour:
   spawnRadius: 20
   spawnHeight: 50
   numbersOfMeteors: 3
---- !u!114 &5643635420946936022
+--- !u!114 &1045188395168788628
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12015716547393459}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39e4bbc2af99c1945831ef3d1d1ce1d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wallPatternPrefab: {fileID: 4010771748805353341, guid: 7c10a8ad32a982641811b21c33623f4f, type: 3}
---- !u!114 &7142425487198719263
+--- !u!114 &9099245513585051315
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12015716547393459}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8bd4b67db1abb94385287ecc6cf365a, type: 3}
@@ -309,13 +308,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emptyPrefab: {fileID: 1413787942626273727, guid: 2c182cace24434a458c6378810dbff50, type: 3}
   spawnRadius: 15
---- !u!114 &8950342144501615344
+--- !u!114 &3873776162744388889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12015716547393459}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1fd576a4c430dc243ba3062a1e29da27, type: 3}
@@ -325,13 +324,13 @@ MonoBehaviour:
   numberOfCubes: 25
   radius: 10
   journeyDuration: 40
---- !u!114 &3860631658362292019
+--- !u!114 &7240667544584951262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12015716547393459}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee2b5357cd3c9684391c33dafd359465, type: 3}
@@ -342,82 +341,16 @@ MonoBehaviour:
   sphereMovementDuration: 0.5
   launchInterval: 0.15
   cubesToLaunch: 7
-  heartSpawner: {fileID: 1380432832344173796}
---- !u!114 &7917694089279008631
+  heartSpawner: {fileID: 3170013866389594440}
+--- !u!114 &3231437305137564045
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12015716547393459}
+  m_GameObject: {fileID: 6544138239093614417}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ca384593e3996043a41e1b05c973604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghost: {fileID: 7083966063575631569, guid: 91ac55acb108f81439a22df1647e294e, type: 3}
-  spawnPoint: {fileID: 5464548926497106743}
---- !u!1 &7289005239915659131
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1503547884131688239}
-  m_Layer: 0
-  m_Name: Eye
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1503547884131688239
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7289005239915659131}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5464548926497106743}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8374639144287423287
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5464548926497106743}
-  m_Layer: 0
-  m_Name: TheHeart
-  m_TagString: Heart
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5464548926497106743
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8374639144287423287}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.25, y: 11, z: 5.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6812183649956168602}
-  - {fileID: 1503547884131688239}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

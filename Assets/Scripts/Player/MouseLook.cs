@@ -8,7 +8,7 @@ public class MouseLook : MonoBehaviour
 
     public float mouseSensivity = 100f;
     public Transform playerBody;
-    float xRotation = 0f;
+    public float xRotation = 0f;
 
     public Quaternion CameraRotation => transform.rotation;
 
@@ -21,10 +21,6 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!playerMovements.canMove)
-        {
-            return;
-        }
 
         float mouseX = Input.GetAxis("Mouse X") * mouseSensivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensivity * Time.deltaTime;

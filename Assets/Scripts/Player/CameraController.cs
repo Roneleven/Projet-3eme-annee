@@ -3,6 +3,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public PlayerMovementsRB playerMovements;
+    public MouseLook mouseLook;
 
     public GameObject targetToFollow;
     public float baseSpeed = 5f;
@@ -14,6 +15,7 @@ public class CameraController : MonoBehaviour
 
     public GameObject mainCameraObject;
     public GameObject invincibility;
+    public Transform playerCamera;
 
     private Camera mainCamera;
     private bool isFollowing = false;
@@ -53,6 +55,9 @@ public class CameraController : MonoBehaviour
         if (isFollowing && targetToFollow != null)
         {
             float distance = Vector3.Distance(transform.position, targetToFollow.transform.position);
+            float mouseX = Input.GetAxis("Mouse X") * mouseLook.mouseSensivity * Time.deltaTime;
+
+            playerCamera.Rotate(Vector3.up * mouseX);
 
             if (Time.time >= dropCameraTime + dropCameraDelay && distance < distanceThreshold)
             {

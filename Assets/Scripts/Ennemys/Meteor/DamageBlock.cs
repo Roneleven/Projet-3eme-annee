@@ -6,11 +6,9 @@ public class DamageBlock : MonoBehaviour
     public float backwardForce = 10f;
     public float upwardForce = 1f;
 
-    public Player playerScript;
-
     private void Start()
     {
-        //Destroy(gameObject, .5f);
+        Destroy(gameObject, .5f);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -27,8 +25,6 @@ public class DamageBlock : MonoBehaviour
             {
                 playerRigidbody.AddForce(repulsionDirection * repulsionForce, ForceMode.Impulse);
             }
-            
-            playerScript.TakeDamage(10);
 
         Destroy(gameObject);
         }

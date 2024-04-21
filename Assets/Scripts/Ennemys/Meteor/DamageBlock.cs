@@ -10,7 +10,7 @@ public class DamageBlock : MonoBehaviour
 
     private void Start()
     {
-        //Destroy(gameObject, .5f);
+        Destroy(gameObject, .5f);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -27,7 +27,7 @@ public class DamageBlock : MonoBehaviour
             {
                 playerRigidbody.AddForce(repulsionDirection * repulsionForce, ForceMode.Impulse);
             }
-            
+
             playerScript.TakeDamage(10);
 
         Destroy(gameObject);

@@ -160,7 +160,7 @@ MonoBehaviour:
   cageRadius: 2.3
   cageTriggerTime: 5
   cageSpawnTime: 2.1
-  cagePatternPreview: {fileID: 0}
+  cagePatternPreview: {fileID: 4645954303748183070, guid: 4d4736979ec4263418d4502cc1470f40, type: 3}
   cageTransparentScale: 4
   cubeLauncherPattern: {fileID: 5459472322788609292}
   cubeTrackingScript: {fileID: 3571893575622429881}

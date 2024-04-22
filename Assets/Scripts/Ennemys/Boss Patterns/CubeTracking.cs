@@ -57,28 +57,6 @@ public class CubeTracking : MonoBehaviour
                 cubeToLaunch.AddComponent<BoxCollider>();
             }
 
-            CubeHealth cubeHealthScript = cubeToLaunch.GetComponent<CubeHealth>();
-
-            // Si le script CubeHealth n'est pas trouvé, l'ajouter
-            if (cubeHealthScript == null)
-            {
-                if (cubeHealthScript == null)
-                {
-                    cubeHealthScript = cubeToLaunch.AddComponent<CubeHealth>();
-
-                    // Créer un GameObject "Visual" comme enfant du cube
-                    GameObject visualObject = new GameObject("Visual");
-                    visualObject.transform.parent = cubeToLaunch.transform;
-
-                    // Créer un GameObject "state_0" comme enfant de "Visual"
-                    GameObject stateObject = new GameObject("state_0");
-                    stateObject.transform.parent = visualObject.transform;
-
-                    cubeHealthScript.health = 1;
-                }
-            }
-
-
             HomingCube homingCubeScript = cubeToLaunch.GetComponent<HomingCube>();
             if (homingCubeScript == null)
             {

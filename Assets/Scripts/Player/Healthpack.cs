@@ -5,14 +5,23 @@ using UnityEngine;
 public class Healthpack : MonoBehaviour
 {
     public int healthGain = 20;
+    private bool isCollected = false;
+    public float respawnCollectibleTime;
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && !isCollected)
         {
             Player playerHealth = other.gameObject.transform.root.GetComponent<Player>();
             playerHealth.Heal(healthGain);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            Invoke("RespawnCollectible", respawnCollectibleTime);
         }
+    }
+
+    void RespawnCollectible()
+    {
+        gameObject.SetActive(true);
+        isCollected = false;
     }
 }

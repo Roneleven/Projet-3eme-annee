@@ -28,8 +28,6 @@ public class DamageBlock : MonoBehaviour
                 playerRigidbody.AddForce(repulsionDirection * repulsionForce, ForceMode.Impulse);
             }
 
-            playerScript.TakeDamage(10);
-
         Destroy(gameObject);
         }
     }

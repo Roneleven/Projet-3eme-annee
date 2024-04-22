@@ -3,28 +3,32 @@ using UnityEngine;
 public class RepulseObject : MonoBehaviour
 {
     // Forces de répulsion
-    public float repulsionForce = 1f;
+    public GameObject child;
+    public float oppositeForce = 2f;
     public float backwardForce = 10f;
     public float upwardForce = 1f;
+    public float repulsionForceHorizontal;
 
     // Fonction appelée lorsqu'une collision se produit
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        Vector3 repulsionDirection = (collision.transform.position - transform.position).normalized;
+
+        if (child != null)
         {
-            // Calculer la direction de la répulsion
-            Vector3 repulsionDirection = (collision.transform.position - transform.position).normalized;
+            Vector3 oppositeDirection = (child.transform.position - collision.transform.position).normalized;
+            repulsionDirection += oppositeDirection * oppositeForce;
+        }
 
-            // Ajouter les forces de répulsion
-            repulsionDirection -= transform.forward * backwardForce;
-            repulsionDirection += transform.up * upwardForce;
+        Vector3 horizontalDirection = Vector3.ProjectOnPlane(repulsionDirection, Vector3.up).normalized;
+        Vector3 finalHorizontalDirection = horizontalDirection * repulsionForceHorizontal;
+        Vector3 backwardDirection = -collision.transform.forward * backwardForce;
+        Vector3 finalDirection = finalHorizontalDirection + Vector3.up * upwardForce + backwardDirection;
 
-            // Appliquer la force de répulsion au joueur
-            Rigidbody playerRigidbody = collision.gameObject.GetComponent<Rigidbody>();
-            if (playerRigidbody != null)
-            {
-                playerRigidbody.AddForce(repulsionDirection * repulsionForce, ForceMode.Impulse);
-            }
+        Rigidbody playerRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+        if (playerRigidbody != null)
+        {
+            playerRigidbody.AddForce(finalDirection, ForceMode.Impulse);
         }
     }
 }

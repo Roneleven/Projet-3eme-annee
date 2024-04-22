@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 3810439456834575818, guid: 2e43e7ba74c5590449a91b647d126f11, type: 3}
+  explosionTime: 1
 --- !u!114 &-7399426867032470940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,4 +151,4 @@ MonoBehaviour:
   Params: []
   OverrideAttenuation: 0
   OverrideMinDistance: 1
-  OverrideMaxDistance: 10
+  OverrideMaxDistance: 70

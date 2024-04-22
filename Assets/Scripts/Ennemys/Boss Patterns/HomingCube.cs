@@ -69,6 +69,7 @@ public class HomingCube : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Collision with player");
             Destroy(gameObject);
         }
     }

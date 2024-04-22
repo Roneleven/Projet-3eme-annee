@@ -134,8 +134,16 @@ public class GatlinLauncherPattern : MonoBehaviour
             yield break;
         }
 
+        int cubesLaunched = 0; // Variable pour compter les cubes lancés
+
         foreach (GameObject cube in cubes)
         {
+            if (cubesLaunched >= cubesToLaunch)
+            {
+                // Si le nombre de cubes lancés atteint cubesToLaunch, sortir de la boucle
+                yield break;
+            }
+
             Rigidbody cubeRigidbody = cube.AddComponent<Rigidbody>();
             cubeRigidbody.useGravity = true;
 
@@ -150,8 +158,11 @@ public class GatlinLauncherPattern : MonoBehaviour
 
             Destroy(cube, heartSpawner.cubeDestroyDelay);
 
+            cubesLaunched++; // Incrémenter le nombre de cubes lancés
+
             yield return new WaitForSeconds(launchInterval);
         }
     }
+
 
 }

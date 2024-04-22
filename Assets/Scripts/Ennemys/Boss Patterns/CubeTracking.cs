@@ -61,7 +61,7 @@ public class CubeTracking : MonoBehaviour
 
             // Configure le cube à tête chercheuse
             homingCubeScript.SetTarget(targetTransform);
-            homingCubeScript.SetDestroyDelay(5f);
+            homingCubeScript.SetDestroyDelay(destroyDelay);
             homingCubeScript.SetSpeed(homingCubeSpeed);
         }
     }

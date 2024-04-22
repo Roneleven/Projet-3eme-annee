@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -30,5 +31,9 @@ public class Player : MonoBehaviour
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
+        if (currentHealth <= 0)
+        {
+            FindObjectOfType<SceneTransition>().ReloadScene();
+        }
     }
 }

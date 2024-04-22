@@ -447,7 +447,7 @@ public class HeartSpawner : MonoBehaviour
     {
         timer += Time.deltaTime;
         float distanceToPlayer = Vector3.Distance(playerPosition, playerGridPosition);
-        float acceptableOverlap = gridSize / 1f;
+        float acceptableOverlap = gridSize / 0.4f;
 
         if (distanceToPlayer >= (gridSize + acceptableOverlap))
         {

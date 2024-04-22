@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f7807ec18cab546aac220794c3aae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerScript: {fileID: 0}
   delayBeforeDisappear: 1
   scaleFactor: 5
   eye: {fileID: 5738283318553002890}

@@ -2,14 +2,20 @@ using UnityEngine;
 
 public class Meteorite : MonoBehaviour
 {
+    public Player playerScript;
+
     public GameObject objectToSpawnOnImpact;
     public GameObject feedbackObject;
     public float explosionRadius = 1.5f;
     private FMOD.Studio.EventInstance meteor;
     private GameObject feedbackInstance;
 
+    public GameObject triggerHB;
+
     private void Start()
     {
+        playerScript = FindObjectOfType<Player>();
+
         Vector3 spawnPosition = transform.position;
         MeteorPattern meteorPattern = FindObjectOfType<MeteorPattern>();
         meteor = FMODUnity.RuntimeManager.CreateInstance("event:/Heart/Patterns/Meteor_Start");
@@ -50,6 +56,8 @@ public class Meteorite : MonoBehaviour
                     Destroy(hitCollider.gameObject);
                 }
             }
+
+
         }
         
         if (collision.collider.CompareTag("Block") || collision.collider.CompareTag("DestroyableBlock"))
@@ -63,5 +71,20 @@ public class Meteorite : MonoBehaviour
                 rb.velocity = new Vector3(rb.velocity.x, 20f, rb.velocity.z);
             }
         }
+
+        if (collision.collider.CompareTag("Player"))
+        {
+                playerScript.TakeDamage(70);
+                Destroy(gameObject);
+                Destroy(feedbackInstance);
+        }
     }
+
+    private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("HeartBlock") && triggerHB != null && other.gameObject == triggerHB)
+            {
+                Destroy(other.gameObject);
+            }
+        }
 }

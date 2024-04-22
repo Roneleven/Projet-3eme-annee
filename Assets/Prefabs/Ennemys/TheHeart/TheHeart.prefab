@@ -168,7 +168,7 @@ MonoBehaviour:
   bigWallPattern: {fileID: 5643635420946936022}
   explosivePillarPattern: {fileID: 7142425487198719263}
   meteorPattern: {fileID: 8496086104443576437}
-  gatlinLauncherPattern: {fileID: 0}
+  gatlinLauncherPattern: {fileID: 3860631658362292019}
   bossPatternManager: {fileID: 2249755692970071878}
 --- !u!114 &5459472322788609292
 MonoBehaviour:

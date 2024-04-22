@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class ExplosionScript : MonoBehaviour
 {
+
+    public Player playerScript;
+
     public float delayBeforeDisappear = 5f;
     public float scaleFactor = 1f;
     
@@ -15,6 +18,7 @@ public class ExplosionScript : MonoBehaviour
     {
         StartCoroutine(ExpandCoroutine());
         StartCoroutine(DisappearCoroutine());
+        playerScript = FindObjectOfType<Player>();
     }
 
     private System.Collections.IEnumerator ExpandCoroutine()
@@ -69,6 +73,7 @@ public class ExplosionScript : MonoBehaviour
             playerRigidbody.AddForce(finalDirection, ForceMode.Impulse);
         }
 
+        playerScript.TakeDamage(10);
         Destroy(gameObject);
     }
 }

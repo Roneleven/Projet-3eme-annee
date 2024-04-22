@@ -46,20 +46,45 @@ public class CubeTracking : MonoBehaviour
                 continue;
             }
 
-            // Ajoute un Rigidbody au cube à tête chercheuse
             Rigidbody homingCubeRigidbody = cubeToLaunch.AddComponent<Rigidbody>();
             homingCubeRigidbody.useGravity = true;
 
+            BoxCollider boxCollider = cubeToLaunch.GetComponent<BoxCollider>();
 
-            // Ajoute ou récupère le script HomingCube
+            // Si aucun BoxCollider n'est trouvé, en ajouter un
+            if (boxCollider == null)
+            {
+                cubeToLaunch.AddComponent<BoxCollider>();
+            }
+
+            CubeHealth cubeHealthScript = cubeToLaunch.GetComponent<CubeHealth>();
+
+            // Si le script CubeHealth n'est pas trouvé, l'ajouter
+            if (cubeHealthScript == null)
+            {
+                if (cubeHealthScript == null)
+                {
+                    cubeHealthScript = cubeToLaunch.AddComponent<CubeHealth>();
+
+                    // Créer un GameObject "Visual" comme enfant du cube
+                    GameObject visualObject = new GameObject("Visual");
+                    visualObject.transform.parent = cubeToLaunch.transform;
+
+                    // Créer un GameObject "state_0" comme enfant de "Visual"
+                    GameObject stateObject = new GameObject("state_0");
+                    stateObject.transform.parent = visualObject.transform;
+
+                    cubeHealthScript.health = 1;
+                }
+            }
+
+
             HomingCube homingCubeScript = cubeToLaunch.GetComponent<HomingCube>();
             if (homingCubeScript == null)
             {
-                // Ajoute le script HomingCube s'il n'est pas déjà présent
                 homingCubeScript = cubeToLaunch.AddComponent<HomingCube>();
             }
 
-            // Configure le cube à tête chercheuse
             homingCubeScript.SetTarget(targetTransform);
             homingCubeScript.SetDestroyDelay(destroyDelay);
             homingCubeScript.SetSpeed(homingCubeSpeed);

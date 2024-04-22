@@ -119,3 +119,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthGain: 20
+  respawnCollectibleTime: 10

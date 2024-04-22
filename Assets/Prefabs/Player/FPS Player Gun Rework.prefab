@@ -6344,7 +6344,7 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Bits: 520
   canMove: 1
-  cameraController: {fileID: 0}
+  cameraController: {fileID: 1367674501831076130}
   jetpackForce: 7
   jetpackChargeRate: 10
   maxJetpackCharge: 8

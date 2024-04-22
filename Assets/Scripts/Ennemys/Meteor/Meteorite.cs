@@ -10,8 +10,6 @@ public class Meteorite : MonoBehaviour
     private FMOD.Studio.EventInstance meteor;
     private GameObject feedbackInstance;
 
-    public GameObject triggerHB;
-
     private void Start()
     {
         playerScript = FindObjectOfType<Player>();
@@ -72,6 +70,20 @@ public class Meteorite : MonoBehaviour
             }
         }
 
+        if (collision.collider.CompareTag("HeartBlock"))
+        {
+            Rigidbody rb = GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                meteor.setParameterByName("Pattern", 2.0F);
+                meteor.setParameterByName("Pattern", 0.0F);
+                rb.useGravity = true;
+                rb.velocity = new Vector3(rb.velocity.x, 2f, rb.velocity.z);
+            }
+
+            Destroy(collision.collider.gameObject);
+        }
+
         if (collision.collider.CompareTag("Player"))
         {
                 playerScript.TakeDamage(70);
@@ -79,12 +91,4 @@ public class Meteorite : MonoBehaviour
                 Destroy(feedbackInstance);
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("HeartBlock") && triggerHB != null && other.gameObject == triggerHB)
-            {
-                Destroy(other.gameObject);
-            }
-        }
 }

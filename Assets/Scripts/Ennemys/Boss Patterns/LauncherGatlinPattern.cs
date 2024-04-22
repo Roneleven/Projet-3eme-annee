@@ -71,6 +71,7 @@ public class GatlinLauncherPattern : MonoBehaviour
                 float azimuthAngle = Random.Range(0f, 360f);
 
                 Vector3 spherePosition = CalculateSpherePosition(sphereCenter, polarAngle, azimuthAngle);
+                GatlinD damaging = cubeToMove.AddComponent<GatlinD>();
 
                 StartCoroutine(MoveCubeToPosition(cubeToMove, spherePosition));
 

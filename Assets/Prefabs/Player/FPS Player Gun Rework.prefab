@@ -287,8 +287,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550d9e4aedbe4d146b398b21467aaf8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovements: {fileID: 0}
   mouseSensivity: 450
   playerBody: {fileID: 7720814548836648889}
+  xRotation: 0
 --- !u!54 &3758678625323864786
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -343,15 +345,15 @@ RectTransform:
   m_GameObject: {fileID: 2369855576276000612}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10.946763, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4172291201936771125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -216.59038, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.0024414062, y: 0.000045776367}
+  m_SizeDelta: {x: 0.19995117, y: -0.4600067}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &996119605836976289
 CanvasRenderer:
@@ -899,10 +901,10 @@ RectTransform:
   - {fileID: 1613122716386559989}
   m_Father: {fileID: 3217633168446887420}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 502, y: 40}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 586.51807, y: -898.59625}
+  m_SizeDelta: {x: 1226.406, y: 177.421}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1213813732484946772
 MonoBehaviour:
@@ -6100,6 +6102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aea45b0ca4daaf48910109ccf2f920a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovements: {fileID: 0}
+  mouseLook: {fileID: 0}
   targetToFollow: {fileID: 6232101016860361905}
   baseSpeed: 5
   distanceThreshold: 0.5
@@ -6109,6 +6113,7 @@ MonoBehaviour:
   maxFOV: 120
   mainCameraObject: {fileID: 8902013439379412538}
   invincibility: {fileID: 3307882838200095667}
+  playerCamera: {fileID: 0}
 --- !u!1 &6082785133045121478
 GameObject:
   m_ObjectHideFlags: 0
@@ -6272,8 +6277,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6232101016860361905}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: -45, y: 1.5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6285,7 +6290,7 @@ Transform:
   - {fileID: 3217633168446887420}
   - {fileID: 1438410973320986582}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4659278818703242318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6338,6 +6343,7 @@ MonoBehaviour:
     m_Bits: 8
   - serializedVersion: 2
     m_Bits: 520
+  canMove: 1
   cameraController: {fileID: 0}
   jetpackForce: 7
   jetpackChargeRate: 10
@@ -6435,15 +6441,15 @@ RectTransform:
   m_GameObject: {fileID: 6702834726252868018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.4655, y: 0.67137855, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4172291201936771125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -9.771408, y: 54.71}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3360411466022164971
 CanvasRenderer:
@@ -6826,6 +6832,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aea45b0ca4daaf48910109ccf2f920a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovements: {fileID: 0}
+  mouseLook: {fileID: 0}
   targetToFollow: {fileID: 0}
   baseSpeed: 5
   distanceThreshold: 0.5
@@ -6835,6 +6843,7 @@ MonoBehaviour:
   maxFOV: 120
   mainCameraObject: {fileID: 0}
   invincibility: {fileID: 0}
+  playerCamera: {fileID: 0}
 --- !u!1 &8925450854511973420
 GameObject:
   m_ObjectHideFlags: 0

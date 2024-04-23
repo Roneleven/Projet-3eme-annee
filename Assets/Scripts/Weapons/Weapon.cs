@@ -27,6 +27,7 @@ public class Weapon : MonoBehaviour
     public float resetSmooth;
     public Vector3 scopePos;
     public float spreadAngle; // New parameter for controlling spread angle
+    private bool _explosiveMode = false;
 
     [Header("ShootingVFX")]
     public ParticleSystem bulletTrailVFX;
@@ -62,6 +63,42 @@ public class Weapon : MonoBehaviour
     {
         if (!_held) return;
 
+        // Logique pour basculer entre les modes de tir
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            _explosiveMode = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            _explosiveMode = true;
+        }
+
+
+        // Appel de la fonction de tir appropriée en fonction du mode actuel
+        if (_explosiveMode)
+        {
+            // Logique pour le mode de tir explosif
+            if ((tapable ? Input.GetMouseButtonDown(0) : Input.GetMouseButton(0)) && !_shooting && !_reloading)
+            {
+                _ammo--;
+                _ammoText.text = _ammo + " / " + maxAmmo +"explo";
+                ExplosiveShoot(); // Appel de la nouvelle fonction de tir
+                StartCoroutine(_ammo <= 0 ? ReloadCooldown() : ShootingCooldown());
+            }
+        }
+        else
+        {
+            // Logique pour le mode de tir normal
+            if ((tapable ? Input.GetMouseButtonDown(0) : Input.GetMouseButton(0)) && !_shooting && !_reloading)
+            {
+                _ammo--;
+                _ammoText.text = _ammo + " / " + maxAmmo;
+                Shoot(); // Appel de la fonction de tir normale
+                StartCoroutine(_ammo <= 0 ? ReloadCooldown() : ShootingCooldown());
+            }
+
+        }
+
         if (_time < animTime)
         {
             _time += Time.deltaTime;
@@ -89,14 +126,6 @@ public class Weapon : MonoBehaviour
         {
             StartCoroutine(ReloadCooldown());
             
-        }
-
-        if ((tapable ? Input.GetMouseButtonDown(0) : Input.GetMouseButton(0)) && !_shooting && !_reloading)
-        {
-            _ammo--;
-            _ammoText.text = _ammo + " / " + maxAmmo;
-            Shoot();
-            StartCoroutine(_ammo <= 0 ? ReloadCooldown() : ShootingCooldown());
         }
     }
 
@@ -142,6 +171,11 @@ public class Weapon : MonoBehaviour
             }
         }
         Recoil_Script.RecoilFire();
+    }
+
+    private void ExplosiveShoot()
+    {
+        Debug.Log("Explosive shoot");
     }
 
     private void HandleHitObject(RaycastHit hitInfo)

@@ -206,7 +206,7 @@ MonoBehaviour:
   teleportPointBoxSpawnerPairs: []
   parent: {fileID: 8374639144287423287}
   eyeRadius: {fileID: 7289005239915659131}
-  moveSpeed: 2
+  moveSpeed: 0.8
   accessibleTeleportPoints: 
 --- !u!114 &2249755692970071878
 MonoBehaviour:
@@ -224,14 +224,14 @@ MonoBehaviour:
   - patterns: 
   - patterns: 01000000
   - patterns: 0300000001000000
-  - patterns: 0000000004000000
+  - patterns: 0600000004000000
   - patterns: 05000000
   - patterns: 020000000400000005000000
   nextPatternTimes:
   - 5000
   - 4
   - 6.5
-  - 6
+  - 7
   - 5.8
   - 5
 --- !u!114 &6558533012190280565
@@ -337,11 +337,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2b5357cd3c9684391c33dafd359465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphereRadius: 5
+  sphereRadius: 2
   sphereHeightOffset: 15
   sphereMovementDuration: 0.5
-  launchInterval: 0.15
-  cubesToLaunch: 7
+  launchInterval: 0.25
+  cubesToLaunch: 15
   heartSpawner: {fileID: 1380432832344173796}
 --- !u!114 &7917694089279008631
 MonoBehaviour:

@@ -9,6 +9,7 @@ public class GatlinLauncherPattern : MonoBehaviour
     public float sphereRadius;
     public float sphereHeightOffset;
     public float sphereMovementDuration;
+    public float launchForce;
     public float launchInterval;
     public int cubesToLaunch;
 
@@ -155,7 +156,7 @@ public class GatlinLauncherPattern : MonoBehaviour
             Vector3 launchDirection = (playerPositionWithOffset - cube.transform.position).normalized;
             FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Patterns/Gatlin_Shoot");
 
-            cubeRigidbody.AddForce(launchDirection * heartSpawner.launchForce, ForceMode.Impulse);
+            cubeRigidbody.AddForce(launchDirection * launchForce, ForceMode.Impulse);
 
             Destroy(cube, heartSpawner.cubeDestroyDelay);
 

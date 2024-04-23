@@ -24,6 +24,11 @@ public class Player : MonoBehaviour
         {
             TakeDamage(20);
         }*/
+
+        if (Input.GetKeyDown(KeyCode.E))
+      {
+          Heal(20);
+      }
     }
 
     public void TakeDamage(int damage)

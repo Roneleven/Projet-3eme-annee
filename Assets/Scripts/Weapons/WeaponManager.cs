@@ -21,6 +21,7 @@ public class WeaponManager : MonoBehaviour {
     public Transform swayHolder;
     public TMP_Text ammoText;
     public TMP_Text chargeText;
+    public TMP_Text laserText;
     public Camera[] playerCams;
     public Image crosshairImage;
 
@@ -39,6 +40,7 @@ public class WeaponManager : MonoBehaviour {
             swayHolder.localPosition += (Vector3) mouseDelta * swaySize;
             ammoText.gameObject.SetActive(_heldWeapon.currentMode == FireMode.Normal);
             chargeText.gameObject.SetActive(_heldWeapon.currentMode == FireMode.Explosive);
+            laserText.gameObject.SetActive(_heldWeapon.currentMode == FireMode.Laser);
 
             if (Input.GetKeyDown(KeyCode.A)) {
                 _heldWeapon.Drop(playerCamera);
@@ -75,7 +77,7 @@ public class WeaponManager : MonoBehaviour {
 
             _isWeaponHeld = true;
             _heldWeapon = realList[0].transform.GetComponent<Weapon>();
-            _heldWeapon.Pickup(weaponHolder, playerCamera, ammoText, chargeText) ;
+            _heldWeapon.Pickup(weaponHolder, playerCamera, ammoText, chargeText, laserText) ;
         }
     }
 

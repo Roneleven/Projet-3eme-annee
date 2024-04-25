@@ -6,7 +6,8 @@ using Random = UnityEngine.Random;
 public enum FireMode
 {
     Normal,
-    Explosive
+    Explosive,
+    Laser
 }
 public class Weapon : MonoBehaviour
 {
@@ -62,8 +63,12 @@ public class Weapon : MonoBehaviour
     public float explosionForce;
     public GameObject explosionPrefab;
     public int maxExplosiveCharges = 5; // Nombre maximum de charges pour le mode explosif
-    private int currentExplosiveCharges; 
+    private int currentExplosiveCharges = 4; 
     private TMP_Text explosiveChargeText;
+
+    [Header("Laser Mode")]
+    private TMP_Text _laserText;
+
 
     private void Start()
     {
@@ -125,6 +130,8 @@ public class Weapon : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             SwitchToExplosiveMode();
+        } else if (Input.GetKeyDown(KeyCode.Alpha3)){
+            SwitchToLaserMode();
         }
 
         //tir clique gauche explosive
@@ -135,6 +142,16 @@ public class Weapon : MonoBehaviour
                 
                 explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
                 ExplosiveShoot();
+            }
+        }
+
+        if (currentMode == FireMode.Laser)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+
+                _laserText.text = "Laser: ";
+                LaserShoot();
             }
         }
     }
@@ -242,7 +259,7 @@ public class Weapon : MonoBehaviour
         _reloading = false;
     }
 
-    public void Pickup(Transform weaponHolder, Transform playerCamera, TMP_Text ammoText, TMP_Text chargeText)
+    public void Pickup(Transform weaponHolder, Transform playerCamera, TMP_Text ammoText, TMP_Text chargeText, TMP_Text laserText)
     {
         if (_held) return;
         Destroy(_rb);
@@ -264,6 +281,8 @@ public class Weapon : MonoBehaviour
         _ammoText.text = _ammo + " / " + maxAmmo;
         explosiveChargeText = chargeText;
         explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
+        _laserText = laserText;
+        _laserText.text = "Laser";
         _scoping = false;
     }
 
@@ -303,19 +322,22 @@ public class Weapon : MonoBehaviour
         currentMode = FireMode.Normal;
     }
 
-    // Méthode pour passer au mode de tir explosif
     private void SwitchToExplosiveMode()
     {
         currentMode = FireMode.Explosive;
+    }
+    private void SwitchToLaserMode()
+    {
+        currentMode = FireMode.Laser;
     }
 
     #endregion
     #region MODE EXPLOSIVE
     private void ExplosiveShoot()
     {
+        Debug.Log("explosive charge shot");
         if (currentMode == FireMode.Explosive && currentExplosiveCharges > 0)
-        {
-            // Logique de tir explosive
+        {  
             currentExplosiveCharges--;
         }
     }
@@ -330,6 +352,14 @@ public class Weapon : MonoBehaviour
     #endregion
 
     #region MODE LASER
+
+    private void LaserShoot()
+    {
+        if (currentMode == FireMode.Laser)
+        {
+            Debug.Log("laser shot");
+        }
+    }
 
     #endregion
     public bool Scoping => _scoping;

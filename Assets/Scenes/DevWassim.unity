@@ -818,6 +818,10 @@ PrefabInstance:
       propertyPath: explosionRadius
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: explosiveDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4805179598088156730, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: m_Name
       value: Weapon

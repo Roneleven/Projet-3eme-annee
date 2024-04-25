@@ -60,6 +60,7 @@ public class Weapon : MonoBehaviour
 
 
     [Header("Explosive Mode")]
+    public int explosiveDamage;
     public float explosiveRange;
     public float explosionRadius;
     public GameObject explosionPrefab;
@@ -349,7 +350,7 @@ public class Weapon : MonoBehaviour
                     CubeHealth cubeHealth = hitCollider.GetComponent<CubeHealth>();
                     if (cubeHealth != null)
                     {
-                        cubeHealth.TakeDamage(damage);
+                        cubeHealth.TakeDamage(explosiveDamage);
                     }
                 }
             }

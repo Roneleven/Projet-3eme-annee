@@ -142,22 +142,19 @@ public class Weapon : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && currentExplosiveCharges > 0)
             {
-                Debug.Log("start timer");
-                // Commencer le chargement du tir explosif
                 chargeStartTime = Time.time;
             }
 
             if (Input.GetMouseButton(0) && Time.time - chargeStartTime >= chargeTimeThreshold)
             {
-                Debug.Log("charged");
-                // Tir chargé, vous pouvez ajouter ici des effets visuels ou sonores pour indiquer que le tir est prêt
+                // Tir chargé, ajouter feedback sonores/visuels quand c'est chargé ici
             }
 
             if (Input.GetMouseButtonUp(0) && Time.time - chargeStartTime >= chargeTimeThreshold)
             {
                 Debug.Log("shoot");
-                ExplosiveShoot(); // Tirer seulement si le tir est chargé
-                explosiveChargeText.text = "Charges: " + currentExplosiveCharges; // Mettre à jour le texte des charges explosives
+                ExplosiveShoot(); 
+                explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
             }
         }
     }
@@ -166,9 +163,6 @@ public class Weapon : MonoBehaviour
     {
         if (currentMode == FireMode.Normal)
         {
-            // Logique de tir normale
-
-            // Reduce accuracy if not scoped
             Vector3 shotDirection = _playerCamera.forward;
             if (!_scoping)
             {

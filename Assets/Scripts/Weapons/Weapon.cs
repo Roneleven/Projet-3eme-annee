@@ -63,7 +63,7 @@ public class Weapon : MonoBehaviour
     public GameObject explosionPrefab;
     public int maxExplosiveCharges = 5; // Nombre maximum de charges pour le mode explosif
     private int currentExplosiveCharges; 
-    private int totalExplosiveAmmo;
+    private TMP_Text explosiveChargeText;
 
     private void Start()
     {
@@ -72,7 +72,8 @@ public class Weapon : MonoBehaviour
         _ammo = maxAmmo;
         Recoil_Script = transform.Find("FPS Player Gun Rework/CameraRot/CameraRecoil").GetComponent<Recoil>();
         currentExplosiveCharges = maxExplosiveCharges;
-    }
+        currentMode = FireMode.Normal;
+}
 
     private void Update()
     {
@@ -106,7 +107,7 @@ public class Weapon : MonoBehaviour
             StartCoroutine(ReloadCooldown());
 
         }
-
+        //tir clique gauche normal
         if ((tapable ? Input.GetMouseButtonDown(0) : Input.GetMouseButton(0)) && !_shooting && !_reloading && currentMode == FireMode.Normal)
         {
             _ammo--;
@@ -126,10 +127,13 @@ public class Weapon : MonoBehaviour
             SwitchToExplosiveMode();
         }
 
+        //tir clique gauche explosive
         if (currentMode == FireMode.Explosive)
         {
             if (Input.GetMouseButtonDown(0) && currentExplosiveCharges > 0)
             {
+                
+                explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
                 ExplosiveShoot();
             }
         }
@@ -184,14 +188,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private void ExplosiveShoot()
-    {
-        if (currentMode == FireMode.Explosive && currentExplosiveCharges-- > 0)
-        {
-            // Logique de tir explosive
-            currentExplosiveCharges--;
-        }
-    }
+   
 
 
     private void HandleHitObject(RaycastHit hitInfo)
@@ -245,7 +242,7 @@ public class Weapon : MonoBehaviour
         _reloading = false;
     }
 
-    public void Pickup(Transform weaponHolder, Transform playerCamera, TMP_Text ammoText)
+    public void Pickup(Transform weaponHolder, Transform playerCamera, TMP_Text ammoText, TMP_Text chargeText)
     {
         if (_held) return;
         Destroy(_rb);
@@ -265,6 +262,8 @@ public class Weapon : MonoBehaviour
         _playerCamera = playerCamera;
         _ammoText = ammoText;
         _ammoText.text = _ammo + " / " + maxAmmo;
+        explosiveChargeText = chargeText;
+        explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
         _scoping = false;
     }
 
@@ -293,6 +292,7 @@ public class Weapon : MonoBehaviour
         _held = false;
     }
 
+    #region SWITCH TYPE ARMES
     public void SwitchFireMode()
     {
         currentMode = (currentMode == FireMode.Normal) ? FireMode.Explosive : FireMode.Normal;
@@ -309,14 +309,28 @@ public class Weapon : MonoBehaviour
         currentMode = FireMode.Explosive;
     }
 
-    public void EnemyKilled()
+    #endregion
+    #region MODE EXPLOSIVE
+    private void ExplosiveShoot()
     {
-        // Augmenter le nombre de charges si le maximum n'est pas atteint
+        if (currentMode == FireMode.Explosive && currentExplosiveCharges > 0)
+        {
+            // Logique de tir explosive
+            currentExplosiveCharges--;
+        }
+    }
+
+    public void GainExplosiveCharge()
+    {
         if (currentExplosiveCharges < maxExplosiveCharges)
         {
             currentExplosiveCharges++;
         }
     }
+    #endregion
 
+    #region MODE LASER
+
+    #endregion
     public bool Scoping => _scoping;
 }

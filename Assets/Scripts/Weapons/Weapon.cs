@@ -58,15 +58,16 @@ public class Weapon : MonoBehaviour
     private Quaternion _startRotation;
     public Recoil Recoil_Script;
 
+
     [Header("Explosive Mode")]
+    public float explosiveRange;
     public float explosionRadius;
     public GameObject explosionPrefab;
-    public int maxExplosiveCharges = 5; // Nombre maximum de charges pour le mode explosif
-    private int currentExplosiveCharges = 4; 
+    public int maxExplosiveCharges = 5;
+    private int currentExplosiveCharges = 5; 
     private TMP_Text explosiveChargeText;
-    public bool chargingShot; // Détermine si le tir est en cours de chargement
-    public float chargeStartTime; // Heure de début du chargement du tir
-    public float chargeTimeThreshold = 1.5f;
+    private float chargeStartTime;
+    public float chargeTimeThreshold;
 
     [Header("Laser Mode")]
     private TMP_Text _laserText;
@@ -339,7 +340,7 @@ public class Weapon : MonoBehaviour
         if (currentMode == FireMode.Explosive && currentExplosiveCharges > 0)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, range))
+            if (Physics.Raycast(transform.position, transform.forward, out hit, explosiveRange))
             {
                 Instantiate(explosionPrefab, hit.point, Quaternion.identity);
                 Collider[] colliders = Physics.OverlapSphere(hit.point, explosionRadius);

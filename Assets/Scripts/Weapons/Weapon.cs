@@ -3,8 +3,14 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public enum FireMode
+{
+    Normal,
+    Explosive
+}
 public class Weapon : MonoBehaviour
 {
+    public FireMode currentMode = FireMode.Normal;
     [Header("Damage")]
     public int damage;
 
@@ -27,7 +33,7 @@ public class Weapon : MonoBehaviour
     public float resetSmooth;
     public Vector3 scopePos;
     public float spreadAngle; // New parameter for controlling spread angle
-    private bool _explosiveMode = false;
+
 
     [Header("ShootingVFX")]
     public ParticleSystem bulletTrailVFX;
@@ -51,53 +57,26 @@ public class Weapon : MonoBehaviour
     private Quaternion _startRotation;
     public Recoil Recoil_Script;
 
+    [Header("Explosive Mode")]
+    public float chargeTime;
+    public float explosionForce;
+    public GameObject explosionPrefab;
+    public int maxExplosiveCharges = 5; // Nombre maximum de charges pour le mode explosif
+    private int currentExplosiveCharges; 
+    private int totalExplosiveAmmo;
+
     private void Start()
     {
         _rb = gameObject.AddComponent<Rigidbody>();
         _rb.mass = 0.1f;
         _ammo = maxAmmo;
         Recoil_Script = transform.Find("FPS Player Gun Rework/CameraRot/CameraRecoil").GetComponent<Recoil>();
+        currentExplosiveCharges = maxExplosiveCharges;
     }
 
     private void Update()
     {
         if (!_held) return;
-
-        // Logique pour basculer entre les modes de tir
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            _explosiveMode = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            _explosiveMode = true;
-        }
-
-
-        // Appel de la fonction de tir appropriée en fonction du mode actuel
-        if (_explosiveMode)
-        {
-            // Logique pour le mode de tir explosif
-            if ((tapable ? Input.GetMouseButtonDown(0) : Input.GetMouseButton(0)) && !_shooting && !_reloading)
-            {
-                _ammo--;
-                _ammoText.text = _ammo + " / " + maxAmmo +"explo";
-                ExplosiveShoot(); // Appel de la nouvelle fonction de tir
-                StartCoroutine(_ammo <= 0 ? ReloadCooldown() : ShootingCooldown());
-            }
-        }
-        else
-        {
-            // Logique pour le mode de tir normal
-            if ((tapable ? Input.GetMouseButtonDown(0) : Input.GetMouseButton(0)) && !_shooting && !_reloading)
-            {
-                _ammo--;
-                _ammoText.text = _ammo + " / " + maxAmmo;
-                Shoot(); // Appel de la fonction de tir normale
-                StartCoroutine(_ammo <= 0 ? ReloadCooldown() : ShootingCooldown());
-            }
-
-        }
 
         if (_time < animTime)
         {
@@ -125,58 +104,95 @@ public class Weapon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && !_reloading && _ammo < maxAmmo)
         {
             StartCoroutine(ReloadCooldown());
-            
+
+        }
+
+        if ((tapable ? Input.GetMouseButtonDown(0) : Input.GetMouseButton(0)) && !_shooting && !_reloading && currentMode == FireMode.Normal)
+        {
+            _ammo--;
+            _ammoText.text = _ammo + " / " + maxAmmo;
+            Shoot();
+            StartCoroutine(_ammo <= 0 ? ReloadCooldown() : ShootingCooldown());
+        }
+
+        //switch de mode
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SwitchToNormalMode();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SwitchToExplosiveMode();
+        }
+
+        if (currentMode == FireMode.Explosive)
+        {
+            if (Input.GetMouseButtonDown(0) && currentExplosiveCharges > 0)
+            {
+                ExplosiveShoot();
+            }
         }
     }
 
     private void Shoot()
     {
-        // Reduce accuracy if not scoped
-        Vector3 shotDirection = _playerCamera.forward;
-        if (!_scoping)
+        if (currentMode == FireMode.Normal)
         {
-            // Add random deviation to the shot direction
-            Vector3 spreadDirection = Quaternion.Euler(Random.insideUnitSphere * spreadAngle) * shotDirection;
-            shotDirection = Vector3.Slerp(shotDirection, spreadDirection, 0.5f); // Adjust spread strength
-        }
+            // Logique de tir normale
 
-        // Apply kickback force
-        transform.localPosition -= new Vector3(0, 0, kickbackForce);
-
-        // Play bullet trail VFX regardless of hitting something or not
-        if (bulletTrailVFX != null)
-        {
-            // Apply rotation to the particle system
-            Quaternion lookRotation = Quaternion.LookRotation(shotDirection, Vector3.up);
-            bulletTrailVFX.transform.rotation = lookRotation;
-
-            // Play the particle system
-            bulletTrailVFX.Play();
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Guns/BasicGun/Shoot");
-        }
-
-        // Perform raycast to check for hit
-        RaycastHit hitInfo;
-        if (Physics.Raycast(_playerCamera.position, shotDirection, out hitInfo, range))
-        {
-            // Process hit object
-            var heartHealth = hitInfo.transform.GetComponent<HeartHealth>();
-            if (heartHealth != null)
+            // Reduce accuracy if not scoped
+            Vector3 shotDirection = _playerCamera.forward;
+            if (!_scoping)
             {
-                heartHealth.TakeDamage(damage);
+                // Add random deviation to the shot direction
+                Vector3 spreadDirection = Quaternion.Euler(Random.insideUnitSphere * spreadAngle) * shotDirection;
+                shotDirection = Vector3.Slerp(shotDirection, spreadDirection, 0.5f); // Adjust spread strength
             }
-            else
+
+            // Apply kickback force
+            transform.localPosition -= new Vector3(0, 0, kickbackForce);
+
+            // Play bullet trail VFX regardless of hitting something or not
+            if (bulletTrailVFX != null)
             {
-                HandleHitObject(hitInfo);
+                // Apply rotation to the particle system
+                Quaternion lookRotation = Quaternion.LookRotation(shotDirection, Vector3.up);
+                bulletTrailVFX.transform.rotation = lookRotation;
+
+                // Play the particle system
+                bulletTrailVFX.Play();
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Guns/BasicGun/Shoot");
             }
+
+            // Perform raycast to check for hit
+            RaycastHit hitInfo;
+            if (Physics.Raycast(_playerCamera.position, shotDirection, out hitInfo, range))
+            {
+                // Process hit object
+                var heartHealth = hitInfo.transform.GetComponent<HeartHealth>();
+                if (heartHealth != null)
+                {
+                    heartHealth.TakeDamage(damage);
+                }
+                else
+                {
+                    HandleHitObject(hitInfo);
+                }
+            }
+            Recoil_Script.RecoilFire();
         }
-        Recoil_Script.RecoilFire();
     }
 
     private void ExplosiveShoot()
     {
-        Debug.Log("Explosive shoot");
+        if (currentMode == FireMode.Explosive && currentExplosiveCharges-- > 0)
+        {
+            // Logique de tir explosive
+            currentExplosiveCharges--;
+        }
     }
+
 
     private void HandleHitObject(RaycastHit hitInfo)
     {
@@ -204,9 +220,9 @@ public class Weapon : MonoBehaviour
         }
 
         if (hitInfo.transform.CompareTag("DestroyableBlock"))
-    {
-        Destroy(hitInfo.transform.gameObject);
-    }
+        {
+            Destroy(hitInfo.transform.gameObject);
+        }
     }
 
     private IEnumerator ShootingCooldown()
@@ -275,6 +291,31 @@ public class Weapon : MonoBehaviour
         _ammoText.text = "";
         transform.parent = null;
         _held = false;
+    }
+
+    public void SwitchFireMode()
+    {
+        currentMode = (currentMode == FireMode.Normal) ? FireMode.Explosive : FireMode.Normal;
+    }
+
+    private void SwitchToNormalMode()
+    {
+        currentMode = FireMode.Normal;
+    }
+
+    // Méthode pour passer au mode de tir explosif
+    private void SwitchToExplosiveMode()
+    {
+        currentMode = FireMode.Explosive;
+    }
+
+    public void EnemyKilled()
+    {
+        // Augmenter le nombre de charges si le maximum n'est pas atteint
+        if (currentExplosiveCharges < maxExplosiveCharges)
+        {
+            currentExplosiveCharges++;
+        }
     }
 
     public bool Scoping => _scoping;

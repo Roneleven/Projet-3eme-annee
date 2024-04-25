@@ -806,6 +806,14 @@ PrefabInstance:
       propertyPath: Recoil_Script
       value: 
       objectReference: {fileID: 1940570660}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: explosionPrefab
+      value: 
+      objectReference: {fileID: 191186, guid: 517c65f5c21a00340b7af8423976621c, type: 3}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: explosionRadius
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4805179598088156730, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: m_Name
       value: Weapon

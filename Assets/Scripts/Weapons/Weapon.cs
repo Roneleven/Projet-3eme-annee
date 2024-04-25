@@ -59,12 +59,14 @@ public class Weapon : MonoBehaviour
     public Recoil Recoil_Script;
 
     [Header("Explosive Mode")]
-    public float chargeTime;
-    public float explosionForce;
+    public float explosionRadius;
     public GameObject explosionPrefab;
     public int maxExplosiveCharges = 5; // Nombre maximum de charges pour le mode explosif
     private int currentExplosiveCharges = 4; 
     private TMP_Text explosiveChargeText;
+    public bool chargingShot; // Détermine si le tir est en cours de chargement
+    public float chargeStartTime; // Heure de début du chargement du tir
+    public float chargeTimeThreshold = 1.5f;
 
     [Header("Laser Mode")]
     private TMP_Text _laserText;
@@ -135,23 +137,27 @@ public class Weapon : MonoBehaviour
         }
 
         //tir clique gauche explosive
+
         if (currentMode == FireMode.Explosive)
         {
             if (Input.GetMouseButtonDown(0) && currentExplosiveCharges > 0)
             {
-                
-                explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
-                ExplosiveShoot();
+                Debug.Log("start timer");
+                // Commencer le chargement du tir explosif
+                chargeStartTime = Time.time;
             }
-        }
 
-        if (currentMode == FireMode.Laser)
-        {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButton(0) && Time.time - chargeStartTime >= chargeTimeThreshold)
             {
+                Debug.Log("charged");
+                // Tir chargé, vous pouvez ajouter ici des effets visuels ou sonores pour indiquer que le tir est prêt
+            }
 
-                _laserText.text = "Laser: ";
-                LaserShoot();
+            if (Input.GetMouseButtonUp(0) && Time.time - chargeStartTime >= chargeTimeThreshold)
+            {
+                Debug.Log("shoot");
+                ExplosiveShoot(); // Tirer seulement si le tir est chargé
+                explosiveChargeText.text = "Charges: " + currentExplosiveCharges; // Mettre à jour le texte des charges explosives
             }
         }
     }
@@ -332,13 +338,29 @@ public class Weapon : MonoBehaviour
     }
 
     #endregion
+
     #region MODE EXPLOSIVE
     private void ExplosiveShoot()
     {
-        Debug.Log("explosive charge shot");
         if (currentMode == FireMode.Explosive && currentExplosiveCharges > 0)
-        {  
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, range))
+            {
+                Instantiate(explosionPrefab, hit.point, Quaternion.identity);
+                Collider[] colliders = Physics.OverlapSphere(hit.point, explosionRadius);
+                foreach (Collider hitCollider in colliders)
+                {
+                    CubeHealth cubeHealth = hitCollider.GetComponent<CubeHealth>();
+                    if (cubeHealth != null)
+                    {
+                        cubeHealth.TakeDamage(damage);
+                    }
+                }
+            }
+
             currentExplosiveCharges--;
+            explosiveChargeText.text = "Charges: " + currentExplosiveCharges;     
         }
     }
 

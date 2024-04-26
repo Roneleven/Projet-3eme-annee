@@ -70,8 +70,14 @@ public class Weapon : MonoBehaviour
     private float chargeStartTime;
     public float chargeTimeThreshold;
 
+
     [Header("Laser Mode")]
+    public float laserCooldown = 1f;
+    public float laserDuration = 1f;
+    public float laserWidth = 3f;
     private TMP_Text _laserText;
+    private bool canShootLaser = true;
+    
 
 
     private void Start()
@@ -159,6 +165,11 @@ public class Weapon : MonoBehaviour
                 explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
             }
         }
+
+        if (Input.GetMouseButton(0) && currentMode == FireMode.Laser && canShootLaser)
+    {
+        LaserShoot();
+    }
     }
 
     private void Shoot()
@@ -205,6 +216,7 @@ public class Weapon : MonoBehaviour
             }
             Recoil_Script.RecoilFire();
         }
+        
     }
 
    
@@ -371,13 +383,53 @@ public class Weapon : MonoBehaviour
 
     #region MODE LASER
 
-    private void LaserShoot()
+private void LaserShoot()
+{
+    if (currentMode == FireMode.Laser)
     {
-        if (currentMode == FireMode.Laser)
-        {
-            Debug.Log("laser shot");
-        }
+        StartCoroutine(FireLaser());
     }
+}
+
+private IEnumerator FireLaser()
+{
+    canShootLaser = false;
+    float startTime = Time.time;
+    float elapsedTime = 0f;
+
+    while (elapsedTime < laserDuration)
+    {
+        RaycastHit[] hits;
+        hits = Physics.SphereCastAll(transform.position, laserWidth / 2f, transform.forward, Mathf.Infinity);
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.collider.CompareTag("Block") || hit.collider.CompareTag("HeartBlock"))
+            {
+                Destroy(hit.collider.gameObject);
+            }
+        }
+
+        elapsedTime = Time.time - startTime;
+
+        // Mise à jour de la direction du rayon en fonction de la position actuelle du viseur
+        Vector3 laserDirection = (Camera.main.transform.position + Camera.main.transform.forward * 100f) - transform.position;
+        transform.forward = laserDirection.normalized;
+
+        yield return null;
+    }
+
+    StartCoroutine(LaserCooldown());
+}
+
+private IEnumerator LaserCooldown()
+{
+    yield return new WaitForSeconds(laserCooldown);
+    canShootLaser = true;
+    
+        Debug.Log("laser");
+}
+
 
     #endregion
     public bool Scoping => _scoping;

@@ -81,6 +81,9 @@ MonoBehaviour:
   explosionPrefab: {fileID: 191186, guid: 517c65f5c21a00340b7af8423976621c, type: 3}
   maxExplosiveCharges: 5
   chargeTimeThreshold: 0
+  laserCooldown: 1
+  laserDuration: 3
+  laserWidth: 3
 --- !u!1 &5617236796851899029
 GameObject:
   m_ObjectHideFlags: 0

@@ -6913,7 +6913,7 @@ GameObject:
   - component: {fileID: 456966808919016548}
   m_Layer: 10
   m_Name: Main Camera
-  m_TagString: Player
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7203,8 +7203,8 @@ MonoBehaviour:
   playerCamera: {fileID: 5207891201020567820}
   swayHolder: {fileID: 4824752360854578780}
   ammoText: {fileID: 7261237504141261587}
-  chargeText: {fileID: 0}
-  laserText: {fileID: 0}
+  chargeText: {fileID: 2504231306477107161}
+  laserText: {fileID: 5190658438566511013}
   playerCams:
   - {fileID: 2649904338549692574}
   - {fileID: 4676258182735163754}

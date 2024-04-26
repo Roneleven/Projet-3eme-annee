@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5311d0c22dd34541ade6dbca5db7b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentMode: 0
   damage: 1
   throwForce: 10
   throwExtraForce: 5
@@ -55,13 +56,12 @@ MonoBehaviour:
   shotsPerSecond: 15
   reloadSpeed: 1.25
   hitForce: 3.5
-  range: 10000
+  range: 100
   tapable: 0
   kickbackForce: 0.075
   resetSmooth: 11.75
   scopePos: {x: -0.4965, y: 0.09, z: -0.03}
   spreadAngle: 2
-  cameraKickForce: 2.87
   bulletTrailVFX: {fileID: 4850474457665193327}
   weaponGfxLayer: 12
   weaponGfxs:
@@ -74,6 +74,13 @@ MonoBehaviour:
   - {fileID: 6932823427785718496}
   - {fileID: 8733154761386723883}
   - {fileID: 5746267683849433718}
+  Recoil_Script: {fileID: 0}
+  explosiveDamage: 1
+  explosiveRange: 200
+  explosionRadius: 5
+  explosionPrefab: {fileID: 191186, guid: 517c65f5c21a00340b7af8423976621c, type: 3}
+  maxExplosiveCharges: 5
+  chargeTimeThreshold: 0
 --- !u!1 &5617236796851899029
 GameObject:
   m_ObjectHideFlags: 0

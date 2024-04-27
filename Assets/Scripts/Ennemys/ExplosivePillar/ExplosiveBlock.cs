@@ -5,6 +5,7 @@ public class ExplosiveBlock : MonoBehaviour
     private Vector3 lastPosition;
 
     public GameObject explosion;
+    public float explosionTime = 1f;
 
     private void Start()
     {
@@ -24,7 +25,7 @@ public class ExplosiveBlock : MonoBehaviour
             }
             else
             {
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(explosionTime);
                 Instantiate(explosion, transform.position, Quaternion.identity);
                 Destroy(gameObject);
                 yield break;

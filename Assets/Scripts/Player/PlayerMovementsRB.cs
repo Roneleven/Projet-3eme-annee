@@ -11,9 +11,13 @@ public class PlayerMovementsRB : MonoBehaviour
     [Header("Player Settings")]
     public float speed;
     public float currentSpeed;
+    public float fallAccelerationForce;
     public Transform groundCheck;
     public float groundDistance;
     public List<LayerMask> groundMasks;
+    public bool canMove = true;
+
+    public CameraController cameraController;
 
     [Header("Respawn Settings")]
     /*public Transform respawnPoint;
@@ -26,6 +30,12 @@ public class PlayerMovementsRB : MonoBehaviour
     public float jetpackCharge;
     public InputActionReference jetpack;
     public ParticleSystem jetpackEffect;
+    private bool isJetpackPressed = false;
+    private bool isJetpackEmptySoundPlayed = false;
+    private bool isGroundedSoundPlayed = false;
+    private bool isPlanningSoundPlayed = false;
+    private FMOD.Studio.EventInstance planning;
+    private bool isPlanningPlaying = false;
 
     [Header("Jetpack Shake Settings")]
     public float shakeDuration;
@@ -55,7 +65,8 @@ public class PlayerMovementsRB : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         jetpackCharge = maxJetpackCharge;
-        jetUse = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Locomotion/JetUse");
+        jetUse = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Locomotion/JetpackUsing");
+        planning = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Locomotion/Planning");
     }
 
     private void Update()
@@ -97,11 +108,31 @@ public class PlayerMovementsRB : MonoBehaviour
         {
             jetpackEffect.Stop();
         }
+
+        if (jetpackCharge <= 0 && !isJetpackEmptySoundPlayed)
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/JetpackEmpty");
+        isJetpackEmptySoundPlayed = true;
+    }
+
+
     }
 
     private void FixedUpdate()
     {
+
+        if (!isGrounded && rb.velocity.magnitude > 50f)
+    {
+        rb.velocity = rb.velocity.normalized * 50f;
+    }
+
         isGrounded = CheckGround();
+
+        if (!isGrounded)
+        {
+            rb.AddForce(Vector3.down * fallAccelerationForce, ForceMode.Acceleration);
+            isGroundedSoundPlayed = false;
+        }
 
         if (jetUse.isValid())
         {
@@ -114,11 +145,14 @@ public class PlayerMovementsRB : MonoBehaviour
         {
             rb.useGravity = false; 
             rb.AddForce(Vector3.down * glideForce, ForceMode.Force); //force vers le bas sans gravité
+            rb.AddForce(Vector3.up * fallAccelerationForce, ForceMode.Acceleration);
+            isPlanningSoundPlayed = true;
             //Physics.gravity = new Vector3(0f, glideForce, 0f); //utilisation de la gravité 
         }
         else
         {
             rb.useGravity = true;
+            isPlanningSoundPlayed = false;
             //Physics.gravity = new Vector3(0f, -9.81f, 0f);
 
             // Gérer l'utilisation du jetpack
@@ -128,14 +162,35 @@ public class PlayerMovementsRB : MonoBehaviour
             }
         }
 
-        if (isGrounded && (Mathf.Abs(movementX) > 0 || Mathf.Abs(movementY) > 0))
+        
+
+    if (isPlanningSoundPlayed && !isPlanningPlaying)
+    {
+        planning.start();
+        isPlanningPlaying = true;
+    }
+    else if (!isPlanningSoundPlayed && isPlanningPlaying)
+    {
+        planning.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        isPlanningPlaying = false;
+    }
+
+    // POUR RAJOUTER LES FOOTSTEPS DU PERSO
+
+        /*if (isGrounded && (Mathf.Abs(movementX) > 0 || Mathf.Abs(movementY) > 0))
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Footsteps");
-        }
+        }*/
 
         MovePlayer();
 
         currentSpeed = rb.velocity.magnitude;
+
+        if (isGrounded && !isGroundedSoundPlayed)
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Grounded");
+        isGroundedSoundPlayed = true;
+    }
     }
 
     /*private void MovePlayer()
@@ -153,8 +208,15 @@ public class PlayerMovementsRB : MonoBehaviour
     }*/
 
     private void MovePlayer()
-    {
-        Vector3 move = new Vector3(movementX, 0f, movementY).normalized;
+    { 
+
+         if (!canMove)
+        {
+            return;
+        }
+
+        //Vector3 move = new Vector3(movementX, 0f, movementY).normalized;
+        Vector3 move = new Vector3(movementX, 0f, movementY);
         Vector3 localMove = transform.TransformDirection(move);
 
         Vector3 targetVelocity = localMove * speed;
@@ -171,16 +233,23 @@ public class PlayerMovementsRB : MonoBehaviour
 
 
     private void SpeedControl()
-    {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+{
+    Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        // limit velocity if needed
-        if (flatVel.magnitude > speed)
-        {
-            Vector3 limitedVel = flatVel.normalized * speed;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
-        }
+    // limit velocity if needed
+    if (flatVel.magnitude > speed)
+    {
+        Vector3 limitedVel = flatVel.normalized * speed;
+        rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
     }
+
+    // Cap the currentSpeed at 50
+    if (flatVel.magnitude > 50f)
+    {
+        Vector3 limitedFlatVel = flatVel.normalized * 50f;
+        rb.velocity = new Vector3(limitedFlatVel.x, rb.velocity.y, limitedFlatVel.z);
+    }
+}
 
     private bool CheckGround()
     {
@@ -215,6 +284,7 @@ public class PlayerMovementsRB : MonoBehaviour
             }
 
             CameraShake.Shake(shakeDuration, shakeForce);
+            isJetpackEmptySoundPlayed = false;
         }
         else
         {
@@ -227,6 +297,8 @@ public class PlayerMovementsRB : MonoBehaviour
     {
         movementX = Input.GetAxis("Horizontal");
         movementY = Input.GetAxis("Vertical");
+
+        isJetpackPressed = jetpack.action.triggered;
     }
 
     /*private void Respawn()
@@ -249,6 +321,17 @@ public class PlayerMovementsRB : MonoBehaviour
     private void OnResetTimer()
     {
         heartSpawner.timer = 0;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ghost"))
+        {
+            if (cameraController != null)
+            {
+                cameraController.DropCamera();
+            }
+        }
     }
 
 }

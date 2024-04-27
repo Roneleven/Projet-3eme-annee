@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -23,6 +24,11 @@ public class Player : MonoBehaviour
         {
             TakeDamage(20);
         }*/
+
+        if (Input.GetKeyDown(KeyCode.E))
+      {
+          Heal(20);
+      }
     }
 
     public void TakeDamage(int damage)
@@ -30,5 +36,27 @@ public class Player : MonoBehaviour
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
+        if (currentHealth <= 0)
+        {
+            FindObjectOfType<SceneTransition>().ReloadScene();
+        }
+    }
+
+    public void Heal(int heal)
+    {
+        currentHealth += heal;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        healthBar.SetHealth(currentHealth);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("DestroyableBlock"))
+        {
+            TakeDamage(5);
+        }
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7173625961838439358}
   - component: {fileID: 462281091523132872}
   - component: {fileID: 8831279727251267949}
+  - component: {fileID: -7399426867032470940}
   m_Layer: 3
   m_Name: ExplosiveBlock
   m_TagString: Block
@@ -119,3 +120,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 3810439456834575818, guid: 2e43e7ba74c5590449a91b647d126f11, type: 3}
+  explosionTime: 1
+--- !u!114 &-7399426867032470940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230891745418371966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -2136261918
+      Data2: 1208284945
+      Data3: 2096368530
+      Data4: -1625197273
+    Path: event:/Blocks/Behaviours/MineIdle
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 70

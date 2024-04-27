@@ -18,6 +18,7 @@ public class AerialMinesPattern : MonoBehaviour
 
             for (int i = 0; i < numberOfCubes; i++)
             {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Patterns/AerialMine_Start");
                 Vector3 randomPosition = playerTransform.position + Random.insideUnitSphere * radius;
                 GameObject newCube = Instantiate(cubePrefab, transform.position, Quaternion.identity);
                 StartCoroutine(MoveToRandomPosition(newCube.transform, randomPosition));

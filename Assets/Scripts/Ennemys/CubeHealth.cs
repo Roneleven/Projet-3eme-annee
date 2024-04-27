@@ -7,13 +7,18 @@ public class CubeHealth : MonoBehaviour
     private bool isDead = false;
 
     // Matériaux pour différents niveaux de santé
-    public Material[] healthMaterials;
+    public Transform visualRoot;
+    Transform activeStateVisual;
+    int maxVisualStates = 5;
 
-    private void Start()
+    private void Awake()
     {
         cubeRenderer = GetComponent<Renderer>();
+        activeStateVisual = visualRoot.Find("state_0");
+        maxVisualStates = visualRoot.childCount;
         UpdateMaterial();
     }
+
 
     public void TakeDamage(int damage)
     {
@@ -28,11 +33,35 @@ public class CubeHealth : MonoBehaviour
         }
     }
 
-    private void UpdateMaterial()
+    [ContextMenu("Update Visual")]
+    public void UpdateMaterial()
     {
-        int materialIndex = Mathf.Clamp(health - 1, 0, healthMaterials.Length - 1);
-        cubeRenderer.material = healthMaterials[materialIndex];
+        //Debug.Log($"Updating state for cube {name}", this);
+        if (activeStateVisual == null)
+        {
+            activeStateVisual = visualRoot.Find("state_0");
+            if (activeStateVisual == null)
+            {
+                Debug.LogWarning("No initial visual state found in CubeHealth.UpdateMaterial().");
+                return;
+            }
+        }
+
+        int materialIndex = Mathf.Clamp(health - 1, 0, maxVisualStates - 1);
+        Transform desiredState = visualRoot.Find("state_" + materialIndex);
+        if (desiredState != null)
+        {
+            activeStateVisual.gameObject.SetActive(false);
+            desiredState.gameObject.SetActive(true);
+            activeStateVisual = desiredState;
+        }
+        else
+        {
+            Debug.LogWarning("Desired visual state not found in CubeHealth.UpdateMaterial().");
+        }
     }
+
+
 
     private void Die()
     {

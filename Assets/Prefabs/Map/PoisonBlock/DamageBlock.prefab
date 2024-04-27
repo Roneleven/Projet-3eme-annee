@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3634220294561686981}
   m_Layer: 3
   m_Name: DamageBlock
-  m_TagString: Block
+  m_TagString: DestroyableBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 466ba9129f9b93a46bce30cb1714b97e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  repulsionForce: 1
+  repulsionForce: 2
   backwardForce: 0
-  upwardForce: 1
+  upwardForce: 2
+  playerScript: {fileID: 0}

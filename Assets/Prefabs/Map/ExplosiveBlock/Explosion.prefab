@@ -32,7 +32,8 @@ Transform:
   m_LocalPosition: {x: 0.0314347, y: 2.616513, z: -0.09576447}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4764325219092148716}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8461275840928010598
@@ -118,8 +119,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f7807ec18cab546aac220794c3aae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerScript: {fileID: 0}
   delayBeforeDisappear: 1
   scaleFactor: 5
-  repulsionForce: 50
-  backwardForce: 10
-  upwardForce: 1
+  eye: {fileID: 5738283318553002890}
+  oppositeForce: -100
+  backwardForce: 0
+  upwardForce: 20
+  repulsionForceHorizontal: 100
+--- !u!1 &5738283318553002890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4764325219092148716}
+  m_Layer: 0
+  m_Name: Eye
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4764325219092148716
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5738283318553002890}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.000000007450581, y: 0.000000023841858, z: 0.000000007450581}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3567835213847410749}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

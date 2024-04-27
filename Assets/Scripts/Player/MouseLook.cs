@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
+    public PlayerMovementsRB playerMovements;
+
     public float mouseSensivity = 100f;
     public Transform playerBody;
-    float xRotation = 0f;
+    public float xRotation = 0f;
 
     public Quaternion CameraRotation => transform.rotation;
 
@@ -19,6 +21,7 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         float mouseX = Input.GetAxis("Mouse X") * mouseSensivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensivity * Time.deltaTime;
 

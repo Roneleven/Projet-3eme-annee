@@ -19,19 +19,57 @@ public class HeartHealth : MonoBehaviour
     private int lastTeleportIndex = -1;
     private HeartSpawner heartSpawner;
     [SerializeField] private List<TeleportPointBoxSpawnerPair> teleportPointBoxSpawnerPairs = new List<TeleportPointBoxSpawnerPair>();
+    private FMOD.Studio.EventInstance Idle;
 
-    // Nouvelle variable pour stocker les points de t�l�portation accessibles apr�s chaque t�l�portation
+    public GameObject parent;
+    public GameObject eyeRadius;
+    public float moveSpeed = 5f;
+    private Vector3 targetPosition;
+
+    // Nouvelle variable pour stocker les points de téléportation accessibles après chaque téléportation
     public List<int> accessibleTeleportPoints = new List<int>();
 
     private void Start()
     {
         heartSpawner = FindObjectOfType<HeartSpawner>();
         InitializeAccessibleTeleportPoints();
+        Idle = FMODUnity.RuntimeManager.CreateInstance("event:/Heart/Behaviours/Idle");
+        Idle.start();
+
+        SetRandomTarget();
+    }
+
+    void Update()
+    {
+        Idle.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+
+         MoveToTarget();
+
+        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+        {
+            SetRandomTarget();
+        }
+    }
+
+    void SetRandomTarget()
+    {
+        float angle = Random.Range(0f, Mathf.PI * 2f);
+    float radius = eyeRadius.transform.localScale.x * 1.5f;
+    float verticalOffset = Random.Range(-radius, radius);
+
+    Vector3 offset = new Vector3(Mathf.Cos(angle), verticalOffset, Mathf.Sin(angle)) * radius;
+    targetPosition = eyeRadius.transform.position + offset;
+    }
+
+    void MoveToTarget()
+    {
+        // Déplacer l'objet vers la position cible avec une vitesse constante
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
     }
 
     private void InitializeAccessibleTeleportPoints()
     {
-        // Initialiser la liste des points de t�l�portation accessibles au d�but
+        // Initialiser la liste des points de téléportation accessibles au début
         accessibleTeleportPoints.Clear();
         for (int i = 0; i < teleportPositions.Length; i++)
         {
@@ -41,11 +79,15 @@ public class HeartHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Hitmarker");
         health -= damage;
 
         if (health <= 0)
         {
+            Idle.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             TeleportHeart();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Teleport");
+            Idle.start();
         }
     }
 
@@ -53,19 +95,21 @@ public class HeartHealth : MonoBehaviour
     {
         DestroyCubesBeforeTeleport();
         DeactivateLinkedBoxSpawners();
+        
 
         if (accessibleTeleportPoints.Count > 0)
         {
             int newTeleportIndex;
             do
             {
-                // Choisir un point de t�l�portation parmi ceux qui sont accessibles
+                // Choisir un point de téléportation parmi ceux qui sont accessibles
                 newTeleportIndex = accessibleTeleportPoints[Random.Range(0, accessibleTeleportPoints.Count)];
             } while (newTeleportIndex == lastTeleportIndex);
 
             lastTeleportIndex = newTeleportIndex;
             Transform nextTeleportPosition = teleportPositions[lastTeleportIndex];
-            transform.position = nextTeleportPosition.position;
+            parent.transform.position = nextTeleportPosition.position;
+            SetRandomTarget();
             FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Locomotion/Teleport");
 
 
@@ -191,7 +235,7 @@ public class HeartHealth : MonoBehaviour
     {
         GameObject[] heartGeneratedCubes = GameObject.FindGameObjectsWithTag("HeartBlock");
         int cubesToDestroy = Mathf.CeilToInt(heartGeneratedCubes.Length * 2f);
-        StartCoroutine(DestroyCubesGradually(heartGeneratedCubes, destroySpeed / cubesToDestroy)); // Changez la valeur 5f selon vos besoins
+        StartCoroutine(DestroyCubesGradually(heartGeneratedCubes, destroySpeed / cubesToDestroy)); 
 
         foreach (var pair in teleportPointBoxSpawnerPairs)
         {
@@ -219,7 +263,7 @@ public class HeartHealth : MonoBehaviour
                     foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
                     {
                         GameObject[] generatedCubes = GameObject.FindGameObjectsWithTag("Block");
-                        float percentageToRemove = 0.6f; // Changer la valeur selon vos besoins
+                        float percentageToRemove = 0.6f; 
                         float delayBetweenCubes = 5f / generatedCubes.Length;
                         StartCoroutine(DestroyPercentageOfCubesGradually(generatedCubes, percentageToRemove, delayBetweenCubes));
                     }
@@ -228,10 +272,18 @@ public class HeartHealth : MonoBehaviour
         }
     }
 
-
-
-
-
-
-
+    public Transform getCurrentTeleportPoint()
+    {
+        // Assurez-vous que lastTeleportIndex est valide
+        if (lastTeleportIndex >= 0 && lastTeleportIndex < teleportPositions.Length)
+        {
+            // Renvoie le transform du point de téléportation correspondant
+            return teleportPositions[lastTeleportIndex];
+        }
+        else
+        {
+            // S'il n'y a pas de dernier index de téléportation valide, renvoie null
+            return null;
+        }
+    }
 }

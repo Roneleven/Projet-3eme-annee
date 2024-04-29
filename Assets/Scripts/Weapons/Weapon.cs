@@ -77,7 +77,8 @@ public class Weapon : MonoBehaviour
     public float laserWidth = 3f;
     private TMP_Text _laserText;
     private bool canShootLaser = true;
-    
+    public GameObject laserVFX;
+    public GameObject laserSpawnPoint;
 
 
     private void Start()
@@ -383,52 +384,70 @@ public class Weapon : MonoBehaviour
 
     #region MODE LASER
 
-private void LaserShoot()
-{
-    if (currentMode == FireMode.Laser)
+    private void LaserShoot()
     {
-        StartCoroutine(FireLaser());
-    }
-}
-
-private IEnumerator FireLaser()
-{
-    canShootLaser = false;
-    float startTime = Time.time;
-    float elapsedTime = 0f;
-
-    while (elapsedTime < laserDuration)
-    {
-        RaycastHit[] hits;
-        hits = Physics.SphereCastAll(transform.position, laserWidth / 2f, transform.forward, Mathf.Infinity);
-
-        foreach (RaycastHit hit in hits)
+        if (currentMode == FireMode.Laser)
         {
-            if (hit.collider.CompareTag("Block") || hit.collider.CompareTag("HeartBlock"))
+            StartCoroutine(FireLaser());
+        }
+    }
+
+    private IEnumerator FireLaser()
+    {
+        canShootLaser = false;
+        float startTime = Time.time;
+        float elapsedTime = 0f;
+
+        // Instantiation du VFX de laser à la position et rotation du cannon du joueur
+            GameObject laserInstance = Instantiate(laserVFX, laserSpawnPoint.transform.position, laserSpawnPoint.transform.rotation);
+
+
+        while (elapsedTime < laserDuration)
+        {
+            // Lance un raycast pour détecter les collisions
+            RaycastHit[] hits;
+            hits = Physics.SphereCastAll(transform.position, laserWidth / 2f, transform.forward, Mathf.Infinity);
+
+            foreach (RaycastHit hit in hits)
             {
-                Destroy(hit.collider.gameObject);
+                if (hit.collider.CompareTag("Block") || hit.collider.CompareTag("HeartBlock"))
+                {
+                    Destroy(hit.collider.gameObject);
+                }
             }
+
+            // Positionne le VFX de laser à l'extrémité du rayon du laser
+            Vector3 laserEnd = transform.position + transform.forward ;
+            laserInstance.transform.position = laserEnd;
+
+            // Met à jour la rotation du VFX de laser pour qu'il regarde dans la direction du rayon du laser
+            laserInstance.transform.rotation = Quaternion.LookRotation(transform.forward);
+
+            elapsedTime = Time.time - startTime;
+
+            yield return null;
         }
 
-        elapsedTime = Time.time - startTime;
-
-        // Mise à jour de la direction du rayon en fonction de la position actuelle du viseur
-        Vector3 laserDirection = (Camera.main.transform.position + Camera.main.transform.forward * 100f) - transform.position;
-        transform.forward = laserDirection.normalized;
-
-        yield return null;
+        // Suppression du VFX de laser une fois que la durée est écoulée
+        Destroy(laserInstance);
+        StartCoroutine(LaserCooldown());
     }
 
-    StartCoroutine(LaserCooldown());
-}
 
-private IEnumerator LaserCooldown()
+    private IEnumerator LaserCooldown()
 {
     yield return new WaitForSeconds(laserCooldown);
     canShootLaser = true;
     
         Debug.Log("laser");
 }
+
+    private void OnDrawGizmos()
+    {
+        // Dessine un gizmo représentant le rayon du laser
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, transform.forward * laserDuration);
+    }
 
 
     #endregion

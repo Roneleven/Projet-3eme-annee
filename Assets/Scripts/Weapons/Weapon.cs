@@ -75,6 +75,7 @@ public class Weapon : MonoBehaviour
     public float laserCooldown = 1f;
     public float laserDuration = 1f;
     public float laserWidth = 3f;
+    public float laserRange;
     private TMP_Text _laserText;
     private bool canShootLaser = true;
     public GameObject laserVFX;
@@ -406,7 +407,7 @@ public class Weapon : MonoBehaviour
         {
             // Lance un raycast pour détecter les collisions
             RaycastHit[] hits;
-            hits = Physics.SphereCastAll(transform.position, laserWidth / 2f, transform.forward, Mathf.Infinity);
+            hits = Physics.SphereCastAll(transform.position, laserWidth / 2f, transform.forward, laserRange);
 
             foreach (RaycastHit hit in hits)
             {
@@ -446,7 +447,7 @@ public class Weapon : MonoBehaviour
     {
         // Dessine un gizmo représentant le rayon du laser
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, transform.forward * laserDuration);
+        Gizmos.DrawRay(transform.position, transform.forward * laserRange);
     }
 
 

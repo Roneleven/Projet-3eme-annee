@@ -760,12 +760,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: maxAmmo
+      value: 300000
+      objectReference: {fileID: 0}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: laserVFX
       value: 
       objectReference: {fileID: 68155020}
     - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: laserRange
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: heatPerShot
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: cooldownRate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: cooldownTime
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: Recoil_Script
@@ -791,6 +807,10 @@ PrefabInstance:
       propertyPath: laserSpawnPoint
       value: 
       objectReference: {fileID: 936966640}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: overheatThreshold
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4805179598088156730, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: m_Name
       value: Weapon

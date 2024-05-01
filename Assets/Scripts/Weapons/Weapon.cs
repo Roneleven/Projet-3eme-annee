@@ -81,6 +81,14 @@ public class Weapon : MonoBehaviour
     public GameObject laserVFX;
     public GameObject laserSpawnPoint;
 
+    public float heatPerShot;
+    public float overheatThreshold;
+    public float cooldownTime;
+    public float currentHeat; 
+    public bool overheated;
+    private float cooldownStartTime;
+    public float cooldownRate;
+
 
     private void Start()
     {
@@ -169,54 +177,84 @@ public class Weapon : MonoBehaviour
         }
 
         if (Input.GetMouseButton(0) && currentMode == FireMode.Laser && canShootLaser)
-    {
-        LaserShoot();
-    }
+        {
+            LaserShoot();
+        }
+
+        if (!overheated && !_shooting)
+        {
+            currentHeat -= cooldownRate * Time.deltaTime;
+
+            // Clamp pour que ce soit entre 0 et 1
+            currentHeat = Mathf.Clamp01(currentHeat);
+        }
     }
 
     private void Shoot()
     {
-        if (currentMode == FireMode.Normal)
+        if (overheated)
         {
-            Vector3 shotDirection = _playerCamera.forward;
-            if (!_scoping)
+            if (Time.time - cooldownStartTime >= cooldownTime)
             {
-                // Add random deviation to the shot direction
-                Vector3 spreadDirection = Quaternion.Euler(Random.insideUnitSphere * spreadAngle) * shotDirection;
-                shotDirection = Vector3.Slerp(shotDirection, spreadDirection, 0.5f); // Adjust spread strength
+                overheated = false;
+                currentHeat = 0f;
             }
-
-            // Apply kickback force
-            transform.localPosition -= new Vector3(0, 0, kickbackForce);
-
-            // Play bullet trail VFX regardless of hitting something or not
-            if (bulletTrailVFX != null)
+            else
             {
-                // Apply rotation to the particle system
-                Quaternion lookRotation = Quaternion.LookRotation(shotDirection, Vector3.up);
-                bulletTrailVFX.transform.rotation = lookRotation;
-
-                // Play the particle system
-                bulletTrailVFX.Play();
-                FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Guns/BasicGun/Shoot");
+                return;
             }
-
-            // Perform raycast to check for hit
-            RaycastHit hitInfo;
-            if (Physics.Raycast(_playerCamera.position, shotDirection, out hitInfo, range))
+        }
+        if (currentHeat < overheatThreshold)
+        {
+            if (currentMode == FireMode.Normal)
             {
-                // Process hit object
-                var heartHealth = hitInfo.transform.GetComponent<HeartHealth>();
-                if (heartHealth != null)
+                Vector3 shotDirection = _playerCamera.forward;
+                if (!_scoping)
                 {
-                    heartHealth.TakeDamage(damage);
+                    // Add random deviation to the shot direction
+                    Vector3 spreadDirection = Quaternion.Euler(Random.insideUnitSphere * spreadAngle) * shotDirection;
+                    shotDirection = Vector3.Slerp(shotDirection, spreadDirection, 0.5f); // Adjust spread strength
                 }
-                else
+
+                // Apply kickback force
+                transform.localPosition -= new Vector3(0, 0, kickbackForce);
+
+                // Play bullet trail VFX regardless of hitting something or not
+                if (bulletTrailVFX != null)
                 {
-                    HandleHitObject(hitInfo);
+                    // Apply rotation to the particle system
+                    Quaternion lookRotation = Quaternion.LookRotation(shotDirection, Vector3.up);
+                    bulletTrailVFX.transform.rotation = lookRotation;
+
+                    // Play the particle system
+                    bulletTrailVFX.Play();
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Guns/BasicGun/Shoot");
                 }
+
+                // Perform raycast to check for hit
+                RaycastHit hitInfo;
+                if (Physics.Raycast(_playerCamera.position, shotDirection, out hitInfo, range))
+                {
+                    // Process hit object
+                    var heartHealth = hitInfo.transform.GetComponent<HeartHealth>();
+                    if (heartHealth != null)
+                    {
+                        heartHealth.TakeDamage(damage);
+                    }
+                    else
+                    {
+                        HandleHitObject(hitInfo);
+                    }
+                }
+                Recoil_Script.RecoilFire();
             }
-            Recoil_Script.RecoilFire();
+            currentHeat += heatPerShot;
+            if (currentHeat >= overheatThreshold)
+            {
+                // Si l'arme est en surchauffe, active le drapeau et commence le temps de refroidissement
+                overheated = true;
+                cooldownStartTime = Time.time;
+            }
         }
         
     }

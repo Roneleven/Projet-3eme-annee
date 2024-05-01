@@ -24,9 +24,7 @@ public class Weapon : MonoBehaviour
     public float animTime;
 
     [Header("Shooting")]
-    public int maxAmmo;
     public int shotsPerSecond;
-    public float reloadSpeed;
     public float hitForce;
     public float range;
     public bool tapable;
@@ -48,9 +46,7 @@ public class Weapon : MonoBehaviour
     private float _time;
     private bool _held;
     private bool _scoping;
-    private bool _reloading;
     private bool _shooting;
-    private int _ammo;
     private Rigidbody _rb;
     private Transform _playerCamera;
     private TMP_Text _ammoText;
@@ -94,7 +90,6 @@ public class Weapon : MonoBehaviour
     {
         _rb = gameObject.AddComponent<Rigidbody>();
         _rb.mass = 0.1f;
-        _ammo = maxAmmo;
         Recoil_Script = transform.Find("FPS Player Gun Rework/CameraRot/CameraRecoil").GetComponent<Recoil>();
         currentExplosiveCharges = maxExplosiveCharges;
         currentMode = FireMode.Normal;
@@ -114,31 +109,17 @@ public class Weapon : MonoBehaviour
         }
         else
         {
-            _scoping = Input.GetMouseButton(1) && !_reloading;
+            _scoping = Input.GetMouseButton(1);
             transform.localRotation = Quaternion.identity;
             transform.localPosition = Vector3.Lerp(transform.localPosition, _scoping ? scopePos : Vector3.zero, resetSmooth * Time.deltaTime);
         }
 
-        if (_reloading)
-        {
-
-            _rotationTime += Time.deltaTime;
-            var spinDelta = -(Mathf.Cos(Mathf.PI * (_rotationTime / reloadSpeed)) - 1f) / 2f;
-            transform.localRotation = Quaternion.Euler(new Vector3(spinDelta * 360f, 0, 0));
-        }
-
-        if (Input.GetKeyDown(KeyCode.R) && !_reloading && _ammo < maxAmmo)
-        {
-            StartCoroutine(ReloadCooldown());
-
-        }
         //tir clique gauche normal
-        if ((tapable ? Input.GetMouseButtonDown(0) : Input.GetMouseButton(0)) && !_shooting && !_reloading && currentMode == FireMode.Normal)
+        if ((tapable ? Input.GetMouseButtonDown(0) : Input.GetMouseButton(0)) && !_shooting &&  currentMode == FireMode.Normal)
         {
-            _ammo--;
-            _ammoText.text = _ammo + " / " + maxAmmo;
+            
             Shoot();
-            StartCoroutine(_ammo <= 0 ? ReloadCooldown() : ShootingCooldown());
+            StartCoroutine(ShootingCooldown());
         }
 
         //switch de mode
@@ -300,18 +281,6 @@ public class Weapon : MonoBehaviour
         _shooting = false;
     }
 
-    private IEnumerator ReloadCooldown()
-    {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Guns/BasicGun/Reload");
-
-        _reloading = true;
-        _ammoText.text = "RELOADING";
-        _rotationTime = 0f;
-        yield return new WaitForSeconds(reloadSpeed);
-        _ammo = maxAmmo;
-        _ammoText.text = _ammo + " / " + maxAmmo;
-        _reloading = false;
-    }
 
     public void Pickup(Transform weaponHolder, Transform playerCamera, TMP_Text ammoText, TMP_Text chargeText, TMP_Text laserText)
     {
@@ -332,7 +301,6 @@ public class Weapon : MonoBehaviour
         _held = true;
         _playerCamera = playerCamera;
         _ammoText = ammoText;
-        _ammoText.text = _ammo + " / " + maxAmmo;
         explosiveChargeText = chargeText;
         explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
         _laserText = laserText;
@@ -360,7 +328,6 @@ public class Weapon : MonoBehaviour
         {
             gfx.layer = 0;
         }
-        _ammoText.text = "";
         transform.parent = null;
         _held = false;
     }

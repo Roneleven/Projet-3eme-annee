@@ -2,16 +2,23 @@ using UnityEngine;
 
 public class ExplosionScript : MonoBehaviour
 {
+
+    public Player playerScript;
+
     public float delayBeforeDisappear = 5f;
     public float scaleFactor = 1f;
-    public float repulsionForce = 2f;
+    
+    public GameObject eye;
+    public float oppositeForce = 2f;
     public float backwardForce = 10f;
     public float upwardForce = 1f;
+    public float repulsionForceHorizontal;
 
     private void Start()
     {
         StartCoroutine(ExpandCoroutine());
         StartCoroutine(DisappearCoroutine());
+        playerScript = FindObjectOfType<Player>();
     }
 
     private System.Collections.IEnumerator ExpandCoroutine()
@@ -43,22 +50,31 @@ public class ExplosionScript : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter(Collision collision)
+        private void OnCollisionEnter(Collision collision)
+{
+    if (collision.gameObject.CompareTag("Player"))
     {
-        if (collision.gameObject.CompareTag("Player"))
+        Vector3 repulsionDirection = (collision.transform.position - transform.position).normalized;
+
+        if (eye != null)
         {
-            Vector3 repulsionDirection = (collision.transform.position - transform.position).normalized;
-
-            repulsionDirection -= transform.forward * backwardForce;
-            repulsionDirection += transform.up * upwardForce;
-
-            Rigidbody playerRigidbody = collision.gameObject.GetComponent<Rigidbody>();
-            if (playerRigidbody != null)
-            {
-                playerRigidbody.AddForce(repulsionDirection * repulsionForce, ForceMode.Impulse);
-            }
-
-        Destroy(gameObject);
+            Vector3 oppositeDirection = (eye.transform.position - collision.transform.position).normalized;
+            repulsionDirection += oppositeDirection * oppositeForce;
         }
+
+        Vector3 horizontalDirection = Vector3.ProjectOnPlane(repulsionDirection, Vector3.up).normalized;
+        Vector3 finalHorizontalDirection = horizontalDirection * repulsionForceHorizontal;
+        Vector3 backwardDirection = -collision.transform.forward * backwardForce;
+        Vector3 finalDirection = finalHorizontalDirection + Vector3.up * upwardForce + backwardDirection;
+
+        Rigidbody playerRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+        if (playerRigidbody != null)
+        {
+            playerRigidbody.AddForce(finalDirection, ForceMode.Impulse);
+        }
+
+        playerScript.TakeDamage(10);
+        Destroy(gameObject);
     }
+}
 }

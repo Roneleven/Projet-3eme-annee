@@ -15,6 +15,9 @@ public class PlayerMovementsRB : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance;
     public List<LayerMask> groundMasks;
+    public bool canMove = true;
+
+    public CameraController cameraController;
 
     [Header("Respawn Settings")]
     /*public Transform respawnPoint;
@@ -111,10 +114,18 @@ public class PlayerMovementsRB : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/JetpackEmpty");
         isJetpackEmptySoundPlayed = true;
     }
+
+
     }
 
     private void FixedUpdate()
     {
+
+        if (!isGrounded && rb.velocity.magnitude > 50f)
+    {
+        rb.velocity = rb.velocity.normalized * 50f;
+    }
+
         isGrounded = CheckGround();
 
         if (!isGrounded)
@@ -198,6 +209,12 @@ public class PlayerMovementsRB : MonoBehaviour
 
     private void MovePlayer()
     { 
+
+         if (!canMove)
+        {
+            return;
+        }
+
         //Vector3 move = new Vector3(movementX, 0f, movementY).normalized;
         Vector3 move = new Vector3(movementX, 0f, movementY);
         Vector3 localMove = transform.TransformDirection(move);
@@ -216,16 +233,23 @@ public class PlayerMovementsRB : MonoBehaviour
 
 
     private void SpeedControl()
-    {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+{
+    Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        // limit velocity if needed
-        if (flatVel.magnitude > speed)
-        {
-            Vector3 limitedVel = flatVel.normalized * speed;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
-        }
+    // limit velocity if needed
+    if (flatVel.magnitude > speed)
+    {
+        Vector3 limitedVel = flatVel.normalized * speed;
+        rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
     }
+
+    // Cap the currentSpeed at 50
+    if (flatVel.magnitude > 50f)
+    {
+        Vector3 limitedFlatVel = flatVel.normalized * 50f;
+        rb.velocity = new Vector3(limitedFlatVel.x, rb.velocity.y, limitedFlatVel.z);
+    }
+}
 
     private bool CheckGround()
     {
@@ -297,6 +321,17 @@ public class PlayerMovementsRB : MonoBehaviour
     private void OnResetTimer()
     {
         heartSpawner.timer = 0;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ghost"))
+        {
+            if (cameraController != null)
+            {
+                cameraController.DropCamera();
+            }
+        }
     }
 
 }

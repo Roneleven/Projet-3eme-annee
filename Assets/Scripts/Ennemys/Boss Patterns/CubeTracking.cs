@@ -46,22 +46,25 @@ public class CubeTracking : MonoBehaviour
                 continue;
             }
 
-            // Ajoute un Rigidbody au cube à tête chercheuse
             Rigidbody homingCubeRigidbody = cubeToLaunch.AddComponent<Rigidbody>();
             homingCubeRigidbody.useGravity = true;
 
+            BoxCollider boxCollider = cubeToLaunch.GetComponent<BoxCollider>();
 
-            // Ajoute ou récupère le script HomingCube
+            // Si aucun BoxCollider n'est trouvé, en ajouter un
+            if (boxCollider == null)
+            {
+                cubeToLaunch.AddComponent<BoxCollider>();
+            }
+
             HomingCube homingCubeScript = cubeToLaunch.GetComponent<HomingCube>();
             if (homingCubeScript == null)
             {
-                // Ajoute le script HomingCube s'il n'est pas déjà présent
                 homingCubeScript = cubeToLaunch.AddComponent<HomingCube>();
             }
 
-            // Configure le cube à tête chercheuse
             homingCubeScript.SetTarget(targetTransform);
-            homingCubeScript.SetDestroyDelay(5f);
+            homingCubeScript.SetDestroyDelay(destroyDelay);
             homingCubeScript.SetSpeed(homingCubeSpeed);
         }
     }

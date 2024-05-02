@@ -9,6 +9,7 @@ public class GatlinLauncherPattern : MonoBehaviour
     public float sphereRadius;
     public float sphereHeightOffset;
     public float sphereMovementDuration;
+    public float launchForce;
     public float launchInterval;
     public int cubesToLaunch;
 
@@ -54,6 +55,7 @@ public class GatlinLauncherPattern : MonoBehaviour
                 float azimuthAngle = Random.Range(0f, 360f);
 
                 Vector3 spherePosition = CalculateSpherePosition(sphereCenter, polarAngle, azimuthAngle);
+                GatlinD damaging = cubeToMove.AddComponent<GatlinD>();
 
                 StartCoroutine(MoveCubeToPosition(cubeToMove, spherePosition));
 
@@ -116,8 +118,16 @@ public class GatlinLauncherPattern : MonoBehaviour
             yield break;
         }
 
+        int cubesLaunched = 0; // Variable pour compter les cubes lancés
+
         foreach (GameObject cube in cubes)
         {
+            if (cubesLaunched >= cubesToLaunch)
+            {
+                // Si le nombre de cubes lancés atteint cubesToLaunch, sortir de la boucle
+                yield break;
+            }
+
             Rigidbody cubeRigidbody = cube.AddComponent<Rigidbody>();
             cubeRigidbody.useGravity = true;
 
@@ -127,12 +137,15 @@ public class GatlinLauncherPattern : MonoBehaviour
             Vector3 playerPositionWithOffset = heartSpawner.playerPosition + Vector3.up * 3.15f;
             Vector3 launchDirection = (playerPositionWithOffset - cube.transform.position).normalized;
 
-            cubeRigidbody.AddForce(launchDirection * heartSpawner.launchForce, ForceMode.Impulse);
+            cubeRigidbody.AddForce(launchDirection * launchForce, ForceMode.Impulse);
 
             Destroy(cube, heartSpawner.cubeDestroyDelay);
+
+            cubesLaunched++; // Incrémenter le nombre de cubes lancés
 
             yield return new WaitForSeconds(launchInterval);
         }
     }
+
 
 }

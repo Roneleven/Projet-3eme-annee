@@ -156,7 +156,6 @@ public class HeartSpawner : MonoBehaviour
         }
     }
 
-
     #region CUBES SPAWN
     private IEnumerator SpawnCube()
     {
@@ -248,6 +247,7 @@ public class HeartSpawner : MonoBehaviour
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {
         GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+        
         //GameObject transparentCube = transparentCubesPool.GetObject(); nstantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
         // transparentCube.transform.position = spawnPosition;
         // transparentCube.transform.setParent(spawnContainer.transform);
@@ -373,6 +373,7 @@ public class HeartSpawner : MonoBehaviour
         float levelUpIncrement = 1.0f;
 
         spawnRadius = palier * 4;
+        // spawnRadius = palier * 4;
 
         if (palier == 1)
         {
@@ -447,7 +448,7 @@ public class HeartSpawner : MonoBehaviour
     {
         timer += Time.deltaTime;
         float distanceToPlayer = Vector3.Distance(playerPosition, playerGridPosition);
-        float acceptableOverlap = gridSize / 1f;
+        float acceptableOverlap = gridSize / 0.4f;
 
         if (distanceToPlayer >= (gridSize + acceptableOverlap))
         {

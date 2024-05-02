@@ -6,6 +6,8 @@ public class DamageBlock : MonoBehaviour
     public float backwardForce = 10f;
     public float upwardForce = 1f;
 
+    public Player playerScript;
+
     private void Start()
     {
         Destroy(gameObject, .5f);

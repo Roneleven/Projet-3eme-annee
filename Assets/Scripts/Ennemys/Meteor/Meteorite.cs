@@ -31,6 +31,18 @@ public class Meteorite : MonoBehaviour
     void Update()
     {
         meteor.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+
+        // Vérifier si la météorite se déplace sur le plan horizontal
+        if (GetComponent<Rigidbody>().velocity.magnitude > 0)
+        {
+            // Obtenir la vitesse de déplacement
+            Vector3 velocity = GetComponent<Rigidbody>().velocity;
+
+            // Mettre à jour la position du feedbackInstance sur le plan horizontal
+            Vector3 feedbackPosition = feedbackInstance.transform.position;
+            feedbackPosition.x += velocity.x * Time.deltaTime;
+            feedbackInstance.transform.position = feedbackPosition;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

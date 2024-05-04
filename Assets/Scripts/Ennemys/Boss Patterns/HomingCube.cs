@@ -2,73 +2,46 @@ using UnityEngine;
 
 public class HomingCube : MonoBehaviour
 {
-    private Rigidbody rb;
-    public float speed = 2f;
-    public float rotationSpeed = 1f;
-    public Transform target;
-    private float destroyDelay;
+    public string targetTag = "Player"; // Tag de la cible
+    public float speed = 5f; // Vitesse de déplacement
+    public Player playerScript;
+
+    private Transform target; // Référence à la cible
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-
-        Transform audioChild = transform.Find("Audio");
-        if (audioChild != null)
+        playerScript = FindObjectOfType<Player>();
+        // Trouver la cible par son tag
+        GameObject targetObject = GameObject.FindGameObjectWithTag(targetTag);
+        if (targetObject != null)
         {
-            audioChild.gameObject.SetActive(true);
-        }
-    }
-
-    void FixedUpdate()
-    {
-        if (target != null)
-        {
-            Vector3 toTarget = target.position - rb.position;
-            Vector3 direction = toTarget.normalized;
-            Quaternion targetRotation = Quaternion.RotateTowards(rb.rotation, Quaternion.LookRotation(direction), rotationSpeed * Time.deltaTime);
-            rb.MoveRotation(targetRotation);
-            rb.velocity = direction * speed;
+            target = targetObject.transform;
         }
         else
         {
-            rb.velocity = transform.forward * speed;
+            Debug.LogError("Aucune cible avec le tag '" + targetTag + "' trouvée.");
         }
-        destroyDelay -= Time.deltaTime;
-        if (destroyDelay <= 0f)
+    }
+
+    void Update()
+    {
+        if (target != null)
         {
-            Destroy(gameObject);
+            // Rotation vers la cible
+            Vector3 direction = target.position - transform.position;
+            Quaternion rotationToTarget = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotationToTarget, Time.deltaTime * speed);
+
+            // Déplacement vers la cible
+            transform.position += transform.forward * Time.deltaTime * speed;
         }
-
-        Debug.DrawRay(rb.position, rb.velocity, Color.green);
     }
-
-
-    void OnDrawGizmos()
-    {
-        if (target == null) return;
-        Gizmos.color = new Color(1f, 0.51f, 0.47f);
-        Gizmos.DrawLine(transform.position, target.position);
-    }
-    public void SetTarget(Transform newTarget)
-    {
-        target = newTarget;
-        
-    }
-
-    public void SetSpeed(float newSpeed)
-    {
-        speed = newSpeed;
-    }
-    public void SetDestroyDelay(float delay)
-    {
-        destroyDelay = delay;
-    }
-
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            playerScript.TakeDamage(10);
             Destroy(gameObject);
         }
     }

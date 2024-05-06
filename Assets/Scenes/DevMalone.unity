@@ -1381,24 +1381,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1748092545}
     - target: {fileID: 1380432832344173796, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
-      propertyPath: cageRadius
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1380432832344173796, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: spawnContainer
       value: 
       objectReference: {fileID: 177016507}
-    - target: {fileID: 1380432832344173796, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
-      propertyPath: cagePatternPreview
-      value: 
-      objectReference: {fileID: 4645954303748183070, guid: 4d4736979ec4263418d4502cc1470f40, type: 3}
     - target: {fileID: 2249755692970071878, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: paliers.Array.data[1].patterns.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2249755692970071878, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: paliers.Array.data[1].patterns.Array.data[0]
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2249755692970071878, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: paliers.Array.data[1].patterns.Array.data[1]
@@ -1408,10 +1400,6 @@ PrefabInstance:
       propertyPath: paliers.Array.data[4].patterns.Array.data[0]
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3571893575622429881, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
-      propertyPath: losange
-      value: 
-      objectReference: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
     - target: {fileID: 3571893575622429881, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: targetTransform
       value: 

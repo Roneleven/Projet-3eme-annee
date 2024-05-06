@@ -74,6 +74,7 @@ MonoBehaviour:
   - {fileID: 6932823427785718496}
   - {fileID: 8733154761386723883}
   - {fileID: 5746267683849433718}
+  explosion: {fileID: 3810439456834575818, guid: 2e43e7ba74c5590449a91b647d126f11, type: 3}
   Recoil_Script: {fileID: 0}
   explosiveDamage: 1
   explosiveRange: 200

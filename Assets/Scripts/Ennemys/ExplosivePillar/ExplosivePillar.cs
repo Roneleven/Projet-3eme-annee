@@ -55,6 +55,8 @@ public class ExplosivePillar : MonoBehaviour
         }
     }
 
+    
+
     private void SpawnCube()
     {
         if (currentIndex < positions.Length)
@@ -89,8 +91,11 @@ public class ExplosivePillar : MonoBehaviour
     }
 
     private void ActivateExplosiveBlocksAndRigidbodies()
+{
+    foreach (Transform position in positions)
     {
-        foreach (Transform position in positions)
+        // Vérifier si le transform existe encore
+        if (position != null)
         {
             CrazyBlock explosiveBlock = position.GetComponent<CrazyBlock>();
             if (explosiveBlock != null)
@@ -106,12 +111,16 @@ public class ExplosivePillar : MonoBehaviour
             }
         }
     }
+}
 
     private void FixedUpdate()
+{
+    if (isKinematicDisabled)
     {
-        if (isKinematicDisabled)
+        foreach (Transform position in positions)
         {
-            foreach (Transform position in positions)
+            // Vérifier si le transform existe encore
+            if (position != null)
             {
                 Rigidbody rb = position.GetComponent<Rigidbody>();
                 if (rb != null && !rb.isKinematic)
@@ -119,9 +128,10 @@ public class ExplosivePillar : MonoBehaviour
                     EjectCube(rb);
                 }
             }
-            isKinematicDisabled = false;
         }
+        isKinematicDisabled = false;
     }
+}
 
     private void EjectCube(Rigidbody rb)
     {

@@ -157,7 +157,7 @@ MonoBehaviour:
   percentageToLaunch: 5
   cubesToLaunch: 5
   CageBlockPrefab: {fileID: 1230891745418371966, guid: 345b0ae9498e327478767960ee2fd6fd, type: 3}
-  cageRadius: 2.3
+  cageRadius: 3
   cageTriggerTime: 5
   cageSpawnTime: 2.1
   cagePatternPreview: {fileID: 4645954303748183070, guid: 4d4736979ec4263418d4502cc1470f40, type: 3}
@@ -265,6 +265,7 @@ MonoBehaviour:
   destroyDelay: 5
   cubeTimer: 5
   targetTransform: {fileID: 0}
+  losange: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
 --- !u!114 &8496086104443576437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,6 +341,7 @@ MonoBehaviour:
   sphereRadius: 2
   sphereHeightOffset: 15
   sphereMovementDuration: 0.5
+  launchForce: 0
   launchInterval: 0.25
   cubesToLaunch: 15
   heartSpawner: {fileID: 1380432832344173796}

@@ -70,14 +70,6 @@ public class CubeHealth : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            Die();
-        }
-    }
-
 
     public bool IsDead()
     {

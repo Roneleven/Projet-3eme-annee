@@ -15,6 +15,10 @@ public class GatlinLauncherPattern : MonoBehaviour
 
     public HeartSpawner heartSpawner;
 
+    public void Start()
+    {
+        heartSpawner = GetComponent<HeartSpawner>();
+    }
 
     public void SphereLauncherPattern()  // No longer takes numCubesToMove as an argument
     {

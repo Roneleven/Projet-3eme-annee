@@ -9,7 +9,6 @@ public class RepulseObject : MonoBehaviour
     public float upwardForce = 1f;
     public float repulsionForceHorizontal;
 
-    // Fonction appelée lorsqu'une collision se produit
     private void OnCollisionEnter(Collision collision)
     {
         Vector3 repulsionDirection = (collision.transform.position - transform.position).normalized;

@@ -70,6 +70,7 @@ public class CubeHealth : MonoBehaviour
         Destroy(gameObject);
     }
 
+
     public bool IsDead()
     {
         return isDead;

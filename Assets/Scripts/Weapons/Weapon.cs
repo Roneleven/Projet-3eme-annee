@@ -41,6 +41,7 @@ public class Weapon : MonoBehaviour
     public int weaponGfxLayer;
     public GameObject[] weaponGfxs;
     public Collider[] gfxColliders;
+    public GameObject explosion;
 
     private float _rotationTime;
     private float _time;
@@ -271,6 +272,12 @@ public class Weapon : MonoBehaviour
 
                 Destroy(hitInfo.transform.gameObject);
             }
+        }
+
+        if (hitInfo.transform.CompareTag("ExplosiveBlock"))
+        {
+            Instantiate(explosion, hitInfo.transform.position, Quaternion.identity);
+            Destroy(hitInfo.transform.gameObject);
         }
 
         if (hitInfo.transform.CompareTag("DestroyableBlock"))

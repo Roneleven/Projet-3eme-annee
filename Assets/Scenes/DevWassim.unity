@@ -788,6 +788,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1940570660}
     - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: laserCooldown
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: laserDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: explosiveRange
       value: 200
       objectReference: {fileID: 0}
@@ -808,9 +816,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 936966640}
     - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: mouseLookScript
+      value: 
+      objectReference: {fileID: 558763929}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: overheatThreshold
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: playerMovementsRB
+      value: 
+      objectReference: {fileID: 1490878987}
     - target: {fileID: 4805179598088156730, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: m_Name
       value: Weapon
@@ -951,6 +967,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &558763929 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7862538914596490753, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+  m_PrefabInstance: {fileID: 134362701}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550d9e4aedbe4d146b398b21467aaf8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1305,6 +1332,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7720814548836648889, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
   m_PrefabInstance: {fileID: 134362701}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1490878987 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1662342133783437384, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+  m_PrefabInstance: {fileID: 134362701}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dcaacba706f73f4da878ed90c718463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1709170487
 GameObject:
   m_ObjectHideFlags: 0

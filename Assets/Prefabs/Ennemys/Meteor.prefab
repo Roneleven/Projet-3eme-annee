@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8124634591630642829}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 289301614986012343, guid: 8d4b936d167bce645896976a4ab1f670, type: 3}
 --- !u!23 &2509121766819640558
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fdacfcf9575e8bd4aa9aec4279f751ce, type: 2}
+  - {fileID: 2100000, guid: c1bd8d00c030b954186b4914512da745, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -124,7 +124,6 @@ MonoBehaviour:
   objectToSpawnOnImpact: {fileID: 2572278838447988762, guid: bec44aac7fbb7344cbdba18651f1c50d, type: 3}
   feedbackObject: {fileID: 2590338932552517828, guid: 7a0e75e1b43394d48babd8835e6222bb, type: 3}
   explosionRadius: 1.5
-  triggerHB: {fileID: 9002910961648187962}
 --- !u!54 &-8739809017272414728
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -152,20 +152,32 @@ public class Weapon : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && currentExplosiveCharges > 0)
             {
                 chargeStartTime = Time.time;
+                Instantiate(chargingEffect, transform.position, Quaternion.identity);
+                chargingEffect.Play();
+               
             }
 
             if (Input.GetMouseButton(0) && Time.time - chargeStartTime >= chargeTimeThreshold)
             {
                 // Tir chargé, ajouter feedback sonores/visuels quand c'est chargé ici
+                chargingEffect.Stop();
+
             }
+
+
 
             if (Input.GetMouseButtonUp(0) && Time.time - chargeStartTime >= chargeTimeThreshold)
             {
-                Debug.Log("shoot");
                 ExplosiveShoot(); 
                 explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
             }
+            else
+            {
+                chargingEffect.Stop();
+            }
         }
+
+        //LASER
 
         if (Input.GetMouseButton(0) && currentMode == FireMode.Laser && canShootLaser)
         {

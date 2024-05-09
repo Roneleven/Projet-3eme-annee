@@ -1736,7 +1736,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8454365674171955205, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: paliers.Array.data[1].patterns.Array.data[0]
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

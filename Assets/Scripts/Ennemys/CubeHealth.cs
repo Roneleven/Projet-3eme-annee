@@ -19,6 +19,14 @@ public class CubeHealth : MonoBehaviour
         UpdateMaterial();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
 
     public void TakeDamage(int damage)
     {

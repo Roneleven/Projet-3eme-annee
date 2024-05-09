@@ -72,6 +72,11 @@ public class CrazyBlock : MonoBehaviour
                 }
             }
         }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Explode();
+        }
     }
 
     private void Explode()

@@ -31,17 +31,25 @@ public class AerialMinesPattern : MonoBehaviour
     }
 
     IEnumerator MoveToRandomPosition(Transform cubeTransform, Vector3 targetPosition)
-    {
-        float startTime = Time.time;
-        Vector3 startPosition = cubeTransform.position;
-        float journeyLength = Vector3.Distance(startPosition, targetPosition);
+{
+    float startTime = Time.time;
+    Vector3 startPosition = cubeTransform.position;
+    float journeyLength = Vector3.Distance(startPosition, targetPosition);
 
-        while (cubeTransform.position != targetPosition)
+    // Tant que le transform du cube existe et qu'il n'a pas atteint la position cible
+    while (cubeTransform != null && cubeTransform.position != targetPosition)
+    {
+        float distanceCovered = (Time.time - startTime) * journeyDuration;
+        float fractionOfJourney = distanceCovered / journeyLength;
+
+        // Vérifier à chaque itération si le cube a été détruit
+        if (cubeTransform == null)
         {
-            float distanceCovered = (Time.time - startTime) * journeyDuration;
-            float fractionOfJourney = distanceCovered / journeyLength;
-            cubeTransform.position = Vector3.Lerp(startPosition, targetPosition, fractionOfJourney);
-            yield return null;
+            yield break; // Sortir de la coroutine si le cube a été détruit
         }
+
+        cubeTransform.position = Vector3.Lerp(startPosition, targetPosition, fractionOfJourney);
+        yield return null;
     }
+}
 }

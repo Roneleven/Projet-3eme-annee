@@ -10,7 +10,12 @@ public class CubeTracking : MonoBehaviour
     public float destroyDelay;
     public float cubeTimer;
     public Transform targetTransform;
+    public GameObject losange;
 
+    public void Start()
+    {
+        heartSpawner = GetComponent<HeartSpawner>();
+    }
 
     public void LaunchHomingCubes()
     {
@@ -40,32 +45,8 @@ public class CubeTracking : MonoBehaviour
 
         foreach (GameObject cubeToLaunch in cubesToLaunch)
         {
-            if (cubeToLaunch == null)
-            {
-                Debug.LogWarning("Cube to launch is null.");
-                continue;
-            }
-
-            Rigidbody homingCubeRigidbody = cubeToLaunch.AddComponent<Rigidbody>();
-            homingCubeRigidbody.useGravity = true;
-
-            BoxCollider boxCollider = cubeToLaunch.GetComponent<BoxCollider>();
-
-            // Si aucun BoxCollider n'est trouvé, en ajouter un
-            if (boxCollider == null)
-            {
-                cubeToLaunch.AddComponent<BoxCollider>();
-            }
-
-            HomingCube homingCubeScript = cubeToLaunch.GetComponent<HomingCube>();
-            if (homingCubeScript == null)
-            {
-                homingCubeScript = cubeToLaunch.AddComponent<HomingCube>();
-            }
-
-            homingCubeScript.SetTarget(targetTransform);
-            homingCubeScript.SetDestroyDelay(destroyDelay);
-            homingCubeScript.SetSpeed(homingCubeSpeed);
+            GameObject newLosange = Instantiate(losange, cubeToLaunch.transform.position, Quaternion.identity);
+            Destroy(cubeToLaunch);
         }
     }
 }

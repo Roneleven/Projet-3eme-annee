@@ -44,7 +44,7 @@ public class PlayerMovementsRB : MonoBehaviour
     [Header("Jetpack UI Settings")]
     public Image jetpackChargeImage;
 
-    private Rigidbody rb;
+    public Rigidbody rb;
     private float movementX;
     private float movementY;
     private bool isGrounded;

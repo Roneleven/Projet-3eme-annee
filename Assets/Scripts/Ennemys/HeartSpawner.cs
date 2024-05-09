@@ -88,11 +88,14 @@ public class HeartSpawner : MonoBehaviour
     private void Start()
     {
         cubeLauncherPattern = GetComponent<CubeLauncherPattern>();
+        cubeTrackingScript = GetComponent<CubeTracking>();
         explosivePillarPattern = GetComponent<ExplosivePillarPattern>();
         bigWallPattern = GetComponent<BigWallPattern>();
         meteorPattern = GetComponent<MeteorPattern>();
         aerialMinesPattern = GetComponent<AerialMinesPattern>();
         gatlinLauncherPattern = GetComponent<GatlinLauncherPattern>();
+        bossPatternManager = GetComponent<BossPatternManager>();
+        heartHealth = GetComponent<HeartHealth>();
         warning = FMODUnity.RuntimeManager.CreateInstance("event:/Heart/Patterns/Cage_Warning");
         //BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/V1/UX/Ambience/CoreBreaked");  INTéGRER LA MUSIQUE ICI
         BreakingHeart.start();
@@ -273,28 +276,6 @@ public class HeartSpawner : MonoBehaviour
         else
         {
             UpgradeCubeIfNeeded(spawnPosition);
-
-            Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-            playerPosition /= gridSize;
-            playerPosition = new Vector3(Mathf.Round(playerPosition.x), Mathf.Round(playerPosition.y), Mathf.Round(playerPosition.z));
-            playerPosition *= gridSize;
-            warning.setParameterByName("Cage", 1.0F);
-            warning.start();
-
-            for (float x = playerPosition.x - 3; x <= playerPosition.x + 3; x += gridSize)
-            {
-                for (float y = playerPosition.y - 3; y <= playerPosition.y + 3; y += gridSize)
-                {
-                    for (float z = playerPosition.z - 3; z <= playerPosition.z + 3; z += gridSize)
-                    {
-                        Vector3 cubePosition = new Vector3(x, y, z);
-                        if (Mathf.Abs(x - playerPosition.x) >= 3 || Mathf.Abs(y - playerPosition.y) >= 3 || Mathf.Abs(z - playerPosition.z) >= 3)
-                        {
-                            Instantiate(CageBlockPrefab, cubePosition, Quaternion.identity, spawnContainer.transform);
-                        }
-                    }
-                }
-            }
         }
     }
     #endregion

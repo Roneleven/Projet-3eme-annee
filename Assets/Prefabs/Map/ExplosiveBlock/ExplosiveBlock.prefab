@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -7399426867032470940}
   m_Layer: 3
   m_Name: ExplosiveBlock
-  m_TagString: Block
+  m_TagString: ExplosiveBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

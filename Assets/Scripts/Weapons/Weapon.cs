@@ -41,6 +41,7 @@ public class Weapon : MonoBehaviour
     public int weaponGfxLayer;
     public GameObject[] weaponGfxs;
     public Collider[] gfxColliders;
+    public GameObject explosion;
 
     private float _rotationTime;
     private float _time;
@@ -76,6 +77,10 @@ public class Weapon : MonoBehaviour
     private bool canShootLaser = true;
     public GameObject laserVFX;
     public GameObject laserSpawnPoint;
+    public PlayerMovementsRB playerMovementsRB;
+    public MouseLook mouseLookScript;
+    private bool isChargingLaser = false;
+    private bool isLaserActive = false;
 
     public float heatPerShot;
     public float overheatThreshold;
@@ -93,7 +98,8 @@ public class Weapon : MonoBehaviour
         Recoil_Script = transform.Find("FPS Player Gun Rework/CameraRot/CameraRecoil").GetComponent<Recoil>();
         currentExplosiveCharges = maxExplosiveCharges;
         currentMode = FireMode.Normal;
-}
+        mouseLookScript = playerMovementsRB.GetComponentInChildren<MouseLook>();
+    }
 
     private void Update()
     {
@@ -159,7 +165,7 @@ public class Weapon : MonoBehaviour
 
         if (Input.GetMouseButton(0) && currentMode == FireMode.Laser && canShootLaser)
         {
-            LaserShoot();
+            StartChargingLaser();
         }
 
         if (!overheated && !_shooting)
@@ -266,6 +272,12 @@ public class Weapon : MonoBehaviour
 
                 Destroy(hitInfo.transform.gameObject);
             }
+        }
+
+        if (hitInfo.transform.CompareTag("ExplosiveBlock"))
+        {
+            Instantiate(explosion, hitInfo.transform.position, Quaternion.identity);
+            Destroy(hitInfo.transform.gameObject);
         }
 
         if (hitInfo.transform.CompareTag("DestroyableBlock"))
@@ -390,25 +402,62 @@ public class Weapon : MonoBehaviour
 
     #region MODE LASER
 
-    private void LaserShoot()
+    private void StartChargingLaser()
     {
-        if (currentMode == FireMode.Laser)
+        if (!isChargingLaser && !isLaserActive)
         {
-            StartCoroutine(FireLaser());
+            StartCoroutine(ChargeLaser());
         }
     }
 
-    private IEnumerator FireLaser()
+    private IEnumerator ChargeLaser()
+    {
+        isChargingLaser = true;
+        float chargeStartTime = Time.time;
+
+        // Ralentir le joueur en ajustant sa vitesse
+        float originalSpeed = playerMovementsRB.speed;
+        playerMovementsRB.speed *= 0.5f; // Réduire la vitesse à la moitié
+
+        // Attendre pendant que le laser se charge
+        while (Time.time - chargeStartTime < 2f)
+        {
+            yield return null;
+        }
+
+        // Rétablir la vitesse du joueur
+        playerMovementsRB.speed = originalSpeed;
+
+        isChargingLaser = false;
+        FireLaser();
+    }
+
+    private void FireLaser()
+    {
+        if (currentMode == FireMode.Laser)
+        {
+            StartCoroutine(FireLaserCoroutine());
+        }
+    }
+
+
+    private IEnumerator FireLaserCoroutine()
     {
         canShootLaser = false;
-        float startTime = Time.time;
-        float elapsedTime = 0f;
+        isLaserActive = true;
+
+        // Désactiver le script MouseLook
+        mouseLookScript.enabled = false;
+
+        // Activer le isKinematic
+        playerMovementsRB.rb.isKinematic = true;
 
         // Instantiation du VFX de laser à la position et rotation du cannon du joueur
-            GameObject laserInstance = Instantiate(laserVFX, laserSpawnPoint.transform.position, laserSpawnPoint.transform.rotation);
+        GameObject laserInstance = Instantiate(laserVFX, laserSpawnPoint.transform.position, laserSpawnPoint.transform.rotation);
 
+        float startTime = Time.time;
 
-        while (elapsedTime < laserDuration)
+        while (Time.time - startTime < laserDuration)
         {
             // Lance un raycast pour détecter les collisions
             RaycastHit[] hits;
@@ -429,10 +478,16 @@ public class Weapon : MonoBehaviour
             // Met à jour la rotation du VFX de laser pour qu'il regarde dans la direction du rayon du laser
             laserInstance.transform.rotation = Quaternion.LookRotation(transform.forward);
 
-            elapsedTime = Time.time - startTime;
-
             yield return null;
         }
+
+        isLaserActive = false;
+
+        // Réactiver le script MouseLook
+        mouseLookScript.enabled = true;
+
+        // Désactiver le isKinematic
+        playerMovementsRB.rb.isKinematic = false;
 
         // Suppression du VFX de laser une fois que la durée est écoulée
         Destroy(laserInstance);

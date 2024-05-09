@@ -67,6 +67,7 @@ public class Weapon : MonoBehaviour
     private float chargeStartTime;
     public float chargeTimeThreshold;
     private int destroyedCubeCount = 0;
+    public int cubesToDestroyToGainACharge = 10;
 
 
     [Header("Laser Mode")]
@@ -279,7 +280,7 @@ public class Weapon : MonoBehaviour
         {
             destroyedCubeCount++;
 
-            if (destroyedCubeCount >= 10)
+            if (destroyedCubeCount >= cubesToDestroyToGainACharge)
             {
                 GainExplosiveCharge(); 
                 destroyedCubeCount = 0;

@@ -58,7 +58,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RimStrengh: 15.29
-    - _Smoothness: 0
+    - _Smoothness: 0.047
     - _SpecularHighlights: 1
     - __dirty: 0
     m_Colors:

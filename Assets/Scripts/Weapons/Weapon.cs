@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 
 public enum FireMode
@@ -68,6 +69,7 @@ public class Weapon : MonoBehaviour
     public float chargeTimeThreshold;
     private int destroyedCubeCount = 0;
     public int cubesToDestroyToGainACharge = 10;
+    public VisualEffect chargingEffect;
 
 
     [Header("Laser Mode")]

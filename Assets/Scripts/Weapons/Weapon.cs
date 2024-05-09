@@ -472,7 +472,7 @@ public class Weapon : MonoBehaviour
             }
 
             // Positionne le VFX de laser à l'extrémité du rayon du laser
-            Vector3 laserEnd = transform.position + transform.forward * laserRange;
+            Vector3 laserEnd = transform.position + transform.forward ;
             laserInstance.transform.position = laserEnd;
 
             // Met à jour la rotation du VFX de laser pour qu'il regarde dans la direction du rayon du laser

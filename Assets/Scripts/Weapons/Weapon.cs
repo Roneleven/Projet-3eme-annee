@@ -62,11 +62,10 @@ public class Weapon : MonoBehaviour
     public float explosionRadius;
     public GameObject explosionPrefab;
     public int maxExplosiveCharges = 5;
-    public int currentExplosiveCharges = 5; 
+    private int currentExplosiveCharges = 5; 
     private TMP_Text explosiveChargeText;
     private float chargeStartTime;
     public float chargeTimeThreshold;
-    private int destroyedCubeCount = 0;
 
 
     [Header("Laser Mode")]
@@ -275,17 +274,6 @@ public class Weapon : MonoBehaviour
             }
         }
 
-        if (cubeHealth != null && cubeHealth.health <= 0)
-        {
-            destroyedCubeCount++;
-
-            if (destroyedCubeCount >= 10)
-            {
-                GainExplosiveCharge(); 
-                destroyedCubeCount = 0;
-            }
-        }
-
         if (hitInfo.transform.CompareTag("ExplosiveBlock"))
         {
             Instantiate(explosion, hitInfo.transform.position, Quaternion.identity);
@@ -408,7 +396,6 @@ public class Weapon : MonoBehaviour
         if (currentExplosiveCharges < maxExplosiveCharges)
         {
             currentExplosiveCharges++;
-            explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
         }
     }
     #endregion

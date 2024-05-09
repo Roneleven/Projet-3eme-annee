@@ -138,7 +138,7 @@ MonoBehaviour:
   exclusionRadius: 3
   spawnCount: 4
   spawnContainer: {fileID: 0}
-  heartHealth: {fileID: 0}
+  heartHealth: {fileID: 3557180172256735928}
   previousPalier: 1
   currentPalier: 1
   temporarySpawnCount: 35
@@ -163,14 +163,14 @@ MonoBehaviour:
   cageSpawnTime: 2.1
   cagePatternPreview: {fileID: 4645954303748183070, guid: 4d4736979ec4263418d4502cc1470f40, type: 3}
   cageTransparentScale: 4
-  cubeLauncherPattern: {fileID: 0}
-  cubeTrackingScript: {fileID: 0}
-  aerialMinesPattern: {fileID: 0}
-  bigWallPattern: {fileID: 0}
-  explosivePillarPattern: {fileID: 0}
-  meteorPattern: {fileID: 0}
-  gatlinLauncherPattern: {fileID: 0}
-  bossPatternManager: {fileID: 0}
+  cubeLauncherPattern: {fileID: 7184678388155635062}
+  cubeTrackingScript: {fileID: 8372236347979211609}
+  aerialMinesPattern: {fileID: 3672458320004308592}
+  bigWallPattern: {fileID: 4267790417615788546}
+  explosivePillarPattern: {fileID: 1133667869545958720}
+  meteorPattern: {fileID: 6587116827550596133}
+  gatlinLauncherPattern: {fileID: 6157199768885211953}
+  bossPatternManager: {fileID: 8454365674171955205}
 --- !u!114 &7184678388155635062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dd25dadca2ece04ea790be2582423e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heartSpawner: {fileID: 0}
+  heartSpawner: {fileID: 6899634225175561795}
 --- !u!114 &3557180172256735928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad4f91a81e412142b41b2b50462d008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heartSpawner: {fileID: 0}
+  heartSpawner: {fileID: 6899634225175561795}
   numberOfCubesToLaunch: 5
   homingCubeSpeed: 15
   destroyDelay: 5

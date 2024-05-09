@@ -12,6 +12,10 @@ public class CubeTracking : MonoBehaviour
     public Transform targetTransform;
     public GameObject losange;
 
+    public void Start()
+    {
+        heartSpawner = GetComponent<HeartSpawner>();
+    }
 
     public void LaunchHomingCubes()
     {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
 
@@ -7,6 +8,10 @@ public class CubeLauncherPattern : MonoBehaviour
 {
     public HeartSpawner heartSpawner;
 
+    public void Start()
+    {
+        heartSpawner = GetComponent<HeartSpawner>();
+    }
 
     public void LauncherPattern()
     {

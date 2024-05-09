@@ -52,7 +52,7 @@ Material:
     - _ASEOutlineWidth: 0
     - _AlphaCutoff: 0.5
     - _EnvironmentReflections: 1
-    - _FresnelScale: 0.23
+    - _FresnelScale: 3
     - _Highlight: 1
     - _QueueControl: 0
     - _QueueOffset: 0

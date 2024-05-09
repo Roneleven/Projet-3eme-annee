@@ -9,6 +9,8 @@ public class BigWall : MonoBehaviour
     private bool allCubesSpawned = false;
     private bool isSpawning = true;
 
+    private FMOD.Studio.EventInstance wall;
+
     private void Start()
     {
         positions = new Transform[transform.childCount];
@@ -19,19 +21,27 @@ public class BigWall : MonoBehaviour
         }
 
         InvokeRepeating("SpawnCube", interval, interval);
+
+        wall = FMODUnity.RuntimeManager.CreateInstance("event:/Heart/Patterns/BigWall_Start");
+        wall.setParameterByName("ToGoing", 0.0F);
+        wall.start();
     }
 
     private void Update()
     {
+        wall.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+
         if (allCubesSpawned && !GetComponent<WallPatternMovement>())
         {
             gameObject.AddComponent<WallPatternMovement>().Initialize(moveSpeed);
+            wall.setParameterByName("ToGoing", 1.0F);
             Invoke("DestroyWallPattern", 10f);
         }
     }
 
     private void DestroyWallPattern()
     {
+        wall.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         Destroy(gameObject);
     }
 

@@ -188,7 +188,10 @@ MonoBehaviour:
   explosionRadius: 5
   explosionPrefab: {fileID: 191186, guid: 517c65f5c21a00340b7af8423976621c, type: 3}
   maxExplosiveCharges: 5
-  chargeTimeThreshold: 0
+  currentExplosiveCharges: 5
+  chargeTimeThreshold: 1.5
+  cubesToDestroyToGainACharge: 10
+  chargingEffect: {fileID: 0}
   laserCooldown: 10
   laserDuration: 2
   laserWidth: 3

@@ -34,25 +34,32 @@ public class BlockWall : MonoBehaviour
     }
 
     void SpawnLosange()
+{
+    Rigidbody rb = GetComponent<Rigidbody>();
+    if (rb != null)
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null)
+        rb.isKinematic = true;
+        rb.isKinematic = false;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
         {
-            rb.isKinematic = true;
-            rb.isKinematic = false;
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null)
-            {
-                Vector3 direction = player.transform.position - transform.position;
-                float distance = direction.magnitude;
-                float calculatedForce = forceMagnitude * distance;
-                rb.AddForce(direction.normalized * calculatedForce, ForceMode.Impulse);
-            }
-        }
+            Vector3 direction = player.transform.position - transform.position;
+            float distance = direction.magnitude;
+            float calculatedForce = forceMagnitude * distance;
 
-        Invoke("DestroyBlock", 3f);
-        hasBeenPropelled = true; // Marque l'objet comme ayant été propulsé
+            // Vérification pour limiter la force à 20
+            if (calculatedForce > 30f)
+            {
+                calculatedForce = 30f;
+            }
+
+            rb.AddForce(direction.normalized * calculatedForce, ForceMode.Impulse);
+        }
     }
+
+    Invoke("DestroyBlock", 3f);
+    hasBeenPropelled = true; // Marque l'objet comme ayant été propulsé
+}
 
     void DestroyBlock()
     {

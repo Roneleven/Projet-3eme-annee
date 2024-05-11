@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.VFX;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public enum FireMode
 {
@@ -94,6 +95,9 @@ public class Weapon : MonoBehaviour
     private float cooldownStartTime;
     public float cooldownRate;
 
+    [Header("Heat UI")]
+    public Image heatImage; // Reference to the UI image representing heat level
+    public float maxFillAmount = 1f;
 
     private void Start()
     {
@@ -191,6 +195,7 @@ public class Weapon : MonoBehaviour
             // Clamp pour que ce soit entre 0 et 1
             currentHeat = Mathf.Clamp01(currentHeat);
         }
+        UpdateHeatUI();
     }
 
     private void Shoot()
@@ -261,9 +266,20 @@ public class Weapon : MonoBehaviour
         }
         
     }
+    private void UpdateHeatUI()
+    {
+        // Calculate the fill amount based on the current heat value and overheat threshold
+        float fillAmount = Mathf.Clamp01(currentHeat / overheatThreshold);
 
-   
+        // Scale the fill amount to match the maximum fill amount
+        fillAmount *= maxFillAmount;
 
+        // Set the fill amount of the heat UI image
+        if (heatImage != null)
+        {
+            heatImage.fillAmount = fillAmount;
+        }
+    }
 
     private void HandleHitObject(RaycastHit hitInfo)
     {

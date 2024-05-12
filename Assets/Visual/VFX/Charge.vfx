@@ -5387,7 +5387,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615329}
   m_ExposedName: RotationStar
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 3
   m_Category: 
   m_Min:
     m_Type:
@@ -7035,7 +7035,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615429}
   m_ExposedName: RotationStar 1
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 4
   m_Category: 
   m_Min:
     m_Type:
@@ -7117,7 +7117,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615431}
   m_ExposedName: StarSize 1
   m_Exposed: 0
-  m_Order: 1
+  m_Order: 2
   m_Category: 
   m_Min:
     m_Type:

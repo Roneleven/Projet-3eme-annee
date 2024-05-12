@@ -26,8 +26,6 @@ public class HeartHealth : MonoBehaviour
     public float moveSpeed = 5f;
     private Vector3 targetPosition;
 
-    public float patternRadius;
-    public MonoBehaviour scriptToToggle;
 
     // Nouvelle variable pour stocker les points de téléportation accessibles après chaque téléportation
     public List<int> accessibleTeleportPoints = new List<int>();
@@ -53,32 +51,9 @@ public class HeartHealth : MonoBehaviour
             SetRandomTarget();
         }
 
-        CheckPlayerDistance();
     }
 
-     void CheckPlayerDistance()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-
-            if (distanceToPlayer > patternRadius)
-            {
-                if (scriptToToggle != null)
-                {
-                    scriptToToggle.enabled = false;
-                }
-            }
-            else
-            {
-                if (scriptToToggle != null)
-                {
-                    scriptToToggle.enabled = true;
-                }
-            }
-        }
-    }
+    
 
     void SetRandomTarget()
     {

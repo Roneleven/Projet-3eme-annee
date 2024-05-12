@@ -10134,6 +10134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TheHeart
       objectReference: {fileID: 0}
+    - target: {fileID: 8454365674171955205, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: detectionRadius
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

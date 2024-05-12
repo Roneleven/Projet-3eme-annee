@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class HomingCube : MonoBehaviour
 {
-    public string targetTag = "Player"; // Tag de la cible
-    public float speed = 5f; // Vitesse de déplacement
+    public string targetTag = "Player"; 
+    public float speed = 5f; 
     public Player playerScript;
+    public float destroyDistance = 1.5f; // Distance à partir de laquelle les losanges se détruisent
 
-    private Transform target; // Référence à la cible
+    private Transform target; 
 
     void Start()
     {
         playerScript = FindObjectOfType<Player>();
-        // Trouver la cible par son tag
         GameObject targetObject = GameObject.FindGameObjectWithTag(targetTag);
         if (targetObject != null)
         {
@@ -27,13 +27,38 @@ public class HomingCube : MonoBehaviour
     {
         if (target != null)
         {
-            // Rotation vers la cible
             Vector3 direction = target.position - transform.position;
             Quaternion rotationToTarget = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Lerp(transform.rotation, rotationToTarget, Time.deltaTime * speed);
 
-            // Déplacement vers la cible
             transform.position += transform.forward * Time.deltaTime * speed;
+
+            CheckDestroyAndMerge();
+        }
+    }
+
+    private void CheckDestroyAndMerge()
+    {
+        HomingCube[] allCubes = FindObjectsOfType<HomingCube>(); // Récupérer tous les losanges dans la scène
+        foreach (HomingCube cube in allCubes)
+        {
+            if (cube != this) // Éviter de comparer le même cube
+            {
+                float distance = Vector3.Distance(transform.position, cube.transform.position);
+                if (distance < destroyDistance)
+                {
+                    if (speed >= cube.speed)
+                    {
+                        speed += cube.speed; // Ajouter la vitesse du cube détruit à la vitesse du cube restant
+                        Destroy(cube.gameObject);
+                    }
+                    else
+                    {
+                        cube.speed += speed; // Ajouter la vitesse du cube restant à la vitesse du cube détruit
+                        Destroy(gameObject);
+                    }
+                }
+            }
         }
     }
 

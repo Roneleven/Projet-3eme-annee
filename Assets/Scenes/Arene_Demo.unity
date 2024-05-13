@@ -47819,10 +47819,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 769903771032562250, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
-      propertyPath: m_AfterStackBundles.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1613122716386559989, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -47831,37 +47827,9 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4239171444264417582, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5291741125452362150, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 5291741125452362150, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 5291741125452362150, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5291741125452362150, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5291741125452362150, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6232101016860361905, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_Name
       value: FPS Player Gun Rework
-      objectReference: {fileID: 0}
-    - target: {fileID: 6232101016860361905, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7720814548836648889, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_LocalPosition.x

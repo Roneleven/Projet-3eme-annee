@@ -195,6 +195,12 @@ public class Weapon : MonoBehaviour
             // Clamp pour que ce soit entre 0 et 1
             currentHeat = Mathf.Clamp01(currentHeat);
         }
+
+        if (overheated && Time.time - cooldownStartTime >= cooldownTime)
+        {
+            overheated = false;
+            currentHeat = 0f; // Réinitialiser la chaleur à zéro lorsque l'arme n'est plus surchauffée
+        }
         UpdateHeatUI();
     }
 

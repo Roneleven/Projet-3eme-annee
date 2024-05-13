@@ -4808,6 +4808,22 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!4 &126464632 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7720814548836648889, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+  m_PrefabInstance: {fileID: 1538944410}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &126464633 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1662342133783437384, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+  m_PrefabInstance: {fileID: 1538944410}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dcaacba706f73f4da878ed90c718463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &132888539
 Mesh:
   m_ObjectHideFlags: 0
@@ -10046,6 +10062,22 @@ PrefabInstance:
       propertyPath: paliers.Array.data[1].patterns.Array.data[0]
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: teleportPositions.Array.data[0]
+      value: 
+      objectReference: {fileID: 1937218090}
+    - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: teleportPositions.Array.data[1]
+      value: 
+      objectReference: {fileID: 503431276}
+    - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: teleportPositions.Array.data[2]
+      value: 
+      objectReference: {fileID: 1136761687}
+    - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: teleportPositions.Array.data[3]
+      value: 
+      objectReference: {fileID: 1397955536}
     - target: {fileID: 3571893575622429881, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: targetTransform
       value: 
@@ -10114,6 +10146,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6899634225175561795, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 637244352}
+    - target: {fileID: 6899634225175561795, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: blackFade
+      value: 
+      objectReference: {fileID: 637244355}
+    - target: {fileID: 6899634225175561795, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: timerText
+      value: 
+      objectReference: {fileID: 1837911462}
+    - target: {fileID: 6899634225175561795, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: spawnContainer
+      value: 
+      objectReference: {fileID: 993472032}
     - target: {fileID: 8146172639752520048, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPositions.Array.data[0]
       value: 
@@ -10130,6 +10178,10 @@ PrefabInstance:
       propertyPath: teleportPositions.Array.data[3]
       value: 
       objectReference: {fileID: 1397955536}
+    - target: {fileID: 8372236347979211609, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: targetTransform
+      value: 
+      objectReference: {fileID: 126464632}
     - target: {fileID: 8374639144287423287, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: m_Name
       value: TheHeart
@@ -19709,6 +19761,17 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &536365237 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7862538914596490753, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+  m_PrefabInstance: {fileID: 1538944410}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550d9e4aedbe4d146b398b21467aaf8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &542725826
 Mesh:
   m_ObjectHideFlags: 0
@@ -22882,6 +22945,22 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!95 &637244352 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4595058583046311635, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+  m_PrefabInstance: {fileID: 1538944410}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &637244355 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2202284201282341319, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+  m_PrefabInstance: {fileID: 1538944410}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &668169274
 GameObject:
   m_ObjectHideFlags: 0
@@ -44420,6 +44499,18 @@ PrefabInstance:
       propertyPath: Recoil_Script
       value: 
       objectReference: {fileID: 2001782202}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: chargingEffect
+      value: 
+      objectReference: {fileID: 8160295511394092841, guid: 953f0e7219309a1479883c56dc88b347, type: 3}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: mouseLookScript
+      value: 
+      objectReference: {fileID: 536365237}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: playerMovementsRB
+      value: 
+      objectReference: {fileID: 126464633}
     - target: {fileID: 4805179598088156730, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: m_Name
       value: Weapon
@@ -57536,6 +57627,17 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &1837911462 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7752941287825596360, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+  m_PrefabInstance: {fileID: 1538944410}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1838846216
 Mesh:
   m_ObjectHideFlags: 0

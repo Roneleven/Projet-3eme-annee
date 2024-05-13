@@ -47890,15 +47890,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1613122716386559989, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1613122716386559989, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4239171444264417582, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5291741125452362150, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_SizeDelta.x

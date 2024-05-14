@@ -1219,13 +1219,34 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 2
+        m_Name: CircleRate
+        m_Overridden: 0
+      - m_Value: 0.3
+        m_Name: CircleLifetime
+        m_Overridden: 0
+      - m_Value: 0.4
+        m_Name: GlowLifetime
+        m_Overridden: 1
+      - m_Value: 0.9
+        m_Name: CircleSize
+        m_Overridden: 1
+      - m_Value: 0.2
+        m_Name: FlashLifetime
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
       m_Array: []
     m_Vector4f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 9.587451, y: 3.555652, z: 1.6564705, w: 1}
+        m_Name: CircleColor
+        m_Overridden: 1
+      - m_Value: {x: 2.981618, y: 1.2378758, z: 0.5205461, w: 1}
+        m_Name: GlowColor
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:

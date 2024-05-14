@@ -44366,6 +44366,10 @@ PrefabInstance:
       propertyPath: playerMovementsRB
       value: 
       objectReference: {fileID: 126464633}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: chargingEffectSpawnPoint
+      value: 
+      objectReference: {fileID: 1518524115}
     - target: {fileID: 4805179598088156730, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: m_Name
       value: Weapon
@@ -47566,6 +47570,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!4 &1518524115 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4582273381768095942, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+  m_PrefabInstance: {fileID: 1333913873}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1523851100
 Mesh:
   m_ObjectHideFlags: 0

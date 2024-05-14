@@ -71,6 +71,8 @@ public class Weapon : MonoBehaviour
     private int destroyedCubeCount = 0;
     public int cubesToDestroyToGainACharge = 10;
     public VisualEffect chargingEffect;
+    public Transform chargingEffectSpawnPoint;
+    private VisualEffect chargingEffectInstance;
 
 
     [Header("Laser Mode")]
@@ -156,28 +158,28 @@ public class Weapon : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && currentExplosiveCharges > 0)
             {
                 chargeStartTime = Time.time;
-                Instantiate(chargingEffect, transform.position, Quaternion.identity);
-                chargingEffect.Play();
-               
+                // Instancie le VisualEffect et garde une référence à son instance
+                chargingEffectInstance = Instantiate(chargingEffect, chargingEffectSpawnPoint.position, chargingEffectSpawnPoint.rotation);
+                chargingEffectInstance.Play();
             }
 
             if (Input.GetMouseButton(0) && Time.time - chargeStartTime >= chargeTimeThreshold)
             {
                 // Tir chargé, ajouter feedback sonores/visuels quand c'est chargé ici
-                chargingEffect.Stop();
-
+                chargingEffectInstance.Stop();
             }
-
-
 
             if (Input.GetMouseButtonUp(0) && Time.time - chargeStartTime >= chargeTimeThreshold)
             {
-                ExplosiveShoot(); 
+                ExplosiveShoot();
                 explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
             }
-            else
+
+            // Assure-toi que le VisualEffectInstance reste attaché au point de spawn de l'arme
+            if (chargingEffectInstance != null)
             {
-                chargingEffect.Stop();
+                chargingEffectInstance.transform.position = chargingEffectSpawnPoint.position;
+                chargingEffectInstance.transform.rotation = chargingEffectSpawnPoint.rotation;
             }
         }
 

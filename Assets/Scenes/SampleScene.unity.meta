@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 56f469bb1c5df7041beb23c0dc9b2b84
+<<<<<<<< Updated upstream:Assets/Scenes/SampleScene.unity.meta
+guid: 1e9e0d03d286f68498f67df7089b4bb1
+========
+guid: 919034c798dad0242a85b2e1d7a3c549
+>>>>>>>> Stashed changes:Assets/Scenes/Menu.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

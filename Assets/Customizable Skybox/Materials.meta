@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: ea580a49e393d474a8246aed4e6421fe
+<<<<<<<< Updated upstream:Assets/Customizable Skybox/Materials.meta
+guid: 71af7ffbfb854f241bc321a12614ab88
+========
+guid: 52852a50dad62cc4bb7e04816c1d494f
+>>>>>>>> Stashed changes:Assets/Settings.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

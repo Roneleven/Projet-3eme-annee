@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -288,11 +288,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &104982703 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4452267393310683513, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
-  m_PrefabInstance: {fileID: 5918088656065024372}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &118953643
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2509,11 +2504,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75a55552e1acd2a4e8137cda36a98ade, type: 3}
---- !u!1 &969814268 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7656597403133102852, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
-  m_PrefabInstance: {fileID: 5918088656065024372}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1233148028
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2694,16 +2684,6 @@ Transform:
 Camera:
   m_CorrespondingSourceObject: {fileID: 2649904338549692574, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
   m_PrefabInstance: {fileID: 2060281685}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1388659303 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8177255429762540967, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
-  m_PrefabInstance: {fileID: 5918088656065024372}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1491198872 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4911475399173274625, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
-  m_PrefabInstance: {fileID: 5918088656065024372}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1494066109 stripped
 Transform:
@@ -3139,7 +3119,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3314,6 +3294,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 840313111}
+    - target: {fileID: 1422499350029867697, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 1613122716386559989, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3402,6 +3386,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5297151527727057903, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 6232101016860361905, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_Name
       value: FPS Player Gun Rework
@@ -3765,19 +3753,19 @@ PrefabInstance:
     - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: weaponGfxs.Array.data[0]
       value: 
-      objectReference: {fileID: 104982703}
+      objectReference: {fileID: 0}
     - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: weaponGfxs.Array.data[1]
       value: 
-      objectReference: {fileID: 1388659303}
+      objectReference: {fileID: 0}
     - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: weaponGfxs.Array.data[2]
       value: 
-      objectReference: {fileID: 969814268}
+      objectReference: {fileID: 0}
     - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: weaponGfxs.Array.data[3]
       value: 
-      objectReference: {fileID: 1491198872}
+      objectReference: {fileID: 0}
     - target: {fileID: 384531942949102673, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: m_Loop
       value: 1
@@ -3810,6 +3798,14 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.key0.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 736013656820184086, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
+    - target: {fileID: 845809221142688928, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
     - target: {fileID: 4805179598088156730, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: m_Name
       value: Weapon

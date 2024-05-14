@@ -29,8 +29,13 @@ public class HeartHealth : MonoBehaviour
     public float patternRadius;
     public MonoBehaviour scriptToToggle;
 
-    // Nouvelle variable pour stocker les points de téléportation accessibles après chaque téléportation
     public List<int> accessibleTeleportPoints = new List<int>();
+
+    // New variables for changing materials
+    public List<GameObject> objectsToChangeMaterial;
+    public List<Material> materials;
+    private int currentMaterialIndex = 0;
+    private int currentObjectIndex = 0;
 
     private void Start()
     {
@@ -46,7 +51,7 @@ public class HeartHealth : MonoBehaviour
     {
         Idle.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
 
-         MoveToTarget();
+        MoveToTarget();
 
         if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
         {
@@ -56,7 +61,7 @@ public class HeartHealth : MonoBehaviour
         CheckPlayerDistance();
     }
 
-     void CheckPlayerDistance()
+    void CheckPlayerDistance()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -83,22 +88,20 @@ public class HeartHealth : MonoBehaviour
     void SetRandomTarget()
     {
         float angle = Random.Range(0f, Mathf.PI * 2f);
-    float radius = eyeRadius.transform.localScale.x * 1.5f;
-    float verticalOffset = Random.Range(-radius, radius);
+        float radius = eyeRadius.transform.localScale.x * 1.5f;
+        float verticalOffset = Random.Range(-radius, radius);
 
-    Vector3 offset = new Vector3(Mathf.Cos(angle), verticalOffset, Mathf.Sin(angle)) * radius;
-    targetPosition = eyeRadius.transform.position + offset;
+        Vector3 offset = new Vector3(Mathf.Cos(angle), verticalOffset, Mathf.Sin(angle)) * radius;
+        targetPosition = eyeRadius.transform.position + offset;
     }
 
     void MoveToTarget()
     {
-        // Déplacer l'objet vers la position cible avec une vitesse constante
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
     }
 
     private void InitializeAccessibleTeleportPoints()
     {
-        // Initialiser la liste des points de téléportation accessibles au début
         accessibleTeleportPoints.Clear();
         for (int i = 0; i < teleportPositions.Length; i++)
         {
@@ -124,14 +127,12 @@ public class HeartHealth : MonoBehaviour
     {
         DestroyCubesBeforeTeleport();
         DeactivateLinkedBoxSpawners();
-        
 
         if (accessibleTeleportPoints.Count > 0)
         {
             int newTeleportIndex;
             do
             {
-                // Choisir un point de téléportation parmi ceux qui sont accessibles
                 newTeleportIndex = accessibleTeleportPoints[Random.Range(0, accessibleTeleportPoints.Count)];
             } while (newTeleportIndex == lastTeleportIndex);
 
@@ -140,7 +141,6 @@ public class HeartHealth : MonoBehaviour
             parent.transform.position = nextTeleportPosition.position;
             SetRandomTarget();
             FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Locomotion/Teleport");
-
 
             health = maxHealth;
 
@@ -159,7 +159,6 @@ public class HeartHealth : MonoBehaviour
                         {
                             if (boxSpawner != null)
                             {
-                                //boxSpawner.gameObject.SetActive(true);
                                 boxSpawner.StartCoroutine(boxSpawner.SpawnCube());
                             }
                             else
@@ -185,7 +184,6 @@ public class HeartHealth : MonoBehaviour
                         {
                             if (boxSpawnerNoHP != null)
                             {
-                                //boxSpawnerNoHP.gameObject.SetActive(true);
                                 boxSpawnerNoHP.StartCoroutine(boxSpawnerNoHP.SpawnCube());
                             }
                             else
@@ -201,6 +199,23 @@ public class HeartHealth : MonoBehaviour
                 }
             }
             UpdateAccessibleTeleportPoints();
+
+            // Change the material of the next object
+            ChangeNextObjectMaterial();
+        }
+    }
+
+    private void ChangeNextObjectMaterial()
+    {
+        if (materials.Count > 0 && objectsToChangeMaterial.Count > 0)
+        {
+            // Change the material of the current object
+            GameObject objectToChange = objectsToChangeMaterial[currentObjectIndex];
+            currentMaterialIndex = (currentMaterialIndex + 1) % materials.Count;
+            objectToChange.GetComponent<Renderer>().material = materials[currentMaterialIndex];
+
+            // Move to the next object in the list
+            currentObjectIndex = (currentObjectIndex + 1) % objectsToChangeMaterial.Count;
         }
     }
 
@@ -222,7 +237,6 @@ public class HeartHealth : MonoBehaviour
             {
                 foreach (var boxSpawner in pair.boxSpawners)
                 {
-                    //boxSpawner.gameObject.SetActive(false);
                     boxSpawner.StopAllCoroutines();
                 }
             }
@@ -234,7 +248,6 @@ public class HeartHealth : MonoBehaviour
             {
                 foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
                 {
-                    //boxSpawnerNoHP.gameObject.SetActive(false);
                     boxSpawnerNoHP.StopAllCoroutines();
                 }
             }
@@ -303,15 +316,12 @@ public class HeartHealth : MonoBehaviour
 
     public Transform getCurrentTeleportPoint()
     {
-        // Assurez-vous que lastTeleportIndex est valide
         if (lastTeleportIndex >= 0 && lastTeleportIndex < teleportPositions.Length)
         {
-            // Renvoie le transform du point de téléportation correspondant
             return teleportPositions[lastTeleportIndex];
         }
         else
         {
-            // S'il n'y a pas de dernier index de téléportation valide, renvoie null
             return null;
         }
     }

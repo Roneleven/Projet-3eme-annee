@@ -340,13 +340,34 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 4
+        m_Name: CrossRate
+        m_Overridden: 1
+      - m_Value: 0.2
+        m_Name: CrossLifetime
+        m_Overridden: 1
+      - m_Value: 1
+        m_Name: ShockwaveRate
+        m_Overridden: 1
+      - m_Value: 0.2
+        m_Name: CrossSize
+        m_Overridden: 1
+      - m_Value: 1
+        m_Name: ShockwaveSize
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 1.5, y: 1.5, z: 1.5}
+        m_Name: CrossScale
+        m_Overridden: 1
     m_Vector4f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 7.78, y: 3.22, z: 1.34, w: 1}
+        m_Name: CrossColor
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
@@ -358,7 +379,10 @@ VisualEffect:
     m_Gradient:
       m_Array: []
     m_NamedObject:
-      m_Array: []
+      m_Array:
+      - m_Value: {fileID: 2800000, guid: 7fa857e3ae350144eb1c9a31733f8c61, type: 3}
+        m_Name: CrossTexture
+        m_Overridden: 1
     m_Bool:
       m_Array: []
 --- !u!4 &185682200

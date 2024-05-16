@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -802086269161450560}
   - component: {fileID: -340183654402047113}
   m_Layer: 9
-  m_Name: LVL5_CUBE
+  m_Name: '[NOT_USEDLVL5_CUBE'
   m_TagString: HeartBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

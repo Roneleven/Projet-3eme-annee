@@ -9,7 +9,7 @@ public class CubeHealth : MonoBehaviour
     // Matériaux pour différents niveaux de santé
     public Transform visualRoot;
     Transform activeStateVisual;
-    int maxVisualStates = 5;
+    int maxVisualStates = 3;
 
     private void Awake()
     {

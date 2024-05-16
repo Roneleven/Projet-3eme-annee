@@ -54,7 +54,7 @@ MonoBehaviour:
   exclusionRadius: 0
   spawnCount: 3
   transparentCubePrefab: {fileID: 2751100251518416, guid: f56d3d1077c1d86478eb6c9fb97f0b8b, type: 3}
-  maxCubeCount: 50
+  maxCubeCount: 500
   cubeCount: 0
 --- !u!1 &7700718710639842506
 GameObject:

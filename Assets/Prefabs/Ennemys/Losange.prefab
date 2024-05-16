@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1167115853549049602}
   - component: {fileID: -2694979883385870408}
   - component: {fileID: 4682444357465741036}
+  - component: {fileID: 7197647289220037862}
   m_Layer: 0
   m_Name: Losange
   m_TagString: DestroyableBlock
@@ -122,3 +123,34 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6195245291975648998, guid: c042634271433634f8afe6e4417b2787, type: 3}
+--- !u!114 &7197647289220037862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558753502991316150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1952146541
+      Data2: 1264722394
+      Data3: -2026915705
+      Data4: 2055959867
+    Path: event:/Heart/Patterns/CubeTracking_Idle
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

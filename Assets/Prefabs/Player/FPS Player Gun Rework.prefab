@@ -6691,6 +6691,8 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   healthBar: {fileID: 1300642433469518194}
+  vignetteIntensity: 0.35
+  vignetteFadeSpeed: 0.2
 --- !u!54 &5729225776423105573
 Rigidbody:
   m_ObjectHideFlags: 0

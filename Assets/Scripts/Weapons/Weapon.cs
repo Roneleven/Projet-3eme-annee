@@ -38,6 +38,9 @@ public class Weapon : MonoBehaviour
 
     [Header("ShootingVFX")]
     public ParticleSystem bulletTrailVFX;
+    public VisualEffect muzzleFlash;
+    public Transform muzzleFlashSpawnPoint;
+    private VisualEffect muzzleFlashInstance;
 
     [Header("Data")]
     public int weaponGfxLayer;
@@ -204,6 +207,12 @@ public class Weapon : MonoBehaviour
             currentHeat = 0f; // Réinitialiser la chaleur à zéro lorsque l'arme n'est plus surchauffée
         }
         UpdateHeatUI();
+
+        if (muzzleFlashInstance != null)
+        {
+            muzzleFlashInstance.transform.position = muzzleFlashSpawnPoint.position;
+            muzzleFlashInstance.transform.rotation = muzzleFlashSpawnPoint.rotation;
+        }
     }
 
     private void Shoot()
@@ -245,7 +254,20 @@ public class Weapon : MonoBehaviour
                     // Play the particle system
                     bulletTrailVFX.Play();
                     FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Guns/BasicGun/Shoot");
+
+                    muzzleFlashInstance = Instantiate(muzzleFlash, muzzleFlashSpawnPoint.position, muzzleFlashSpawnPoint.rotation);
+                    muzzleFlashInstance.Play();
                 }
+
+                
+
+                if (muzzleFlashInstance != null)
+                {
+                    muzzleFlashInstance.transform.position = muzzleFlashSpawnPoint.position;
+                    muzzleFlashInstance.transform.rotation = muzzleFlashSpawnPoint.rotation;
+                }
+
+                
 
                 // Perform raycast to check for hit
                 RaycastHit hitInfo;

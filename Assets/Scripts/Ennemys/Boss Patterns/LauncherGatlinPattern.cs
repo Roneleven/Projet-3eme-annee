@@ -13,15 +13,27 @@ public class GatlinLauncherPattern : MonoBehaviour
     public float launchInterval;
     public int cubesToLaunch;
 
+    private FMOD.Studio.EventInstance gatlin;
+
     public HeartSpawner heartSpawner;
 
     public void Start()
     {
         heartSpawner = GetComponent<HeartSpawner>();
+         gatlin = FMODUnity.RuntimeManager.CreateInstance("event:/Heart/Patterns/Gatlin_Start");
+    }
+
+    void Update()
+    {
+        gatlin.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
     }
 
     public void SphereLauncherPattern()  // No longer takes numCubesToMove as an argument
     {
+
+        gatlin.setParameterByName("Pattern", 0.0F);
+        gatlin.start();
+
         if (heartSpawner == null)
         {
             Debug.LogError("HeartSpawner is not assigned.");
@@ -47,7 +59,7 @@ public class GatlinLauncherPattern : MonoBehaviour
 
         cubes = cubes.Where(cube => cube != null).ToList();
 
-        List<GameObject> cubesToRemove = new List<GameObject>(); // Liste pour stocker les cubes à retirer de la liste principale
+        List<GameObject> cubesToRemove = new List<GameObject>(); // Liste pour stocker les cubes ï¿½ retirer de la liste principale
 
         for (int i = 0; i < numCubes; i++)
         {
@@ -63,21 +75,21 @@ public class GatlinLauncherPattern : MonoBehaviour
 
                 StartCoroutine(MoveCubeToPosition(cubeToMove, spherePosition));
 
-                cubesToRemove.Add(cubeToMove); // Ajoute le cube à la liste des cubes à retirer
-                yield return new WaitForSeconds(launchInterval); // Attendre avant de déplacer le prochain cube
+                cubesToRemove.Add(cubeToMove); // Ajoute le cube ï¿½ la liste des cubes ï¿½ retirer
+                yield return new WaitForSeconds(launchInterval); // Attendre avant de dï¿½placer le prochain cube
             }
         }
 
-        // Retire les cubes sélectionnés pour le lancement de la liste principale
+        // Retire les cubes sï¿½lectionnï¿½s pour le lancement de la liste principale
         foreach (var cubeToRemove in cubesToRemove)
         {
             cubes.Remove(cubeToRemove);
         }
 
-        // Attendre que tous les cubes aient atteint la sphère avant de déclencher l'action suivante
+        // Attendre que tous les cubes aient atteint la sphï¿½re avant de dï¿½clencher l'action suivante
         yield return new WaitForSeconds(sphereMovementDuration);
 
-        onCompletion?.Invoke(); // Déclencher l'action suivante
+        onCompletion?.Invoke(); // Dï¿½clencher l'action suivante
     }
 
     private Vector3 CalculateSpherePosition(Vector3 center, float polarAngle, float azimuthAngle)
@@ -93,14 +105,14 @@ public class GatlinLauncherPattern : MonoBehaviour
 
     private IEnumerator MoveCubeToPosition(GameObject cube, Vector3 targetPosition)
     {
-        if (cube == null) yield break; // Vérifie si le cube a été détruit
+        if (cube == null) yield break; // Vï¿½rifie si le cube a ï¿½tï¿½ dï¿½truit
 
         float elapsedTime = 0f;
         Vector3 initialPosition = cube.transform.position;
 
         while (elapsedTime < sphereMovementDuration)
         {
-            if (cube == null) yield break; // Vérifie si le cube a été détruit
+            if (cube == null) yield break; // Vï¿½rifie si le cube a ï¿½tï¿½ dï¿½truit
 
             cube.transform.position = Vector3.Lerp(initialPosition, targetPosition, elapsedTime / sphereMovementDuration);
             elapsedTime += Time.deltaTime;
@@ -108,7 +120,7 @@ public class GatlinLauncherPattern : MonoBehaviour
             yield return null;
         }
 
-        if (cube == null) yield break; // Vérifie si le cube a été détruit
+        if (cube == null) yield break; // Vï¿½rifie si le cube a ï¿½tï¿½ dï¿½truit
 
         cube.transform.position = targetPosition;
     }
@@ -116,6 +128,7 @@ public class GatlinLauncherPattern : MonoBehaviour
 
     private IEnumerator LaunchCubesOneByOne(List<GameObject> cubes)
     {
+        gatlin.setParameterByName("Pattern", 1.0F);
         if (cubes == null || cubes.Count == 0)
         {
             Debug.LogError("List of cubes is null or empty.");
@@ -140,6 +153,8 @@ public class GatlinLauncherPattern : MonoBehaviour
 
             Vector3 playerPositionWithOffset = heartSpawner.playerPosition + Vector3.up * 3.15f;
             Vector3 launchDirection = (playerPositionWithOffset - cube.transform.position).normalized;
+
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Patterns/Gatlin_Shoot");
 
             cubeRigidbody.AddForce(launchDirection * launchForce, ForceMode.Impulse);
 

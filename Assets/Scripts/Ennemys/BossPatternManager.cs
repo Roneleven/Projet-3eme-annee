@@ -13,6 +13,12 @@ public class BossPatternManager : MonoBehaviour
     private ExplosivePillarPattern explosivePillarPattern;
     private MeteorPattern meteorPattern;
     private GatlinLauncherPattern gatlinLauncherPattern;
+
+    private bool playerInTrigger = false;
+    public float detectionRadius = 30f; // Rayon de détection du joueur
+    public float timer = 0f; // Temps écoulé depuis le début de la détection
+    public bool patternActive = false;
+
     [Serializable]
     public class Palier
     {
@@ -47,11 +53,32 @@ public class BossPatternManager : MonoBehaviour
         meteorPattern = GetComponent<MeteorPattern>();
 
         // Démarrez les patterns pour le premier palier
-        int currentPalier = heartSpawner.currentPalier;
-
-        // Utilisez currentPalier pour obtenir le palier actuel
-        Palier currentPalierData = paliers[currentPalier];
         StartPatternsForCurrentPalier();
+    }
+
+    private void Update()
+    {
+        // Vérifiez si le joueur est dans le rayon de détection et qu'aucun modèle n'est déjà actif
+        if (!patternActive && Vector3.Distance(heartSpawner.playerPosition, transform.position) < detectionRadius)
+        {
+            // Incrémentation du timer
+            timer += Time.deltaTime;
+
+            // Obtenez le temps entre les patterns pour le palier actuel
+            float patternTriggerTime = nextPatternTimes[heartSpawner.currentPalier];
+
+            // Vérifiez si le temps de déclenchement est atteint
+            if (timer >= patternTriggerTime)
+            {
+                // Démarrez un pattern aléatoire
+                SwitchToNextPattern();
+            }
+        }
+        else
+        {
+            // Réinitialisez le timer si le joueur n'est plus dans le rayon
+            timer = 0f;
+        }
     }
 
     public void SwitchToNextPattern()
@@ -63,25 +90,16 @@ public class BossPatternManager : MonoBehaviour
         List<PatternType> patternsForCurrentPalier = new List<PatternType>();
         patternsForCurrentPalier.AddRange(paliers[currentPalier].patterns);
 
-        // exclusion
-        Transform tp = FindObjectOfType<HeartHealth>().getCurrentTeleportPoint();
-        List<PatternType> tpPointExlusionList = tp.GetComponent<TeleportPoint>().exclusionList;
-
-        foreach (PatternType pattern in tpPointExlusionList)
-        {
-            patternsForCurrentPalier.Remove(pattern);
-        }
-
         // Choisissez un pattern aléatoire dans la liste des patterns pour ce palier
         PatternType randomPattern = patternsForCurrentPalier[rand.Next(patternsForCurrentPalier.Count)];
 
         // Lancez le pattern choisi
         StartCoroutine(StartPattern(randomPattern));
-
     }
 
     public IEnumerator StartPattern(PatternType patternType)
     {
+        patternActive = true;
         switch (patternType)
         {
             case PatternType.CubeTracking:
@@ -106,15 +124,14 @@ public class BossPatternManager : MonoBehaviour
                 gatlinLauncherPattern.SphereLauncherPattern();
                 break;
         }
-        yield return null;
+        yield return null; // Attendez la fin de l'exécution du modèle
+        patternActive = false;
     }
 
     public void StartPatternsForCurrentPalier()
     {
-        // Efface toutes les coroutines actives pour les patterns des paliers précédents
         StopAllCoroutines();
 
-        // Obtient le palier actuel depuis HeartSpawner
         int currentPalier = heartSpawner.currentPalier;
 
         // Obtient les patterns pour ce palier
@@ -132,11 +149,34 @@ public class BossPatternManager : MonoBehaviour
     {
         while (true)
         {
-            foreach (PatternType patternType in patterns)
+            if (playerInTrigger)
             {
-                StartCoroutine(StartPattern(patternType));
-                yield return new WaitForSeconds(interval);
+                foreach (PatternType patternType in patterns)
+                {
+                    StartCoroutine(StartPattern(patternType));
+                    yield return new WaitForSeconds(interval);
+                }
+            }
+            else
+            {
+                yield return null;
             }
         }
+    }
+
+    public void PlayerEnteredTrigger()
+    {
+        playerInTrigger = true;
+    }
+
+    public void PlayerExitedTrigger()
+    {
+        playerInTrigger = false;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

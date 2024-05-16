@@ -121,6 +121,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   visualRoot: {fileID: 0}
+  CubeHit: {fileID: 8377534922468075976, guid: 96c76a57a0eb7574d8b0fe74bdbd3874, type: 3}
+  CubeDestroyed: {fileID: 6128940009062918843, guid: efc82b0f915cfc7429d43df6cb71862d, type: 3}
+  CubeHitSpawnPoint: {fileID: 6862152407198973497}
 --- !u!114 &7404598875493099207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91e28b5ad200f2489c6a2228a9a36ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  repulsionForce: 1
+  child: {fileID: 0}
+  oppositeForce: 2
   backwardForce: 10
   upwardForce: 1
+  repulsionForceHorizontal: 0

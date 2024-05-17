@@ -656,7 +656,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: AMPLIFY_SHADER_EDITOR;AURA_IN_PROJECT;AURA_IN_SCENEVIEW
+    Standalone: AMPLIFY_SHADER_EDITOR;AURA_IN_PROJECT
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

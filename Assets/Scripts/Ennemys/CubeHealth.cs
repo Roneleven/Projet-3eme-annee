@@ -13,7 +13,6 @@ public class CubeHealth : MonoBehaviour
     int maxVisualStates = 3;
 
     public VisualEffect CubeHit;
-    public VisualEffect CubeDestroyed;
     public Transform CubeHitSpawnPoint;
     private VisualEffect CubeHitInstance;
 
@@ -72,12 +71,6 @@ public class CubeHealth : MonoBehaviour
     private void Die()
     {
         isDead = true;
-        if (CubeDestroyed != null)
-        {
-            VisualEffect CubeDestroyedInstance = Instantiate(CubeDestroyed, CubeHitSpawnPoint.position, CubeHitSpawnPoint.rotation);
-            CubeDestroyedInstance.Play();
-            CubeDestroyedInstance.gameObject.AddComponent<VFXAutoDestroy>();
-        }
 
         Destroy(gameObject);
     }

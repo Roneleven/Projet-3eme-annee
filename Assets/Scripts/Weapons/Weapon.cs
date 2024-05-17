@@ -79,6 +79,10 @@ public class Weapon : MonoBehaviour
     public VisualEffect explosiveEffect;
     private VisualEffect explosiveInstance;
     public ParticleSystem explosiveTrailVFX;
+    public VisualEffect explosionEffect;
+    private VisualEffect explosionInstance;
+    public VisualEffect shootEffect;
+    private VisualEffect shootInstance;
 
 
     [Header("Laser Mode")]
@@ -166,6 +170,7 @@ public class Weapon : MonoBehaviour
         chargeStartTime = Time.time;
         chargingEffectInstance = Instantiate(chargingEffect, chargingEffectSpawnPoint.position, chargingEffectSpawnPoint.rotation);
         chargingEffectInstance.Play();
+        chargingEffectInstance.gameObject.AddComponent<VFXAutoDestroy>();
     }
 
     if (Input.GetMouseButton(0) && Time.time - chargeStartTime >= chargeTimeThreshold)
@@ -182,9 +187,10 @@ public class Weapon : MonoBehaviour
                     Vector3 spreadDirection = Quaternion.Euler(Random.insideUnitSphere * spreadAngle) * shotDirection;
                     shotDirection = Vector3.Slerp(shotDirection, spreadDirection, 0.5f); // Adjust spread strength
                 }
-                
+
         explosiveInstance = Instantiate(explosiveEffect, chargingEffectSpawnPoint.position, chargingEffectSpawnPoint.rotation);
         explosiveInstance.Play();
+        explosiveInstance.gameObject.AddComponent<VFXAutoDestroy>();
         ExplosiveShoot();
         explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
 
@@ -303,6 +309,9 @@ public class Weapon : MonoBehaviour
                 RaycastHit hitInfo;
                 if (Physics.Raycast(_playerCamera.position, shotDirection, out hitInfo, range))
                 {
+                    shootInstance = Instantiate(shootEffect, hitInfo.point, Quaternion.identity); // Corrected line
+                    shootInstance.Play();
+                    shootInstance.gameObject.AddComponent<VFXAutoDestroy>();
                     // Process hit object
                     var heartHealth = hitInfo.transform.GetComponent<HeartHealth>();
                     if (heartHealth != null)
@@ -471,13 +480,16 @@ public class Weapon : MonoBehaviour
     #endregion
 
     #region MODE EXPLOSIVE
-    private void ExplosiveShoot()
+     private void ExplosiveShoot()
     {
         if (currentMode == FireMode.Explosive && currentExplosiveCharges > 0)
         {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, explosiveRange))
             {
+                explosionInstance = Instantiate(explosionEffect, hit.point, Quaternion.identity );
+                explosionInstance.Play();
+                explosionInstance.gameObject.AddComponent<VFXAutoDestroy>();
                 Instantiate(explosionPrefab, hit.point, Quaternion.identity);
                 Collider[] colliders = Physics.OverlapSphere(hit.point, explosionRadius);
                 foreach (Collider hitCollider in colliders)

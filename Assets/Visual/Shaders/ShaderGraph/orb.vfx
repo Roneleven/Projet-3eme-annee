@@ -2834,7 +2834,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"frames":[{"time":0.0,"value":0.0,"inTangent":2.958118200302124,"outTangent":2.958118200302124,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false},{"time":3.04925537109375,"value":9.020057678222657,"inTangent":2.958118200302124,"outTangent":2.958118200302124,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
+      m_SerializableObject: '{"frames":[{"time":0.0,"value":0.0,"inTangent":1.6634207963943482,"outTangent":1.6634207963943482,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false},{"time":3.00006103515625,"value":4.990364074707031,"inTangent":1.6634207963943482,"outTangent":1.6634207963943482,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
     m_Space: 2147483647
   m_Property:
     name: Size
@@ -4334,7 +4334,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.TArcSphere, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"sphere":{"transform":{"position":{"x":0.0,"y":0.0,"z":0.0},"angles":{"x":0.0,"y":0.0,"z":0.0},"scale":{"x":1.0,"y":1.0,"z":1.0}},"radius":0.5},"arc":6.2831854820251469}'
+      m_SerializableObject: '{"sphere":{"transform":{"position":{"x":0.0,"y":0.0,"z":0.0},"angles":{"x":0.0,"y":0.0,"z":0.0},"scale":{"x":1.0,"y":1.0,"z":1.0}},"radius":0.4000000059604645},"arc":6.28000020980835}'
     m_Space: 0
   m_Property:
     name: arcSphere
@@ -5554,7 +5554,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.5
+      m_SerializableObject: 0.485
     m_Space: 2147483647
   m_Property:
     name: roughness
@@ -5918,7 +5918,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"frames":[{"time":0.0,"value":0.0,"inTangent":3.998539686203003,"outTangent":3.998539686203003,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false},{"time":3.0032598972320558,"value":12.00865364074707,"inTangent":3.998539686203003,"outTangent":3.998539686203003,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
+      m_SerializableObject: '{"frames":[{"time":0.0,"value":0.0,"inTangent":2.336588144302368,"outTangent":2.336588144302368,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false},{"time":3.0102016925811769,"value":7.033601760864258,"inTangent":2.336588144302368,"outTangent":2.336588144302368,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
     m_Space: 2147483647
   m_Property:
     name: Size

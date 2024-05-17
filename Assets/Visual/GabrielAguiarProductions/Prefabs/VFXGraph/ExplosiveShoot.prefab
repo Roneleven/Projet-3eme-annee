@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6128940009062918843}
   - component: {fileID: 3004613076689779021}
   m_Layer: 0
-  m_Name: vfxgraph_Hit02
+  m_Name: ExplosiveShoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

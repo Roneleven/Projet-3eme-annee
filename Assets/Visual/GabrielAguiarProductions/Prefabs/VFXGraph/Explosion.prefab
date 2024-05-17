@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5706826700655881247
+--- !u!1 &8424513150488952716
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4057945953637852370}
-  - component: {fileID: 1656210228620440249}
-  - component: {fileID: 3739616412987382794}
+  - component: {fileID: 2441093425652154732}
+  - component: {fileID: 4092455346545260222}
+  - component: {fileID: 5815094078122779802}
   m_Layer: 0
-  m_Name: vfxgraph_Hit09
+  m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4057945953637852370
+--- !u!4 &2441093425652154732
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5706826700655881247}
+  m_GameObject: {fileID: 8424513150488952716}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -33,13 +33,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!2083052967 &1656210228620440249
+--- !u!2083052967 &4092455346545260222
 VisualEffect:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5706826700655881247}
+  m_GameObject: {fileID: 8424513150488952716}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: df65f4d46c3b2ae438e78ad5f46462cd, type: 3}
   m_InitialEventName: OnPlay
@@ -51,8 +51,17 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.3
+      - m_Value: 1
         m_Name: SphereLifetime
+        m_Overridden: 1
+      - m_Value: 5
+        m_Name: SphereSize
+        m_Overridden: 1
+      - m_Value: 10
+        m_Name: SphereRate
+        m_Overridden: 1
+      - m_Value: 5
+        m_Name: SmokeSize
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
@@ -60,14 +69,20 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 10.968895, y: 87.29411, z: 11.225641, w: 1}
+      - m_Value: {x: 1.3476439, y: 2.686514, z: 7.8, w: 1}
+        m_Name: FlashColor
+        m_Overridden: 1
+      - m_Value: {x: 10.968895, y: 34.59406, z: 87.29411, w: 1}
         m_Name: ParticlesColor
         m_Overridden: 1
-      - m_Value: {x: 112.30191, y: 14.414299, z: 11.759359, w: 1}
+      - m_Value: {x: 19.289675, y: 11.759359, z: 112.30191, w: 1}
         m_Name: SmokeColor02
         m_Overridden: 1
-      - m_Value: {x: 60.159325, y: 112.30191, z: 11.759359, w: 1}
+      - m_Value: {x: 11.759359, y: 11.848412, z: 112.30191, w: 1}
         m_Name: SphereColor
+        m_Overridden: 1
+      - m_Value: {x: 1.4745097, y: 2.0430195, z: 3.2156863, w: 0}
+        m_Name: SmokeColor01
         m_Overridden: 1
     m_Uint:
       m_Array: []
@@ -81,7 +96,7 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 15.831966, g: 274.90054, b: 58.953503, a: 0}
+          key0: {r: 15.831966, g: 72.60081, b: 274.90054, a: 0}
           key1: {r: 0, g: 0, b: 0, a: 1}
           key2: {r: 0, g: 0, b: 0, a: 1}
           key3: {r: 0, g: 0, b: 0, a: 0}
@@ -115,14 +130,14 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!73398921 &3739616412987382794
+--- !u!73398921 &5815094078122779802
 VFXRenderer:
   serializedVersion: 1
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5706826700655881247}
+  m_GameObject: {fileID: 8424513150488952716}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0

@@ -87,6 +87,7 @@ public class HeartHealth : MonoBehaviour
         health -= damage;
         HeartHitInstance = Instantiate(HeartHit, HeartHitSpawnPoint.position, HeartHitSpawnPoint.rotation);
         HeartHitInstance.Play();
+        HeartHitInstance.gameObject.AddComponent<VFXAutoDestroy>();
 
         if (health <= 0)
         {

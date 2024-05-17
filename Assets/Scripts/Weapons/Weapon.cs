@@ -101,7 +101,7 @@ public class Weapon : MonoBehaviour
     public float cooldownRate;
 
     [Header("Heat UI")]
-    public Image heatImage; // Reference to the UI image representing heat level
+    public Image heatImage;
     public float maxFillAmount = 1f;
 
     private void Start()
@@ -161,7 +161,6 @@ public class Weapon : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && currentExplosiveCharges > 0)
             {
                 chargeStartTime = Time.time;
-                // Instancie le VisualEffect et garde une référence à son instance
                 chargingEffectInstance = Instantiate(chargingEffect, chargingEffectSpawnPoint.position, chargingEffectSpawnPoint.rotation);
                 chargingEffectInstance.Play();
             }
@@ -236,7 +235,6 @@ public class Weapon : MonoBehaviour
                 Vector3 shotDirection = _playerCamera.forward;
                 if (!_scoping)
                 {
-                    // Add random deviation to the shot direction
                     Vector3 spreadDirection = Quaternion.Euler(Random.insideUnitSphere * spreadAngle) * shotDirection;
                     shotDirection = Vector3.Slerp(shotDirection, spreadDirection, 0.5f); // Adjust spread strength
                 }
@@ -257,17 +255,14 @@ public class Weapon : MonoBehaviour
 
                     muzzleFlashInstance = Instantiate(muzzleFlash, muzzleFlashSpawnPoint.position, muzzleFlashSpawnPoint.rotation);
                     muzzleFlashInstance.Play();
+                    muzzleFlashInstance.gameObject.AddComponent<VFXAutoDestroy>();
                 }
-
-                
 
                 if (muzzleFlashInstance != null)
                 {
                     muzzleFlashInstance.transform.position = muzzleFlashSpawnPoint.position;
                     muzzleFlashInstance.transform.rotation = muzzleFlashSpawnPoint.rotation;
                 }
-
-                
 
                 // Perform raycast to check for hit
                 RaycastHit hitInfo;
@@ -294,8 +289,9 @@ public class Weapon : MonoBehaviour
                 cooldownStartTime = Time.time;
             }
         }
-        
     }
+
+
     private void UpdateHeatUI()
     {
         // Calculate the fill amount based on the current heat value and overheat threshold

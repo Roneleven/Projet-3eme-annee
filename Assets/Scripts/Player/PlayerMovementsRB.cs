@@ -10,7 +10,9 @@ public class PlayerMovementsRB : MonoBehaviour
 {
     [Header("Player Settings")]
     public float speed;
+    private float initialSpeed;
     public float currentSpeed;
+    public float maxPossibleSpeed;
     public float fallAccelerationForce;
     public Transform groundCheck;
     public float groundDistance;
@@ -25,6 +27,8 @@ public class PlayerMovementsRB : MonoBehaviour
 
     [Header("Jetpack Settings")]
     public float jetpackForce = 10f;
+    public float jetpackForceMultiplier;
+    private float initialJetpackForce;
     public float jetpackChargeRate = 1f;
     public float maxJetpackCharge = 100f;
     public float jetpackCharge;
@@ -59,7 +63,6 @@ public class PlayerMovementsRB : MonoBehaviour
     private Vector3 velocityRef = Vector3.zero;
     public float smoothTime;
 
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -67,6 +70,8 @@ public class PlayerMovementsRB : MonoBehaviour
         jetpackCharge = maxJetpackCharge;
         jetUse = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Locomotion/JetpackUsing");
         planning = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Locomotion/Planning");
+        initialJetpackForce = jetpackForce; // Store the initial jetpack force
+        initialSpeed = speed;
     }
 
     private void Update()
@@ -95,6 +100,8 @@ public class PlayerMovementsRB : MonoBehaviour
                 isJetUsePlaying = false;
                 jetpackEffect.Stop();
             }
+            jetpackForce = initialJetpackForce; // Reset jetpack force when input is released
+            speed = initialSpeed;
         }
 
         UpdateJetpackChargeUI();
@@ -110,21 +117,18 @@ public class PlayerMovementsRB : MonoBehaviour
         }
 
         if (jetpackCharge <= 0 && !isJetpackEmptySoundPlayed)
-    {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/JetpackEmpty");
-        isJetpackEmptySoundPlayed = true;
-    }
-
-
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/JetpackEmpty");
+            isJetpackEmptySoundPlayed = true;
+        }
     }
 
     private void FixedUpdate()
     {
-
-        if (!isGrounded && rb.velocity.magnitude > 50f)
-    {
-        rb.velocity = rb.velocity.normalized * 50f;
-    }
+        if (!isGrounded && rb.velocity.magnitude > maxPossibleSpeed)
+        {
+            rb.velocity = rb.velocity.normalized * maxPossibleSpeed;
+        }
 
         isGrounded = CheckGround();
 
@@ -143,82 +147,51 @@ public class PlayerMovementsRB : MonoBehaviour
 
         if (!isGrounded && jetpackCharge <= 0 && jetpack.action.IsPressed())
         {
-            rb.useGravity = false; 
-            rb.AddForce(Vector3.down * glideForce, ForceMode.Force); //force vers le bas sans gravité
+            rb.useGravity = false;
+            rb.AddForce(Vector3.down * glideForce, ForceMode.Force); // Force vers le bas sans gravité
             rb.AddForce(Vector3.up * fallAccelerationForce, ForceMode.Acceleration);
             isPlanningSoundPlayed = true;
-            //Physics.gravity = new Vector3(0f, glideForce, 0f); //utilisation de la gravité 
         }
         else
         {
             rb.useGravity = true;
             isPlanningSoundPlayed = false;
-            //Physics.gravity = new Vector3(0f, -9.81f, 0f);
 
-            // Gérer l'utilisation du jetpack
             if (jetpackCharge > 0 && jetpack.action.IsPressed())
             {
                 UseJetpack();
             }
         }
 
-        
-
-    if (isPlanningSoundPlayed && !isPlanningPlaying)
-    {
-        planning.start();
-        isPlanningPlaying = true;
-    }
-    else if (!isPlanningSoundPlayed && isPlanningPlaying)
-    {
-        planning.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        isPlanningPlaying = false;
-    }
-
-        // POUR RAJOUTER LES FOOTSTEPS DU PERSO
-
-        /*
-
-        if (isGrounded && (Mathf.Abs(movementX) > 0 || Mathf.Abs(movementY) > 0))
+        if (isPlanningSoundPlayed && !isPlanningPlaying)
         {
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Footsteps");
+            planning.start();
+            isPlanningPlaying = true;
         }
-        */
-    
+        else if (!isPlanningSoundPlayed && isPlanningPlaying)
+        {
+            planning.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            isPlanningPlaying = false;
+        }
+
         MovePlayer();
 
         currentSpeed = rb.velocity.magnitude;
 
         if (isGrounded && !isGroundedSoundPlayed)
-    {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Grounded");
-        isGroundedSoundPlayed = true;
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Grounded");
+            isGroundedSoundPlayed = true;
+        }
     }
-    }
-
-    /*private void MovePlayer()
-    {
-        // calculate movement direction
-        moveDirection = orientation.forward * movementY + orientation.right * movementX;
-
-        // on ground
-        if (isGrounded)
-            rb.AddForce(moveDirection.normalized * speed * 10f, ForceMode.Force);
-
-        // in air
-        else if (!isGrounded)
-            rb.AddForce(moveDirection.normalized * speed * 10f * airMultiplier, ForceMode.Force);
-    }*/
 
     private void MovePlayer()
-    { 
-
-         if (!canMove)
+    {
+        if (!canMove)
         {
             return;
         }
 
-        //Vector3 move = new Vector3(movementX, 0f, movementY).normalized;
         Vector3 move = new Vector3(movementX, 0f, movementY);
         Vector3 localMove = transform.TransformDirection(move);
 
@@ -227,32 +200,28 @@ public class PlayerMovementsRB : MonoBehaviour
         {
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocityRef, smoothTime);
         }
-        else 
+        else
         {
             rb.AddForce(targetVelocity - rb.velocity, ForceMode.Acceleration);
         }
     }
 
-
-
     private void SpeedControl()
-{
-    Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-    // limit velocity if needed
-    if (flatVel.magnitude > speed)
     {
-        Vector3 limitedVel = flatVel.normalized * speed;
-        rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
-    }
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-    // Cap the currentSpeed at 50
-    if (flatVel.magnitude > 50f)
-    {
-        Vector3 limitedFlatVel = flatVel.normalized * 50f;
-        rb.velocity = new Vector3(limitedFlatVel.x, rb.velocity.y, limitedFlatVel.z);
+        if (flatVel.magnitude > speed)
+        {
+            Vector3 limitedVel = flatVel.normalized * speed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
+
+        if (flatVel.magnitude > maxPossibleSpeed)
+        {
+            Vector3 limitedFlatVel = flatVel.normalized * maxPossibleSpeed;
+            rb.velocity = new Vector3(limitedFlatVel.x, rb.velocity.y, limitedFlatVel.z);
+        }
     }
-}
 
     private bool CheckGround()
     {
@@ -266,7 +235,6 @@ public class PlayerMovementsRB : MonoBehaviour
         return false;
     }
 
-
     private void OnMove(InputValue movementValue)
     {
         Vector2 movementVector = movementValue.Get<Vector2>();
@@ -278,6 +246,8 @@ public class PlayerMovementsRB : MonoBehaviour
     {
         if (jetpackCharge > 0)
         {
+            jetpackForce += Time.deltaTime * jetpackForceMultiplier; // Increase jetpack force over time
+            speed +=  Time.deltaTime * jetpackForceMultiplier;
             rb.velocity = new Vector3(rb.velocity.x, jetpackForce, rb.velocity.z);
             jetpackCharge = Mathf.Max(jetpackCharge - Time.deltaTime, 0);
 
@@ -295,7 +265,6 @@ public class PlayerMovementsRB : MonoBehaviour
         }
     }
 
-
     private void GetPlayerInput()
     {
         movementX = Input.GetAxis("Horizontal");
@@ -304,16 +273,11 @@ public class PlayerMovementsRB : MonoBehaviour
         isJetpackPressed = jetpack.action.triggered;
     }
 
-    /*private void Respawn()
-    {
-        transform.position = respawnPoint.position;
-    }*/
-
     private void UpdateJetpackChargeUI()
     {
         if (jetpackChargeImage != null)
         {
-            jetpackChargeImage.fillAmount = jetpackCharge / maxJetpackCharge;   
+            jetpackChargeImage.fillAmount = jetpackCharge / maxJetpackCharge;
         }
     }
 
@@ -321,6 +285,7 @@ public class PlayerMovementsRB : MonoBehaviour
     {
         heartSpawner.timer += 60;
     }
+
     private void OnResetTimer()
     {
         heartSpawner.timer = 0;
@@ -336,5 +301,4 @@ public class PlayerMovementsRB : MonoBehaviour
             }
         }
     }
-
 }

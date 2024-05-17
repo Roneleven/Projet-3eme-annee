@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class CubeHealth : MonoBehaviour
 {
@@ -9,7 +10,11 @@ public class CubeHealth : MonoBehaviour
     // Matériaux pour différents niveaux de santé
     public Transform visualRoot;
     Transform activeStateVisual;
-    int maxVisualStates = 5;
+    int maxVisualStates = 3;
+
+    public VisualEffect CubeHit;
+    public Transform CubeHitSpawnPoint;
+    private VisualEffect CubeHitInstance;
 
     private void Awake()
     {
@@ -19,10 +24,13 @@ public class CubeHealth : MonoBehaviour
         UpdateMaterial();
     }
 
-
     public void TakeDamage(int damage)
     {
         health -= damage;
+        CubeHitInstance = Instantiate(CubeHit, CubeHitSpawnPoint.position, CubeHitSpawnPoint.rotation);
+        CubeHitInstance.Play();
+        CubeHitInstance.gameObject.AddComponent<VFXAutoDestroy>();
+        
         if (health <= 0)
         {
             Die();
@@ -36,7 +44,6 @@ public class CubeHealth : MonoBehaviour
     [ContextMenu("Update Visual")]
     public void UpdateMaterial()
     {
-        //Debug.Log($"Updating state for cube {name}", this);
         if (activeStateVisual == null)
         {
             activeStateVisual = visualRoot.Find("state_0");
@@ -61,15 +68,12 @@ public class CubeHealth : MonoBehaviour
         }
     }
 
-
-
     private void Die()
     {
         isDead = true;
-        // Gérer la destruction du cube ici
+
         Destroy(gameObject);
     }
-
 
     public bool IsDead()
     {

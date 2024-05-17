@@ -13,7 +13,7 @@ public class CubeHealth : MonoBehaviour
     int maxVisualStates = 3;
 
     public VisualEffect CubeHit;
-    public VisualEffect CubeDestroyed; // Nouveau VisualEffect pour la destruction
+    public VisualEffect CubeDestroyed;
     public Transform CubeHitSpawnPoint;
     private VisualEffect CubeHitInstance;
 
@@ -30,6 +30,7 @@ public class CubeHealth : MonoBehaviour
         health -= damage;
         CubeHitInstance = Instantiate(CubeHit, CubeHitSpawnPoint.position, CubeHitSpawnPoint.rotation);
         CubeHitInstance.Play();
+        CubeHitInstance.gameObject.AddComponent<VFXAutoDestroy>();
         
         if (health <= 0)
         {
@@ -44,7 +45,6 @@ public class CubeHealth : MonoBehaviour
     [ContextMenu("Update Visual")]
     public void UpdateMaterial()
     {
-        //Debug.Log($"Updating state for cube {name}", this);
         if (activeStateVisual == null)
         {
             activeStateVisual = visualRoot.Find("state_0");
@@ -72,13 +72,11 @@ public class CubeHealth : MonoBehaviour
     private void Die()
     {
         isDead = true;
-        // Gérer la destruction du cube ici
-
-        // Instancier et jouer l'effet visuel de destruction
         if (CubeDestroyed != null)
         {
             VisualEffect CubeDestroyedInstance = Instantiate(CubeDestroyed, CubeHitSpawnPoint.position, CubeHitSpawnPoint.rotation);
             CubeDestroyedInstance.Play();
+            CubeDestroyedInstance.gameObject.AddComponent<VFXAutoDestroy>();
         }
 
         Destroy(gameObject);

@@ -204,12 +204,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   teleportPointBoxSpawnerPairs: []
   parent: {fileID: 8374639144287423287}
   eyeRadius: {fileID: 7289005239915659131}
   moveSpeed: 0.8
-  patternRadius: 0
-  scriptToToggle: {fileID: 0}
+  HeartHit: {fileID: 0}
+  HeartHitSpawnPoint: {fileID: 0}
   accessibleTeleportPoints: 
 --- !u!114 &8454365674171955205
 MonoBehaviour:
@@ -223,6 +225,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71bf244ec5768f04ebb65096ee4d1b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionRadius: 50
+  timer: 0
+  patternActive: 0
   paliers:
   - patterns: 
   - patterns: 01000000

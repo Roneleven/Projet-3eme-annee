@@ -38,6 +38,9 @@ public class Weapon : MonoBehaviour
 
     [Header("ShootingVFX")]
     public ParticleSystem bulletTrailVFX;
+    public VisualEffect muzzleFlash;
+    public Transform muzzleFlashSpawnPoint;
+    private VisualEffect muzzleFlashInstance;
 
     [Header("Data")]
     public int weaponGfxLayer;
@@ -73,6 +76,13 @@ public class Weapon : MonoBehaviour
     public VisualEffect chargingEffect;
     public Transform chargingEffectSpawnPoint;
     private VisualEffect chargingEffectInstance;
+    public VisualEffect explosiveEffect;
+    private VisualEffect explosiveInstance;
+    public ParticleSystem explosiveTrailVFX;
+    public VisualEffect explosionEffect;
+    private VisualEffect explosionInstance;
+    public VisualEffect shootEffect;
+    private VisualEffect shootInstance;
 
 
     [Header("Laser Mode")]
@@ -98,7 +108,7 @@ public class Weapon : MonoBehaviour
     public float cooldownRate;
 
     [Header("Heat UI")]
-    public Image heatImage; // Reference to the UI image representing heat level
+    public Image heatImage;
     public float maxFillAmount = 1f;
 
     private void Start()
@@ -154,34 +164,67 @@ public class Weapon : MonoBehaviour
         //tir clique gauche explosive
 
         if (currentMode == FireMode.Explosive)
-        {
-            if (Input.GetMouseButtonDown(0) && currentExplosiveCharges > 0)
-            {
-                chargeStartTime = Time.time;
-                // Instancie le VisualEffect et garde une référence à son instance
-                chargingEffectInstance = Instantiate(chargingEffect, chargingEffectSpawnPoint.position, chargingEffectSpawnPoint.rotation);
-                chargingEffectInstance.Play();
-            }
+{
+    if (Input.GetMouseButtonDown(0) && currentExplosiveCharges > 0)
+    {
+        chargeStartTime = Time.time;
+        chargingEffectInstance = Instantiate(chargingEffect, chargingEffectSpawnPoint.position, chargingEffectSpawnPoint.rotation);
+        chargingEffectInstance.Play();
+        chargingEffectInstance.gameObject.AddComponent<VFXAutoDestroy>();
+    }
 
-            if (Input.GetMouseButton(0) && Time.time - chargeStartTime >= chargeTimeThreshold)
-            {
-                // Tir chargé, ajouter feedback sonores/visuels quand c'est chargé ici
-                chargingEffectInstance.Stop();
-            }
+    if (Input.GetMouseButton(0) && Time.time - chargeStartTime >= chargeTimeThreshold)
+    {
+        
+                
+    }
 
-            if (Input.GetMouseButtonUp(0) && Time.time - chargeStartTime >= chargeTimeThreshold)
-            {
-                ExplosiveShoot();
-                explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
-            }
+    if (Input.GetMouseButtonUp(0) && Time.time - chargeStartTime >= chargeTimeThreshold && currentExplosiveCharges > 0)
+    {
+        Vector3 shotDirection = _playerCamera.forward;
+                if (!_scoping)
+                {
+                    Vector3 spreadDirection = Quaternion.Euler(Random.insideUnitSphere * spreadAngle) * shotDirection;
+                    shotDirection = Vector3.Slerp(shotDirection, spreadDirection, 0.5f); // Adjust spread strength
+                }
 
-            // Assure-toi que le VisualEffectInstance reste attaché au point de spawn de l'arme
-            if (chargingEffectInstance != null)
-            {
-                chargingEffectInstance.transform.position = chargingEffectSpawnPoint.position;
-                chargingEffectInstance.transform.rotation = chargingEffectSpawnPoint.rotation;
-            }
-        }
+        explosiveInstance = Instantiate(explosiveEffect, chargingEffectSpawnPoint.position, chargingEffectSpawnPoint.rotation);
+        explosiveInstance.Play();
+        explosiveInstance.gameObject.AddComponent<VFXAutoDestroy>();
+        ExplosiveShoot();
+        explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
+
+        if (explosiveTrailVFX != null)
+                {
+                    // Apply rotation to the particle system
+                    Quaternion lookRotation = Quaternion.LookRotation(shotDirection, Vector3.up);
+                    explosiveTrailVFX.transform.rotation = lookRotation;
+
+                    // Play the particle system
+                    explosiveTrailVFX.Play();
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Guns/BasicGun/Shoot");
+                }
+    }
+
+    if (Input.GetMouseButtonUp(0))
+    {
+            chargingEffectInstance.Stop();
+            Destroy(chargingEffectInstance.gameObject);
+    }
+
+    // Assure-toi que le VisualEffectInstance reste attaché au point de spawn de l'arme
+    if (chargingEffectInstance != null)
+    {
+        chargingEffectInstance.transform.position = chargingEffectSpawnPoint.position;
+        chargingEffectInstance.transform.rotation = chargingEffectSpawnPoint.rotation;
+    }
+    
+    if (explosiveInstance != null)
+    {
+        explosiveInstance.transform.position = chargingEffectSpawnPoint.position;
+        explosiveInstance.transform.rotation = chargingEffectSpawnPoint.rotation;
+    }
+}
 
         //LASER
 
@@ -204,6 +247,12 @@ public class Weapon : MonoBehaviour
             currentHeat = 0f; // Réinitialiser la chaleur à zéro lorsque l'arme n'est plus surchauffée
         }
         UpdateHeatUI();
+
+        if (muzzleFlashInstance != null)
+        {
+            muzzleFlashInstance.transform.position = muzzleFlashSpawnPoint.position;
+            muzzleFlashInstance.transform.rotation = muzzleFlashSpawnPoint.rotation;
+        }
     }
 
     private void Shoot()
@@ -227,7 +276,6 @@ public class Weapon : MonoBehaviour
                 Vector3 shotDirection = _playerCamera.forward;
                 if (!_scoping)
                 {
-                    // Add random deviation to the shot direction
                     Vector3 spreadDirection = Quaternion.Euler(Random.insideUnitSphere * spreadAngle) * shotDirection;
                     shotDirection = Vector3.Slerp(shotDirection, spreadDirection, 0.5f); // Adjust spread strength
                 }
@@ -245,12 +293,25 @@ public class Weapon : MonoBehaviour
                     // Play the particle system
                     bulletTrailVFX.Play();
                     FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Guns/BasicGun/Shoot");
+
+                    muzzleFlashInstance = Instantiate(muzzleFlash, muzzleFlashSpawnPoint.position, muzzleFlashSpawnPoint.rotation);
+                    muzzleFlashInstance.Play();
+                    muzzleFlashInstance.gameObject.AddComponent<VFXAutoDestroy>();
+                }
+
+                if (muzzleFlashInstance != null)
+                {
+                    muzzleFlashInstance.transform.position = muzzleFlashSpawnPoint.position;
+                    muzzleFlashInstance.transform.rotation = muzzleFlashSpawnPoint.rotation;
                 }
 
                 // Perform raycast to check for hit
                 RaycastHit hitInfo;
                 if (Physics.Raycast(_playerCamera.position, shotDirection, out hitInfo, range))
                 {
+                    shootInstance = Instantiate(shootEffect, hitInfo.point, Quaternion.identity); // Corrected line
+                    shootInstance.Play();
+                    shootInstance.gameObject.AddComponent<VFXAutoDestroy>();
                     // Process hit object
                     var heartHealth = hitInfo.transform.GetComponent<HeartHealth>();
                     if (heartHealth != null)
@@ -272,8 +333,9 @@ public class Weapon : MonoBehaviour
                 cooldownStartTime = Time.time;
             }
         }
-        
     }
+
+
     private void UpdateHeatUI()
     {
         // Calculate the fill amount based on the current heat value and overheat threshold
@@ -418,13 +480,16 @@ public class Weapon : MonoBehaviour
     #endregion
 
     #region MODE EXPLOSIVE
-    private void ExplosiveShoot()
+     private void ExplosiveShoot()
     {
         if (currentMode == FireMode.Explosive && currentExplosiveCharges > 0)
         {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, explosiveRange))
             {
+                explosionInstance = Instantiate(explosionEffect, hit.point, Quaternion.identity );
+                explosionInstance.Play();
+                explosionInstance.gameObject.AddComponent<VFXAutoDestroy>();
                 Instantiate(explosionPrefab, hit.point, Quaternion.identity);
                 Collider[] colliders = Physics.OverlapSphere(hit.point, explosionRadius);
                 foreach (Collider hitCollider in colliders)

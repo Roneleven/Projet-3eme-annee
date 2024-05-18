@@ -45167,49 +45167,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
-      propertyPath: muzzleFlash
-      value: 
-      objectReference: {fileID: 2460101500737463019, guid: 3fc9846fae621f540bd9c1ccc515de61, type: 3}
-    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
-      propertyPath: shootEffect
-      value: 
-      objectReference: {fileID: 1656210228620440249, guid: 89c818eb0a7f189408cdc22227191714, type: 3}
-    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: Recoil_Script
       value: 
       objectReference: {fileID: 2001782202}
-    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
-      propertyPath: chargingEffect
-      value: 
-      objectReference: {fileID: 8160295511394092841, guid: 953f0e7219309a1479883c56dc88b347, type: 3}
-    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
-      propertyPath: explosionEffect
-      value: 
-      objectReference: {fileID: 4092455346545260222, guid: 33c4062e08712c94f9ba6a87f01048b9, type: 3}
-    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
-      propertyPath: explosiveEffect
-      value: 
-      objectReference: {fileID: 6128940009062918843, guid: efc82b0f915cfc7429d43df6cb71862d, type: 3}
     - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: mouseLookScript
       value: 
       objectReference: {fileID: 536365237}
     - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
-      propertyPath: explosiveTrailVFX
-      value: 
-      objectReference: {fileID: 1518524117}
-    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: playerMovementsRB
       value: 
       objectReference: {fileID: 126464633}
-    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
-      propertyPath: muzzleFlashSpawnPoint
-      value: 
-      objectReference: {fileID: 1518524115}
-    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
-      propertyPath: chargingEffectSpawnPoint
-      value: 
-      objectReference: {fileID: 1518524115}
     - target: {fileID: 4805179598088156730, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: m_Name
       value: Weapon
@@ -48704,16 +48672,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!4 &1518524115 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4582273381768095942, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
-  m_PrefabInstance: {fileID: 1333913873}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &1518524117 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4850474457665193327, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
-  m_PrefabInstance: {fileID: 1333913873}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1523851100
 Mesh:
   m_ObjectHideFlags: 0

@@ -204,10 +204,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   teleportPointBoxSpawnerPairs: []
   parent: {fileID: 8374639144287423287}
   eyeRadius: {fileID: 7289005239915659131}
   moveSpeed: 0.8
+  HeartHit: {fileID: 0}
+  HeartHitSpawnPoint: {fileID: 0}
   accessibleTeleportPoints: 
 --- !u!114 &8454365674171955205
 MonoBehaviour:
@@ -344,10 +348,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sphereRadius: 2
   sphereHeightOffset: 15
-  sphereMovementDuration: 0.55
-  launchForce: 60
+  sphereMovementDuration: 0.5
+  launchForce: 0
   launchInterval: 0.25
-  cubesToLaunch: 16
+  cubesToLaunch: 15
   heartSpawner: {fileID: 0}
 --- !u!114 &4905110009106583516
 MonoBehaviour:
@@ -419,7 +423,7 @@ Transform:
   m_GameObject: {fileID: 8374639144287423287}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 15, z: 50}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

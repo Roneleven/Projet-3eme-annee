@@ -208,6 +208,8 @@ MonoBehaviour:
   parent: {fileID: 8374639144287423287}
   eyeRadius: {fileID: 7289005239915659131}
   moveSpeed: 0.8
+  patternRadius: 0
+  scriptToToggle: {fileID: 0}
   accessibleTeleportPoints: 
 --- !u!114 &8454365674171955205
 MonoBehaviour:
@@ -221,9 +223,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71bf244ec5768f04ebb65096ee4d1b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 50
-  timer: 0
-  patternActive: 0
   paliers:
   - patterns: 
   - patterns: 01000000
@@ -344,10 +343,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sphereRadius: 2
   sphereHeightOffset: 15
-  sphereMovementDuration: 0.55
-  launchForce: 60
+  sphereMovementDuration: 0.5
+  launchForce: 0
   launchInterval: 0.25
-  cubesToLaunch: 16
+  cubesToLaunch: 15
   heartSpawner: {fileID: 0}
 --- !u!114 &4905110009106583516
 MonoBehaviour:
@@ -419,7 +418,7 @@ Transform:
   m_GameObject: {fileID: 8374639144287423287}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 15, z: 50}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -215,6 +215,8 @@ MonoBehaviour:
   scopePos: {x: -0.4965, y: 0.09, z: -0.03}
   spreadAngle: 2
   bulletTrailVFX: {fileID: 4850474457665193327}
+  muzzleFlash: {fileID: 2460101500737463019, guid: 3fc9846fae621f540bd9c1ccc515de61, type: 3}
+  muzzleFlashSpawnPoint: {fileID: 4582273381768095942}
   weaponGfxLayer: 12
   weaponGfxs:
   - {fileID: 1871108421856253659}
@@ -230,7 +232,12 @@ MonoBehaviour:
   currentExplosiveCharges: 5
   chargeTimeThreshold: 1.5
   cubesToDestroyToGainACharge: 10
-  chargingEffect: {fileID: 0}
+  chargingEffect: {fileID: 8160295511394092841, guid: 953f0e7219309a1479883c56dc88b347, type: 3}
+  chargingEffectSpawnPoint: {fileID: 4582273381768095942}
+  explosiveEffect: {fileID: 6128940009062918843, guid: efc82b0f915cfc7429d43df6cb71862d, type: 3}
+  explosiveTrailVFX: {fileID: 4850474457665193327}
+  explosionEffect: {fileID: 4092455346545260222, guid: 33c4062e08712c94f9ba6a87f01048b9, type: 3}
+  shootEffect: {fileID: 1656210228620440249, guid: 89c818eb0a7f189408cdc22227191714, type: 3}
   laserCooldown: 10
   laserDuration: 2
   laserWidth: 3
@@ -246,7 +253,7 @@ MonoBehaviour:
   overheated: 0
   cooldownRate: 0.5
   heatImage: {fileID: 8630471691321958509}
-  heatSprites: []
+  maxFillAmount: 1
 --- !u!1 &5617236796851899029
 GameObject:
   m_ObjectHideFlags: 0

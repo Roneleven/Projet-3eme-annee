@@ -383,6 +383,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 2
   visualRoot: {fileID: 3470294469841249046}
+  CubeHit: {fileID: 8377534922468075976, guid: 96c76a57a0eb7574d8b0fe74bdbd3874, type: 3}
+  CubeDestroyed: {fileID: 6128940009062918843, guid: efc82b0f915cfc7429d43df6cb71862d, type: 3}
+  CubeHitSpawnPoint: {fileID: 3470294469841249046}
 --- !u!65 &1366837735476708123
 BoxCollider:
   m_ObjectHideFlags: 0

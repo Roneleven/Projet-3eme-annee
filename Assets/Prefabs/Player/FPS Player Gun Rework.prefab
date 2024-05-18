@@ -601,7 +601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovements: {fileID: 1662342133783437384}
-  mouseSensivity: 450
+  mouseSensivity: 200
   playerBody: {fileID: 7720814548836648889}
   xRotation: 0
 --- !u!54 &3758678625323864786
@@ -6651,7 +6651,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 13
   currentSpeed: 0
-  fallAccelerationForce: 30
+  maxPossibleSpeed: 65
+  fallAccelerationForce: 32
   groundCheck: {fileID: 7463014139835152866}
   groundDistance: 0.2
   groundMasks:
@@ -6662,6 +6663,7 @@ MonoBehaviour:
   canMove: 1
   cameraController: {fileID: 1367674501831076130}
   jetpackForce: 7
+  jetpackForceMultiplier: 2.5
   jetpackChargeRate: 10
   maxJetpackCharge: 8
   jetpackCharge: 0

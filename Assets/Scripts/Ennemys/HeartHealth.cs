@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 [System.Serializable]
 public struct TeleportPointBoxSpawnerPair
@@ -26,6 +27,10 @@ public class HeartHealth : MonoBehaviour
     public GameObject eyeRadius;
     public float moveSpeed = 5f;
     private Vector3 targetPosition;
+
+    public VisualEffect HeartHit;
+    public Transform HeartHitSpawnPoint;
+    private VisualEffect HeartHitInstance;
 
     // Nouvelle variable pour stocker les points de téléportation accessibles après chaque téléportation
     public List<int> accessibleTeleportPoints = new List<int>();
@@ -80,6 +85,9 @@ public class HeartHealth : MonoBehaviour
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Hitmarker");
         health -= damage;
+        HeartHitInstance = Instantiate(HeartHit, HeartHitSpawnPoint.position, HeartHitSpawnPoint.rotation);
+        HeartHitInstance.Play();
+        HeartHitInstance.gameObject.AddComponent<VFXAutoDestroy>();
 
         if (health <= 0)
         {

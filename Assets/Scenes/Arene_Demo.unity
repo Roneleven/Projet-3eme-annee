@@ -10073,7 +10073,7 @@ GameObject:
   m_Component:
   - component: {fileID: 201801883}
   m_Layer: 0
-  m_Name: Donelight
+  m_Name: Donelights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

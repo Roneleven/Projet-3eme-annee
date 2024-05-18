@@ -4942,13 +4942,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5311d0c22dd34541ade6dbca5db7b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentMode: 0
   damage: 1
   throwForce: 10
   throwExtraForce: 5
   rotationForce: 120
   animTime: 0
+  maxAmmo: 30
   shotsPerSecond: 15
+  reloadSpeed: 1.25
   hitForce: 3.5
   range: 100
   tapable: 0
@@ -4968,33 +4969,7 @@ MonoBehaviour:
   - {fileID: 4295875098546899272}
   - {fileID: 6257895492542649356}
   - {fileID: 8867781397111303109}
-  explosion: {fileID: 0}
   Recoil_Script: {fileID: 0}
-  explosiveDamage: 0
-  explosiveRange: 0
-  explosionRadius: 0
-  explosionPrefab: {fileID: 0}
-  maxExplosiveCharges: 5
-  currentExplosiveCharges: 5
-  chargeTimeThreshold: 0
-  cubesToDestroyToGainACharge: 10
-  chargingEffect: {fileID: 0}
-  laserCooldown: 1
-  laserDuration: 1
-  laserWidth: 3
-  laserRange: 0
-  laserVFX: {fileID: 0}
-  laserSpawnPoint: {fileID: 0}
-  playerMovementsRB: {fileID: 0}
-  mouseLookScript: {fileID: 0}
-  heatPerShot: 0
-  overheatThreshold: 0
-  cooldownTime: 0
-  currentHeat: 0
-  overheated: 0
-  cooldownRate: 0
-  heatImage: {fileID: 0}
-  maxFillAmount: 1
 --- !u!1001 &1167311450422002744
 PrefabInstance:
   m_ObjectHideFlags: 0

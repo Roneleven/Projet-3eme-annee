@@ -246,28 +246,6 @@ public class Weapon : MonoBehaviour
             overheated = false;
             currentHeat = 0f; // Réinitialiser la chaleur à zéro lorsque l'arme n'est plus surchauffée
         }
-
-        if (overheated)
-        {
-            if (Time.time - cooldownStartTime >= cooldownTime)
-            {
-                overheated = false;
-                currentHeat = 0f;
-            }
-            else
-            {
-                // New Code: Decrease heat during cooldown
-                currentHeat -= cooldownRate * Time.deltaTime;
-                currentHeat = Mathf.Clamp01(currentHeat);
-            }
-        }
-        else if (!_shooting)
-        {
-            // New Code: Decrease heat when not shooting
-            currentHeat -= cooldownRate * Time.deltaTime;
-            currentHeat = Mathf.Clamp01(currentHeat);
-        }
-
         UpdateHeatUI();
 
         if (muzzleFlashInstance != null)

@@ -512,7 +512,6 @@ public class Weapon : MonoBehaviour
                 explosionInstance = Instantiate(explosionEffect, hit.point, Quaternion.identity );
                 explosionInstance.Play();
                 explosionInstance.gameObject.AddComponent<VFXAutoDestroy>();
-                Instantiate(explosionPrefab, hit.point, Quaternion.identity);
                 Collider[] colliders = Physics.OverlapSphere(hit.point, explosionRadius);
                 foreach (Collider hitCollider in colliders)
                 {

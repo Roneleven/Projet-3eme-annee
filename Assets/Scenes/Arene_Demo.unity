@@ -19249,6 +19249,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4595058584566342473}
     - target: {fileID: 6899634225175561795, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: coconvfx
+      value: 
+      objectReference: {fileID: 1605956714}
+    - target: {fileID: 6899634225175561795, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: blackFade
       value: 
       objectReference: {fileID: 2202284202162512989}
@@ -87343,6 +87347,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1605956714 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 113216390190002751, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+  m_PrefabInstance: {fileID: 325100342}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1612170490
 GameObject:
   m_ObjectHideFlags: 0

@@ -82634,6 +82634,10 @@ PrefabInstance:
       value: 2015
       objectReference: {fileID: 0}
     - target: {fileID: 4766561922871944430, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: m_ClearDepth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4766561922871944430, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_RenderShadows
       value: 0
       objectReference: {fileID: 0}

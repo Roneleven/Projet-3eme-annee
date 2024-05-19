@@ -455,29 +455,7 @@ public class Weapon : MonoBehaviour
         _scoping = false;
     }
 
-    public void Drop(Transform playerCamera)
-    {
-        if (!_held) return;
-        _rb = gameObject.AddComponent<Rigidbody>();
-        _rb.mass = 0.1f;
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
-        var forward = playerCamera.forward;
-        forward.y = 0f;
-        _rb.velocity = forward * throwForce;
-        _rb.velocity += Vector3.up * throwExtraForce;
-        _rb.angularVelocity = Random.onUnitSphere * rotationForce;
-        foreach (var col in gfxColliders)
-        {
-            col.enabled = true;
-        }
-        foreach (var gfx in weaponGfxs)
-        {
-            gfx.layer = 0;
-        }
-        transform.parent = null;
-        _held = false;
-    }
+   
 
     #region SWITCH TYPE ARMES
     public void SwitchFireMode()

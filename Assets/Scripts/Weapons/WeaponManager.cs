@@ -41,12 +41,6 @@ public class WeaponManager : MonoBehaviour {
             ammoText.gameObject.SetActive(_heldWeapon.currentMode == FireMode.Normal);
             chargeText.gameObject.SetActive(_heldWeapon.currentMode == FireMode.Explosive);
             laserText.gameObject.SetActive(_heldWeapon.currentMode == FireMode.Laser);
-
-            if (Input.GetKeyDown(KeyCode.A)) {
-                _heldWeapon.Drop(playerCamera);
-                _heldWeapon = null;
-                _isWeaponHeld = false;
-            }
         }
         else if (Input.GetKeyDown(KeyCode.E)) {
             var hitList = new RaycastHit[256];

@@ -284,7 +284,7 @@ MonoBehaviour:
   animTime: 0
   shotsPerSecond: 15
   hitForce: 3.5
-  range: 100
+  range: 200
   tapable: 0
   kickbackForce: 0.075
   resetSmooth: 11.75
@@ -303,7 +303,7 @@ MonoBehaviour:
   explosion: {fileID: 3810439456834575818, guid: 2e43e7ba74c5590449a91b647d126f11, type: 3}
   Recoil_Script: {fileID: 0}
   explosiveDamage: 1
-  explosiveRange: 200
+  explosiveRange: 250
   explosionRadius: 5
   explosionPrefab: {fileID: 191186, guid: 517c65f5c21a00340b7af8423976621c, type: 3}
   maxExplosiveCharges: 5
@@ -319,7 +319,7 @@ MonoBehaviour:
   laserCooldown: 10
   laserDuration: 2
   laserWidth: 3
-  laserRange: 100
+  laserRange: 350
   laserVFX: {fileID: 3233454600361160312, guid: d19452b1c9045ac42ba3cdf865568d50, type: 3}
   laserSpawnPoint: {fileID: 5617236796851899029}
   playerMovementsRB: {fileID: 0}

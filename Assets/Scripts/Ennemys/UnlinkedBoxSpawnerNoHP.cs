@@ -13,7 +13,6 @@ public class UnlinkedBoxSpawnerNoHP : MonoBehaviour
     public float spawnCount;
     public GameObject transparentCubePrefab;
     public int maxCubeCount = 50;
-    private FMOD.Studio.EventInstance spawningSound;
 
     // Variable pour suivre le nombre actuel de blocs r�els
     public int cubeCount = 0;
@@ -21,11 +20,6 @@ public class UnlinkedBoxSpawnerNoHP : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SpawnCube());
-    }
-
-    void Update()
-    {
-        spawningSound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
     }
 
 
@@ -88,7 +82,6 @@ public class UnlinkedBoxSpawnerNoHP : MonoBehaviour
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {
         GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-        spawningSound.start();
         yield return new WaitForSeconds(spawnInterval);
 
         Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
@@ -101,31 +94,11 @@ public class UnlinkedBoxSpawnerNoHP : MonoBehaviour
                 break;
             }
         }
-        spawningSound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         Destroy(transparentCube);
 
         if (playerInPosition)
         {
-            Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-            playerPosition /= gridSize;
-            playerPosition = new Vector3(Mathf.Round(playerPosition.x), Mathf.Round(playerPosition.y), Mathf.Round(playerPosition.z));
-            playerPosition *= gridSize;
-
-            for (float x = playerPosition.x - 3; x <= playerPosition.x + 3; x += gridSize)
-            {
-                for (float y = playerPosition.y - 3; y <= playerPosition.y + 3; y += gridSize)
-                {
-                    for (float z = playerPosition.z - 3; z <= playerPosition.z + 3; z += gridSize)
-                    {
-                        Vector3 cubePosition = new Vector3(x, y, z);
-                        if (Mathf.Abs(x - playerPosition.x) >= 3 || Mathf.Abs(y - playerPosition.y) >= 3 || Mathf.Abs(z - playerPosition.z) >= 3)
-                        {
-                            Instantiate(cubePrefab, cubePosition, Quaternion.identity, spawnContainer.transform);
-                            cubeCount++; // Incr�mente le nombre de blocs r�els
-                        }
-                    }
-                }
-            }
+            
         }
         else
         {

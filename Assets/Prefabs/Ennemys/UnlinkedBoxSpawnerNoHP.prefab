@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c360cfb36ff2a64183e2a53ddb1c8c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubePrefab: {fileID: 1230891745418371966, guid: 75a55552e1acd2a4e8137cda36a98ade, type: 3}
+  cubePrefab: {fileID: 997631944070638011, guid: 83d66a50b9813e04fb3cdf2dc654c2f0, type: 3}
   spawnInterval: 1
   spawnRadius: 0
   spawnContainer: {fileID: 5476958668913692069}

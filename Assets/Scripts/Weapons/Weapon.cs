@@ -114,6 +114,12 @@ public class Weapon : MonoBehaviour
     public VisualEffect shootEffect;
     private VisualEffect shootInstance;
 
+    [Header("Mode Materials")]
+    public GameObject weaponModel;
+    public Material normalModeMaterial;
+    public Material explosiveModeMaterial;
+    public Material laserModeMaterial;
+
     private void Start()
     {
         _rb = gameObject.AddComponent<Rigidbody>();
@@ -478,15 +484,46 @@ public class Weapon : MonoBehaviour
     private void SwitchToNormalMode()
     {
         currentMode = FireMode.Normal;
+        ChangeMaterial(currentMode);
     }
 
     private void SwitchToExplosiveMode()
     {
         currentMode = FireMode.Explosive;
+        ChangeMaterial(currentMode);
     }
+
     private void SwitchToLaserMode()
     {
         currentMode = FireMode.Laser;
+        ChangeMaterial(currentMode);
+    }
+
+    private void ChangeMaterial(FireMode mode)
+    {
+        Material newMaterial = null;
+
+        switch (mode)
+        {
+            case FireMode.Normal:
+                newMaterial = normalModeMaterial;
+                break;
+            case FireMode.Explosive:
+                newMaterial = explosiveModeMaterial;
+                break;
+            case FireMode.Laser:
+                newMaterial = laserModeMaterial;
+                break;
+        }
+
+        if (weaponModel != null && newMaterial != null)
+        {
+            var renderer = weaponModel.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.material = newMaterial;
+            }
+        }
     }
 
     #endregion

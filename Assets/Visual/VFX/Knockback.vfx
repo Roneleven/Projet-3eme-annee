@@ -1009,7 +1009,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: True
+      m_SerializableObject: False
     m_Space: 2147483647
   m_Property:
     name: _vfx_enabled
@@ -1180,7 +1180,7 @@ MonoBehaviour:
   - m_Id: 3
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614607}
-      inputSlot: {fileID: 8926484042661614799}
+      inputSlot: {fileID: 8926484042661614798}
     position: {x: 52, y: 413}
     expandedSlots: []
     expanded: 0
@@ -1227,8 +1227,8 @@ MonoBehaviour:
   m_LinkedSlots:
   - {fileID: 8926484042661614608}
   - {fileID: 8926484042661614767}
-  - {fileID: 8926484042661614799}
   - {fileID: 8926484042661614881}
+  - {fileID: 8926484042661614798}
 --- !u!114 &8926484042661614608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1928,7 +1928,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: True
+      m_SerializableObject: False
     m_Space: 2147483647
   m_Property:
     name: _vfx_enabled
@@ -3059,7 +3059,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: True
+      m_SerializableObject: False
     m_Space: 2147483647
   m_Property:
     name: _vfx_enabled
@@ -6174,7 +6174,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 2
+      m_SerializableObject: 1
     m_Space: 2147483647
   m_Property:
     name: Rate
@@ -6776,7 +6776,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1
+      m_SerializableObject: 2
     m_Space: 2147483647
   m_Property:
     name: Lifetime
@@ -6784,7 +6784,8 @@ MonoBehaviour:
       m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
   m_Direction: 0
-  m_LinkedSlots: []
+  m_LinkedSlots:
+  - {fileID: 8926484042661614607}
 --- !u!114 &8926484042661614799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6818,8 +6819,7 @@ MonoBehaviour:
       m_SerializableType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
   m_Direction: 0
-  m_LinkedSlots:
-  - {fileID: 8926484042661614607}
+  m_LinkedSlots: []
 --- !u!114 &8926484042661614812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6899,16 +6899,16 @@ MonoBehaviour:
     - _QueueControl
     m_PropertyValues:
     - 1
-    - 0
-    - 0
-    - 1
     - 1
     - 0
     - 1
+    - 5
+    - 10
+    - 0
     - 0
     - 4
     - 0
-    - 1
+    - 0
     - 0
     - 0
   MeshCount: 1
@@ -7034,7 +7034,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 100
+      m_SerializableObject: 1
     m_Space: 2147483647
   m_Property:
     name: Size
@@ -7106,7 +7106,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":0.0984521135687828,"g":0.003337480826303363,"b":0.23584908246994019,"a":0.0}'
+      m_SerializableObject: '{"r":2.0,"g":2.0,"b":2.0,"a":0.0}'
     m_Space: 2147483647
   m_Property:
     name: _FRONTCOLOR
@@ -7276,7 +7276,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":0.831238329410553,"g":0.2827931046485901,"b":1.6203280687332154,"a":1.0}'
+      m_SerializableObject: '{"r":0.7811795473098755,"g":0.7513746023178101,"b":0.8244897723197937,"a":2.0299999713897707}'
     m_Space: 2147483647
   m_Property:
     name: _BACKCOLOR
@@ -7476,7 +7476,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1
+      m_SerializableObject: 3.98
     m_Space: 2147483647
   m_Property:
     name: _MAINTEXPOWER
@@ -7510,7 +7510,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.519
+      m_SerializableObject: 0.158
     m_Space: 2147483647
   m_Property:
     name: _Clip
@@ -7744,7 +7744,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":1.0,"y":1.0}'
+      m_SerializableObject: '{"x":8.600000381469727,"y":1.659999966621399}'
     m_Space: 2147483647
   m_Property:
     name: _TILING
@@ -7846,7 +7846,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.6000000238418579,"y":-0.10000000149011612}'
+      m_SerializableObject: '{"x":0.07000000029802323,"y":-0.019999999552965165}'
     m_Space: 2147483647
   m_Property:
     name: _MAINTEXSPEED
@@ -8223,7 +8223,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: True
+      m_SerializableObject: False
     m_Space: 2147483647
   m_Property:
     name: _vfx_enabled

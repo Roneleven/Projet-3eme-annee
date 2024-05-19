@@ -7106,7 +7106,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":2.0,"g":2.0,"b":2.0,"a":0.0}'
+      m_SerializableObject: '{"r":4.211794853210449,"g":4.211794853210449,"b":4.211794853210449,"a":0.0}'
     m_Space: 2147483647
   m_Property:
     name: _FRONTCOLOR

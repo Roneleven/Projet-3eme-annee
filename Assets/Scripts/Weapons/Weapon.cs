@@ -68,7 +68,7 @@ public class Weapon : MonoBehaviour
     public GameObject explosionPrefab;
     public int maxExplosiveCharges = 5;
     public int currentExplosiveCharges = 5;
-    private TMP_Text explosiveChargeText;
+    public TMP_Text explosiveChargeText;
     private float chargeStartTime;
     public float chargeTimeThreshold;
     private int destroyedCubeCount = 0;
@@ -200,7 +200,7 @@ public class Weapon : MonoBehaviour
                 explosiveInstance.Play();
                 explosiveInstance.gameObject.AddComponent<VFXAutoDestroy>();
                 ExplosiveShoot();
-                explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
+                explosiveChargeText.text = currentExplosiveCharges + "/" + maxExplosiveCharges;
 
                 if (explosiveTrailVFX != null)
                 {
@@ -447,7 +447,7 @@ public class Weapon : MonoBehaviour
     }
 
 
-    public void Pickup(Transform weaponHolder, Transform playerCamera, TMP_Text ammoText, TMP_Text chargeText, TMP_Text laserText)
+    public void Pickup(Transform weaponHolder, Transform playerCamera)
     {
         if (_held) return;
         Destroy(_rb);
@@ -465,11 +465,6 @@ public class Weapon : MonoBehaviour
         }
         _held = true;
         _playerCamera = playerCamera;
-        _ammoText = ammoText;
-        explosiveChargeText = chargeText;
-        explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
-        _laserText = laserText;
-        _laserText.text = "Laser";
         _scoping = false;
     }
 
@@ -551,7 +546,7 @@ public class Weapon : MonoBehaviour
             }
 
             currentExplosiveCharges--;
-            explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
+            explosiveChargeText.text = currentExplosiveCharges + "/" + maxExplosiveCharges;
         }
     }
 
@@ -560,7 +555,7 @@ public class Weapon : MonoBehaviour
         if (currentExplosiveCharges < maxExplosiveCharges)
         {
             currentExplosiveCharges++;
-            explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
+            explosiveChargeText.text = currentExplosiveCharges + "/" + maxExplosiveCharges;
         }
     }
     #endregion

@@ -72,7 +72,7 @@ public class Weapon : MonoBehaviour
     private float chargeStartTime;
     public float chargeTimeThreshold;
     private int destroyedCubeCount = 0;
-    public int cubesToDestroyToGainACharge = 10;
+    public int cubesToDestroyToGainACharge = 5;
 
     [Header("Laser Mode")]
     public float laserCooldown = 1f;

@@ -21,7 +21,6 @@ public class UnlinkedBoxSpawnerNoHP : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SpawnCube());
-        spawningSound = FMODUnity.RuntimeManager.CreateInstance("event:/DestructibleBlock/Behaviours/Spawning");
     }
 
     void Update()

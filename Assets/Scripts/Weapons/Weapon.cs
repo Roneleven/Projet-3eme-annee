@@ -67,23 +67,12 @@ public class Weapon : MonoBehaviour
     public float explosionRadius;
     public GameObject explosionPrefab;
     public int maxExplosiveCharges = 5;
-    public int currentExplosiveCharges = 5; 
+    public int currentExplosiveCharges = 5;
     private TMP_Text explosiveChargeText;
     private float chargeStartTime;
     public float chargeTimeThreshold;
     private int destroyedCubeCount = 0;
     public int cubesToDestroyToGainACharge = 10;
-    public VisualEffect chargingEffect;
-    public Transform chargingEffectSpawnPoint;
-    private VisualEffect chargingEffectInstance;
-    public VisualEffect explosiveEffect;
-    private VisualEffect explosiveInstance;
-    public ParticleSystem explosiveTrailVFX;
-    public VisualEffect explosionEffect;
-    private VisualEffect explosionInstance;
-    public VisualEffect shootEffect;
-    private VisualEffect shootInstance;
-
 
     [Header("Laser Mode")]
     public float laserCooldown = 1f;
@@ -99,10 +88,12 @@ public class Weapon : MonoBehaviour
     private bool isChargingLaser = false;
     private bool isLaserActive = false;
 
+    [Header("Heat Settings")]
     public float heatPerShot;
+    public float heatEffectMultiplier;
     public float overheatThreshold;
     public float cooldownTime;
-    public float currentHeat; 
+    public float currentHeat;
     public bool overheated;
     private float cooldownStartTime;
     public float cooldownRate;
@@ -110,6 +101,18 @@ public class Weapon : MonoBehaviour
     [Header("Heat UI")]
     public Image heatImage;
     public float maxFillAmount = 1f;
+
+    [Header("VFXs")]
+    public VisualEffect chargingEffect;
+    public Transform chargingEffectSpawnPoint;
+    private VisualEffect chargingEffectInstance;
+    public VisualEffect explosiveEffect;
+    private VisualEffect explosiveInstance;
+    public ParticleSystem explosiveTrailVFX;
+    public VisualEffect explosionEffect;
+    private VisualEffect explosionInstance;
+    public VisualEffect shootEffect;
+    private VisualEffect shootInstance;
 
     private void Start()
     {
@@ -141,9 +144,8 @@ public class Weapon : MonoBehaviour
         }
 
         //tir clique gauche normal
-        if ((tapable ? Input.GetMouseButtonDown(0) : Input.GetMouseButton(0)) && !_shooting &&  currentMode == FireMode.Normal)
+        if ((tapable ? Input.GetMouseButtonDown(0) : Input.GetMouseButton(0)) && !_shooting && currentMode == FireMode.Normal)
         {
-            
             Shoot();
             StartCoroutine(ShootingCooldown());
         }
@@ -157,44 +159,44 @@ public class Weapon : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             SwitchToExplosiveMode();
-        } else if (Input.GetKeyDown(KeyCode.Alpha3)){
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
             SwitchToLaserMode();
         }
 
         //tir clique gauche explosive
 
         if (currentMode == FireMode.Explosive)
-{
-    if (Input.GetMouseButtonDown(0) && currentExplosiveCharges > 0)
-    {
-        chargeStartTime = Time.time;
-        chargingEffectInstance = Instantiate(chargingEffect, chargingEffectSpawnPoint.position, chargingEffectSpawnPoint.rotation);
-        chargingEffectInstance.Play();
-        chargingEffectInstance.gameObject.AddComponent<VFXAutoDestroy>();
-    }
+        {
+            if (Input.GetMouseButtonDown(0) && currentExplosiveCharges > 0)
+            {
+                chargeStartTime = Time.time;
+                chargingEffectInstance = Instantiate(chargingEffect, chargingEffectSpawnPoint.position, chargingEffectSpawnPoint.rotation);
+                chargingEffectInstance.Play();
+                chargingEffectInstance.gameObject.AddComponent<VFXAutoDestroy>();
+            }
 
-    if (Input.GetMouseButton(0) && Time.time - chargeStartTime >= chargeTimeThreshold)
-    {
-        
-                
-    }
+            if (Input.GetMouseButton(0) && Time.time - chargeStartTime >= chargeTimeThreshold)
+            {
+            }
 
-    if (Input.GetMouseButtonUp(0) && Time.time - chargeStartTime >= chargeTimeThreshold && currentExplosiveCharges > 0)
-    {
-        Vector3 shotDirection = _playerCamera.forward;
+            if (Input.GetMouseButtonUp(0) && Time.time - chargeStartTime >= chargeTimeThreshold && currentExplosiveCharges > 0)
+            {
+                Vector3 shotDirection = _playerCamera.forward;
                 if (!_scoping)
                 {
                     Vector3 spreadDirection = Quaternion.Euler(Random.insideUnitSphere * spreadAngle) * shotDirection;
                     shotDirection = Vector3.Slerp(shotDirection, spreadDirection, 0.5f); // Adjust spread strength
                 }
 
-        explosiveInstance = Instantiate(explosiveEffect, chargingEffectSpawnPoint.position, chargingEffectSpawnPoint.rotation);
-        explosiveInstance.Play();
-        explosiveInstance.gameObject.AddComponent<VFXAutoDestroy>();
-        ExplosiveShoot();
-        explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
+                explosiveInstance = Instantiate(explosiveEffect, chargingEffectSpawnPoint.position, chargingEffectSpawnPoint.rotation);
+                explosiveInstance.Play();
+                explosiveInstance.gameObject.AddComponent<VFXAutoDestroy>();
+                ExplosiveShoot();
+                explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
 
-        if (explosiveTrailVFX != null)
+                if (explosiveTrailVFX != null)
                 {
                     // Apply rotation to the particle system
                     Quaternion lookRotation = Quaternion.LookRotation(shotDirection, Vector3.up);
@@ -204,27 +206,27 @@ public class Weapon : MonoBehaviour
                     explosiveTrailVFX.Play();
                     FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Guns/BasicGun/Shoot");
                 }
-    }
+            }
 
-    if (Input.GetMouseButtonUp(0))
-    {
-            chargingEffectInstance.Stop();
-            Destroy(chargingEffectInstance.gameObject);
-    }
+            if (Input.GetMouseButtonUp(0))
+            {
+                chargingEffectInstance.Stop();
+                Destroy(chargingEffectInstance.gameObject);
+            }
 
-    // Assure-toi que le VisualEffectInstance reste attaché au point de spawn de l'arme
-    if (chargingEffectInstance != null)
-    {
-        chargingEffectInstance.transform.position = chargingEffectSpawnPoint.position;
-        chargingEffectInstance.transform.rotation = chargingEffectSpawnPoint.rotation;
-    }
-    
-    if (explosiveInstance != null)
-    {
-        explosiveInstance.transform.position = chargingEffectSpawnPoint.position;
-        explosiveInstance.transform.rotation = chargingEffectSpawnPoint.rotation;
-    }
-}
+            // Assure-toi que le VisualEffectInstance reste attaché au point de spawn de l'arme
+            if (chargingEffectInstance != null)
+            {
+                chargingEffectInstance.transform.position = chargingEffectSpawnPoint.position;
+                chargingEffectInstance.transform.rotation = chargingEffectSpawnPoint.rotation;
+            }
+
+            if (explosiveInstance != null)
+            {
+                explosiveInstance.transform.position = chargingEffectSpawnPoint.position;
+                explosiveInstance.transform.rotation = chargingEffectSpawnPoint.rotation;
+            }
+        }
 
         //LASER
 
@@ -355,7 +357,17 @@ public class Weapon : MonoBehaviour
                 cooldownStartTime = Time.time;
             }
         }
+
+        StartCoroutine(ShootingCooldown());
     }
+
+    private IEnumerator ShootingCooldown()
+    {
+        _shooting = true;
+        yield return new WaitForSeconds(GetAdjustedFireRate());
+        _shooting = false;
+    }
+
 
 
     private void UpdateHeatUI()
@@ -371,6 +383,13 @@ public class Weapon : MonoBehaviour
         {
             heatImage.fillAmount = fillAmount;
         }
+    }
+
+    private float GetAdjustedFireRate()
+    {
+        float baseFireRate = 1f / shotsPerSecond;
+        float adjustedFireRate = baseFireRate / (1f + heatEffectMultiplier * currentHeat);
+        return adjustedFireRate;
     }
 
     private void HandleHitObject(RaycastHit hitInfo)
@@ -404,7 +423,7 @@ public class Weapon : MonoBehaviour
 
             if (destroyedCubeCount >= cubesToDestroyToGainACharge)
             {
-                GainExplosiveCharge(); 
+                GainExplosiveCharge();
                 destroyedCubeCount = 0;
             }
         }
@@ -419,13 +438,6 @@ public class Weapon : MonoBehaviour
         {
             Destroy(hitInfo.transform.gameObject);
         }
-    }
-
-    private IEnumerator ShootingCooldown()
-    {
-        _shooting = true;
-        yield return new WaitForSeconds(1f / shotsPerSecond);
-        _shooting = false;
     }
 
 
@@ -455,7 +467,7 @@ public class Weapon : MonoBehaviour
         _scoping = false;
     }
 
-   
+
 
     #region SWITCH TYPE ARMES
     public void SwitchFireMode()
@@ -480,14 +492,14 @@ public class Weapon : MonoBehaviour
     #endregion
 
     #region MODE EXPLOSIVE
-     private void ExplosiveShoot()
+    private void ExplosiveShoot()
     {
         if (currentMode == FireMode.Explosive && currentExplosiveCharges > 0)
         {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, explosiveRange))
             {
-                explosionInstance = Instantiate(explosionEffect, hit.point, Quaternion.identity );
+                explosionInstance = Instantiate(explosionEffect, hit.point, Quaternion.identity);
                 explosionInstance.Play();
                 explosionInstance.gameObject.AddComponent<VFXAutoDestroy>();
                 Collider[] colliders = Physics.OverlapSphere(hit.point, explosionRadius);
@@ -502,7 +514,7 @@ public class Weapon : MonoBehaviour
             }
 
             currentExplosiveCharges--;
-            explosiveChargeText.text = "Charges: " + currentExplosiveCharges;     
+            explosiveChargeText.text = "Charges: " + currentExplosiveCharges;
         }
     }
 
@@ -588,7 +600,7 @@ public class Weapon : MonoBehaviour
             }
 
             // Positionne le VFX de laser à l'extrémité du rayon du laser
-            Vector3 laserEnd = transform.position + transform.forward ;
+            Vector3 laserEnd = transform.position + transform.forward;
             laserInstance.transform.position = laserEnd;
 
             // Met à jour la rotation du VFX de laser pour qu'il regarde dans la direction du rayon du laser
@@ -612,12 +624,12 @@ public class Weapon : MonoBehaviour
 
 
     private IEnumerator LaserCooldown()
-{
-    yield return new WaitForSeconds(laserCooldown);
-    canShootLaser = true;
-    
+    {
+        yield return new WaitForSeconds(laserCooldown);
+        canShootLaser = true;
+
         Debug.Log("laser");
-}
+    }
 
     private void OnDrawGizmos()
     {

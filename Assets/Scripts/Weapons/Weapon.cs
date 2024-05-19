@@ -97,6 +97,7 @@ public class Weapon : MonoBehaviour
     public bool overheated;
     private float cooldownStartTime;
     public float cooldownRate;
+    
 
     [Header("Heat UI")]
     public Image heatImage;

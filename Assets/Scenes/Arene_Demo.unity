@@ -17246,6 +17246,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7862538915290276763}
     - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: overheatedScript
+      value: 
+      objectReference: {fileID: 1796613594}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: explosiveMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 7270f9b4cabe9fd48b1d274df83567ce, type: 2}
@@ -17320,7 +17324,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8120168775960669728, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1796613596}
   m_SourcePrefab: {fileID: 100100000, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
 --- !u!1 &332887009
 GameObject:
@@ -34045,6 +34052,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 90891586}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &571761977 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+  m_PrefabInstance: {fileID: 328729014}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5311d0c22dd34541ade6dbca5db7b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &572868910
 GameObject:
   m_ObjectHideFlags: 0
@@ -96271,6 +96289,29 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &1796613594 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8120168775960669728, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+  m_PrefabInstance: {fileID: 328729014}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1796613596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796613594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a84d5da5ed63745b1cee65aaf63b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 1917b7094cd98574db41329cbaeb1479, type: 2}
+  colors:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 1, g: 0, b: 0, a: 0}
+  time: 0.5
+  weaponScript: {fileID: 571761977}
 --- !u!43 &1803763457
 Mesh:
   m_ObjectHideFlags: 0

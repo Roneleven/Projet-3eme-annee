@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 public class WeaponUIManager : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class WeaponUIManager : MonoBehaviour
     private Sprite laserWeaponInactive; // Sprite pour l'icône inactive du mode Laser
 
     private bool isBlinking = false;
+    public TMP_Text laserCooldownText;
 
     private void Start()
     {
@@ -153,4 +155,26 @@ public class WeaponUIManager : MonoBehaviour
         }
         SetIconOpacity(weaponImage, endOpacity);
     }
+
+    public void DisplayLaserCooldownText(float cooldownDuration)
+    {
+        StartCoroutine(ShowCooldownText(cooldownDuration));
+    }
+
+    private IEnumerator ShowCooldownText(float cooldownDuration)
+    {
+        laserCooldownText.gameObject.SetActive(true);
+        laserCooldownText.text = Mathf.Ceil(cooldownDuration).ToString(); 
+
+        float elapsedTime = 0f;
+        while (elapsedTime < cooldownDuration)
+        {
+            yield return null;
+            elapsedTime += Time.deltaTime;
+            laserCooldownText.text = Mathf.Ceil(cooldownDuration - elapsedTime).ToString(); 
+        }
+
+        laserCooldownText.gameObject.SetActive(false);
+    }
+
 }

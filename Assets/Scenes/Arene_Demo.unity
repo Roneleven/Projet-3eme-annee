@@ -18670,6 +18670,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cba95076c8ee3a546bd078f4f8cf9726, type: 3}
+--- !u!1 &306985978 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1183209336307125447, guid: fbf7535d23a6d764e8081bfa7c923486, type: 3}
+  m_PrefabInstance: {fileID: 1317959602}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &309214746
 Mesh:
   m_ObjectHideFlags: 0
@@ -20894,16 +20899,36 @@ PrefabInstance:
       objectReference: {fileID: 1937218090}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointAnimators.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointAnimators.Array.data[0]
       value: 
       objectReference: {fileID: 232199753}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: teleportPointAnimators.Array.data[1]
+      value: 
+      objectReference: {fileID: 774893496}
+    - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: teleportPointAnimators.Array.data[2]
+      value: 
+      objectReference: {fileID: 774893496}
+    - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: destructionAnimationPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointBoxSpawnerPairs.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: destructionAnimationPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 394458567}
+    - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: destructionAnimationPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 306985978}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].teleportPointIndex
       value: 1
@@ -21016,6 +21041,10 @@ PrefabInstance:
       propertyPath: spawnContainer
       value: 
       objectReference: {fileID: 993472032}
+    - target: {fileID: 6899634225175561795, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: timerFillImage
+      value: 
+      objectReference: {fileID: 2049403494}
     - target: {fileID: 8372236347979211609, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: targetTransform
       value: 
@@ -25849,6 +25878,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3777852713529929525, guid: cba95076c8ee3a546bd078f4f8cf9726, type: 3}
   m_PrefabInstance: {fileID: 392794537}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &394458567 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1183209336307125447, guid: fbf7535d23a6d764e8081bfa7c923486, type: 3}
+  m_PrefabInstance: {fileID: 1420447350}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &396390722
 GameObject:
@@ -47597,6 +47631,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 90891586}
   m_LocalEulerAnglesHint: {x: -90, y: -180, z: 270}
+--- !u!95 &774893496 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4133060802409683188, guid: fbf7535d23a6d764e8081bfa7c923486, type: 3}
+  m_PrefabInstance: {fileID: 1317959602}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &779882816
 GameObject:
   m_ObjectHideFlags: 0
@@ -89278,6 +89317,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7171811288497735006, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7171811288497735006, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ab89055727f376a4985b1fbb206e96f2, type: 3}
+    - target: {fileID: 7171811288497735006, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7171811288497735006, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: m_FillMethod
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7720814548836648889, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.9994006
@@ -112897,6 +112952,17 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &2049403494 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7171811288497735006, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+  m_PrefabInstance: {fileID: 1538944410}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &2051061591
 Mesh:
   m_ObjectHideFlags: 0

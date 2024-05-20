@@ -22,7 +22,7 @@ public class GhostController : MonoBehaviour
             foreach (GameObject player in players)
             {
                 float distance = Vector3.Distance(transform.position, player.transform.position);
-                if (distance < spawnRadius)
+                if (distance < (spawnRadius + 2)) // >> spawnRadius + 2 = cocon <<
                 {
                     playerInRange = true;
                     break; // Sortir de la boucle dès qu'un joueur est dans la zone

@@ -12,6 +12,7 @@ public class HeartSpawner : MonoBehaviour
     public GameObject transparentCubePrefab;
     public float spawnInterval;
     public float spawnRadius;
+    private float cocon;
     public float gridSize;
     public float exclusionRadius;
     public float spawnCount;
@@ -29,6 +30,7 @@ public class HeartSpawner : MonoBehaviour
     public float timeSincePalierStart = 0f;
     public delegate void PalierChangeAction(int newPalier);
     public event PalierChangeAction OnPalierChange;
+    public GameObject coconvfx;
 
 
     private FMOD.Studio.EventInstance BreakingHeart;
@@ -305,6 +307,12 @@ public class HeartSpawner : MonoBehaviour
         }
     }
 
+    private void UpdateCocon()
+    {
+        cocon = (spawnRadius + 2) * 110;
+        coconvfx.transform.localScale = new Vector3(cocon, cocon, cocon);
+    }
+
     private IEnumerator ResetPalier()
     {
         isCooldownActive = true;
@@ -354,7 +362,7 @@ public class HeartSpawner : MonoBehaviour
         float levelUpIncrement = 1.0f;
 
         spawnRadius = palier * 4;
-        // spawnRadius = palier * 4;
+        UpdateCocon();
 
         if (palier == 1)
         {

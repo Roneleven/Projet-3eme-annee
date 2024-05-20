@@ -611,7 +611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6302881755263184899, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12
+      value: 29.2
       objectReference: {fileID: 0}
     - target: {fileID: 6302881755263184899, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1826,8 +1826,12 @@ PrefabInstance:
       value: TheHeart
       objectReference: {fileID: 0}
     - target: {fileID: 8454365674171955205, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: nextPatternTimes.Array.data[1]
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454365674171955205, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: paliers.Array.data[1].patterns.Array.data[0]
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

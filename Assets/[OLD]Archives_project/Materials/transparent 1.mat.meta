@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Font.meta
+guid: 9779a25f4633cf84f80cadf4ad8c27f7
+folderAsset: yes
+DefaultImporter:
+========
 guid: d821285da699eee46a8727dc3f3d0f99
 NativeFormatImporter:
+>>>>>>>> origin/Level-design-V2:Assets/[OLD]Archives_project/Materials/transparent 1.mat.meta
   externalObjects: {}
   mainObjectFileID: 2100000
   userData: 

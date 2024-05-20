@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Font/UnityFont.meta
+guid: 1871879f87d7a0842bd2607b856bb458
+folderAsset: yes
+DefaultImporter:
+========
 guid: 82a7c4267b430f74aafe6b593dd7597b
 NativeFormatImporter:
+>>>>>>>> origin/Level-design-V2:Assets/Scripts/Map/Cube (3).controller.meta
   externalObjects: {}
   mainObjectFileID: 9100000
   userData: 

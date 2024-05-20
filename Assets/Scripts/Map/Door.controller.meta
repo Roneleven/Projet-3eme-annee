@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Image/UI Weapon.meta
+guid: a24f7103c8aaa6a4a8067a492078ada5
+folderAsset: yes
+DefaultImporter:
+========
 guid: 0121c0179d78afb499a6fddf5fcefe78
 NativeFormatImporter:
+>>>>>>>> origin/Level-design-V2:Assets/Scripts/Map/Door.controller.meta
   externalObjects: {}
   mainObjectFileID: 9100000
   userData: 

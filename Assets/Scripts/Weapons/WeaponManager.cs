@@ -38,15 +38,6 @@ public class WeaponManager : MonoBehaviour {
             var mouseDelta = -new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
             swayHolder.localPosition = Vector3.Lerp(swayHolder.localPosition, Vector3.zero, swaySmooth * Time.deltaTime);
             swayHolder.localPosition += (Vector3) mouseDelta * swaySize;
-            ammoText.gameObject.SetActive(_heldWeapon.currentMode == FireMode.Normal);
-            chargeText.gameObject.SetActive(_heldWeapon.currentMode == FireMode.Explosive);
-            laserText.gameObject.SetActive(_heldWeapon.currentMode == FireMode.Laser);
-
-            if (Input.GetKeyDown(KeyCode.A)) {
-                _heldWeapon.Drop(playerCamera);
-                _heldWeapon = null;
-                _isWeaponHeld = false;
-            }
         }
         else if (Input.GetKeyDown(KeyCode.E)) {
             var hitList = new RaycastHit[256];
@@ -77,7 +68,7 @@ public class WeaponManager : MonoBehaviour {
 
             _isWeaponHeld = true;
             _heldWeapon = realList[0].transform.GetComponent<Weapon>();
-            _heldWeapon.Pickup(weaponHolder, playerCamera, ammoText, chargeText, laserText) ;
+            _heldWeapon.Pickup(weaponHolder, playerCamera) ;
         }
     }
 

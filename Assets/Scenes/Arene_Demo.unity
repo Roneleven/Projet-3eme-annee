@@ -19290,6 +19290,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5612328976966789895}
     - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: weaponUIPanel
+      value: 
+      objectReference: {fileID: 732698911}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: mouseLookScript
       value: 
       objectReference: {fileID: 7862538915290276763}
@@ -42102,6 +42106,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &732698911 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2792528978137644063, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+  m_PrefabInstance: {fileID: 1538944410}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &734000325 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3777852713529929525, guid: cba95076c8ee3a546bd078f4f8cf9726, type: 3}
@@ -84040,6 +84049,10 @@ PrefabInstance:
     - target: {fileID: 2649904338549692574, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_projectionMatrixMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2792528978137644063, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4239171444264417582, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_IsActive

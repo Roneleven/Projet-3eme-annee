@@ -119,6 +119,7 @@ public class Weapon : MonoBehaviour
     public Material normalModeMaterial;
     public Material explosiveModeMaterial;
     public Material laserModeMaterial;
+    public GameObject weaponUIPanel;
 
     private void Start()
     {
@@ -466,6 +467,7 @@ public class Weapon : MonoBehaviour
         _held = true;
         _playerCamera = playerCamera;
         _scoping = false;
+        weaponUIPanel.SetActive(true);
     }
 
 

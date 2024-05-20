@@ -50,7 +50,7 @@ public class Weapon : MonoBehaviour
 
     private float _rotationTime;
     private float _time;
-    private bool _held;
+    public bool _held;
     private bool _scoping;
     private bool _shooting;
     private Rigidbody _rb;

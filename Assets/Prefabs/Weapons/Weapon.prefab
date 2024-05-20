@@ -335,6 +335,68 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3714880803914648012, guid: 4b3475f45ba972e409e0b53506731257, type: 3}
+--- !u!1 &3018207717706436029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6852232308582588155}
+  m_Layer: 0
+  m_Name: FumeeDroite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6852232308582588155
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3018207717706436029}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.48, y: -0.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4649867410123433997}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4248778054740604644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6911821284292804120}
+  m_Layer: 0
+  m_Name: FumeeGauche
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6911821284292804120
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4248778054740604644}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.48, y: 0.19, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4649867410123433997}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4805179598088156730
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,10 +502,13 @@ MonoBehaviour:
   explosiveTrailVFX: {fileID: 4850474457665193327}
   explosionEffect: {fileID: 4092455346545260222, guid: 33c4062e08712c94f9ba6a87f01048b9, type: 3}
   shootEffect: {fileID: 1656210228620440249, guid: 89c818eb0a7f189408cdc22227191714, type: 3}
+  smokeEffect: {fileID: 0}
+  smokeEffectSpawnPoint: {fileID: 0}
   weaponModel: {fileID: 2253449755891213522}
   normalModeMaterial: {fileID: 2100000, guid: db353bd9508c6e643a1b0d0f96219d7e, type: 2}
   explosiveModeMaterial: {fileID: 2100000, guid: 7270f9b4cabe9fd48b1d274df83567ce, type: 2}
   laserModeMaterial: {fileID: 2100000, guid: c8c63ae86aea2684fa7b65d7d1a0d5b8, type: 2}
+  weaponUIPanel: {fileID: 0}
 --- !u!1 &5461869548831699639
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,6 +540,8 @@ Transform:
   m_Children:
   - {fileID: 6120516310023219353}
   - {fileID: 3722978507008214383}
+  - {fileID: 6852232308582588155}
+  - {fileID: 6911821284292804120}
   m_Father: {fileID: 7616929701851145350}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
 --- !u!1 &5617236796851899029

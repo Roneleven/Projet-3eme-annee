@@ -5,9 +5,9 @@ using System.Collections;
 public class VFXAutoDestroy : MonoBehaviour
 {
     private VisualEffect vfx;
-    public float initialDelay = 0.1f; // Délai avant de commencer à vérifier la destruction
-    public float checkInterval = 0.1f; // Intervalle entre les vérifications
-    public float extraDelay = 0.1f; // Délai supplémentaire pour s'assurer que les particules sont complètement terminées
+    public float initialDelay = 0.1f; // Delay before starting to check for destruction
+    public float checkInterval = 0.1f; // Interval between checks
+    public float extraDelay = 0.1f; // Additional delay to ensure particles are completely finished
 
     private void Awake()
     {
@@ -21,21 +21,27 @@ public class VFXAutoDestroy : MonoBehaviour
 
     private IEnumerator CheckVFXAlive()
     {
-        // Attendre un moment pour que l'effet visuel commence à jouer
+        // Wait for the initial delay to let the visual effect start playing
         yield return new WaitForSeconds(initialDelay);
 
-        // Vérifier à plusieurs reprises avec un intervalle
+        // Continuously check at the specified interval
         while (true)
         {
-            // Si les particules sont terminées, attendre un délai supplémentaire puis détruire l'objet
+            // If no particles are alive, wait for the extra delay then destroy the object
             if (vfx.aliveParticleCount == 0)
             {
+                // Wait for the extra delay to ensure all particles are finished
                 yield return new WaitForSeconds(extraDelay);
-                Destroy(gameObject);
-                yield break;
+
+                // Double-check if the particle count is still zero after the extra delay
+                if (vfx.aliveParticleCount == 0)
+                {
+                    Destroy(gameObject);
+                    yield break;
+                }
             }
 
-            // Attendre un intervalle avant la prochaine vérification
+            // Wait for the check interval before the next check
             yield return new WaitForSeconds(checkInterval);
         }
     }

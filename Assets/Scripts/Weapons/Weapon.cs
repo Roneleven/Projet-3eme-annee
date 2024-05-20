@@ -113,6 +113,9 @@ public class Weapon : MonoBehaviour
     private VisualEffect explosionInstance;
     public VisualEffect shootEffect;
     private VisualEffect shootInstance;
+    public VisualEffect smokeEffect;
+    public Transform smokeEffectSpawnPoint;
+    private VisualEffect smokeInstance;
 
     [Header("Mode Materials")]
     public GameObject weaponModel;
@@ -233,6 +236,11 @@ public class Weapon : MonoBehaviour
                 explosiveInstance.transform.position = chargingEffectSpawnPoint.position;
                 explosiveInstance.transform.rotation = chargingEffectSpawnPoint.rotation;
             }
+
+            if (smokeInstance != null)
+            {
+                smokeInstance.transform.position = smokeEffectSpawnPoint.position;
+            }
         }
 
         //LASER
@@ -253,7 +261,7 @@ public class Weapon : MonoBehaviour
         if (overheated && Time.time - cooldownStartTime >= cooldownTime)
         {
             overheated = false;
-            currentHeat = 0f; // Réinitialiser la chaleur à zéro lorsque l'arme n'est plus surchauffée
+            currentHeat = 0f;
         }
 
         if (overheated)
@@ -262,19 +270,32 @@ public class Weapon : MonoBehaviour
             {
                 overheated = false;
                 currentHeat = 0f;
+                if (smokeInstance != null)
+                {
+                    smokeInstance.Stop();
+                }
             }
             else
             {
-                // New Code: Decrease heat during cooldown
                 currentHeat -= cooldownRate * Time.deltaTime;
                 currentHeat = Mathf.Clamp01(currentHeat);
+                if (smokeInstance == null)
+                {
+                    smokeInstance = Instantiate(smokeEffect, smokeEffectSpawnPoint.position, smokeEffectSpawnPoint.rotation);
+                    smokeInstance.transform.SetParent(smokeEffectSpawnPoint, true);  // Attache l'effet de fumée au spawn point
+                    smokeInstance.Play();
+                    smokeInstance.gameObject.AddComponent<VFXAutoDestroy>();
+                }
             }
         }
         else if (!_shooting)
         {
-            // New Code: Decrease heat when not shooting
             currentHeat -= cooldownRate * Time.deltaTime;
             currentHeat = Mathf.Clamp01(currentHeat);
+            if (smokeInstance != null)
+            {
+                smokeInstance.Stop();
+            }
         }
 
         UpdateHeatUI();
@@ -294,6 +315,11 @@ public class Weapon : MonoBehaviour
             {
                 overheated = false;
                 currentHeat = 0f;
+                if (smokeInstance != null)
+                {
+                    smokeInstance.Stop();
+                    Destroy(smokeInstance.gameObject);
+                }
             }
             else
             {
@@ -336,14 +362,12 @@ public class Weapon : MonoBehaviour
                     muzzleFlashInstance.transform.rotation = muzzleFlashSpawnPoint.rotation;
                 }
 
-                // Perform raycast to check for hit
                 RaycastHit hitInfo;
                 if (Physics.Raycast(_playerCamera.position, shotDirection, out hitInfo, range))
                 {
-                    shootInstance = Instantiate(shootEffect, hitInfo.point, Quaternion.identity); // Corrected line
+                    shootInstance = Instantiate(shootEffect, hitInfo.point, Quaternion.identity);
                     shootInstance.Play();
                     shootInstance.gameObject.AddComponent<VFXAutoDestroy>();
-                    // Process hit object
                     var heartHealth = hitInfo.transform.GetComponent<HeartHealth>();
 
                     if (heartHealth != null)
@@ -360,9 +384,15 @@ public class Weapon : MonoBehaviour
             currentHeat += heatPerShot;
             if (currentHeat >= overheatThreshold)
             {
-                // Si l'arme est en surchauffe, active le drapeau et commence le temps de refroidissement
                 overheated = true;
                 cooldownStartTime = Time.time;
+                if (smokeInstance == null)
+                {
+                    smokeInstance = Instantiate(smokeEffect, smokeEffectSpawnPoint.position, smokeEffectSpawnPoint.rotation);
+                    smokeInstance.transform.SetParent(smokeEffectSpawnPoint, true);
+                    smokeInstance.Play();
+                    smokeInstance.gameObject.AddComponent<VFXAutoDestroy>();
+                }
             }
         }
 

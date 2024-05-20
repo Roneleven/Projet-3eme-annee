@@ -19297,6 +19297,10 @@ PrefabInstance:
       propertyPath: playerMovementsRB
       value: 
       objectReference: {fileID: 1662342132266552786}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: explosiveChargeText
+      value: 
+      objectReference: {fileID: 1117589723}
     - target: {fileID: 4805179598088156730, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: m_Name
       value: Weapon
@@ -63514,6 +63518,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3777852713529929525, guid: cba95076c8ee3a546bd078f4f8cf9726, type: 3}
   m_PrefabInstance: {fileID: 240885553}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1117589723 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2168704585574508849, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+  m_PrefabInstance: {fileID: 1538944410}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1118327521
 GameObject:
   m_ObjectHideFlags: 0

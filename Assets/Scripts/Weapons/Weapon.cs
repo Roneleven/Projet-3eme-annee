@@ -79,7 +79,6 @@ public class Weapon : MonoBehaviour
     public float laserDuration = 1f;
     public float laserWidth = 3f;
     public float laserRange;
-    private TMP_Text _laserText;
     private bool canShootLaser = true;
     public GameObject laserVFX;
     public GameObject laserSpawnPoint;

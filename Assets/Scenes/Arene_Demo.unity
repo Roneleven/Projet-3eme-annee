@@ -84050,6 +84050,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+    - target: {fileID: 5549083183655211605, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5612328977609180829, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: recoilY
       value: 1

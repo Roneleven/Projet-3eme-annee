@@ -369,6 +369,7 @@ public class Weapon : MonoBehaviour
                     shootInstance.Play();
                     shootInstance.gameObject.AddComponent<VFXAutoDestroy>();
                     var heartHealth = hitInfo.transform.GetComponent<HeartHealth>();
+
                     if (heartHealth != null)
                     {
                         heartHealth.TakeDamage(damage);
@@ -433,10 +434,15 @@ public class Weapon : MonoBehaviour
     {
         var rb = hitInfo.transform.GetComponent<Rigidbody>();
         var cubeHealth = hitInfo.transform.GetComponent<CubeHealth>();
-
+        var fakeHeart = hitInfo.transform.GetComponent<FakeHeart>();
         if (rb != null)
         {
             rb.velocity += _playerCamera.forward * hitForce;
+        }
+
+        if (fakeHeart != null)
+        {
+            fakeHeart.TakeDamage(damage);
         }
 
         if (cubeHealth != null)

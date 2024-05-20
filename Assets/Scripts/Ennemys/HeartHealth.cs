@@ -42,6 +42,7 @@ public class HeartHealth : MonoBehaviour
         Idle = FMODUnity.RuntimeManager.CreateInstance("event:/Heart/Behaviours/Idle");
         Idle.start();
 
+        SetRandomTarget();
         SetTargetForTeleportIndex(currentTeleportIndex);
     }
 
@@ -51,7 +52,10 @@ public class HeartHealth : MonoBehaviour
 
         MoveToTarget();
 
-        // Suppression de l'appel à SetRandomTarget()
+        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+        {
+            SetRandomTarget();
+        }
     }
 
     void SetTargetForTeleportIndex(int teleportIndex)
@@ -64,6 +68,17 @@ public class HeartHealth : MonoBehaviour
             targetPosition = nextTeleportPosition.position;
         }
     }
+
+    void SetRandomTarget()
+    {
+        float angle = Random.Range(0f, Mathf.PI * 2f);
+    float radius = eyeRadius.transform.localScale.x * 1.5f;
+    float verticalOffset = Random.Range(-radius, radius);
+
+    Vector3 offset = new Vector3(Mathf.Cos(angle), verticalOffset, Mathf.Sin(angle)) * radius;
+    targetPosition = eyeRadius.transform.position + offset;
+    }
+
 
     void MoveToTarget()
     {
@@ -93,6 +108,7 @@ public class HeartHealth : MonoBehaviour
         {
             Idle.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             TeleportHeart();
+            TeleportEyeRadius(transform.position);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Teleport");
             Idle.start();
         }
@@ -179,6 +195,13 @@ public class HeartHealth : MonoBehaviour
         }
     }
 
+    public void TeleportEyeRadius(Vector3 newPosition)
+    {
+        eyeRadius.transform.position = newPosition;
+        SetRandomTarget();
+    }
+
+
     private void UpdateAccessibleTeleportPoints()
     {
         accessibleTeleportPoints.Remove(lastTeleportIndex);
@@ -248,8 +271,8 @@ public class HeartHealth : MonoBehaviour
                     foreach (var boxSpawner in pair.boxSpawners)
                     {
                         GameObject[] generatedCubes = GameObject.FindGameObjectsWithTag("Block");
-                        float percentageToRemove = 0.6f;
-                        float delayBetweenCubes = 5f / generatedCubes.Length;
+                        float percentageToRemove = 0.9f;
+                        float delayBetweenCubes = 3f / generatedCubes.Length;
                         StartCoroutine(DestroyPercentageOfCubesGradually(generatedCubes, percentageToRemove, delayBetweenCubes));
                     }
                 }
@@ -265,8 +288,8 @@ public class HeartHealth : MonoBehaviour
                     foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
                     {
                         GameObject[] generatedCubes = GameObject.FindGameObjectsWithTag("Block");
-                        float percentageToRemove = 0.6f;
-                        float delayBetweenCubes = 5f / generatedCubes.Length;
+                        float percentageToRemove = 0.9f;
+                        float delayBetweenCubes = 3f / generatedCubes.Length;
                         StartCoroutine(DestroyPercentageOfCubesGradually(generatedCubes, percentageToRemove, delayBetweenCubes));
                     }
                 }

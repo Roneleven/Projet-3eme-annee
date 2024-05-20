@@ -25,7 +25,7 @@ public class PlayerCageUI : MonoBehaviour
             isInsideTrigger = true;
             panelAnimator.Play("Appear");
             warning.setParameterByName("Cage", 0.0F);
-            warning.start();
+            //warning.start();
         }
     }
 

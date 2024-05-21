@@ -32,8 +32,10 @@ public class HeartHealth : MonoBehaviour
     public Transform HeartHitSpawnPoint;
     private VisualEffect HeartHitInstance;
 
-    // Nouvelle variable pour stocker les points de téléportation accessibles après chaque téléportation
     public List<int> accessibleTeleportPoints = new List<int>();
+
+    // List of prefabs with destruction animations for each teleport position
+    public List<GameObject> destructionAnimationPrefabs = new List<GameObject>();
 
     private void Start()
     {
@@ -48,17 +50,13 @@ public class HeartHealth : MonoBehaviour
     void Update()
     {
         Idle.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
-
         MoveToTarget();
-
-        // Suppression de l'appel à SetRandomTarget()
     }
 
     void SetTargetForTeleportIndex(int teleportIndex)
     {
         if (teleportIndex >= 0 && teleportIndex < teleportPositions.Length)
         {
-            // Sélectionne le point de téléportation en fonction de l'index spécifié
             Transform nextTeleportPosition = teleportPositions[teleportIndex];
             parent.transform.position = nextTeleportPosition.position;
             targetPosition = nextTeleportPosition.position;
@@ -67,13 +65,11 @@ public class HeartHealth : MonoBehaviour
 
     void MoveToTarget()
     {
-        // Déplacer l'objet vers la position cible avec une vitesse constante
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
     }
 
     private void InitializeAccessibleTeleportPoints()
     {
-        // Initialiser la liste des points de téléportation accessibles au début
         accessibleTeleportPoints.Clear();
         for (int i = 0; i < teleportPositions.Length; i++)
         {
@@ -92,9 +88,27 @@ public class HeartHealth : MonoBehaviour
         if (health <= 0)
         {
             Idle.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            PlayDestructionAnimation(lastTeleportIndex);
             TeleportHeart();
             FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Teleport");
             Idle.start();
+        }
+    }
+
+    private void PlayDestructionAnimation(int teleportIndex)
+    {
+        if (teleportIndex >= 0 && teleportIndex < destructionAnimationPrefabs.Count)
+        {
+            GameObject prefab = destructionAnimationPrefabs[teleportIndex];
+            if (prefab != null)
+            {
+                GameObject instance = Instantiate(prefab, teleportPositions[teleportIndex].position, Quaternion.identity);
+                Animator animator = instance.GetComponent<Animator>();
+                if (animator != null)
+                {
+                    animator.SetTrigger("Destroy");
+                }
+            }
         }
     }
 
@@ -105,15 +119,13 @@ public class HeartHealth : MonoBehaviour
         currentTeleportIndex++;
         if (currentTeleportIndex >= teleportPositions.Length)
         {
-            currentTeleportIndex = 0; // ici c'est pour reset le tableau des TP s'il est passé par tout, à supprimer peut être pour la fin
+            currentTeleportIndex = 0;
         }
         SetTargetForTeleportIndex(currentTeleportIndex);
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Locomotion/Teleport");
 
         if (accessibleTeleportPoints.Count > 0)
         {
-            // Suppression de la sélection aléatoire du prochain point de téléportation
-
             lastTeleportIndex = currentTeleportIndex;
             Transform nextTeleportPosition = teleportPositions[lastTeleportIndex];
             parent.transform.position = nextTeleportPosition.position;
@@ -276,15 +288,12 @@ public class HeartHealth : MonoBehaviour
 
     public Transform getCurrentTeleportPoint()
     {
-        // Assurez-vous que lastTeleportIndex est valide
         if (lastTeleportIndex >= 0 && lastTeleportIndex < teleportPositions.Length)
         {
-            // Renvoie le transform du point de téléportation correspondant
             return teleportPositions[lastTeleportIndex];
         }
         else
         {
-            // S'il n'y a pas de dernier index de téléportation valide, renvoie null
             return null;
         }
     }

@@ -36064,7 +36064,7 @@ GameObject:
   m_Component:
   - component: {fileID: 526906552}
   m_Layer: 0
-  m_Name: Linkedboxspawner Palier1
+  m_Name: Linkedboxspawner Palier1 TO REMOVE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82827,6 +82827,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2071284309}
+    - target: {fileID: 7267222032369618486, guid: fbf7535d23a6d764e8081bfa7c923486, type: 3}
+      propertyPath: unlinkedBoxSpawnersToRemove
+      value: 
+      objectReference: {fileID: 526906551}
     - target: {fileID: 7688077514120658675, guid: fbf7535d23a6d764e8081bfa7c923486, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -126157,11 +126161,11 @@ SceneRoots:
   - {fileID: 325100342}
   - {fileID: 201801883}
   - {fileID: 328729014}
-  - {fileID: 1684748508}
   - {fileID: 396390725}
   - {fileID: 90891586}
   - {fileID: 1040825563}
   - {fileID: 554352355}
+  - {fileID: 1684748508}
   - {fileID: 526906552}
   - {fileID: 6302235296317842166}
   - {fileID: 1420447350}

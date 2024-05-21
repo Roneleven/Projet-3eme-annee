@@ -194,7 +194,6 @@ public class HeartHealth : MonoBehaviour
                     {
                         if (boxSpawner != null)
                         {
-                            Debug.Log("Activating BoxSpawner at teleport index: " + teleportIndex);
                             boxSpawner.StartCoroutine(boxSpawner.SpawnCube());
                         }
                         else

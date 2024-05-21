@@ -21877,29 +21877,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 560476175}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
-      propertyPath: teleportPositions.Array.data[0]
-      value: 
-      objectReference: {fileID: 1647522097}
+      propertyPath: teleportPositions.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
-      propertyPath: teleportPositions.Array.data[1]
+      propertyPath: teleportPositions.Array.data[0]
       value: 
       objectReference: {fileID: 543061334}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
-      propertyPath: teleportPositions.Array.data[2]
+      propertyPath: teleportPositions.Array.data[1]
       value: 
       objectReference: {fileID: 779882817}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
-      propertyPath: teleportPositions.Array.data[3]
+      propertyPath: teleportPositions.Array.data[2]
       value: 
       objectReference: {fileID: 1397955536}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
-      propertyPath: teleportPositions.Array.data[4]
+      propertyPath: teleportPositions.Array.data[3]
       value: 
       objectReference: {fileID: 1136761687}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
-      propertyPath: teleportPositions.Array.data[5]
+      propertyPath: teleportPositions.Array.data[4]
       value: 
       objectReference: {fileID: 1937218090}
+    - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: teleportPositions.Array.data[5]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointAnimators.Array.size
       value: 2
@@ -21934,11 +21938,11 @@ PrefabInstance:
       objectReference: {fileID: 306985978}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].teleportPointIndex
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].boxSpawners.Array.size
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].boxSpawners.Array.data[0]
@@ -21947,43 +21951,43 @@ PrefabInstance:
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].boxSpawners.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1505642389}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].boxSpawners.Array.data[2]
       value: 
-      objectReference: {fileID: 1505642389}
+      objectReference: {fileID: 1330770462}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].boxSpawners.Array.data[3]
       value: 
-      objectReference: {fileID: 1330770462}
+      objectReference: {fileID: 980797089}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].boxSpawners.Array.data[4]
       value: 
-      objectReference: {fileID: 980797089}
+      objectReference: {fileID: 512948103}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].boxSpawners.Array.data[5]
       value: 
-      objectReference: {fileID: 512948103}
+      objectReference: {fileID: 719995375}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].boxSpawners.Array.data[6]
       value: 
-      objectReference: {fileID: 719995375}
+      objectReference: {fileID: 248294554}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].boxSpawners.Array.data[7]
       value: 
-      objectReference: {fileID: 248294554}
+      objectReference: {fileID: 27119468}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].boxSpawners.Array.data[8]
       value: 
-      objectReference: {fileID: 27119468}
+      objectReference: {fileID: 613649734}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].boxSpawners.Array.data[9]
       value: 
-      objectReference: {fileID: 613649734}
+      objectReference: {fileID: 1578568835}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].boxSpawners.Array.data[10]
       value: 
-      objectReference: {fileID: 1578568835}
+      objectReference: {fileID: 0}
     - target: {fileID: 5020451415022464614, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -99621,37 +99625,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1647522096
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1647522097}
-  m_Layer: 0
-  m_Name: HeartSpawn 0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1647522097
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1647522096}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 51.1, y: -33.06, z: -54.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1702181244}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1652280985
 Mesh:
   m_ObjectHideFlags: 0
@@ -102080,7 +102053,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1647522097}
   - {fileID: 543061334}
   - {fileID: 779882817}
   - {fileID: 1397955536}

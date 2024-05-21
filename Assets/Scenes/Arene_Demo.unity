@@ -87531,6 +87531,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1724266642}
+    - target: {fileID: 7267222032369618486, guid: fbf7535d23a6d764e8081bfa7c923486, type: 3}
+      propertyPath: unlinkedBoxSpawnersToRemove
+      value: 
+      objectReference: {fileID: 1684748507}
     - target: {fileID: 7688077514120658675, guid: fbf7535d23a6d764e8081bfa7c923486, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -100948,7 +100952,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1684748508}
   m_Layer: 0
-  m_Name: UnlinkedBoxSpanwersContainer
+  m_Name: UnlinkedBoxSpanwersContainerToDelete
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

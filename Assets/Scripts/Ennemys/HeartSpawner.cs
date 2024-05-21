@@ -31,7 +31,7 @@ public class HeartSpawner : MonoBehaviour
     public delegate void PalierChangeAction(int newPalier);
     public event PalierChangeAction OnPalierChange;
     public GameObject coconvfx;
-
+    public Image timerFillImage;
 
     private FMOD.Studio.EventInstance BreakingHeart;
 
@@ -126,7 +126,14 @@ public class HeartSpawner : MonoBehaviour
             }
             else
             {
-                timerText.text = Mathf.Round(timer).ToString() + "s";
+                float percentageCompleted = (1 - (timer / defaultTimer)) * 100;
+                timerText.text = Mathf.RoundToInt(percentageCompleted).ToString() + "%";
+
+                if (timerFillImage != null)
+                {
+                    // Fill amount based on the percentage completed
+                    timerFillImage.fillAmount = 1 - (timer / defaultTimer);
+                }
             }
         }
 
@@ -309,7 +316,7 @@ public class HeartSpawner : MonoBehaviour
 
     private void UpdateCocon()
     {
-        cocon = (spawnRadius + 2) * 110;
+        cocon = currentPalier * 0.2f + 2;
         coconvfx.transform.localScale = new Vector3(cocon, cocon, cocon);
     }
 

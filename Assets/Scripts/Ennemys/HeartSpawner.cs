@@ -38,7 +38,7 @@ public class HeartSpawner : MonoBehaviour
     [Header("Timer/Reset Properties")]
     public float timer;
     public float defaultTimer;
-    private bool timerActive = false;
+    private bool timerActive = true;
     public TextMeshProUGUI timerText;
     public Image blackFade;
     public Animator anim;
@@ -302,7 +302,7 @@ public class HeartSpawner : MonoBehaviour
             float newLevelUpValue = (currentPalier + 1) * 1.0f;
             BreakingHeart.setParameterByName("LevelUp 2", newLevelUpValue);
 
-            timerActive = true;
+            //timerActive = true;
             StartCoroutine(ResetPalier());
             timeSincePalierStart = 0f;
 

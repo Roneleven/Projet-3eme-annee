@@ -21868,6 +21868,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1133667869545958720, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: emptyPrefab
+      value: 
+      objectReference: {fileID: 1413787942626273727, guid: 99e5ed7a289a0d34db49ec59023e746c, type: 3}
+    - target: {fileID: 3272709582937674179, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: HeartHit
       value: 
@@ -21988,6 +21996,14 @@ PrefabInstance:
       propertyPath: teleportPointBoxSpawnerPairs.Array.data[0].boxSpawners.Array.data[10]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3672458320004308592, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: radius
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672458320004308592, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: numberOfCubes
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5020451415022464614, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -22067,6 +22083,14 @@ PrefabInstance:
     - target: {fileID: 8374639144287423287, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454365674171955205, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: paliers.Array.data[1].patterns.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454365674171955205, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: paliers.Array.data[1].patterns.Array.data[1]
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22515,6 +22539,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 113216390190002751, guid: 9ded535dd6174ee428a1de07b12073c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272709582937674179, guid: 9ded535dd6174ee428a1de07b12073c2, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 5464548926497106743, guid: 9ded535dd6174ee428a1de07b12073c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -22555,9 +22587,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7289005239915659131, guid: 9ded535dd6174ee428a1de07b12073c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8374639144287423287, guid: 9ded535dd6174ee428a1de07b12073c2, type: 3}
       propertyPath: m_Name
       value: FAKE_HEART
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374639144287423287, guid: 9ded535dd6174ee428a1de07b12073c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8452553787884289748, guid: 9ded535dd6174ee428a1de07b12073c2, type: 3}
       propertyPath: trueHeart
@@ -93681,6 +93721,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1522139770570907707, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 18399
+      objectReference: {fileID: 0}
+    - target: {fileID: 3433612360395097092, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: m_RendererIndex
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 6518649123472393457, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.9994006

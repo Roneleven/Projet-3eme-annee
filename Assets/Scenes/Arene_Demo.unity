@@ -22073,6 +22073,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 632903520}
     - target: {fileID: 8372236347979211609, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: losange
+      value: 
+      objectReference: {fileID: 5213527703166270280, guid: 72cfc522981e85b4093f97763bb3500a, type: 3}
+    - target: {fileID: 8372236347979211609, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: targetTransform
       value: 
       objectReference: {fileID: 1658432068}
@@ -22086,11 +22090,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8454365674171955205, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: paliers.Array.data[1].patterns.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454365674171955205, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: paliers.Array.data[2].patterns.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8454365674171955205, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: paliers.Array.data[1].patterns.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454365674171955205, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: paliers.Array.data[1].patterns.Array.data[1]
-      value: 4
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454365674171955205, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: paliers.Array.data[2].patterns.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454365674171955205, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: paliers.Array.data[2].patterns.Array.data[1]
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

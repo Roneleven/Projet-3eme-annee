@@ -31,14 +31,14 @@ public class HeartSpawner : MonoBehaviour
     public delegate void PalierChangeAction(int newPalier);
     public event PalierChangeAction OnPalierChange;
     public GameObject coconvfx;
-
+    public Image timerFillImage;
 
     private FMOD.Studio.EventInstance BreakingHeart;
 
     [Header("Timer/Reset Properties")]
     public float timer;
     public float defaultTimer;
-    private bool timerActive = false;
+    private bool timerActive = true;
     public TextMeshProUGUI timerText;
     public Image blackFade;
     public Animator anim;
@@ -126,7 +126,14 @@ public class HeartSpawner : MonoBehaviour
             }
             else
             {
-                timerText.text = Mathf.Round(timer).ToString() + "s";
+                float percentageCompleted = (1 - (timer / defaultTimer)) * 100;
+                timerText.text = Mathf.RoundToInt(percentageCompleted).ToString() + "%";
+
+                if (timerFillImage != null)
+                {
+                    // Fill amount based on the percentage completed
+                    timerFillImage.fillAmount = 1 - (timer / defaultTimer);
+                }
             }
         }
 
@@ -252,7 +259,7 @@ public class HeartSpawner : MonoBehaviour
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {
         GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-        
+
         //GameObject transparentCube = transparentCubesPool.GetObject(); nstantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
         // transparentCube.transform.position = spawnPosition;
         // transparentCube.transform.setParent(spawnContainer.transform);
@@ -295,7 +302,7 @@ public class HeartSpawner : MonoBehaviour
             float newLevelUpValue = (currentPalier + 1) * 1.0f;
             BreakingHeart.setParameterByName("LevelUp 2", newLevelUpValue);
 
-            timerActive = true;
+            //timerActive = true;
             StartCoroutine(ResetPalier());
             timeSincePalierStart = 0f;
 
@@ -309,7 +316,7 @@ public class HeartSpawner : MonoBehaviour
 
     private void UpdateCocon()
     {
-        cocon = (spawnRadius + 2) * 110;
+        cocon = currentPalier * 0.2f + 2;
         coconvfx.transform.localScale = new Vector3(cocon, cocon, cocon);
     }
 
@@ -415,68 +422,68 @@ public class HeartSpawner : MonoBehaviour
 
     #region BOSS PATTERNS
     private IEnumerator GenerateCagePattern()
-{
-    cagePatternActive = true;
-
-    Vector3 playerGridPosition = playerPosition / gridSize;
-    playerGridPosition = new Vector3(Mathf.Round(playerGridPosition.x), Mathf.Round(playerGridPosition.y), Mathf.Round(playerGridPosition.z));
-    playerGridPosition *= gridSize;
-
-    int cageSizeXZ = 3;
-
-    // Générer un seul cube transparent à une échelle plus grande
-    GameObject transparentCube = Instantiate(cagePatternPreview, playerGridPosition, Quaternion.identity, spawnContainer.transform);
-    transparentCube.transform.localScale = new Vector3(cageTransparentScale, cageTransparentScale, cageTransparentScale);
-    warning.setParameterByName("Cage", 0.0F);
-    warning.start();
-
-    float timer = 0f;
-    bool playerExited = false;
-
-    while (timer < cageSpawnTime)
     {
-        timer += Time.deltaTime;
-        float distanceToPlayer = Vector3.Distance(playerPosition, playerGridPosition);
-        float acceptableOverlap = gridSize / 0.4f;
+        cagePatternActive = true;
 
-        if (distanceToPlayer >= (gridSize + acceptableOverlap))
+        Vector3 playerGridPosition = playerPosition / gridSize;
+        playerGridPosition = new Vector3(Mathf.Round(playerGridPosition.x), Mathf.Round(playerGridPosition.y), Mathf.Round(playerGridPosition.z));
+        playerGridPosition *= gridSize;
+
+        int cageSizeXZ = 3;
+
+        // Générer un seul cube transparent à une échelle plus grande
+        GameObject transparentCube = Instantiate(cagePatternPreview, playerGridPosition, Quaternion.identity, spawnContainer.transform);
+        transparentCube.transform.localScale = new Vector3(cageTransparentScale, cageTransparentScale, cageTransparentScale);
+        warning.setParameterByName("Cage", 0.0F);
+        warning.start();
+
+        float timer = 0f;
+        bool playerExited = false;
+
+        while (timer < cageSpawnTime)
         {
-            playerExited = true;
-            break;
+            timer += Time.deltaTime;
+            float distanceToPlayer = Vector3.Distance(playerPosition, playerGridPosition);
+            float acceptableOverlap = gridSize / 0.4f;
+
+            if (distanceToPlayer >= (gridSize + acceptableOverlap))
+            {
+                playerExited = true;
+                break;
+            }
+
+            yield return null;
         }
 
-        yield return null;
-    }
-
-    if (!playerExited)
-    {
-        warning.setParameterByName("Cage", 1.0F);
-        // Générer la cage autour du joueur
-        for (float x = playerGridPosition.x - cageSizeXZ; x <= playerGridPosition.x + cageSizeXZ; x += gridSize)
+        if (!playerExited)
         {
-            for (float y = playerGridPosition.y - cageSizeXZ; y <= playerGridPosition.y + cageSizeXZ; y += gridSize)
+            warning.setParameterByName("Cage", 1.0F);
+            // Générer la cage autour du joueur
+            for (float x = playerGridPosition.x - cageSizeXZ; x <= playerGridPosition.x + cageSizeXZ; x += gridSize)
             {
-                for (float z = playerGridPosition.z - cageSizeXZ; z <= playerGridPosition.z + cageSizeXZ; z += gridSize)
+                for (float y = playerGridPosition.y - cageSizeXZ; y <= playerGridPosition.y + cageSizeXZ; y += gridSize)
                 {
-                    Vector3 cageSpawnPosition = new Vector3(x, y, z);
-                    if (Mathf.Abs(x - playerGridPosition.x) >= cageSizeXZ || Mathf.Abs(y - playerGridPosition.y) >= cageSizeXZ || Mathf.Abs(z - playerGridPosition.z) >= cageSizeXZ)
+                    for (float z = playerGridPosition.z - cageSizeXZ; z <= playerGridPosition.z + cageSizeXZ; z += gridSize)
                     {
-                        Instantiate(CageBlockPrefab, cageSpawnPosition, Quaternion.identity, spawnContainer.transform);
+                        Vector3 cageSpawnPosition = new Vector3(x, y, z);
+                        if (Mathf.Abs(x - playerGridPosition.x) >= cageSizeXZ || Mathf.Abs(y - playerGridPosition.y) >= cageSizeXZ || Mathf.Abs(z - playerGridPosition.z) >= cageSizeXZ)
+                        {
+                            Instantiate(CageBlockPrefab, cageSpawnPosition, Quaternion.identity, spawnContainer.transform);
+                        }
                     }
                 }
             }
         }
-    }
-    else
-    {
-        warning.setParameterByName("Cage", 2.0F);
-    }
+        else
+        {
+            warning.setParameterByName("Cage", 2.0F);
+        }
 
-    // Détruire le cube transparent car la cage a été générée ou le joueur a quitté
-    Destroy(transparentCube);
+        // Détruire le cube transparent car la cage a été générée ou le joueur a quitté
+        Destroy(transparentCube);
 
-    cagePatternActive = false;
-}
+        cagePatternActive = false;
+    }
 
 
     private void OnDrawGizmos()

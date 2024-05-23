@@ -50,7 +50,7 @@ public class Weapon : MonoBehaviour
 
     private float _rotationTime;
     private float _time;
-    private bool _held;
+    public bool _held;
     private bool _scoping;
     private bool _shooting;
     private Rigidbody _rb;
@@ -122,6 +122,8 @@ public class Weapon : MonoBehaviour
     public Material normalModeMaterial;
     public Material explosiveModeMaterial;
     public Material laserModeMaterial;
+
+    [Header("UI Manager")]
     public GameObject weaponUIPanel;
 
     private void Start()
@@ -689,6 +691,8 @@ public class Weapon : MonoBehaviour
 
         // Suppression du VFX de laser une fois que la durée est écoulée
         Destroy(laserInstance);
+        WeaponUIManager weaponUIManager = FindObjectOfType<WeaponUIManager>();
+        weaponUIManager.DisplayLaserCooldownText(laserCooldown);
         StartCoroutine(LaserCooldown());
     }
 

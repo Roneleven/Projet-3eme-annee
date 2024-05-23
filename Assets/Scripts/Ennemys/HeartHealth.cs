@@ -32,7 +32,6 @@ public class HeartHealth : MonoBehaviour
     public Transform HeartHitSpawnPoint;
     private VisualEffect HeartHitInstance;
 
-    // Nouvelle variable pour stocker les points de téléportation accessibles après chaque téléportation
     public List<int> accessibleTeleportPoints = new List<int>();
 
     private void Start()
@@ -44,6 +43,7 @@ public class HeartHealth : MonoBehaviour
 
         SetRandomTarget();
         SetTargetForTeleportIndex(currentTeleportIndex);
+        ActivateLinkedBoxSpawners(currentTeleportIndex); // Activer les spawners initiaux
     }
 
     void Update()
@@ -62,7 +62,6 @@ public class HeartHealth : MonoBehaviour
     {
         if (teleportIndex >= 0 && teleportIndex < teleportPositions.Length)
         {
-            // Sélectionne le point de téléportation en fonction de l'index spécifié
             Transform nextTeleportPosition = teleportPositions[teleportIndex];
             parent.transform.position = nextTeleportPosition.position;
             targetPosition = nextTeleportPosition.position;
@@ -72,23 +71,20 @@ public class HeartHealth : MonoBehaviour
     void SetRandomTarget()
     {
         float angle = Random.Range(0f, Mathf.PI * 2f);
-    float radius = eyeRadius.transform.localScale.x * 1.5f;
-    float verticalOffset = Random.Range(-radius, radius);
+        float radius = eyeRadius.transform.localScale.x * 1.5f;
+        float verticalOffset = Random.Range(-radius, radius);
 
-    Vector3 offset = new Vector3(Mathf.Cos(angle), verticalOffset, Mathf.Sin(angle)) * radius;
-    targetPosition = eyeRadius.transform.position + offset;
+        Vector3 offset = new Vector3(Mathf.Cos(angle), verticalOffset, Mathf.Sin(angle)) * radius;
+        targetPosition = eyeRadius.transform.position + offset;
     }
-
 
     void MoveToTarget()
     {
-        // Déplacer l'objet vers la position cible avec une vitesse constante
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
     }
 
     private void InitializeAccessibleTeleportPoints()
     {
-        // Initialiser la liste des points de téléportation accessibles au début
         accessibleTeleportPoints.Clear();
         for (int i = 0; i < teleportPositions.Length; i++)
         {
@@ -121,15 +117,13 @@ public class HeartHealth : MonoBehaviour
         currentTeleportIndex++;
         if (currentTeleportIndex >= teleportPositions.Length)
         {
-            currentTeleportIndex = 0; // ici c'est pour reset le tableau des TP s'il est passé par tout, à supprimer peut être pour la fin
+            currentTeleportIndex = 0;
         }
         SetTargetForTeleportIndex(currentTeleportIndex);
         FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Locomotion/Teleport");
 
         if (accessibleTeleportPoints.Count > 0)
         {
-            // Suppression de la sélection aléatoire du prochain point de téléportation
-
             lastTeleportIndex = currentTeleportIndex;
             Transform nextTeleportPosition = teleportPositions[lastTeleportIndex];
             parent.transform.position = nextTeleportPosition.position;
@@ -142,55 +136,7 @@ public class HeartHealth : MonoBehaviour
                 heartSpawner.ChangePalierOnTeleport();
             }
 
-            foreach (var pair in teleportPointBoxSpawnerPairs)
-            {
-                if (pair.teleportPointIndex == lastTeleportIndex)
-                {
-                    if (pair.boxSpawners != null)
-                    {
-                        foreach (var boxSpawner in pair.boxSpawners)
-                        {
-                            if (boxSpawner != null)
-                            {
-                                boxSpawner.StartCoroutine(boxSpawner.SpawnCube());
-                            }
-                            else
-                            {
-                                Debug.LogError("boxSpawner is null in pair.boxSpawners");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Debug.LogError("pair.boxSpawners is null");
-                    }
-                }
-            }
-
-            foreach (var pair in teleportPointBoxSpawnerPairs)
-            {
-                if (pair.teleportPointIndex == lastTeleportIndex)
-                {
-                    if (pair.boxSpawnersNoHP != null)
-                    {
-                        foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
-                        {
-                            if (boxSpawnerNoHP != null)
-                            {
-                                boxSpawnerNoHP.StartCoroutine(boxSpawnerNoHP.SpawnCube());
-                            }
-                            else
-                            {
-                                Debug.LogError("boxSpawnerNoHP is null in pair.boxSpawners");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Debug.LogError("pair.boxSpawnersNoHP is null");
-                    }
-                }
-            }
+            ActivateLinkedBoxSpawners(lastTeleportIndex);
             UpdateAccessibleTeleportPoints();
         }
     }
@@ -200,7 +146,6 @@ public class HeartHealth : MonoBehaviour
         eyeRadius.transform.position = newPosition;
         SetRandomTarget();
     }
-
 
     private void UpdateAccessibleTeleportPoints()
     {
@@ -232,6 +177,54 @@ public class HeartHealth : MonoBehaviour
                 foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
                 {
                     boxSpawnerNoHP.StopAllCoroutines();
+                }
+            }
+        }
+    }
+
+    private void ActivateLinkedBoxSpawners(int teleportIndex)
+    {
+        foreach (var pair in teleportPointBoxSpawnerPairs)
+        {
+            if (pair.teleportPointIndex == teleportIndex)
+            {
+                if (pair.boxSpawners != null)
+                {
+                    foreach (var boxSpawner in pair.boxSpawners)
+                    {
+                        if (boxSpawner != null)
+                        {
+                            boxSpawner.StartCoroutine(boxSpawner.SpawnCube());
+                        }
+                        else
+                        {
+                            Debug.LogError("boxSpawner is null in pair.boxSpawners");
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.LogError("pair.boxSpawners is null");
+                }
+
+                if (pair.boxSpawnersNoHP != null)
+                {
+                    foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
+                    {
+                        if (boxSpawnerNoHP != null)
+                        {
+                            Debug.Log("Activating BoxSpawnerNoHP at teleport index: " + teleportIndex);
+                            boxSpawnerNoHP.StartCoroutine(boxSpawnerNoHP.SpawnCube());
+                        }
+                        else
+                        {
+                            Debug.LogError("boxSpawnerNoHP is null in pair.boxSpawnersNoHP");
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.LogError("pair.boxSpawnersNoHP is null");
                 }
             }
         }
@@ -299,15 +292,12 @@ public class HeartHealth : MonoBehaviour
 
     public Transform getCurrentTeleportPoint()
     {
-        // Assurez-vous que lastTeleportIndex est valide
         if (lastTeleportIndex >= 0 && lastTeleportIndex < teleportPositions.Length)
         {
-            // Renvoie le transform du point de téléportation correspondant
             return teleportPositions[lastTeleportIndex];
         }
         else
         {
-            // S'il n'y a pas de dernier index de téléportation valide, renvoie null
             return null;
         }
     }

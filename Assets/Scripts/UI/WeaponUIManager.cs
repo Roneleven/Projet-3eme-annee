@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 public class WeaponUIManager : MonoBehaviour
 {
@@ -8,21 +9,23 @@ public class WeaponUIManager : MonoBehaviour
     public Image explosiveIcon;
     public Image laserIcon;
 
-    public Sprite normalWeaponActive;
-    public Sprite explosiveWeaponActive;
-    public Sprite laserWeaponActive;
+    public Sprite normalWeaponActive; // Sprite pour l'icône active du mode Normal
+    public Sprite explosiveWeaponActive; // Sprite pour l'icône active du mode Explosive
+    public Sprite laserWeaponActive; // Sprite pour l'icône active du mode Laser
 
     public Image weaponImage; // Image de l'arme à droite
-    public Sprite weaponOverheatImage; // Image pour l'overheat
     public Sprite normalWeaponImage; // Image normale de l'arme
+    public Sprite explosiveWeaponImage; // Image pour l'arme explosive
+    public Sprite laserWeaponImage; // Image pour l'arme laser
 
     private Weapon weapon;
 
-    private Sprite normalWeaponInactive;
-    private Sprite explosiveWeaponInactive;
-    private Sprite laserWeaponInactive;
+    private Sprite normalWeaponInactive; // Sprite pour l'icône inactive du mode Normal
+    private Sprite explosiveWeaponInactive; // Sprite pour l'icône inactive du mode Explosive
+    private Sprite laserWeaponInactive; // Sprite pour l'icône inactive du mode Laser
 
     private bool isBlinking = false;
+    public TMP_Text laserCooldownText;
 
     private void Start()
     {
@@ -35,6 +38,9 @@ public class WeaponUIManager : MonoBehaviour
 
         // Définir l'image par défaut de l'arme
         weaponImage.sprite = normalWeaponImage;
+        Debug.Log("Normal Weapon Image: " + (normalWeaponImage != null));
+        Debug.Log("Explosive Weapon Image: " + (explosiveWeaponImage != null));
+        Debug.Log("Laser Weapon Image: " + (laserWeaponImage != null));
     }
 
     private void Update()
@@ -60,21 +66,35 @@ public class WeaponUIManager : MonoBehaviour
             case FireMode.Normal:
                 normalIcon.sprite = normalWeaponActive;
                 SetIconOpacity(normalIcon, 1f);
+                weaponImage.sprite = normalWeaponImage; // Définir l'image de l'arme pour le mode Normal
                 break;
             case FireMode.Explosive:
                 explosiveIcon.sprite = explosiveWeaponActive;
                 SetIconOpacity(explosiveIcon, 1f);
+                weaponImage.sprite = explosiveWeaponImage; // Définir l'image de l'arme pour le mode Explosive
                 break;
             case FireMode.Laser:
                 laserIcon.sprite = laserWeaponActive;
                 SetIconOpacity(laserIcon, 1f);
+                weaponImage.sprite = laserWeaponImage; // Définir l'image de l'arme pour le mode Laser
                 break;
         }
 
-        // Si pas en surchauffe, définir l'image de l'arme normale
+        // Si pas en surchauffe, définir l'image de l'arme normale (pour réinitialiser après une surchauffe)
         if (!isBlinking)
         {
-            weaponImage.sprite = normalWeaponImage;
+            switch (weapon.currentMode)
+            {
+                case FireMode.Normal:
+                    weaponImage.sprite = normalWeaponImage;
+                    break;
+                case FireMode.Explosive:
+                    weaponImage.sprite = explosiveWeaponImage;
+                    break;
+                case FireMode.Laser:
+                    weaponImage.sprite = laserWeaponImage;
+                    break;
+            }
         }
     }
 
@@ -96,7 +116,19 @@ public class WeaponUIManager : MonoBehaviour
             StopCoroutine(BlinkWeaponImageSmooth());
             isBlinking = false;
             SetIconOpacity(weaponImage, 1f); // Réinitialiser l'opacité à 1 quand pas en surchauffe
-            weaponImage.sprite = normalWeaponImage; // Réinitialiser à l'image de l'arme normale
+            // Réinitialiser l'image de l'arme en fonction du mode actuel
+            switch (weapon.currentMode)
+            {
+                case FireMode.Normal:
+                    weaponImage.sprite = normalWeaponImage;
+                    break;
+                case FireMode.Explosive:
+                    weaponImage.sprite = explosiveWeaponImage;
+                    break;
+                case FireMode.Laser:
+                    weaponImage.sprite = laserWeaponImage;
+                    break;
+            }
         }
     }
 
@@ -104,7 +136,6 @@ public class WeaponUIManager : MonoBehaviour
     {
         isBlinking = true;
         float duration = 0.5f;
-        weaponImage.sprite = weaponOverheatImage; // Définir l'image de surchauffe
         while (weapon.overheated)
         {
             // Atténuer
@@ -127,4 +158,26 @@ public class WeaponUIManager : MonoBehaviour
         }
         SetIconOpacity(weaponImage, endOpacity);
     }
+
+    public void DisplayLaserCooldownText(float cooldownDuration)
+    {
+        StartCoroutine(ShowCooldownText(cooldownDuration));
+    }
+
+    private IEnumerator ShowCooldownText(float cooldownDuration)
+    {
+        laserCooldownText.gameObject.SetActive(true);
+        laserCooldownText.text = Mathf.Ceil(cooldownDuration).ToString(); 
+
+        float elapsedTime = 0f;
+        while (elapsedTime < cooldownDuration)
+        {
+            yield return null;
+            elapsedTime += Time.deltaTime;
+            laserCooldownText.text = Mathf.Ceil(cooldownDuration - elapsedTime).ToString(); 
+        }
+
+        laserCooldownText.gameObject.SetActive(false);
+    }
+
 }

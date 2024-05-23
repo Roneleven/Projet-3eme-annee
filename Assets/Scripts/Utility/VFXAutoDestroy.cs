@@ -5,9 +5,9 @@ using System.Collections;
 public class VFXAutoDestroy : MonoBehaviour
 {
     private VisualEffect vfx;
-    public float initialDelay = 0.1f; // Delay before starting to check for destruction
-    public float checkInterval = 0.1f; // Interval between checks
-    public float extraDelay = 0.1f; // Additional delay to ensure particles are completely finished
+    public float initialDelay = 0.2f; // Delay before starting to check for destruction
+    public float checkInterval = 0.2f; // Interval between checks
+    public float extraDelay = 0.2f; // Additional delay to ensure particles are completely finished
 
     private void Awake()
     {
@@ -36,13 +36,26 @@ public class VFXAutoDestroy : MonoBehaviour
                 // Double-check if the particle count is still zero after the extra delay
                 if (vfx.aliveParticleCount == 0)
                 {
-                    Destroy(gameObject);
-                    yield break;
+                    // Add a final check to ensure the VFX has truly finished
+                    if (!vfx.HasAnyParticlesAlive())
+                    {
+                        Destroy(gameObject);
+                        yield break;
+                    }
                 }
             }
 
             // Wait for the check interval before the next check
             yield return new WaitForSeconds(checkInterval);
         }
+    }
+}
+
+public static class VisualEffectExtensions
+{
+    public static bool HasAnyParticlesAlive(this VisualEffect vfx)
+    {
+        // This function can be expanded if additional checks are needed
+        return vfx.aliveParticleCount > 0;
     }
 }

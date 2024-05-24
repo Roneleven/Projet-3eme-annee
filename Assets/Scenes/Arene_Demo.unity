@@ -22069,9 +22069,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 993472032}
     - target: {fileID: 6899634225175561795, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: targetMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 3bc77c7a8f741b84e8bb74f121b76b18, type: 2}
+    - target: {fileID: 6899634225175561795, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: timerFillImage
       value: 
       objectReference: {fileID: 632903520}
+    - target: {fileID: 6899634225175561795, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: materialToAdjust
+      value: 
+      objectReference: {fileID: 2100000, guid: 3bc77c7a8f741b84e8bb74f121b76b18, type: 2}
     - target: {fileID: 8372236347979211609, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: losange
       value: 

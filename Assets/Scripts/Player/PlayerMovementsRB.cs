@@ -183,6 +183,8 @@ public class PlayerMovementsRB : MonoBehaviour
             FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Grounded");
             isGroundedSoundPlayed = true;
         }
+        
+        PlayFootsteps();
     }
 
     private void MovePlayer()
@@ -299,6 +301,14 @@ public class PlayerMovementsRB : MonoBehaviour
             {
                 cameraController.DropCamera();
             }
+        }
+    }
+
+    private void PlayFootsteps()
+    {
+        if (isGrounded && (movementX != 0 || movementY != 0))
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Footsteps");
         }
     }
 }

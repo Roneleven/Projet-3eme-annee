@@ -59,6 +59,7 @@ public class SuivreJoueur : MonoBehaviour
     {
         Vector3 repulsionDirection = (collision.transform.position - transform.position).normalized;
         GameObject heartObject = GameObject.FindGameObjectWithTag("Heart");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Patterns/Ghost");
 
         if (heartObject != null)
         {

@@ -189,8 +189,9 @@ public class Weapon : MonoBehaviour
                 chargingEffectInstance.gameObject.AddComponent<VFXAutoDestroy>();
             }
 
-            if (Input.GetMouseButton(0) && Time.time - chargeStartTime >= chargeTimeThreshold)
+            if (Input.GetMouseButtonDown(0) && currentExplosiveCharges <= 0)
             {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Guns/ExplosiveGun/0 Charge");
             }
 
             if (Input.GetMouseButtonUp(0) && Time.time - chargeStartTime >= chargeTimeThreshold && currentExplosiveCharges > 0)
@@ -216,7 +217,7 @@ public class Weapon : MonoBehaviour
 
                     // Play the particle system
                     explosiveTrailVFX.Play();
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Guns/BasicGun/Shoot");
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Guns/ExplosiveGun/Shoot 2");
                 }
             }
 

@@ -72,6 +72,7 @@ public class Player : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Behaviours/Hit");
 
         if (_vignette != null)
         {

@@ -22644,7 +22644,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ea33ea2a516429a45be93e7ed1e9a400, type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 113216390190002751, guid: 9ded535dd6174ee428a1de07b12073c2, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ded535dd6174ee428a1de07b12073c2, type: 3}
@@ -93768,6 +93769,14 @@ PrefabInstance:
     - target: {fileID: 3433612360395097092, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_RendererIndex
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4410968295794841529, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: vignetteFadeSpeed
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4410968295794841529, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: vignetteIntensity
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 6518649123472393457, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_LocalPosition.x

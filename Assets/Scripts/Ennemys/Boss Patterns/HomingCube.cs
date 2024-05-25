@@ -39,22 +39,24 @@ public class HomingCube : MonoBehaviour
 
     private void CheckDestroyAndMerge()
     {
-        HomingCube[] allCubes = FindObjectsOfType<HomingCube>(); // Récupérer tous les losanges dans la scène
+        HomingCube[] allCubes = FindObjectsOfType<HomingCube>();
         foreach (HomingCube cube in allCubes)
         {
-            if (cube != this) // Éviter de comparer le même cube
+            if (cube != this)
             {
                 float distance = Vector3.Distance(transform.position, cube.transform.position);
                 if (distance < destroyDistance)
                 {
                     if (speed >= cube.speed)
                     {
-                        speed += cube.speed; // Ajouter la vitesse du cube détruit à la vitesse du cube restant
+                        speed += cube.speed;
+                        speed /= 1.2f;
                         Destroy(cube.gameObject);
                     }
                     else
                     {
-                        cube.speed += speed; // Ajouter la vitesse du cube restant à la vitesse du cube détruit
+                        cube.speed += speed;
+                        cube.speed /= 1.2f;
                         Destroy(gameObject);
                     }
                 }

@@ -21881,6 +21881,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1656210228620440249, guid: b1566a96e6a00064a82712476b02785a, type: 3}
     - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
+      propertyPath: urpRendererData
+      value: 
+      objectReference: {fileID: 11400000, guid: ea33ea2a516429a45be93e7ed1e9a400, type: 2}
+    - target: {fileID: 3557180172256735928, guid: d643c2fe60097ab448f67bf1d6c60811, type: 3}
       propertyPath: HeartHitSpawnPoint
       value: 
       objectReference: {fileID: 560476175}
@@ -22137,6 +22141,10 @@ PrefabInstance:
       propertyPath: laserRange
       value: 10000
       objectReference: {fileID: 0}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: xRayFeature
+      value: 
+      objectReference: {fileID: -7334044143411725834, guid: ea33ea2a516429a45be93e7ed1e9a400, type: 2}
     - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: Recoil_Script
       value: 
@@ -22631,6 +22639,10 @@ PrefabInstance:
       propertyPath: trueHeart
       value: 
       objectReference: {fileID: 834397609}
+    - target: {fileID: 8452553787884289748, guid: 9ded535dd6174ee428a1de07b12073c2, type: 3}
+      propertyPath: urpRendererData
+      value: 
+      objectReference: {fileID: 11400000, guid: ea33ea2a516429a45be93e7ed1e9a400, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -93803,6 +93815,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7204344585063069495, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838506839882909147, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8120114340350589417, guid: b4b0a53eea71bd749b4fd9e66b23f970, type: 3}

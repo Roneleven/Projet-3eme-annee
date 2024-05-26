@@ -79,7 +79,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 113216390190002751}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 3672458320004308592}
   - component: {fileID: 6157199768885211953}
   - component: {fileID: 4905110009106583516}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CORE_V3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ MonoBehaviour:
   maxPalier: 6
   timeNextPalier: 500
   timeSincePalierStart: 0
-  coconvfx: {fileID: 0}
+  coconvfx: {fileID: 113216390190002751}
   timerFillImage: {fileID: 0}
   timer: 90
   defaultTimer: 90
@@ -318,13 +318,26 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  teleportPointBoxSpawnerPairs: []
+  teleportPointBoxSpawnerPairs:
+  - teleportPointIndex: 0
+    boxSpawners:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    boxSpawnersNoHP: []
   parent: {fileID: 8374639144287423287}
   eyeRadius: {fileID: 7289005239915659131}
   moveSpeed: 0.8
-  HeartHit: {fileID: 0}
-  HeartHitSpawnPoint: {fileID: 0}
+  HeartHit: {fileID: 1656210228620440249, guid: b1566a96e6a00064a82712476b02785a, type: 3}
+  HeartHitSpawnPoint: {fileID: 3934878839238042672}
+  urpRendererData: {fileID: 11400000, guid: ea33ea2a516429a45be93e7ed1e9a400, type: 2}
   accessibleTeleportPoints: 
 --- !u!114 &8454365674171955205
 MonoBehaviour:
@@ -338,13 +351,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71bf244ec5768f04ebb65096ee4d1b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 50
+  detectionRadius:
+  - 0
+  - 30
+  - 40
+  - 50
+  - 60
   timer: 0
   patternActive: 0
   paliers:
   - patterns: 
-  - patterns: 01000000
-  - patterns: 0300000001000000
+  - patterns: 00000000
+  - patterns: 0100000000000000
   - patterns: 0600000004000000
   - patterns: 05000000
   - patterns: 020000000400000005000000
@@ -386,7 +404,7 @@ MonoBehaviour:
   destroyDelay: 5
   cubeTimer: 5
   targetTransform: {fileID: 0}
-  losange: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
+  losange: {fileID: 5213527703166270280, guid: 72cfc522981e85b4093f97763bb3500a, type: 3}
 --- !u!114 &6587116827550596133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8bd4b67db1abb94385287ecc6cf365a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emptyPrefab: {fileID: 1413787942626273727, guid: 2c182cace24434a458c6378810dbff50, type: 3}
+  emptyPrefab: {fileID: 1413787942626273727, guid: 99e5ed7a289a0d34db49ec59023e746c, type: 3}
   spawnRadius: 15
 --- !u!114 &3672458320004308592
 MonoBehaviour:
@@ -444,8 +462,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubePrefab: {fileID: 1230891745418371966, guid: 84298ffa45b86bd44a293d38649bea51, type: 3}
-  numberOfCubes: 25
-  radius: 10
+  numberOfCubes: 20
+  radius: 5
   journeyDuration: 40
 --- !u!114 &6157199768885211953
 MonoBehaviour:
@@ -526,7 +544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5464548926497106743
 Transform:
   m_ObjectHideFlags: 0

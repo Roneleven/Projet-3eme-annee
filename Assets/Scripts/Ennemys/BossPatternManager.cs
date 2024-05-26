@@ -15,7 +15,7 @@ public class BossPatternManager : MonoBehaviour
     private GatlinLauncherPattern gatlinLauncherPattern;
 
     private bool playerInTrigger = false;
-    public float detectionRadius = 30f; // Rayon de détection du joueur
+    public float[] detectionRadius; // Rayon de détection du joueur
     public float timer = 0f; // Temps écoulé depuis le début de la détection
     public bool patternActive = false;
 
@@ -59,7 +59,7 @@ public class BossPatternManager : MonoBehaviour
     private void Update()
     {
         // Vérifiez si le joueur est dans le rayon de détection et qu'aucun modèle n'est déjà actif
-        if (!patternActive && Vector3.Distance(heartSpawner.playerPosition, transform.position) < detectionRadius)
+        if (!patternActive && Vector3.Distance(heartSpawner.playerPosition, transform.position) < detectionRadius[heartSpawner.currentPalier])
         {
             // Incrémentation du timer
             timer += Time.deltaTime;
@@ -177,6 +177,6 @@ public class BossPatternManager : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        Gizmos.DrawWireSphere(transform.position, detectionRadius[heartSpawner.currentPalier]);
     }
 }

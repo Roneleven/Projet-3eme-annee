@@ -59,6 +59,7 @@ public class Weapon : MonoBehaviour
     private Vector3 _startPosition;
     private Quaternion _startRotation;
     public Recoil Recoil_Script;
+    private float originalSpeed;
 
 
     [Header("Explosive Mode")]
@@ -153,6 +154,15 @@ public class Weapon : MonoBehaviour
             _scoping = Input.GetMouseButton(1);
             transform.localRotation = Quaternion.identity;
             transform.localPosition = Vector3.Lerp(transform.localPosition, _scoping ? scopePos : Vector3.zero, resetSmooth * Time.deltaTime);
+        }
+
+        if (_scoping)
+        {
+            playerMovementsRB.speed = originalSpeed * 0.5f;
+        }
+        else
+        {
+            playerMovementsRB.speed = originalSpeed;
         }
 
         //tir clique gauche normal
@@ -489,6 +499,11 @@ public class Weapon : MonoBehaviour
 
     public void Pickup(Transform weaponHolder, Transform playerCamera)
     {
+        if (playerMovementsRB != null)
+        {
+            originalSpeed = playerMovementsRB.speed;
+        }
+
         if (_held) return;
         Destroy(_rb);
         _time = 0f;

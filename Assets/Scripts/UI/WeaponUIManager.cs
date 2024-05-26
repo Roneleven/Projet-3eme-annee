@@ -38,9 +38,6 @@ public class WeaponUIManager : MonoBehaviour
 
         // Définir l'image par défaut de l'arme
         weaponImage.sprite = normalWeaponImage;
-        Debug.Log("Normal Weapon Image: " + (normalWeaponImage != null));
-        Debug.Log("Explosive Weapon Image: " + (explosiveWeaponImage != null));
-        Debug.Log("Laser Weapon Image: " + (laserWeaponImage != null));
     }
 
     private void Update()

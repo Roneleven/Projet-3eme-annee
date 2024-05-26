@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -29,17 +31,30 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    void ResumeGame()
+    public void ResumeGame()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         CanvasPause.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
     }
 
-    void PauseGame()
+    public void PauseGame()
     {
+        Cursor.lockState = CursorLockMode.None;
         CanvasPause.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
     }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("Arene_Demo");
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
 }

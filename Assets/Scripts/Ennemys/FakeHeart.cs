@@ -16,7 +16,8 @@ public class FakeHeart : MonoBehaviour
     public GameObject trueHeart;
     public UniversalRendererData urpRendererData;
     private ScriptableRendererFeature xRayFeature;
-    
+    public Animator doorAnimator;
+
     void Start()
     {
         xRayFeature = urpRendererData.rendererFeatures.Find(feature => feature.name == "xRay");
@@ -34,12 +35,16 @@ public class FakeHeart : MonoBehaviour
 
         if (health <= 0)
         {
+            if (doorAnimator != null)
+            {
+                doorAnimator.Play("DoorOpening");
+            }
             Idle.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Teleport");
             Idle.start();
             trueHeart.SetActive(true);
             xRayFeature.SetActive(false);
-            Destroy(parentHeart);
+            Destroy(parentHeart);       
         }
     }
 

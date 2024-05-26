@@ -16,6 +16,7 @@ public class HeartHealth : MonoBehaviour
 {
     public int maxHealth;
     public int health;
+    private bool hasBeenDestroyed = false;
     public float destroySpeed;
     public Transform[] teleportPositions;
     private int currentTeleportIndex = 0;
@@ -28,6 +29,7 @@ public class HeartHealth : MonoBehaviour
     public GameObject eyeRadius;
     public float moveSpeed = 5f;
     private Vector3 targetPosition;
+    public Animator doorAnimator;
 
     public VisualEffect HeartHit;
     public Transform HeartHitSpawnPoint;
@@ -106,13 +108,16 @@ public class HeartHealth : MonoBehaviour
         HeartHitInstance.gameObject.AddComponent<VFXAutoDestroy>();
         StartCoroutine(ActivateXRay());
 
-        if (health <= 0)
+        if (health <= 0 && !hasBeenDestroyed) // Vérifie si l'objet n'a pas déjà été détruit
         {
+            hasBeenDestroyed = true;
+            doorAnimator.Play("DoorOpening");
             Idle.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             TeleportHeart();
             TeleportEyeRadius(transform.position);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Teleport");
             Idle.start();
+
         }
     }
 

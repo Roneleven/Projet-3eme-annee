@@ -11,20 +11,12 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            if (isOpen)
-            {
-                Door.Play("DoorOpening");
-                gameObject.SetActive(false);
-            }
-            else if (isClosed)
+        if (isClosed)
             {
                 Door.Play("DoorClose");
                 gameObject.SetActive(false);
             }
-        }
-
-        Destroy(unlinkedBoxSpawnersToRemove);
+            Destroy(unlinkedBoxSpawnersToRemove);
     }
 }
+

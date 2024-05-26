@@ -1435,7 +1435,7 @@ GameObject:
   - component: {fileID: 5752175847148644080}
   - component: {fileID: 4133060802409683188}
   m_Layer: 0
-  m_Name: Cube (3)
+  m_Name: DoorObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2303,6 +2303,7 @@ MonoBehaviour:
   Door: {fileID: 4133060802409683188}
   isOpen: 0
   isClosed: 1
+  unlinkedBoxSpawnersToRemove: {fileID: 0}
 --- !u!1 &8150193647909049378
 GameObject:
   m_ObjectHideFlags: 0
@@ -3025,3 +3026,4 @@ MonoBehaviour:
   Door: {fileID: 4133060802409683188}
   isOpen: 1
   isClosed: 0
+  unlinkedBoxSpawnersToRemove: {fileID: 0}

@@ -26,7 +26,6 @@ public class HeartSpawner : MonoBehaviour
     public float temporarySpawnInterval;//le spawninterval pendant le changement de palier
     public float timeTemporaryPalier; //la durée du changement de palier
     public int maxPalier = 10;
-    public float timeNextPalier;
     public float timeSincePalierStart = 0f;
     public delegate void PalierChangeAction(int newPalier);
     public event PalierChangeAction OnPalierChange;
@@ -77,15 +76,6 @@ public class HeartSpawner : MonoBehaviour
     public GatlinLauncherPattern gatlinLauncherPattern;
 
     public BossPatternManager bossPatternManager;
-    //creer une classeliste de palier (donc 10), faire une boucle dans le start pour un new palier et inserer dans la liste
-    //car la liste creer pas les objets tous seul, il faut en gros l'initialisé, en faite mettre en public
-    //classe palier system seriazable, dans cette classe liste de pattern
-    //creer enum de pattern (tous les pattern disponible) commec a palier font ref à x éléments de cet énum
-    //switchcurrentpalier etc la fonction, prendre la liste de palier, indexer avec current palier, pour recup le palier et faire .pattern pour avoir la liste des patterns
-    //on choisis un au hasard par exemple, une fois choisis on fait un switch qui va ressembler a ce que j'avais en un peu moins lourd
-    // case bigwall,case cubelauncher etc si on est dans le case cubetracking on startcoroutine cubetracking, et c'est déclencher en fonction du palier ou on est
-    //dans hearthealth mettre une list de pattern pour les exclusions, scrap la data et le code sera dans switch to next pattern en gros, c'est elle qui lance les pattern et recupere tout. random ou algo pour choisir qui appelle la bonne coroutine
-
 
     private void Start()
     {
@@ -139,10 +129,6 @@ public class HeartSpawner : MonoBehaviour
 
         // Condition pour déclencher le changement de palier automatique
         timeSincePalierStart += Time.deltaTime;
-        if (timeSincePalierStart >= timeNextPalier)
-        {
-            StartCoroutine(ChangePalierAutomatically());
-        }
 
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
@@ -387,34 +373,6 @@ public class HeartSpawner : MonoBehaviour
         if (OnPalierChange != null)
         {
             OnPalierChange(palier);
-        }
-    }
-
-
-    private IEnumerator ChangePalierAutomatically()
-    {
-        if (currentPalier < maxPalier)
-        {
-            currentPalier++;
-            OnCurrentPalierChanged();
-
-            AdjustPalierValues(currentPalier);
-
-            // Réinitialiser le temps pour le nouveau palier
-            timeSincePalierStart = 0f;
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/AutoLevelUp");
-
-            // Attendre avant de déclencher à nouveau le changement automatique (30 secondes)
-            yield return new WaitForSeconds(timeNextPalier);
-
-            // Appeler récursivement la fonction pour le palier suivant
-            StartCoroutine(ChangePalierAutomatically());
-        }
-        else
-        {
-            // Si nous avons atteint le dernier palier, activer le chronomètre pour le timeout
-            timerActive = true;
-            Invoke("TimeOut", timer);
         }
     }
 

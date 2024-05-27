@@ -66,6 +66,7 @@ public class Weapon : MonoBehaviour
     public int explosiveDamage;
     public float explosiveRange;
     public float explosionRadius;
+    public float kickbackForceExplosive;
     public GameObject explosionPrefab;
     public int maxExplosiveCharges = 5;
     public int currentExplosiveCharges = 5;
@@ -582,6 +583,8 @@ public class Weapon : MonoBehaviour
     #region MODE EXPLOSIVE
     private void ExplosiveShoot()
     {
+        transform.localPosition -= new Vector3(0, 0, kickbackForceExplosive);
+
         if (currentMode == FireMode.Explosive && currentExplosiveCharges > 0)
         {
             RaycastHit hit;

@@ -9,7 +9,7 @@ public enum FireMode
 {
     Normal,
     Explosive,
-    Laser
+    //Laser
 }
 public class Weapon : MonoBehaviour
 {
@@ -60,6 +60,7 @@ public class Weapon : MonoBehaviour
     private Quaternion _startRotation;
     public Recoil Recoil_Script;
     private float originalSpeed;
+    public PlayerMovementsRB playerMovementsRB;
 
 
     [Header("Explosive Mode")]
@@ -76,7 +77,7 @@ public class Weapon : MonoBehaviour
     private int destroyedCubeCount = 0;
     public int cubesToDestroyToGainACharge = 5;
 
-    [Header("Laser Mode")]
+    /*[Header("Laser Mode")]
     public float laserCooldown = 1f;
     public float laserDuration = 1f;
     public float laserWidth = 3f;
@@ -84,10 +85,10 @@ public class Weapon : MonoBehaviour
     private bool canShootLaser = true;
     public GameObject laserVFX;
     public GameObject laserSpawnPoint;
-    public PlayerMovementsRB playerMovementsRB;
+    
     public MouseLook mouseLookScript;
     private bool isChargingLaser = false;
-    private bool isLaserActive = false;
+    private bool isLaserActive = false;*/
 
     [Header("Heat Settings")]
     public float heatPerShot;
@@ -135,7 +136,7 @@ public class Weapon : MonoBehaviour
         Recoil_Script = transform.Find("FPS Player Gun Rework/CameraRot/CameraRecoil").GetComponent<Recoil>();
         currentExplosiveCharges = maxExplosiveCharges;
         currentMode = FireMode.Normal;
-        mouseLookScript = playerMovementsRB.GetComponentInChildren<MouseLook>();
+        //mouseLookScript = playerMovementsRB.GetComponentInChildren<MouseLook>();
     }
 
     private void Update()
@@ -183,10 +184,10 @@ public class Weapon : MonoBehaviour
         {
             SwitchToExplosiveMode();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        /*else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             SwitchToLaserMode();
-        }
+        }*/
 
         //tir clique gauche explosive
 
@@ -259,10 +260,10 @@ public class Weapon : MonoBehaviour
 
         //LASER
 
-        if (Input.GetMouseButton(0) && currentMode == FireMode.Laser && canShootLaser)
+       /* if (Input.GetMouseButton(0) && currentMode == FireMode.Laser && canShootLaser)
         {
             StartChargingLaser();
-        }
+        }*/
 
         if (!overheated && !_shooting)
         {
@@ -545,11 +546,11 @@ public class Weapon : MonoBehaviour
         ChangeMaterial(currentMode);
     }
 
-    private void SwitchToLaserMode()
+    /*private void SwitchToLaserMode()
     {
         currentMode = FireMode.Laser;
         ChangeMaterial(currentMode);
-    }
+    }*/
 
     private void ChangeMaterial(FireMode mode)
     {
@@ -563,9 +564,9 @@ public class Weapon : MonoBehaviour
             case FireMode.Explosive:
                 newMaterial = explosiveModeMaterial;
                 break;
-            case FireMode.Laser:
+           /* case FireMode.Laser:
                 newMaterial = laserModeMaterial;
-                break;
+                break;*/
         }
 
         if (weaponModel != null && newMaterial != null)
@@ -619,7 +620,7 @@ public class Weapon : MonoBehaviour
     }
     #endregion
 
-    #region MODE LASER
+   /* #region MODE LASER
 
     private void StartChargingLaser()
     {
@@ -733,5 +734,7 @@ public class Weapon : MonoBehaviour
 
 
     #endregion
+   */
     public bool Scoping => _scoping;
+    
 }

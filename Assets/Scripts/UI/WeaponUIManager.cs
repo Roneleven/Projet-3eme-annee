@@ -13,10 +13,9 @@ public class WeaponUIManager : MonoBehaviour
     public Sprite explosiveWeaponActive; // Sprite pour l'icône active du mode Explosive
     public Sprite laserWeaponActive; // Sprite pour l'icône active du mode Laser
 
-    public Image weaponImage; // Image de l'arme à droite
-    public Sprite normalWeaponImage; // Image normale de l'arme
-    public Sprite explosiveWeaponImage; // Image pour l'arme explosive
-    public Sprite laserWeaponImage; // Image pour l'arme laser
+    public Image normalWeaponImage; // Image normale de l'arme
+    public Image explosiveWeaponImage; // Image pour l'arme explosive
+    public Image laserWeaponImage; // Image pour l'arme laser
 
     private Weapon weapon;
 
@@ -36,8 +35,13 @@ public class WeaponUIManager : MonoBehaviour
         explosiveWeaponInactive = explosiveIcon.sprite;
         laserWeaponInactive = laserIcon.sprite;
 
-        // Définir l'image par défaut de l'arme
-        weaponImage.sprite = normalWeaponImage;
+        // Masquer toutes les images de l'arme au départ
+        normalWeaponImage.gameObject.SetActive(false);
+        explosiveWeaponImage.gameObject.SetActive(false);
+        laserWeaponImage.gameObject.SetActive(false);
+
+        // Afficher l'image de l'arme par défaut
+        normalWeaponImage.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -49,31 +53,59 @@ public class WeaponUIManager : MonoBehaviour
     private void UpdateIcons()
     {
         // Réinitialiser les icônes aux images inactives et définir l'opacité à moitié
-        normalIcon.sprite = normalWeaponInactive;
-        explosiveIcon.sprite = explosiveWeaponInactive;
-        laserIcon.sprite = laserWeaponInactive;
+        if (normalIcon != null)
+        {
+            normalIcon.sprite = normalWeaponInactive;
+            SetIconOpacity(normalIcon, 0.5f);
+        }
+        if (explosiveIcon != null)
+        {
+            explosiveIcon.sprite = explosiveWeaponInactive;
+            SetIconOpacity(explosiveIcon, 0.5f);
+        }
+        if (laserIcon != null)
+        {
+            laserIcon.sprite = laserWeaponInactive;
+            SetIconOpacity(laserIcon, 0.5f);
+        }
 
-        SetIconOpacity(normalIcon, 0.5f);
-        SetIconOpacity(explosiveIcon, 0.5f);
-        SetIconOpacity(laserIcon, 0.5f);
+        // Masquer toutes les images d'arme au début
+        if (normalWeaponImage != null)
+            normalWeaponImage.gameObject.SetActive(false);
+        if (explosiveWeaponImage != null)
+            explosiveWeaponImage.gameObject.SetActive(false);
+        if (laserWeaponImage != null)
+            laserWeaponImage.gameObject.SetActive(false);
 
         // Mettre en évidence l'icône du mode actuel et changer le sprite en image active
         switch (weapon.currentMode)
         {
             case FireMode.Normal:
-                normalIcon.sprite = normalWeaponActive;
-                SetIconOpacity(normalIcon, 1f);
-                weaponImage.sprite = normalWeaponImage; // Définir l'image de l'arme pour le mode Normal
+                if (normalIcon != null)
+                {
+                    normalIcon.sprite = normalWeaponActive;
+                    SetIconOpacity(normalIcon, 1f);
+                }
+                if (normalWeaponImage != null)
+                    normalWeaponImage.gameObject.SetActive(true); // Afficher l'image de l'arme pour le mode Normal
                 break;
             case FireMode.Explosive:
-                explosiveIcon.sprite = explosiveWeaponActive;
-                SetIconOpacity(explosiveIcon, 1f);
-                weaponImage.sprite = explosiveWeaponImage; // Définir l'image de l'arme pour le mode Explosive
+                if (explosiveIcon != null)
+                {
+                    explosiveIcon.sprite = explosiveWeaponActive;
+                    SetIconOpacity(explosiveIcon, 1f);
+                }
+                if (explosiveWeaponImage != null)
+                    explosiveWeaponImage.gameObject.SetActive(true); // Afficher l'image de l'arme pour le mode Explosive
                 break;
             case FireMode.Laser:
-                laserIcon.sprite = laserWeaponActive;
-                SetIconOpacity(laserIcon, 1f);
-                weaponImage.sprite = laserWeaponImage; // Définir l'image de l'arme pour le mode Laser
+                if (laserIcon != null)
+                {
+                    laserIcon.sprite = laserWeaponActive;
+                    SetIconOpacity(laserIcon, 1f);
+                }
+                if (laserWeaponImage != null)
+                    laserWeaponImage.gameObject.SetActive(true); // Afficher l'image de l'arme pour le mode Laser
                 break;
         }
 
@@ -83,13 +115,16 @@ public class WeaponUIManager : MonoBehaviour
             switch (weapon.currentMode)
             {
                 case FireMode.Normal:
-                    weaponImage.sprite = normalWeaponImage;
+                    if (normalWeaponImage != null)
+                        normalWeaponImage.gameObject.SetActive(true);
                     break;
                 case FireMode.Explosive:
-                    weaponImage.sprite = explosiveWeaponImage;
+                    if (explosiveWeaponImage != null)
+                        explosiveWeaponImage.gameObject.SetActive(true);
                     break;
                 case FireMode.Laser:
-                    weaponImage.sprite = laserWeaponImage;
+                    if (laserWeaponImage != null)
+                        laserWeaponImage.gameObject.SetActive(true);
                     break;
             }
         }
@@ -112,21 +147,29 @@ public class WeaponUIManager : MonoBehaviour
         {
             StopCoroutine(BlinkWeaponImageSmooth());
             isBlinking = false;
-            SetIconOpacity(weaponImage, 1f); // Réinitialiser l'opacité à 1 quand pas en surchauffe
+            ResetWeaponImagesOpacity();
+
             // Réinitialiser l'image de l'arme en fonction du mode actuel
             switch (weapon.currentMode)
             {
                 case FireMode.Normal:
-                    weaponImage.sprite = normalWeaponImage;
+                    normalWeaponImage.gameObject.SetActive(true);
                     break;
                 case FireMode.Explosive:
-                    weaponImage.sprite = explosiveWeaponImage;
+                    explosiveWeaponImage.gameObject.SetActive(true);
                     break;
                 case FireMode.Laser:
-                    weaponImage.sprite = laserWeaponImage;
+                    laserWeaponImage.gameObject.SetActive(true);
                     break;
             }
         }
+    }
+
+    private void ResetWeaponImagesOpacity()
+    {
+        SetIconOpacity(normalWeaponImage, 1f);
+        SetIconOpacity(explosiveWeaponImage, 1f);
+        SetIconOpacity(laserWeaponImage, 1f);
     }
 
     private IEnumerator BlinkWeaponImageSmooth()
@@ -150,10 +193,10 @@ public class WeaponUIManager : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             float newOpacity = Mathf.Lerp(startOpacity, endOpacity, elapsed / duration);
-            SetIconOpacity(weaponImage, newOpacity);
+            SetIconOpacity(normalWeaponImage, newOpacity);
             yield return null;
         }
-        SetIconOpacity(weaponImage, endOpacity);
+        SetIconOpacity(normalWeaponImage, endOpacity);
     }
 
     public void DisplayLaserCooldownText(float cooldownDuration)
@@ -164,17 +207,16 @@ public class WeaponUIManager : MonoBehaviour
     private IEnumerator ShowCooldownText(float cooldownDuration)
     {
         laserCooldownText.gameObject.SetActive(true);
-        laserCooldownText.text = Mathf.Ceil(cooldownDuration).ToString(); 
+        laserCooldownText.text = Mathf.Ceil(cooldownDuration).ToString();
 
         float elapsedTime = 0f;
         while (elapsedTime < cooldownDuration)
         {
             yield return null;
             elapsedTime += Time.deltaTime;
-            laserCooldownText.text = Mathf.Ceil(cooldownDuration - elapsedTime).ToString(); 
+            laserCooldownText.text = Mathf.Ceil(cooldownDuration - elapsedTime).ToString();
         }
 
         laserCooldownText.gameObject.SetActive(false);
     }
-
 }

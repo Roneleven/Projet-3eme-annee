@@ -112,6 +112,13 @@ public class HeartHealth : MonoBehaviour
         {
             hasBeenDestroyed = true;
             doorAnimator.Play("DoorOpening");
+            
+
+        }
+
+        if (health <= 0) // Vérifie si l'objet n'a pas déjà été détruit
+        {
+           
             Idle.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             TeleportHeart();
             TeleportEyeRadius(transform.position);

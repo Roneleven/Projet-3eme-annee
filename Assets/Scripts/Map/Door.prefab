@@ -2300,9 +2300,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa16d7b606ec4684890eecce65223faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Door: {fileID: 4133060802409683188}
+  doorAnimators:
+  - {fileID: 4133060802409683188}
   isOpen: 0
-  isClosed: 1
   unlinkedBoxSpawnersToRemove: {fileID: 0}
 --- !u!1 &8150193647909049378
 GameObject:
@@ -3023,7 +3023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa16d7b606ec4684890eecce65223faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Door: {fileID: 4133060802409683188}
+  doorAnimators:
+  - {fileID: 4133060802409683188}
   isOpen: 1
-  isClosed: 0
   unlinkedBoxSpawnersToRemove: {fileID: 0}

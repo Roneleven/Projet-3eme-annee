@@ -133,6 +133,9 @@ public class Weapon : MonoBehaviour
     public Camera xRayCamera;
     public LayerMask normalViewMask;
     public LayerMask thermalViewMask;
+    public GameObject targetObject1;
+    public GameObject targetObject2;
+    public float angleMargin = 5f;
 
     private void Start()
     {
@@ -321,22 +324,51 @@ public class Weapon : MonoBehaviour
 
         UpdateHeatUI();
 
-        if (muzzleFlashInstance != null)
+        if (Input.GetMouseButton(1)) // Assumant que "Fire2" est le bouton pour viser
         {
-            muzzleFlashInstance.transform.position = muzzleFlashSpawnPoint.position;
-            muzzleFlashInstance.transform.rotation = muzzleFlashSpawnPoint.rotation;
+            if (IsLookingAtTarget())
+            {
+                mainCamera.cullingMask = thermalViewMask;
+                xRayCamera.enabled = true;
+            }
+            else
+            {
+                mainCamera.cullingMask = normalViewMask;
+                xRayCamera.enabled = false;
+            }
         }
-
-        if (Input.GetButtonDown("Fire2")) // Assumant que "Fire2" est le bouton pour viser
-        {
-            mainCamera.cullingMask = thermalViewMask;
-            xRayCamera.enabled = true;
-        }
-        else if (Input.GetButtonUp("Fire2"))
+        else if (Input.GetMouseButtonUp(1))
         {
             mainCamera.cullingMask = normalViewMask;
             xRayCamera.enabled = false;
         }
+    }
+
+    private bool IsLookingAtTarget()
+    {
+        if (targetObject1 == null && targetObject2 == null) return false;
+
+        if (targetObject1 != null)
+        {
+            Vector3 directionToTarget1 = targetObject1.transform.position - _playerCamera.position;
+            float angle1 = Vector3.Angle(_playerCamera.forward, directionToTarget1);
+            if (angle1 <= angleMargin)
+            {
+                return true;
+            }
+        }
+
+        if (targetObject2 != null)
+        {
+            Vector3 directionToTarget2 = targetObject2.transform.position - _playerCamera.position;
+            float angle2 = Vector3.Angle(_playerCamera.forward, directionToTarget2);
+            if (angle2 <= angleMargin)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void Shoot()

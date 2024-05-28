@@ -79,7 +79,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 113216390190002751}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -259,8 +259,8 @@ MonoBehaviour:
   timeSincePalierStart: 0
   coconvfx: {fileID: 113216390190002751}
   timerFillImage: {fileID: 0}
-  timer: 90
-  defaultTimer: 90
+  timer: 180
+  defaultTimer: 180
   timerText: {fileID: 0}
   blackFade: {fileID: 0}
   anim: {fileID: 0}
@@ -331,6 +331,32 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     boxSpawnersNoHP: []
+  - teleportPointIndex: 2
+    boxSpawners: []
+    boxSpawnersNoHP: []
+  - teleportPointIndex: 4
+    boxSpawners:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    boxSpawnersNoHP: []
+  - teleportPointIndex: 3
+    boxSpawners:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    boxSpawnersNoHP: []
   parent: {fileID: 8374639144287423287}
   eyeRadius: {fileID: 7289005239915659131}
   moveSpeed: 0.8
@@ -361,11 +387,11 @@ MonoBehaviour:
   patternActive: 0
   paliers:
   - patterns: 
-  - patterns: 00000000
-  - patterns: 0100000000000000
-  - patterns: 0600000004000000
-  - patterns: 05000000
-  - patterns: 020000000400000005000000
+  - patterns: 06000000
+  - patterns: 0400000006000000
+  - patterns: 0600000005000000
+  - patterns: 0500000006000000
+  - patterns: 020000000000000006000000
   nextPatternTimes:
   - 5000
   - 4
@@ -480,7 +506,7 @@ MonoBehaviour:
   sphereRadius: 2
   sphereHeightOffset: 15
   sphereMovementDuration: 0.5
-  launchForce: 0
+  launchForce: 50
   launchInterval: 0.25
   cubesToLaunch: 15
   heartSpawner: {fileID: 0}
@@ -627,7 +653,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5464548926497106743
 Transform:
   m_ObjectHideFlags: 0

@@ -31,6 +31,7 @@ public class HeartSpawner : MonoBehaviour
     public event PalierChangeAction OnPalierChange;
     public GameObject coconvfx;
     public Image timerFillImage;
+    private Player player;
 
     [Header("Timer/Reset Properties")]
     public float timer;
@@ -87,6 +88,7 @@ public class HeartSpawner : MonoBehaviour
         bossPatternManager = GetComponent<BossPatternManager>();
         heartHealth = GetComponent<HeartHealth>();
         warning = FMODUnity.RuntimeManager.CreateInstance("event:/Heart/Patterns/Cage_Warning");
+        player = FindObjectOfType<Player>();
 
         //dissolve = gameObject.GetComponent<Animation>();
 
@@ -277,8 +279,8 @@ public class HeartSpawner : MonoBehaviour
         if (heartHealth != null)
         {
             timer = defaultTimer;
-
-            float newLevelUpValue = (currentPalier + 1) * 1.0f;
+            
+            player.IncreaseLoomParameter();
 
             //timerActive = true;
             StartCoroutine(ResetPalier());
@@ -344,7 +346,6 @@ public class HeartSpawner : MonoBehaviour
 
     private void AdjustPalierValues(int palier)
     {
-        float levelUpIncrement = 1.0f;
 
         spawnRadius = palier * 4;
         UpdateCocon();
@@ -358,8 +359,6 @@ public class HeartSpawner : MonoBehaviour
             spawnCount = 6 + ((palier - 1) * 4);
 
         }
-
-        float newLevelUpValue = palier * levelUpIncrement;
 
         // Déclencher l'événement OnPalierChange avec le nouveau palier
         if (OnPalierChange != null)

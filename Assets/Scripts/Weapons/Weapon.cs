@@ -616,125 +616,128 @@ public class Weapon : MonoBehaviour
         {
             currentExplosiveCharges++;
             explosiveChargeText.text = currentExplosiveCharges + "/" + maxExplosiveCharges;
+
+            // Appeler la méthode pour afficher l'image
+            FindObjectOfType<WeaponUIManager>().ShowExplosiveChargeGain();
         }
     }
     #endregion
 
-   /* #region MODE LASER
+    /* #region MODE LASER
 
-    private void StartChargingLaser()
-    {
-        if (!isChargingLaser && !isLaserActive)
-        {
-            StartCoroutine(ChargeLaser());
-        }
-    }
+     private void StartChargingLaser()
+     {
+         if (!isChargingLaser && !isLaserActive)
+         {
+             StartCoroutine(ChargeLaser());
+         }
+     }
 
-    private IEnumerator ChargeLaser()
-    {
-        isChargingLaser = true;
-        float chargeStartTime = Time.time;
+     private IEnumerator ChargeLaser()
+     {
+         isChargingLaser = true;
+         float chargeStartTime = Time.time;
 
-        // Ralentir le joueur en ajustant sa vitesse
-        float originalSpeed = playerMovementsRB.speed;
-        playerMovementsRB.speed *= 0.5f; // Réduire la vitesse à la moitié
+         // Ralentir le joueur en ajustant sa vitesse
+         float originalSpeed = playerMovementsRB.speed;
+         playerMovementsRB.speed *= 0.5f; // Réduire la vitesse à la moitié
 
-        // Attendre pendant que le laser se charge
-        while (Time.time - chargeStartTime < 2f)
-        {
-            yield return null;
-        }
+         // Attendre pendant que le laser se charge
+         while (Time.time - chargeStartTime < 2f)
+         {
+             yield return null;
+         }
 
-        // Rétablir la vitesse du joueur
-        playerMovementsRB.speed = originalSpeed;
+         // Rétablir la vitesse du joueur
+         playerMovementsRB.speed = originalSpeed;
 
-        isChargingLaser = false;
-        FireLaser();
-    }
+         isChargingLaser = false;
+         FireLaser();
+     }
 
-    private void FireLaser()
-    {
-        if (currentMode == FireMode.Laser)
-        {
-            StartCoroutine(FireLaserCoroutine());
-        }
-    }
-
-
-    private IEnumerator FireLaserCoroutine()
-    {
-        canShootLaser = false;
-        isLaserActive = true;
-
-        // Désactiver le script MouseLook
-        mouseLookScript.enabled = false;
-
-        // Activer le isKinematic
-        playerMovementsRB.rb.isKinematic = true;
-
-        // Instantiation du VFX de laser à la position et rotation du cannon du joueur
-        GameObject laserInstance = Instantiate(laserVFX, laserSpawnPoint.transform.position, laserSpawnPoint.transform.rotation);
-
-        float startTime = Time.time;
-
-        while (Time.time - startTime < laserDuration)
-        {
-            // Lance un raycast pour détecter les collisions
-            RaycastHit[] hits;
-            hits = Physics.SphereCastAll(transform.position, laserWidth / 2f, transform.forward, laserRange);
-
-            foreach (RaycastHit hit in hits)
-            {
-                if (hit.collider.CompareTag("Block") || hit.collider.CompareTag("HeartBlock"))
-                {
-                    Destroy(hit.collider.gameObject);
-                }
-            }
-
-            // Positionne le VFX de laser à l'extrémité du rayon du laser
-            Vector3 laserEnd = transform.position + transform.forward;
-            laserInstance.transform.position = laserEnd;
-
-            // Met à jour la rotation du VFX de laser pour qu'il regarde dans la direction du rayon du laser
-            laserInstance.transform.rotation = Quaternion.LookRotation(transform.forward);
-
-            yield return null;
-        }
-
-        isLaserActive = false;
-
-        // Réactiver le script MouseLook
-        mouseLookScript.enabled = true;
-
-        // Désactiver le isKinematic
-        playerMovementsRB.rb.isKinematic = false;
-
-        // Suppression du VFX de laser une fois que la durée est écoulée
-        Destroy(laserInstance);
-        WeaponUIManager weaponUIManager = FindObjectOfType<WeaponUIManager>();
-        weaponUIManager.DisplayLaserCooldownText(laserCooldown);
-        StartCoroutine(LaserCooldown());
-    }
+     private void FireLaser()
+     {
+         if (currentMode == FireMode.Laser)
+         {
+             StartCoroutine(FireLaserCoroutine());
+         }
+     }
 
 
-    private IEnumerator LaserCooldown()
-    {
-        yield return new WaitForSeconds(laserCooldown);
-        canShootLaser = true;
+     private IEnumerator FireLaserCoroutine()
+     {
+         canShootLaser = false;
+         isLaserActive = true;
 
-        Debug.Log("laser");
-    }
+         // Désactiver le script MouseLook
+         mouseLookScript.enabled = false;
 
-    private void OnDrawGizmos()
-    {
-        // Dessine un gizmo représentant le rayon du laser
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, transform.forward * laserRange);
-    }
+         // Activer le isKinematic
+         playerMovementsRB.rb.isKinematic = true;
+
+         // Instantiation du VFX de laser à la position et rotation du cannon du joueur
+         GameObject laserInstance = Instantiate(laserVFX, laserSpawnPoint.transform.position, laserSpawnPoint.transform.rotation);
+
+         float startTime = Time.time;
+
+         while (Time.time - startTime < laserDuration)
+         {
+             // Lance un raycast pour détecter les collisions
+             RaycastHit[] hits;
+             hits = Physics.SphereCastAll(transform.position, laserWidth / 2f, transform.forward, laserRange);
+
+             foreach (RaycastHit hit in hits)
+             {
+                 if (hit.collider.CompareTag("Block") || hit.collider.CompareTag("HeartBlock"))
+                 {
+                     Destroy(hit.collider.gameObject);
+                 }
+             }
+
+             // Positionne le VFX de laser à l'extrémité du rayon du laser
+             Vector3 laserEnd = transform.position + transform.forward;
+             laserInstance.transform.position = laserEnd;
+
+             // Met à jour la rotation du VFX de laser pour qu'il regarde dans la direction du rayon du laser
+             laserInstance.transform.rotation = Quaternion.LookRotation(transform.forward);
+
+             yield return null;
+         }
+
+         isLaserActive = false;
+
+         // Réactiver le script MouseLook
+         mouseLookScript.enabled = true;
+
+         // Désactiver le isKinematic
+         playerMovementsRB.rb.isKinematic = false;
+
+         // Suppression du VFX de laser une fois que la durée est écoulée
+         Destroy(laserInstance);
+         WeaponUIManager weaponUIManager = FindObjectOfType<WeaponUIManager>();
+         weaponUIManager.DisplayLaserCooldownText(laserCooldown);
+         StartCoroutine(LaserCooldown());
+     }
 
 
-    #endregion
-   */
+     private IEnumerator LaserCooldown()
+     {
+         yield return new WaitForSeconds(laserCooldown);
+         canShootLaser = true;
+
+         Debug.Log("laser");
+     }
+
+     private void OnDrawGizmos()
+     {
+         // Dessine un gizmo représentant le rayon du laser
+         Gizmos.color = Color.red;
+         Gizmos.DrawRay(transform.position, transform.forward * laserRange);
+     }
+
+
+     #endregion
+    */
     public bool Scoping => _scoping;
     
 }

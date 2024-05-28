@@ -22031,6 +22031,10 @@ PrefabInstance:
       propertyPath: explosiveChargeText
       value: 
       objectReference: {fileID: 2109610201}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: cubesToDestroyToGainACharge
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 4805179598088156730, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: m_Name
       value: Weapon
@@ -125907,6 +125911,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1538944410}
+  - {fileID: 328729014}
   - {fileID: 180279127}
   - {fileID: 993472033}
   - {fileID: 1702181244}
@@ -125914,7 +125919,6 @@ SceneRoots:
   - {fileID: 1075577624}
   - {fileID: 325100342}
   - {fileID: 201801883}
-  - {fileID: 328729014}
   - {fileID: 396390725}
   - {fileID: 90891586}
   - {fileID: 1040825563}

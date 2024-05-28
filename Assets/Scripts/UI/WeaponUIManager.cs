@@ -16,6 +16,8 @@ public class WeaponUIManager : MonoBehaviour
     public Image normalWeaponImage; // Image normale de l'arme
     public Image explosiveWeaponImage; // Image pour l'arme explosive
     //public Image laserWeaponImage; // Image pour l'arme laser
+    public Image explosiveChargeGainImage;
+    private Vector3 initialPosition;
 
     private Weapon weapon;
 
@@ -42,6 +44,8 @@ public class WeaponUIManager : MonoBehaviour
 
         // Afficher l'image de l'arme par défaut
         normalWeaponImage.gameObject.SetActive(true);
+
+        initialPosition = explosiveChargeGainImage.rectTransform.localPosition;
     }
 
     private void Update()
@@ -197,6 +201,54 @@ public class WeaponUIManager : MonoBehaviour
             yield return null;
         }
         SetIconOpacity(normalWeaponImage, endOpacity);
+    }
+
+    public void ShowExplosiveChargeGain()
+    {
+        StartCoroutine(DisplayExplosiveChargeGain());
+    }
+
+    private IEnumerator DisplayExplosiveChargeGain()
+    {
+        explosiveChargeGainImage.gameObject.SetActive(true); // Activer l'image
+        explosiveChargeGainImage.rectTransform.localPosition = initialPosition; // Assurez-vous qu'il commence à partir de la position initiale
+        yield return SlideImageLeft(explosiveChargeGainImage, 0.25f, 1500f); // Glisser l'image vers la gauche (ajustez la durée et la distance selon vos besoins)
+        yield return FadeOutImage(explosiveChargeGainImage, 1f); // Faire disparaître l'image progressivement
+        SetIconOpacity(explosiveChargeGainImage, 1f); // Réinitialiser l'opacité
+    }
+
+    private IEnumerator FadeOutImage(Image image, float duration)
+    {
+        float startOpacity = image.color.a;
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float newOpacity = Mathf.Lerp(startOpacity, 0f, elapsed / duration);
+            SetIconOpacity(image, newOpacity);
+            yield return null;
+        }
+        SetIconOpacity(image, 0f);
+        image.gameObject.SetActive(false); // Désactiver l'image une fois le fade out terminé
+        image.rectTransform.localPosition = initialPosition; // Remettre à la position initiale
+    }
+
+    private IEnumerator SlideImageLeft(Image image, float duration, float distance)
+    {
+        Vector3 startPosition = image.rectTransform.localPosition;
+        Vector3 endPosition = startPosition + Vector3.left * distance;
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            image.rectTransform.localPosition = Vector3.Lerp(startPosition, endPosition, t);
+            yield return null;
+        }
+
+        image.rectTransform.localPosition = endPosition;
     }
 
     /*public void DisplayLaserCooldownText(float cooldownDuration)

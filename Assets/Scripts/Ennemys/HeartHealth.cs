@@ -156,7 +156,7 @@ public class HeartHealth : MonoBehaviour
             currentTeleportIndex = 0;
         }
         SetTargetForTeleportIndex(currentTeleportIndex);
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Locomotion/Teleport");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Teleport");
 
         if (accessibleTeleportPoints.Count > 0)
         {

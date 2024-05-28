@@ -17,11 +17,15 @@ public class Player : MonoBehaviour
     private VolumeProfile _volume;
     private Vignette _vignette;
 
+    private FMOD.Studio.EventInstance Loom;
+
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        Loom = FMODUnity.RuntimeManager.CreateInstance("event:/UX/Ambience/LoomingTheHeart");
+        Loom.start();
 
         Volume volume = FindObjectOfType<Volume>();
         if (volume != null)
@@ -101,5 +105,11 @@ public class Player : MonoBehaviour
         {
             TakeDamage(5);
         }
+    }
+    
+    public void IncreaseLoomParameter()
+    {
+        Loom.getParameterByName("Loom", out float currentValue);
+        Loom.setParameterByName("Loom", currentValue + 1f);
     }
 }

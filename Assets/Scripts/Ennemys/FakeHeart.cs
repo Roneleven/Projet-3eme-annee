@@ -17,10 +17,12 @@ public class FakeHeart : MonoBehaviour
     public UniversalRendererData urpRendererData;
     private ScriptableRendererFeature xRayFeature;
     public Animator doorAnimator;
+    private Player player;
 
     void Start()
     {
         xRayFeature = urpRendererData.rendererFeatures.Find(feature => feature.name == "xRay");
+        player = FindObjectOfType<Player>();
     }
 
     public void TakeDamage(int damage)
@@ -44,6 +46,7 @@ public class FakeHeart : MonoBehaviour
             Idle.start();
             trueHeart.SetActive(true);
             xRayFeature.SetActive(false);
+            player.IncreaseLoomParameter();
             Destroy(parentHeart);       
         }
     }

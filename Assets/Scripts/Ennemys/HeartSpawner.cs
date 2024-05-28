@@ -296,7 +296,7 @@ public class HeartSpawner : MonoBehaviour
 
     private void UpdateCocon()
     {
-        cocon = currentPalier * 0.2f + 2;
+        cocon = (currentPalier + 4) * 220 ;
         coconvfx.transform.localScale = new Vector3(cocon, cocon, cocon);
     }
 

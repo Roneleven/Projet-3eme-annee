@@ -85,6 +85,7 @@ public class Player : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            Loom.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             FindObjectOfType<SceneTransition>().ReloadScene();
         }
     }

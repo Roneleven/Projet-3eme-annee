@@ -112,4 +112,9 @@ public class Player : MonoBehaviour
         Loom.getParameterByName("Loom", out float currentValue);
         Loom.setParameterByName("Loom", currentValue + 1f);
     }
+
+    public void ResetLoomParameter()
+    {
+        Loom.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+    }
 }

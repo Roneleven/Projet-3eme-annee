@@ -11,6 +11,8 @@ public class MenuiUI : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UX/Button/Start");
+        PauseManager.MenuMusique.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         SceneManager.LoadScene(sceneName);
     }
 
@@ -21,12 +23,14 @@ public class MenuiUI : MonoBehaviour
 
     public void GoToOptions()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UX/Button/Select");
         mainMenuUI.SetActive(false);
         optionsUI.SetActive(true);
     }
 
     public void BackToMainMenu()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UX/Button/Back");
         mainMenuUI.SetActive(true);
         optionsUI.SetActive(false);
     }

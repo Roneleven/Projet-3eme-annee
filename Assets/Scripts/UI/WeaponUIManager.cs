@@ -17,6 +17,8 @@ public class WeaponUIManager : MonoBehaviour
     public Image explosiveWeaponImage; // Image pour l'arme explosive
     //public Image laserWeaponImage; // Image pour l'arme laser
     public Image explosiveChargeGainImage;
+    public Transform startTransform;
+    public Transform targetTransform;
     private Vector3 initialPosition;
 
     private Weapon weapon;
@@ -211,8 +213,8 @@ public class WeaponUIManager : MonoBehaviour
     private IEnumerator DisplayExplosiveChargeGain()
     {
         explosiveChargeGainImage.gameObject.SetActive(true); // Activer l'image
-        explosiveChargeGainImage.rectTransform.localPosition = initialPosition; // Assurez-vous qu'il commence à partir de la position initiale
-        yield return SlideImageLeft(explosiveChargeGainImage, 0.25f, 1500f); // Glisser l'image vers la gauche (ajustez la durée et la distance selon vos besoins)
+        explosiveChargeGainImage.rectTransform.localPosition = startTransform.localPosition; // Assurez-vous qu'il commence à partir de la position de départ
+        yield return SlideImageToTarget(explosiveChargeGainImage, startTransform, targetTransform, 0.5f); // Glisser l'image vers la cible (ajustez la durée selon vos besoins)
         yield return FadeOutImage(explosiveChargeGainImage, 1f); // Faire disparaître l'image progressivement
         SetIconOpacity(explosiveChargeGainImage, 1f); // Réinitialiser l'opacité
     }
@@ -230,13 +232,13 @@ public class WeaponUIManager : MonoBehaviour
         }
         SetIconOpacity(image, 0f);
         image.gameObject.SetActive(false); // Désactiver l'image une fois le fade out terminé
-        image.rectTransform.localPosition = initialPosition; // Remettre à la position initiale
+        image.rectTransform.localPosition = startTransform.localPosition; // Remettre à la position initiale
     }
 
-    private IEnumerator SlideImageLeft(Image image, float duration, float distance)
+    private IEnumerator SlideImageToTarget(Image image, Transform start, Transform target, float duration)
     {
-        Vector3 startPosition = image.rectTransform.localPosition;
-        Vector3 endPosition = startPosition + Vector3.left * distance;
+        Vector3 startPosition = start.localPosition;
+        Vector3 endPosition = target.localPosition;
 
         float elapsed = 0f;
 

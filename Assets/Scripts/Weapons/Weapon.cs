@@ -77,6 +77,9 @@ public class Weapon : MonoBehaviour
     public float chargeTimeThreshold;
     private int destroyedCubeCount = 0;
     public int cubesToDestroyToGainACharge = 5;
+    public float chargingShakeIntensity = 0.1f;
+    public float readyShakeIntensity = 0.2f;
+    public float shakeFrequency = 25f;
 
     /*[Header("Laser Mode")]
     public float laserCooldown = 1f;
@@ -207,6 +210,11 @@ public class Weapon : MonoBehaviour
                 FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Guns/ExplosiveGun/0 Charge");
             }
 
+            if (Input.GetMouseButton(0) && Time.time - chargeStartTime < chargeTimeThreshold && currentExplosiveCharges > 0)
+            {
+                ApplyShake(chargingShakeIntensity);
+            }
+
             if (Input.GetMouseButtonUp(0) && Time.time - chargeStartTime >= chargeTimeThreshold && currentExplosiveCharges > 0)
             {
                 Vector3 shotDirection = _playerCamera.forward;
@@ -240,6 +248,11 @@ public class Weapon : MonoBehaviour
                 Destroy(chargingEffectInstance.gameObject);
             }
 
+            if (Input.GetMouseButton(0) && Time.time - chargeStartTime >= chargeTimeThreshold && currentExplosiveCharges > 0)
+            {
+                ApplyShake(readyShakeIntensity);
+            }
+
             // Assure-toi que le VisualEffectInstance reste attaché au point de spawn de l'arme
             if (chargingEffectInstance != null)
             {
@@ -259,12 +272,13 @@ public class Weapon : MonoBehaviour
             }
         }
 
+
         //LASER
 
-       /* if (Input.GetMouseButton(0) && currentMode == FireMode.Laser && canShootLaser)
-        {
-            StartChargingLaser();
-        }*/
+        /* if (Input.GetMouseButton(0) && currentMode == FireMode.Laser && canShootLaser)
+         {
+             StartChargingLaser();
+         }*/
 
         if (!overheated && !_shooting)
         {
@@ -646,6 +660,17 @@ public class Weapon : MonoBehaviour
 
         transform.localPosition = initialPosition;
     }
+
+    private void ApplyShake(float intensity)
+    {
+        float shakeOffsetX = Mathf.PerlinNoise(Time.time * shakeFrequency, 0f) * 2 - 1;
+        float shakeOffsetY = Mathf.PerlinNoise(0f, Time.time * shakeFrequency) * 2 - 1;
+        float shakeOffsetZ = Mathf.PerlinNoise(Time.time * shakeFrequency, Time.time * shakeFrequency) * 2 - 1;
+
+        Vector3 shakeOffset = new Vector3(shakeOffsetX, shakeOffsetY, shakeOffsetZ) * intensity;
+        transform.localPosition += shakeOffset;
+    }
+
 
     #endregion
 

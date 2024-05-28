@@ -112,4 +112,9 @@ public class Player : MonoBehaviour
         Loom.getParameterByName("Loom", out float currentValue);
         Loom.setParameterByName("Loom", currentValue + 1f);
     }
+
+    public void ResetLoomParameter()
+    {
+        Loom.setParameterByName("Loom", 0f);
+    }
 }

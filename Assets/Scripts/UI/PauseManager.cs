@@ -8,11 +8,11 @@ public class PauseManager : MonoBehaviour
     public GameObject CanvasPause;
     public FMOD.Studio.EventInstance backgroundMusic;
     private bool isPaused = false;
+    private Player player;
 
     private void Start()
     {
-        //backgroundMusic = FMODUnity.RuntimeManager.CreateInstance("event:/MARBLE ARCADE/SD_HUD/S_HUD_MUSIC/S_HUD_MUSIC_INGAME");
-        //backgroundMusic.start();
+        player = FindObjectOfType<Player>();
     }
 
     void Update()
@@ -49,6 +49,7 @@ public class PauseManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene("Arene_Demo");
+        player.ResetLoomParameter();
     }
 
     public void MainMenu()

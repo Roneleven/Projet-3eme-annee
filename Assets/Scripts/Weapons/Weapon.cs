@@ -129,6 +129,10 @@ public class Weapon : MonoBehaviour
 
     [Header("UI Manager")]
     public GameObject weaponUIPanel;
+    public Camera mainCamera;
+    public Camera xRayCamera;
+    public LayerMask normalViewMask;
+    public LayerMask thermalViewMask;
 
     private void Start()
     {
@@ -138,6 +142,7 @@ public class Weapon : MonoBehaviour
         currentExplosiveCharges = maxExplosiveCharges;
         currentMode = FireMode.Normal;
         //mouseLookScript = playerMovementsRB.GetComponentInChildren<MouseLook>();
+        xRayCamera.enabled = false;
     }
 
     private void Update()
@@ -320,6 +325,17 @@ public class Weapon : MonoBehaviour
         {
             muzzleFlashInstance.transform.position = muzzleFlashSpawnPoint.position;
             muzzleFlashInstance.transform.rotation = muzzleFlashSpawnPoint.rotation;
+        }
+
+        if (Input.GetButtonDown("Fire2")) // Assumant que "Fire2" est le bouton pour viser
+        {
+            mainCamera.cullingMask = thermalViewMask;
+            xRayCamera.enabled = true;
+        }
+        else if (Input.GetButtonUp("Fire2"))
+        {
+            mainCamera.cullingMask = normalViewMask;
+            xRayCamera.enabled = false;
         }
     }
 

@@ -414,37 +414,6 @@ public class Weapon : MonoBehaviour
         StartCoroutine(ShootingCooldown());
     }
 
-    private IEnumerator ShootingCooldown()
-    {
-        _shooting = true;
-        yield return new WaitForSeconds(GetAdjustedFireRate());
-        _shooting = false;
-    }
-
-
-
-    private void UpdateHeatUI()
-    {
-        // Calculate the fill amount based on the current heat value and overheat threshold
-        float fillAmount = Mathf.Clamp01(currentHeat / overheatThreshold);
-
-        // Scale the fill amount to match the maximum fill amount
-        fillAmount *= maxFillAmount;
-
-        // Set the fill amount of the heat UI image
-        if (heatImage != null)
-        {
-            heatImage.fillAmount = fillAmount;
-        }
-    }
-
-    private float GetAdjustedFireRate()
-    {
-        float baseFireRate = 1f / shotsPerSecond;
-        float adjustedFireRate = baseFireRate / (1f + heatEffectMultiplier * currentHeat);
-        return adjustedFireRate;
-    }
-
     private void HandleHitObject(RaycastHit hitInfo)
     {
         var rb = hitInfo.transform.GetComponent<Rigidbody>();
@@ -462,7 +431,7 @@ public class Weapon : MonoBehaviour
 
         if (cubeHealth != null)
         {
-            cubeHealth.TakeDamage(damage);
+            cubeHealth.TakeDamage(damage, false); // Passe false pour isExplosiveDamage
 
             if (cubeHealth.health <= 0)
             {
@@ -497,6 +466,40 @@ public class Weapon : MonoBehaviour
             Destroy(hitInfo.transform.gameObject);
         }
     }
+
+
+    private IEnumerator ShootingCooldown()
+    {
+        _shooting = true;
+        yield return new WaitForSeconds(GetAdjustedFireRate());
+        _shooting = false;
+    }
+
+
+
+    private void UpdateHeatUI()
+    {
+        // Calculate the fill amount based on the current heat value and overheat threshold
+        float fillAmount = Mathf.Clamp01(currentHeat / overheatThreshold);
+
+        // Scale the fill amount to match the maximum fill amount
+        fillAmount *= maxFillAmount;
+
+        // Set the fill amount of the heat UI image
+        if (heatImage != null)
+        {
+            heatImage.fillAmount = fillAmount;
+        }
+    }
+
+    private float GetAdjustedFireRate()
+    {
+        float baseFireRate = 1f / shotsPerSecond;
+        float adjustedFireRate = baseFireRate / (1f + heatEffectMultiplier * currentHeat);
+        return adjustedFireRate;
+    }
+
+   
 
 
     public void Pickup(Transform weaponHolder, Transform playerCamera)
@@ -600,7 +603,7 @@ public class Weapon : MonoBehaviour
                     CubeHealth cubeHealth = hitCollider.GetComponent<CubeHealth>();
                     if (cubeHealth != null)
                     {
-                        cubeHealth.TakeDamage(explosiveDamage);
+                        cubeHealth.TakeDamage(explosiveDamage, true); // Passe true pour isExplosiveDamage
                     }
                 }
             }
@@ -609,6 +612,7 @@ public class Weapon : MonoBehaviour
             explosiveChargeText.text = currentExplosiveCharges + "/" + maxExplosiveCharges;
         }
     }
+
 
     public void GainExplosiveCharge()
     {

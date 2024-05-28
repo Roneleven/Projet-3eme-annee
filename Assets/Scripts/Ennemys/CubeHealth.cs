@@ -24,13 +24,16 @@ public class CubeHealth : MonoBehaviour
         UpdateMaterial();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, bool isExplosiveDamage)
     {
         health -= damage;
-        CubeHitInstance = Instantiate(CubeHit, CubeHitSpawnPoint.position, CubeHitSpawnPoint.rotation);
-        CubeHitInstance.Play();
-        CubeHitInstance.gameObject.AddComponent<VFXAutoDestroy>();
-        
+        if (!isExplosiveDamage)
+        {
+            CubeHitInstance = Instantiate(CubeHit, CubeHitSpawnPoint.position, CubeHitSpawnPoint.rotation);
+            CubeHitInstance.Play();
+            CubeHitInstance.gameObject.AddComponent<VFXAutoDestroy>();
+        }
+
         if (health <= 0)
         {
             Die();
@@ -71,7 +74,6 @@ public class CubeHealth : MonoBehaviour
     private void Die()
     {
         isDead = true;
-
         Destroy(gameObject);
     }
 

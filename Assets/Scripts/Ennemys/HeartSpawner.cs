@@ -32,8 +32,6 @@ public class HeartSpawner : MonoBehaviour
     public GameObject coconvfx;
     public Image timerFillImage;
 
-    private FMOD.Studio.EventInstance BreakingHeart;
-
     [Header("Timer/Reset Properties")]
     public float timer;
     public float defaultTimer;
@@ -89,8 +87,6 @@ public class HeartSpawner : MonoBehaviour
         bossPatternManager = GetComponent<BossPatternManager>();
         heartHealth = GetComponent<HeartHealth>();
         warning = FMODUnity.RuntimeManager.CreateInstance("event:/Heart/Patterns/Cage_Warning");
-        //BreakingHeart = FMODUnity.RuntimeManager.CreateInstance("event:/V1/UX/Ambience/CoreBreaked");  INTéGRER LA MUSIQUE ICI
-        BreakingHeart.start();
 
         //dissolve = gameObject.GetComponent<Animation>();
 
@@ -135,8 +131,6 @@ public class HeartSpawner : MonoBehaviour
         {
             playerPosition = playerObject.transform.position;
         }
-
-        BreakingHeart.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
 
         // Condition for spawn of the CageTracking pattern
         if (currentPalier >= 3 && !cagePatternActive && Vector3.Distance(playerPosition, transform.position) < (spawnRadius * cageRadius))
@@ -223,7 +217,6 @@ public class HeartSpawner : MonoBehaviour
 
     private void TimeOut()
     {
-        BreakingHeart.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         FindObjectOfType<SceneTransition>().ReloadScene();
     }
 
@@ -286,7 +279,6 @@ public class HeartSpawner : MonoBehaviour
             timer = defaultTimer;
 
             float newLevelUpValue = (currentPalier + 1) * 1.0f;
-            BreakingHeart.setParameterByName("LevelUp 2", newLevelUpValue);
 
             //timerActive = true;
             StartCoroutine(ResetPalier());

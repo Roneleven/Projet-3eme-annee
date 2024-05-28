@@ -487,24 +487,18 @@ MonoBehaviour:
   explosion: {fileID: 3810439456834575818, guid: 2e43e7ba74c5590449a91b647d126f11, type: 3}
   _held: 0
   Recoil_Script: {fileID: 0}
+  playerMovementsRB: {fileID: 0}
   explosiveDamage: 3
   explosiveRange: 250
   explosionRadius: 10
-  kickbackForceExplosive: 1
+  kickbackForceExplosive: 1.2
+  kickbackTimeExplosive: 0.3
   explosionPrefab: {fileID: 191186, guid: 517c65f5c21a00340b7af8423976621c, type: 3}
   maxExplosiveCharges: 5
   currentExplosiveCharges: 5
   explosiveChargeText: {fileID: 0}
   chargeTimeThreshold: 0.6
-  cubesToDestroyToGainACharge: 10
-  laserCooldown: 10
-  laserDuration: 2
-  laserWidth: 3
-  laserRange: 10000
-  laserVFX: {fileID: 3233454600361160312, guid: d19452b1c9045ac42ba3cdf865568d50, type: 3}
-  laserSpawnPoint: {fileID: 5617236796851899029}
-  playerMovementsRB: {fileID: 0}
-  mouseLookScript: {fileID: 0}
+  cubesToDestroyToGainACharge: 15
   heatPerShot: 0.017
   heatEffectMultiplier: 1.22
   overheatThreshold: 1

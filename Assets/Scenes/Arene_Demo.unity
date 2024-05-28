@@ -22036,6 +22036,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2109610201}
     - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: kickbackTimeExplosive
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
+      propertyPath: kickbackForceExplosive
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -4970237095398441290, guid: 4e71ef55b750e7b47b0279c326474831, type: 3}
       propertyPath: cubesToDestroyToGainACharge
       value: 15
       objectReference: {fileID: 0}

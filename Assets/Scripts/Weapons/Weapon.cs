@@ -68,6 +68,7 @@ public class Weapon : MonoBehaviour
     public float explosiveRange;
     public float explosionRadius;
     public float kickbackForceExplosive;
+    public float kickbackTimeExplosive;
     public GameObject explosionPrefab;
     public int maxExplosiveCharges = 5;
     public int currentExplosiveCharges = 5;
@@ -587,23 +588,24 @@ public class Weapon : MonoBehaviour
     #region MODE EXPLOSIVE
     private void ExplosiveShoot()
     {
-        transform.localPosition -= new Vector3(0, 0, kickbackForceExplosive);
-
-        if (currentMode == FireMode.Explosive && currentExplosiveCharges > 0)
+        if (currentExplosiveCharges > 0)
         {
+            StartCoroutine(HandleExplosiveRecoil(kickbackTimeExplosive, kickbackForceExplosive)); // Adjust the duration and force as needed
+
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, explosiveRange))
             {
                 explosionInstance = Instantiate(explosionEffect, hit.point, Quaternion.identity);
                 explosionInstance.Play();
                 explosionInstance.gameObject.AddComponent<VFXAutoDestroy>();
+
                 Collider[] colliders = Physics.OverlapSphere(hit.point, explosionRadius);
                 foreach (Collider hitCollider in colliders)
                 {
                     CubeHealth cubeHealth = hitCollider.GetComponent<CubeHealth>();
                     if (cubeHealth != null)
                     {
-                        cubeHealth.TakeDamage(explosiveDamage, true); // Passe true pour isExplosiveDamage
+                        cubeHealth.TakeDamage(explosiveDamage, true);
                     }
                 }
             }
@@ -612,6 +614,7 @@ public class Weapon : MonoBehaviour
             explosiveChargeText.text = currentExplosiveCharges + "/" + maxExplosiveCharges;
         }
     }
+
 
 
     public void GainExplosiveCharge()
@@ -625,6 +628,25 @@ public class Weapon : MonoBehaviour
             FindObjectOfType<WeaponUIManager>().ShowExplosiveChargeGain();
         }
     }
+
+    private IEnumerator HandleExplosiveRecoil(float duration, float force)
+    {
+        Vector3 initialPosition = transform.localPosition;
+        Vector3 recoilPosition = initialPosition - new Vector3(0, 0, force);
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            transform.localPosition = Vector3.Lerp(recoilPosition, initialPosition, t);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localPosition = initialPosition;
+    }
+
     #endregion
 
     /* #region MODE LASER

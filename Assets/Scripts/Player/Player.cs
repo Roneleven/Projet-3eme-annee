@@ -115,6 +115,6 @@ public class Player : MonoBehaviour
 
     public void ResetLoomParameter()
     {
-        Loom.setParameterByName("Loom", 0f);
+        Loom.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 }

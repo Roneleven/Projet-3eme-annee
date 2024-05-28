@@ -499,6 +499,31 @@ MonoBehaviour:
   explosiveChargeText: {fileID: 0}
   chargeTimeThreshold: 0.6
   cubesToDestroyToGainACharge: 15
+  chargingShakeIntensity: 0.1
+  shakeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.0045
+      inSlope: 0.0068788505
+      outSlope: 0.0068788505
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.057489872
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   heatPerShot: 0.017
   heatEffectMultiplier: 1.22
   overheatThreshold: 1
@@ -513,6 +538,7 @@ MonoBehaviour:
   explosiveEffect: {fileID: 6128940009062918843, guid: efc82b0f915cfc7429d43df6cb71862d, type: 3}
   explosiveTrailVFX: {fileID: 4850474457665193327}
   explosionEffect: {fileID: 4092455346545260222, guid: 33c4062e08712c94f9ba6a87f01048b9, type: 3}
+  readyToFireEffect: {fileID: 6265271906444159715, guid: 614fb958050d1784e9606377c268f872, type: 3}
   shootEffect: {fileID: 1656210228620440249, guid: 89c818eb0a7f189408cdc22227191714, type: 3}
   smokeEffect: {fileID: 3045803582391615888, guid: ac4b08be3e9e426428ec9ee363b881a1, type: 3}
   smokeEffectSpawnPoint: {fileID: 6852232308582588155}

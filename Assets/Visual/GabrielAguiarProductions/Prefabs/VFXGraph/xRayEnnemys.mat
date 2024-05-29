@@ -124,7 +124,7 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 766.9961, g: 8.031388, b: 8.031388, a: 1}
+    - _Color: {r: 766.9961, g: 12.047037, b: 671.98236, a: 1}
     - _EmissionColor: {r: 2.848036, g: 2.848036, b: 2.848036, a: 2.848036}
     - _NoiseSpeed: {r: 6.2, g: 11.27, b: 0, a: 0}
     - _NoiseTiling: {r: 0.5, g: 11.42, b: 0, a: 0}

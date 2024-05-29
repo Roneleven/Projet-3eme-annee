@@ -8,7 +8,7 @@ Shader "OutlineAMPLIFY"
 		[HideInInspector] _EmissionColor("Emission Color", Color) = (1,1,1,1)
 		_MainTexture1("Albedo", 2D) = "white" {}
 		_Smoothness("Smoothness", Range( 0 , 1)) = 0.9096047
-		_Color1("Color 0", Color) = (0.9622642,0.9622642,0.9622642,0)
+		[HDR]_Color1("Color 0", Color) = (0.9622642,0.9622642,0.9622642,0)
 		[HDR]_Specular("Specular", Color) = (0,0,0,0)
 		_FresnelScale("FresnelScale", Float) = 1.99
 		_Highlight("Highlight", Float) = 0
@@ -3514,7 +3514,7 @@ Node;AmplifyShaderEditor.SimpleAddOpNode;110;-207.143,114.7981;Inherit;False;3;3
 Node;AmplifyShaderEditor.GetLocalVarNode;111;-461.7406,96.71825;Inherit;False;79;Specular;1;0;OBJECT;;False;1;COLOR;0
 Node;AmplifyShaderEditor.ViewDirInputsCoordNode;112;-2449.753,60.76663;Inherit;False;World;True;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.WorldSpaceLightDirHlpNode;113;-2469.136,253.8219;Inherit;False;True;1;0;FLOAT;0;False;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
-Node;AmplifyShaderEditor.RangedFloatNode;114;-2214.504,547.6529;Inherit;False;Property;_Smoothness;Smoothness;1;0;Create;True;0;0;0;False;0;False;0.9096047;0;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;114;-2214.504,547.6529;Inherit;False;Property;_Smoothness;Smoothness;1;0;Create;True;0;0;0;False;0;False;0.9096047;0.047;0;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;115;-1884.371,484.6759;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;10;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;116;-1737.657,490.1078;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;4.72;False;1;FLOAT;0
 Node;AmplifyShaderEditor.PowerNode;117;-1413.269,404.0658;Inherit;False;False;2;0;FLOAT;0;False;1;FLOAT;1;False;1;FLOAT;0
@@ -3528,7 +3528,6 @@ Node;AmplifyShaderEditor.StickyNoteNode;129;-2081.868,-1450.079;Inherit;False;41
 Node;AmplifyShaderEditor.StickyNoteNode;130;-1853.669,-900.5151;Inherit;False;177.8485;113.9243;New Note;;1,1,1,1;Ici, on permet de choisir la couleur du Shader grace à une property;0;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;131;-1780.799,-1292.574;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT3;0,0,0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;133;-1481.668,-933.7673;Inherit;True;2;2;0;FLOAT3;0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
-Node;AmplifyShaderEditor.ColorNode;134;-2122.011,-616.3419;Inherit;False;Property;_Color1;Color 0;2;0;Create;True;0;0;0;False;0;False;0.9622642,0.9622642,0.9622642,0;0.745283,0.745283,0.745283,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SamplerNode;135;-2158.004,-812.566;Inherit;True;Property;_MainTexture1;Albedo;0;0;Create;False;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.DotProductOpNode;136;-3265.109,-1144.293;Inherit;True;2;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.LightAttenuation;137;-3152.587,-710.1241;Inherit;False;0;1;FLOAT;0
@@ -3555,6 +3554,7 @@ Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;169;0,0;Float;False;False;-
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;170;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphLitGUI;0;1;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;GBuffer;0;7;GBuffer;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;5;True;12;all;0;False;True;1;1;False;;0;False;;1;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalGBuffer;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;171;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphLitGUI;0;1;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;SceneSelectionPass;0;8;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;5;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=SceneSelectionPass;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;172;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphLitGUI;0;1;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;ScenePickingPass;0;9;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;5;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Picking;False;False;0;;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.ColorNode;134;-2122.011,-616.3419;Inherit;False;Property;_Color1;Color 0;2;1;[HDR];Create;True;0;0;0;False;0;False;0.9622642,0.9622642,0.9622642,0;0.9811319,0.9811319,0.9811319,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 WireConnection;70;0;74;0
 WireConnection;71;0;70;0
 WireConnection;71;1;72;0
@@ -3604,4 +3604,4 @@ WireConnection;132;1;134;0
 WireConnection;147;0;133;0
 WireConnection;164;0;110;0
 ASEEND*/
-//CHKSM=709A4C2D1647FDF6456C9499A944CF41CD87C1BF
+//CHKSM=79CC09034F5F8D4EDB443F2F19618E341C634232

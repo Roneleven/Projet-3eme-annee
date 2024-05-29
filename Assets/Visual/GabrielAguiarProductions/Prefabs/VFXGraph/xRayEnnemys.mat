@@ -99,12 +99,12 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FresnelPower: 2.82
+    - _FresnelPower: 4.1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _NoiseAmount: 1
+    - _NoiseAmount: 0
     - _NoisePower: 2.98
     - _NoiseScale: 1.38
     - _OcclusionStrength: 1

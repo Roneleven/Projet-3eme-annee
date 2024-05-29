@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class ExplosionScript : MonoBehaviour
 {
@@ -14,11 +15,19 @@ public class ExplosionScript : MonoBehaviour
     public float upwardForce = 1f;
     public float repulsionForceHorizontal;
 
+    public VisualEffect explosionEffect;
+    public Transform explosionEffectSpawnPoint;
+    private VisualEffect explosionEffectInstance;
+
     private void Start()
     {
         StartCoroutine(ExpandCoroutine());
         StartCoroutine(DisappearCoroutine());
         playerScript = FindObjectOfType<Player>();
+
+        explosionEffectInstance = Instantiate(explosionEffect, explosionEffectSpawnPoint.position, explosionEffectSpawnPoint.rotation);
+        explosionEffectInstance.Play();
+        explosionEffectInstance.gameObject.AddComponent<VFXAutoDestroy>();
     }
 
     private System.Collections.IEnumerator ExpandCoroutine()

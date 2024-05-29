@@ -270,7 +270,7 @@ MonoBehaviour:
   launchForce: 40
   percentageToLaunch: 5
   cubesToLaunch: 5
-  CageBlockPrefab: {fileID: 1230891745418371966, guid: 345b0ae9498e327478767960ee2fd6fd, type: 3}
+  CageBlockPrefab: {fileID: 1230891745418371966, guid: 095cb75299d059641a810e1d945b7e59, type: 3}
   cageRadius: 2.3
   cageTriggerTime: 5
   cageSpawnTime: 2.1

@@ -51,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3810439456834575818}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -127,6 +127,8 @@ MonoBehaviour:
   backwardForce: 0
   upwardForce: 20
   repulsionForceHorizontal: 100
+  explosionEffect: {fileID: 4092455346545260222, guid: c6deda3e7b127a247912427a755623c9, type: 3}
+  explosionEffectSpawnPoint: {fileID: 4764325219092148716}
 --- !u!1 &5738283318553002890
 GameObject:
   m_ObjectHideFlags: 0

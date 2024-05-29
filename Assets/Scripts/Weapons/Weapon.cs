@@ -702,6 +702,8 @@ public class Weapon : MonoBehaviour
         {
             currentExplosiveCharges++;
             explosiveChargeText.text = currentExplosiveCharges + "/" + maxExplosiveCharges;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Collectibles/Collected");
+            
 
             // Appeler la méthode pour afficher l'image
             FindObjectOfType<WeaponUIManager>().ShowExplosiveChargeGain();

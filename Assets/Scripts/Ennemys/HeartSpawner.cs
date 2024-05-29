@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Rendering.Universal;
 
 public class HeartSpawner : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class HeartSpawner : MonoBehaviour
     public TextMeshProUGUI timerText;
     public Image blackFade;
     public Animator anim;
+    public GameObject GameOverCanvas;
 
     private bool isCooldownActive = false;
 
@@ -223,6 +225,9 @@ public class HeartSpawner : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         player.isTimeOut = false;
         //FindObjectOfType<SceneTransition>().ReloadScene();
+        GameOverCanvas.SetActive(true);
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void UpgradeCubeIfNeeded(Vector3 position)

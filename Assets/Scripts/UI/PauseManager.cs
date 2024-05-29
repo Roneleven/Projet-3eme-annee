@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,11 +8,13 @@ public class PauseManager : MonoBehaviour
     public GameObject CanvasPause;
     public FMOD.Studio.EventInstance backgroundMusic;
     private bool isPaused = false;
+    private Player player;
+    public static FMOD.Studio.EventInstance MenuMusique;
 
     private void Start()
     {
-        //backgroundMusic = FMODUnity.RuntimeManager.CreateInstance("event:/MARBLE ARCADE/SD_HUD/S_HUD_MUSIC/S_HUD_MUSIC_INGAME");
-        //backgroundMusic.start();
+        player = FindObjectOfType<Player>();
+        MenuMusique = FMODUnity.RuntimeManager.CreateInstance("event:/UX/Ambience/MenuBreakingTheHeart");
     }
 
     void Update()
@@ -33,6 +34,7 @@ public class PauseManager : MonoBehaviour
 
     public void ResumeGame()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UX/Button/Select");
         Cursor.lockState = CursorLockMode.Locked;
         CanvasPause.SetActive(false);
         Time.timeScale = 1f;
@@ -41,6 +43,8 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
+        
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UX/Button/Back");
         Cursor.lockState = CursorLockMode.None;
         CanvasPause.SetActive(true);
         Time.timeScale = 0f;
@@ -49,12 +53,17 @@ public class PauseManager : MonoBehaviour
 
     public void RestartGame()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UX/Button/Start");
+        player.ResetLoomParameter();
         SceneManager.LoadScene("Arene_Demo");
     }
 
     public void MainMenu()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UX/Button/Select");
+        player.ResetLoomParameter();
         SceneManager.LoadScene("Menu");
+        MenuMusique.start();
     }
 
 }

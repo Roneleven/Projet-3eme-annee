@@ -19,7 +19,7 @@ public class ExplosiveBullet : MonoBehaviour
 
         if (cubeHealth != null)
         {
-            cubeHealth.TakeDamage(bulletDamage);
+            cubeHealth.TakeDamage(bulletDamage, true);
         }
 
         Explode();
@@ -35,7 +35,7 @@ public class ExplosiveBullet : MonoBehaviour
 
             if (cubeHealth != null)
             {
-                cubeHealth.TakeDamage(bulletDamage);
+                cubeHealth.TakeDamage(bulletDamage, true);
             }
         }
 

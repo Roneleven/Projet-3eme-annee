@@ -35,7 +35,6 @@ public class HeartHealth : MonoBehaviour
     public Transform HeartHitSpawnPoint;
     private VisualEffect HeartHitInstance;
     public UniversalRendererData urpRendererData;
-    private ScriptableRendererFeature xRayFeature;
 
     public List<int> accessibleTeleportPoints = new List<int>();
 
@@ -48,9 +47,7 @@ public class HeartHealth : MonoBehaviour
 
         SetRandomTarget();
         SetTargetForTeleportIndex(currentTeleportIndex);
-        ActivateLinkedBoxSpawners(currentTeleportIndex); // Activer les spawners initiaux
-
-        xRayFeature = urpRendererData.rendererFeatures.Find(feature => feature.name == "xRay");
+        ActivateLinkedBoxSpawners(currentTeleportIndex);
     }
 
     void Update()
@@ -106,12 +103,18 @@ public class HeartHealth : MonoBehaviour
         HeartHitInstance = Instantiate(HeartHit, HeartHitSpawnPoint.position, HeartHitSpawnPoint.rotation);
         HeartHitInstance.Play();
         HeartHitInstance.gameObject.AddComponent<VFXAutoDestroy>();
-        StartCoroutine(ActivateXRay());
 
         if (health <= 0 && !hasBeenDestroyed) // Vérifie si l'objet n'a pas déjà été détruit
         {
             hasBeenDestroyed = true;
             doorAnimator.Play("DoorOpening");
+            
+
+        }
+
+        if (health <= 0) // Vérifie si l'objet n'a pas déjà été détruit
+        {
+           
             Idle.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             TeleportHeart();
             TeleportEyeRadius(transform.position);
@@ -121,35 +124,17 @@ public class HeartHealth : MonoBehaviour
         }
     }
 
-    private IEnumerator ActivateXRay()
-    {
-
-        if (xRayFeature != null)
-        {
-            // Activez la feature xRay
-            xRayFeature.SetActive(true);
-            yield return new WaitForSeconds(2);
-            // Désactivez la feature xRay
-            xRayFeature.SetActive(false);
-        }
-        else
-        {
-            Debug.LogError("xRay feature not found in the renderer features.");
-        }
-    }
-
     private void TeleportHeart()
     {
         DestroyCubesBeforeTeleport();
         DeactivateLinkedBoxSpawners();
-        xRayFeature.SetActive(false);
         currentTeleportIndex++;
         if (currentTeleportIndex >= teleportPositions.Length)
         {
             currentTeleportIndex = 0;
         }
         SetTargetForTeleportIndex(currentTeleportIndex);
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Locomotion/Teleport");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Teleport");
 
         if (accessibleTeleportPoints.Count > 0)
         {

@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
 
         if (cubeHealth != null)
         {
-            cubeHealth.TakeDamage(damage);
+            cubeHealth.TakeDamage(damage, true);
             penetrationCount--;
 
             if (cubeHealth.health <= 0)

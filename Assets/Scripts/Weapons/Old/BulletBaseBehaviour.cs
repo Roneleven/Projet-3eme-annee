@@ -28,7 +28,7 @@ public class BulletBaseBehavior : MonoBehaviour
         // Si le composant CubeHealth est trouvé, inflige des dégâts au cube
         if (cubeHealth != null)
         {
-            cubeHealth.TakeDamage(1);
+            cubeHealth.TakeDamage(1, true);
         }
 
         // Annule l'invocation si la balle est détruite lors d'une collision

@@ -11,13 +11,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Jeu.unity
     guid: e8c88fff68326ea44bbb1aecf2b57054
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Menu.unity
-    guid: 919034c798dad0242a85b2e1d7a3c549
-  - enabled: 0
+    guid: 0fc9ac7e2d9e45b44a1590321570e0ac
+  - enabled: 1
     path: Assets/Scenes/Arene_Demo.unity
     guid: c173b284831554f47be57b115fecff6b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Temp.unity
     guid: 6a7632d443c290f4791f6cabe4a7178a
   m_configObjects: {}

@@ -15,12 +15,12 @@ public class FakeHeart : MonoBehaviour
     public GameObject parentHeart;
     public GameObject trueHeart;
     public UniversalRendererData urpRendererData;
-    private ScriptableRendererFeature xRayFeature;
     public Animator doorAnimator;
+    private Player player;
 
     void Start()
     {
-        xRayFeature = urpRendererData.rendererFeatures.Find(feature => feature.name == "xRay");
+        player = FindObjectOfType<Player>();
     }
 
     public void TakeDamage(int damage)
@@ -30,8 +30,6 @@ public class FakeHeart : MonoBehaviour
         HeartHitInstance = Instantiate(HeartHit, HeartHitSpawnPoint.position, HeartHitSpawnPoint.rotation);
         HeartHitInstance.Play();
         HeartHitInstance.gameObject.AddComponent<VFXAutoDestroy>();
-
-        StartCoroutine(ActivateXRay());
 
         if (health <= 0)
         {
@@ -43,21 +41,8 @@ public class FakeHeart : MonoBehaviour
             FMODUnity.RuntimeManager.PlayOneShot("event:/Heart/Behaviours/Teleport");
             Idle.start();
             trueHeart.SetActive(true);
-            xRayFeature.SetActive(false);
+            player.IncreaseLoomParameter();
             Destroy(parentHeart);       
-        }
-    }
-
-    private IEnumerator ActivateXRay()
-    {
-
-        if (xRayFeature != null)
-        {
-            // Activez la feature xRay
-            xRayFeature.SetActive(true);
-            yield return new WaitForSeconds(2);
-            // Désactivez la feature xRay
-            xRayFeature.SetActive(false);
         }
     }
 }

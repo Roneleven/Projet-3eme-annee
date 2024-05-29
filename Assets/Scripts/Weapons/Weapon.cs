@@ -9,7 +9,7 @@ public enum FireMode
 {
     Normal,
     Explosive,
-    Laser
+    //Laser
 }
 public class Weapon : MonoBehaviour
 {
@@ -60,12 +60,15 @@ public class Weapon : MonoBehaviour
     private Quaternion _startRotation;
     public Recoil Recoil_Script;
     private float originalSpeed;
+    public PlayerMovementsRB playerMovementsRB;
 
 
     [Header("Explosive Mode")]
     public int explosiveDamage;
     public float explosiveRange;
     public float explosionRadius;
+    public float kickbackForceExplosive;
+    public float kickbackTimeExplosive;
     public GameObject explosionPrefab;
     public int maxExplosiveCharges = 5;
     public int currentExplosiveCharges = 5;
@@ -74,8 +77,10 @@ public class Weapon : MonoBehaviour
     public float chargeTimeThreshold;
     private int destroyedCubeCount = 0;
     public int cubesToDestroyToGainACharge = 5;
+    public float chargingShakeIntensity = 0.1f;
+    public AnimationCurve shakeCurve;
 
-    [Header("Laser Mode")]
+    /*[Header("Laser Mode")]
     public float laserCooldown = 1f;
     public float laserDuration = 1f;
     public float laserWidth = 3f;
@@ -83,10 +88,10 @@ public class Weapon : MonoBehaviour
     private bool canShootLaser = true;
     public GameObject laserVFX;
     public GameObject laserSpawnPoint;
-    public PlayerMovementsRB playerMovementsRB;
+    
     public MouseLook mouseLookScript;
     private bool isChargingLaser = false;
-    private bool isLaserActive = false;
+    private bool isLaserActive = false;*/
 
     [Header("Heat Settings")]
     public float heatPerShot;
@@ -112,6 +117,8 @@ public class Weapon : MonoBehaviour
     public ParticleSystem explosiveTrailVFX;
     public VisualEffect explosionEffect;
     private VisualEffect explosionInstance;
+    public VisualEffect readyToFireEffect;
+    private VisualEffect readyToFireInstance;
     public VisualEffect shootEffect;
     private VisualEffect shootInstance;
     public VisualEffect smokeEffect;
@@ -126,6 +133,13 @@ public class Weapon : MonoBehaviour
 
     [Header("UI Manager")]
     public GameObject weaponUIPanel;
+    public Camera mainCamera;
+    public Camera xRayCamera;
+    public LayerMask normalViewMask;
+    public LayerMask thermalViewMask;
+    public GameObject targetObject1;
+    public GameObject targetObject2;
+    public float angleMargin = 5f;
 
     private void Start()
     {
@@ -134,7 +148,8 @@ public class Weapon : MonoBehaviour
         Recoil_Script = transform.Find("FPS Player Gun Rework/CameraRot/CameraRecoil").GetComponent<Recoil>();
         currentExplosiveCharges = maxExplosiveCharges;
         currentMode = FireMode.Normal;
-        mouseLookScript = playerMovementsRB.GetComponentInChildren<MouseLook>();
+        //mouseLookScript = playerMovementsRB.GetComponentInChildren<MouseLook>();
+        xRayCamera.enabled = false;
     }
 
     private void Update()
@@ -182,10 +197,10 @@ public class Weapon : MonoBehaviour
         {
             SwitchToExplosiveMode();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        /*else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             SwitchToLaserMode();
-        }
+        }*/
 
         //tir clique gauche explosive
 
@@ -197,11 +212,24 @@ public class Weapon : MonoBehaviour
                 chargingEffectInstance = Instantiate(chargingEffect, chargingEffectSpawnPoint.position, chargingEffectSpawnPoint.rotation);
                 chargingEffectInstance.Play();
                 chargingEffectInstance.gameObject.AddComponent<VFXAutoDestroy>();
+                StartCoroutine(HandleWeaponShake());
             }
 
             if (Input.GetMouseButtonDown(0) && currentExplosiveCharges <= 0)
             {
                 FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Guns/ExplosiveGun/0 Charge");
+            }
+
+            if (Input.GetMouseButton(0) && currentExplosiveCharges > 0)
+            {
+                if (Time.time - chargeStartTime >= chargeTimeThreshold && readyToFireInstance == null)
+                {
+                    Debug.Log("Ready to fire particle should be instantiated");
+                    readyToFireInstance = Instantiate(readyToFireEffect, muzzleFlashSpawnPoint.position, muzzleFlashSpawnPoint.rotation);
+                    readyToFireInstance.transform.SetParent(muzzleFlashSpawnPoint);
+                    readyToFireInstance.Play();
+                    //readyToFireInstance.gameObject.AddComponent<VFXAutoDestroy>();
+                }
             }
 
             if (Input.GetMouseButtonUp(0) && Time.time - chargeStartTime >= chargeTimeThreshold && currentExplosiveCharges > 0)
@@ -229,12 +257,23 @@ public class Weapon : MonoBehaviour
                     explosiveTrailVFX.Play();
                     FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Guns/ExplosiveGun/Shoot 2");
                 }
+
+                if (readyToFireInstance != null)
+                {
+                    readyToFireInstance.Stop();
+                    Destroy(readyToFireInstance.gameObject);
+                    readyToFireInstance = null;
+                }
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-                chargingEffectInstance.Stop();
-                Destroy(chargingEffectInstance.gameObject);
+                if (chargingEffectInstance != null)
+                {
+                    chargingEffectInstance.Stop();
+                    Destroy(chargingEffectInstance.gameObject);
+                    chargingEffectInstance = null;
+                }
             }
 
             // Assure-toi que le VisualEffectInstance reste attaché au point de spawn de l'arme
@@ -256,12 +295,13 @@ public class Weapon : MonoBehaviour
             }
         }
 
+
         //LASER
 
-        if (Input.GetMouseButton(0) && currentMode == FireMode.Laser && canShootLaser)
-        {
-            StartChargingLaser();
-        }
+        /* if (Input.GetMouseButton(0) && currentMode == FireMode.Laser && canShootLaser)
+         {
+             StartChargingLaser();
+         }*/
 
         if (!overheated && !_shooting)
         {
@@ -313,12 +353,54 @@ public class Weapon : MonoBehaviour
 
         UpdateHeatUI();
 
-        if (muzzleFlashInstance != null)
+        if (Input.GetMouseButton(1)) // Assumant que "Fire2" est le bouton pour viser
         {
-            muzzleFlashInstance.transform.position = muzzleFlashSpawnPoint.position;
-            muzzleFlashInstance.transform.rotation = muzzleFlashSpawnPoint.rotation;
+            if (IsLookingAtTarget())
+            {
+                mainCamera.cullingMask = thermalViewMask;
+                xRayCamera.enabled = true;
+            }
+            else
+            {
+                mainCamera.cullingMask = normalViewMask;
+                xRayCamera.enabled = false;
+            }
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            mainCamera.cullingMask = normalViewMask;
+            xRayCamera.enabled = false;
         }
     }
+
+    private bool IsLookingAtTarget()
+    {
+        if (targetObject1 == null && targetObject2 == null) return false;
+
+        if (targetObject1 != null)
+        {
+            Vector3 directionToTarget1 = targetObject1.transform.position - _playerCamera.position;
+            float angle1 = Vector3.Angle(_playerCamera.forward, directionToTarget1);
+            if (angle1 <= angleMargin)
+            {
+                return true;
+            }
+        }
+
+        if (targetObject2 != null)
+        {
+            Vector3 directionToTarget2 = targetObject2.transform.position - _playerCamera.position;
+            float angle2 = Vector3.Angle(_playerCamera.forward, directionToTarget2);
+            if (angle2 <= angleMargin)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
 
     private void Shoot()
     {
@@ -412,37 +494,6 @@ public class Weapon : MonoBehaviour
         StartCoroutine(ShootingCooldown());
     }
 
-    private IEnumerator ShootingCooldown()
-    {
-        _shooting = true;
-        yield return new WaitForSeconds(GetAdjustedFireRate());
-        _shooting = false;
-    }
-
-
-
-    private void UpdateHeatUI()
-    {
-        // Calculate the fill amount based on the current heat value and overheat threshold
-        float fillAmount = Mathf.Clamp01(currentHeat / overheatThreshold);
-
-        // Scale the fill amount to match the maximum fill amount
-        fillAmount *= maxFillAmount;
-
-        // Set the fill amount of the heat UI image
-        if (heatImage != null)
-        {
-            heatImage.fillAmount = fillAmount;
-        }
-    }
-
-    private float GetAdjustedFireRate()
-    {
-        float baseFireRate = 1f / shotsPerSecond;
-        float adjustedFireRate = baseFireRate / (1f + heatEffectMultiplier * currentHeat);
-        return adjustedFireRate;
-    }
-
     private void HandleHitObject(RaycastHit hitInfo)
     {
         var rb = hitInfo.transform.GetComponent<Rigidbody>();
@@ -460,7 +511,7 @@ public class Weapon : MonoBehaviour
 
         if (cubeHealth != null)
         {
-            cubeHealth.TakeDamage(damage);
+            cubeHealth.TakeDamage(damage, false); // Passe false pour isExplosiveDamage
 
             if (cubeHealth.health <= 0)
             {
@@ -495,6 +546,40 @@ public class Weapon : MonoBehaviour
             Destroy(hitInfo.transform.gameObject);
         }
     }
+
+
+    private IEnumerator ShootingCooldown()
+    {
+        _shooting = true;
+        yield return new WaitForSeconds(GetAdjustedFireRate());
+        _shooting = false;
+    }
+
+
+
+    private void UpdateHeatUI()
+    {
+        // Calculate the fill amount based on the current heat value and overheat threshold
+        float fillAmount = Mathf.Clamp01(currentHeat / overheatThreshold);
+
+        // Scale the fill amount to match the maximum fill amount
+        fillAmount *= maxFillAmount;
+
+        // Set the fill amount of the heat UI image
+        if (heatImage != null)
+        {
+            heatImage.fillAmount = fillAmount;
+        }
+    }
+
+    private float GetAdjustedFireRate()
+    {
+        float baseFireRate = 1f / shotsPerSecond;
+        float adjustedFireRate = baseFireRate / (1f + heatEffectMultiplier * currentHeat);
+        return adjustedFireRate;
+    }
+
+   
 
 
     public void Pickup(Transform weaponHolder, Transform playerCamera)
@@ -544,11 +629,11 @@ public class Weapon : MonoBehaviour
         ChangeMaterial(currentMode);
     }
 
-    private void SwitchToLaserMode()
+    /*private void SwitchToLaserMode()
     {
         currentMode = FireMode.Laser;
         ChangeMaterial(currentMode);
-    }
+    }*/
 
     private void ChangeMaterial(FireMode mode)
     {
@@ -562,9 +647,9 @@ public class Weapon : MonoBehaviour
             case FireMode.Explosive:
                 newMaterial = explosiveModeMaterial;
                 break;
-            case FireMode.Laser:
+           /* case FireMode.Laser:
                 newMaterial = laserModeMaterial;
-                break;
+                break;*/
         }
 
         if (weaponModel != null && newMaterial != null)
@@ -582,21 +667,24 @@ public class Weapon : MonoBehaviour
     #region MODE EXPLOSIVE
     private void ExplosiveShoot()
     {
-        if (currentMode == FireMode.Explosive && currentExplosiveCharges > 0)
+        if (currentExplosiveCharges > 0)
         {
+            StartCoroutine(HandleExplosiveRecoil(kickbackTimeExplosive, kickbackForceExplosive)); // Adjust the duration and force as needed
+
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, explosiveRange))
             {
                 explosionInstance = Instantiate(explosionEffect, hit.point, Quaternion.identity);
                 explosionInstance.Play();
                 explosionInstance.gameObject.AddComponent<VFXAutoDestroy>();
+
                 Collider[] colliders = Physics.OverlapSphere(hit.point, explosionRadius);
                 foreach (Collider hitCollider in colliders)
                 {
                     CubeHealth cubeHealth = hitCollider.GetComponent<CubeHealth>();
                     if (cubeHealth != null)
                     {
-                        cubeHealth.TakeDamage(explosiveDamage);
+                        cubeHealth.TakeDamage(explosiveDamage, true);
                     }
                 }
             }
@@ -606,129 +694,181 @@ public class Weapon : MonoBehaviour
         }
     }
 
+
+
     public void GainExplosiveCharge()
     {
         if (currentExplosiveCharges < maxExplosiveCharges)
         {
             currentExplosiveCharges++;
             explosiveChargeText.text = currentExplosiveCharges + "/" + maxExplosiveCharges;
-        }
-    }
-    #endregion
 
-    #region MODE LASER
-
-    private void StartChargingLaser()
-    {
-        if (!isChargingLaser && !isLaserActive)
-        {
-            StartCoroutine(ChargeLaser());
+            // Appeler la méthode pour afficher l'image
+            FindObjectOfType<WeaponUIManager>().ShowExplosiveChargeGain();
         }
     }
 
-    private IEnumerator ChargeLaser()
+    private IEnumerator HandleExplosiveRecoil(float duration, float force)
     {
-        isChargingLaser = true;
-        float chargeStartTime = Time.time;
+        Vector3 initialPosition = transform.localPosition;
+        Vector3 recoilPosition = initialPosition - new Vector3(0, 0, force);
 
-        // Ralentir le joueur en ajustant sa vitesse
-        float originalSpeed = playerMovementsRB.speed;
-        playerMovementsRB.speed *= 0.5f; // Réduire la vitesse à la moitié
+        float elapsed = 0f;
 
-        // Attendre pendant que le laser se charge
-        while (Time.time - chargeStartTime < 2f)
+        while (elapsed < duration)
         {
+            float t = elapsed / duration;
+            transform.localPosition = Vector3.Lerp(recoilPosition, initialPosition, t);
+            elapsed += Time.deltaTime;
             yield return null;
         }
 
-        // Rétablir la vitesse du joueur
-        playerMovementsRB.speed = originalSpeed;
-
-        isChargingLaser = false;
-        FireLaser();
+        transform.localPosition = initialPosition;
     }
 
-    private void FireLaser()
+    private IEnumerator HandleWeaponShake()
     {
-        if (currentMode == FireMode.Laser)
+        while (Input.GetMouseButton(0))
         {
-            StartCoroutine(FireLaserCoroutine());
-        }
-    }
+            float chargeDuration = Time.time - chargeStartTime;
+            float normalizedCharge = chargeDuration / chargeTimeThreshold;
+            float shakeIntensity = shakeCurve.Evaluate(normalizedCharge);
 
-
-    private IEnumerator FireLaserCoroutine()
-    {
-        canShootLaser = false;
-        isLaserActive = true;
-
-        // Désactiver le script MouseLook
-        mouseLookScript.enabled = false;
-
-        // Activer le isKinematic
-        playerMovementsRB.rb.isKinematic = true;
-
-        // Instantiation du VFX de laser à la position et rotation du cannon du joueur
-        GameObject laserInstance = Instantiate(laserVFX, laserSpawnPoint.transform.position, laserSpawnPoint.transform.rotation);
-
-        float startTime = Time.time;
-
-        while (Time.time - startTime < laserDuration)
-        {
-            // Lance un raycast pour détecter les collisions
-            RaycastHit[] hits;
-            hits = Physics.SphereCastAll(transform.position, laserWidth / 2f, transform.forward, laserRange);
-
-            foreach (RaycastHit hit in hits)
-            {
-                if (hit.collider.CompareTag("Block") || hit.collider.CompareTag("HeartBlock"))
-                {
-                    Destroy(hit.collider.gameObject);
-                }
-            }
-
-            // Positionne le VFX de laser à l'extrémité du rayon du laser
-            Vector3 laserEnd = transform.position + transform.forward;
-            laserInstance.transform.position = laserEnd;
-
-            // Met à jour la rotation du VFX de laser pour qu'il regarde dans la direction du rayon du laser
-            laserInstance.transform.rotation = Quaternion.LookRotation(transform.forward);
+            ApplyShake(shakeIntensity);
 
             yield return null;
         }
-
-        isLaserActive = false;
-
-        // Réactiver le script MouseLook
-        mouseLookScript.enabled = true;
-
-        // Désactiver le isKinematic
-        playerMovementsRB.rb.isKinematic = false;
-
-        // Suppression du VFX de laser une fois que la durée est écoulée
-        Destroy(laserInstance);
-        WeaponUIManager weaponUIManager = FindObjectOfType<WeaponUIManager>();
-        weaponUIManager.DisplayLaserCooldownText(laserCooldown);
-        StartCoroutine(LaserCooldown());
     }
 
-
-    private IEnumerator LaserCooldown()
+    private void ApplyShake(float intensity)
     {
-        yield return new WaitForSeconds(laserCooldown);
-        canShootLaser = true;
+        float shakeOffsetX = Mathf.PerlinNoise(Time.time * 25f, 0f) * 2 - 1;
+        float shakeOffsetY = Mathf.PerlinNoise(0f, Time.time * 25f) * 2 - 1;
+        float shakeOffsetZ = Mathf.PerlinNoise(Time.time * 25f, Time.time * 25f) * 2 - 1;
 
-        Debug.Log("laser");
-    }
-
-    private void OnDrawGizmos()
-    {
-        // Dessine un gizmo représentant le rayon du laser
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, transform.forward * laserRange);
+        Vector3 shakeOffset = new Vector3(shakeOffsetX, shakeOffsetY, shakeOffsetZ) * intensity;
+        transform.localPosition += shakeOffset;
     }
 
 
-    #endregion
-    public bool Scoping => _scoping;
+
+#endregion
+
+/* #region MODE LASER
+
+ private void StartChargingLaser()
+ {
+     if (!isChargingLaser && !isLaserActive)
+     {
+         StartCoroutine(ChargeLaser());
+     }
+ }
+
+ private IEnumerator ChargeLaser()
+ {
+     isChargingLaser = true;
+     float chargeStartTime = Time.time;
+
+     // Ralentir le joueur en ajustant sa vitesse
+     float originalSpeed = playerMovementsRB.speed;
+     playerMovementsRB.speed *= 0.5f; // Réduire la vitesse à la moitié
+
+     // Attendre pendant que le laser se charge
+     while (Time.time - chargeStartTime < 2f)
+     {
+         yield return null;
+     }
+
+     // Rétablir la vitesse du joueur
+     playerMovementsRB.speed = originalSpeed;
+
+     isChargingLaser = false;
+     FireLaser();
+ }
+
+ private void FireLaser()
+ {
+     if (currentMode == FireMode.Laser)
+     {
+         StartCoroutine(FireLaserCoroutine());
+     }
+ }
+
+
+ private IEnumerator FireLaserCoroutine()
+ {
+     canShootLaser = false;
+     isLaserActive = true;
+
+     // Désactiver le script MouseLook
+     mouseLookScript.enabled = false;
+
+     // Activer le isKinematic
+     playerMovementsRB.rb.isKinematic = true;
+
+     // Instantiation du VFX de laser à la position et rotation du cannon du joueur
+     GameObject laserInstance = Instantiate(laserVFX, laserSpawnPoint.transform.position, laserSpawnPoint.transform.rotation);
+
+     float startTime = Time.time;
+
+     while (Time.time - startTime < laserDuration)
+     {
+         // Lance un raycast pour détecter les collisions
+         RaycastHit[] hits;
+         hits = Physics.SphereCastAll(transform.position, laserWidth / 2f, transform.forward, laserRange);
+
+         foreach (RaycastHit hit in hits)
+         {
+             if (hit.collider.CompareTag("Block") || hit.collider.CompareTag("HeartBlock"))
+             {
+                 Destroy(hit.collider.gameObject);
+             }
+         }
+
+         // Positionne le VFX de laser à l'extrémité du rayon du laser
+         Vector3 laserEnd = transform.position + transform.forward;
+         laserInstance.transform.position = laserEnd;
+
+         // Met à jour la rotation du VFX de laser pour qu'il regarde dans la direction du rayon du laser
+         laserInstance.transform.rotation = Quaternion.LookRotation(transform.forward);
+
+         yield return null;
+     }
+
+     isLaserActive = false;
+
+     // Réactiver le script MouseLook
+     mouseLookScript.enabled = true;
+
+     // Désactiver le isKinematic
+     playerMovementsRB.rb.isKinematic = false;
+
+     // Suppression du VFX de laser une fois que la durée est écoulée
+     Destroy(laserInstance);
+     WeaponUIManager weaponUIManager = FindObjectOfType<WeaponUIManager>();
+     weaponUIManager.DisplayLaserCooldownText(laserCooldown);
+     StartCoroutine(LaserCooldown());
+ }
+
+
+ private IEnumerator LaserCooldown()
+ {
+     yield return new WaitForSeconds(laserCooldown);
+     canShootLaser = true;
+
+     Debug.Log("laser");
+ }
+
+ private void OnDrawGizmos()
+ {
+     // Dessine un gizmo représentant le rayon du laser
+     Gizmos.color = Color.red;
+     Gizmos.DrawRay(transform.position, transform.forward * laserRange);
+ }
+
+
+ #endregion
+*/
+public bool Scoping => _scoping;
+    
 }

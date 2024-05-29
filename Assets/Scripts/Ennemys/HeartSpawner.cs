@@ -222,7 +222,7 @@ public class HeartSpawner : MonoBehaviour
         player.isTimeOut = true;
         yield return new WaitForSeconds(0.1f);
         player.isTimeOut = false;
-        FindObjectOfType<SceneTransition>().ReloadScene();
+        //FindObjectOfType<SceneTransition>().ReloadScene();
     }
 
     private void UpgradeCubeIfNeeded(Vector3 position)

@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     private VolumeProfile _volume;
     private Vignette _vignette;
     public bool isTimeOut = false;
+    public GameObject GameOverCanvas;
 
     private FMOD.Studio.EventInstance Loom;
 
@@ -92,7 +93,10 @@ public class Player : MonoBehaviour
         if (currentHealth <= 0)
         {
             Loom.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            FindObjectOfType<SceneTransition>().ReloadScene();
+            GameOverCanvas.SetActive(true);
+            Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.None;
+            //FindObjectOfType<SceneTransition>().ReloadScene();
         }
     }
 

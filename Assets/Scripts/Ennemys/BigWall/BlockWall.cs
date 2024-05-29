@@ -7,6 +7,7 @@ public class BlockWall : MonoBehaviour
     public Player playerScript;
     public GameObject losangePrefab;
     public float forceMagnitude;
+    public Material newMaterial;
 
     private bool hasBeenPropelled = false; // Variable pour suivre l'état de propulsion
 
@@ -35,6 +36,8 @@ public class BlockWall : MonoBehaviour
 
     void SpawnLosange()
 {
+    ChangeMaterial();
+
     Rigidbody rb = GetComponent<Rigidbody>();
     if (rb != null)
     {
@@ -60,6 +63,16 @@ public class BlockWall : MonoBehaviour
     Invoke("DestroyBlock", 3f);
     hasBeenPropelled = true; // Marque l'objet comme ayant été propulsé
 }
+
+void ChangeMaterial()
+    {
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer != null && newMaterial != null)
+        {
+            renderer.material = newMaterial;
+        }
+    }
+
 
     void DestroyBlock()
     {

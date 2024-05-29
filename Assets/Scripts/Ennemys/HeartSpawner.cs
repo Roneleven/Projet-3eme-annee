@@ -214,13 +214,13 @@ public class HeartSpawner : MonoBehaviour
     {
         anim.Play("FadeIn");
         yield return new WaitForSeconds(1);
-        TimeOut();
+        StartCoroutine(TimeOut());
     }
 
-    private void TimeOut()
+    private IEnumerator TimeOut()
     {
         player.isTimeOut = true;
-        yield return new WaitForSeconds(0.1);
+        yield return new WaitForSeconds(0.1f);
         player.isTimeOut = false;
         FindObjectOfType<SceneTransition>().ReloadScene();
     }
@@ -299,7 +299,7 @@ public class HeartSpawner : MonoBehaviour
 
     private void UpdateCocon()
     {
-        cocon = (currentPalier + 4) * 220 ;
+        cocon = (spawnRadius) * 110 + 220 ;
         coconvfx.transform.localScale = new Vector3(cocon, cocon, cocon);
     }
 
@@ -442,6 +442,9 @@ public class HeartSpawner : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, spawnRadius * cageRadius);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, spawnRadius);
     }
     #endregion
 

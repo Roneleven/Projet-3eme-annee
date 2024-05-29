@@ -3,7 +3,10 @@ guid: 322b24c34adc2a945b99e050690e51db
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - playerScript: {instanceID: 0}
+  - losangePrefab: {instanceID: 0}
+  - newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

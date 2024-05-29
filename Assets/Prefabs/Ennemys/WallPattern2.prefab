@@ -328,6 +328,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &1912106459114082594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,6 +452,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &3512275648821395164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,6 +576,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &1364485544952700606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -697,6 +700,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &834515811138360812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -820,6 +824,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &7818622498191570341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,6 +948,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &7372086787763611343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1066,6 +1072,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &362502624342680375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1189,6 +1196,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &2595538942580260434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1312,6 +1320,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &3542630434674333140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1435,6 +1444,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &1329276265547988622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1558,6 +1568,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &8566525693780500470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1681,6 +1692,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &7527838808063666207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1804,6 +1816,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &1410300917054592743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1927,6 +1940,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &1479035170755074668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2045,6 +2059,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &4906126229771002056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2168,6 +2183,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &8085556771562774921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2291,6 +2307,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &3891020261525297776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2414,6 +2431,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &5299045368733382710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2537,6 +2555,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &6554551903000117920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2660,6 +2679,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &2220786679892683520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2783,6 +2803,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &234848014214421950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2906,6 +2927,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &9120818456624850059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3029,6 +3051,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &5348896507645979640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3152,6 +3175,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &2842918107190461238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3275,6 +3299,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &1503741535531341175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3398,6 +3423,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &1316259078550564288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3521,6 +3547,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &6263199360631118555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3644,6 +3671,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &484857894693949126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3767,6 +3795,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &7635063639925355833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3890,6 +3919,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
   forceMagnitude: 2
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &6042391577226097154
 MonoBehaviour:
   m_ObjectHideFlags: 0

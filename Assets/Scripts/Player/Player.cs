@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public float vignetteFadeSpeed = 1f;
     private VolumeProfile _volume;
     private Vignette _vignette;
+    public bool isTimeOut = false;
 
     private FMOD.Studio.EventInstance Loom;
 
@@ -70,6 +71,11 @@ public class Player : MonoBehaviour
                 _vignette.intensity.value = 0;
             }
         }
+
+        if (isTimeOut)
+        {
+            Loom.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -92,10 +98,7 @@ public class Player : MonoBehaviour
 
     public void CheckTimeout()
     {
-        if (isTimeOut)
-        {
-            Loom.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        }
+        
     }
 
     public void Heal(int heal)

@@ -284,6 +284,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (8)
@@ -298,9 +302,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 855676251565889031}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1912106459114082594}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!4 &2101309570857866944 stripped
@@ -313,22 +314,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 245007886708516812}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &855676251565889031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5860016126201016557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &1912106459114082594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,6 +393,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (12)
@@ -422,9 +411,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1221169092263316550}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 3512275648821395164}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!4 &1659154817734299892 stripped
@@ -437,22 +423,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 669250944593879544}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1221169092263316550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6592474846229657305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &3512275648821395164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,6 +502,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (7)
@@ -546,9 +520,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6798084331464131385}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1364485544952700606}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!4 &1468283415149387195 stripped
@@ -561,22 +532,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 733888039274753207}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6798084331464131385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6348896287157042070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &1364485544952700606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -656,6 +611,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (10)
@@ -670,9 +629,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8766455684195984335}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 834515811138360812}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!4 &1539789602515894060 stripped
@@ -685,22 +641,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 797496434612899360}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8766455684195984335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6423753790185642241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &834515811138360812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -780,6 +720,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (12)
@@ -794,9 +738,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7582442177292590275}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7818622498191570341}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!4 &982354161471798791 stripped
@@ -809,22 +750,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 1435853693497216779}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7582442177292590275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4745010127688308778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &7818622498191570341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -904,6 +829,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (7)
@@ -918,9 +847,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3012599273590207786}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7372086787763611343}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!4 &757614501215030985 stripped
@@ -933,22 +859,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 1498782696391442373}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3012599273590207786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5113901330817247460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &7372086787763611343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1028,6 +938,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (7)
@@ -1042,9 +956,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6868230208445174417}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 362502624342680375}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!4 &67129286564427712 stripped
@@ -1057,22 +968,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 2207138815028496076}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6868230208445174417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5518547607110783469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &362502624342680375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1152,6 +1047,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (11)
@@ -1166,9 +1065,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2425730739347150999}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2595538942580260434}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!4 &4458043322283152512 stripped
@@ -1181,22 +1077,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 2562845589654988172}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2425730739347150999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8189104044810465965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &2595538942580260434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1276,6 +1156,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (12)
@@ -1290,9 +1174,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7528419814764545532}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 3542630434674333140}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!4 &4315784340456959821 stripped
@@ -1305,22 +1186,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 2714428444125683265}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7528419814764545532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8619628588317559136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &3542630434674333140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1400,6 +1265,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (8)
@@ -1414,9 +1283,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7667099395457380009}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1329276265547988622}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!4 &4120326364559718876 stripped
@@ -1429,22 +1295,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 2837688103327533264}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7667099395457380009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8454939346541944817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &1329276265547988622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1524,6 +1374,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (9)
@@ -1538,9 +1392,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7119864415652640608}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8566525693780500470}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!4 &3461598084478950780 stripped
@@ -1553,22 +1404,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 3334134501528366192}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7119864415652640608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8967156602726742865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &8566525693780500470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1648,6 +1483,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (11)
@@ -1662,9 +1501,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4093103931950081515}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7527838808063666207}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!4 &3123668303048430311 stripped
@@ -1677,22 +1513,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 3825341079011189739}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4093103931950081515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7431735088334795978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &7527838808063666207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1772,6 +1592,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (10)
@@ -1786,9 +1610,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3416895168252746057}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1410300917054592743}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!4 &2592337263653510276 stripped
@@ -1801,22 +1622,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 4447020639032831368}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3416895168252746057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8035118225115740841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &1410300917054592743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1896,6 +1701,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (11)
@@ -1910,9 +1719,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3633368653380079270}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1479035170755074668}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!4 &2310385453951563725 stripped
@@ -1925,22 +1731,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 4494324011004692161}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3633368653380079270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7812495353979736544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &1479035170755074668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2020,6 +1810,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (11)
@@ -2034,9 +1828,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 260881753615658573}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4906126229771002056}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!1 &1366245907679913909 stripped
@@ -2044,22 +1835,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 4666122476617216148}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &260881753615658573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1366245907679913909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &4906126229771002056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2144,6 +1919,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (8)
@@ -2158,9 +1937,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9047481076519929999}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8085556771562774921}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!1 &1534373717139864156 stripped
@@ -2168,22 +1944,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 5152034435003755901}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9047481076519929999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1534373717139864156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &8085556771562774921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2268,6 +2028,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (10)
@@ -2282,9 +2046,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5821123782887889323}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 3891020261525297776}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!1 &1807225647889640058 stripped
@@ -2292,22 +2053,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 5413338740850720091}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5821123782887889323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1807225647889640058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &3891020261525297776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2392,6 +2137,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (7)
@@ -2406,9 +2155,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5965643252101027652}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5299045368733382710}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!1 &1851398116272125539 stripped
@@ -2416,22 +2162,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 5442028431951896898}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5965643252101027652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1851398116272125539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &5299045368733382710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2516,6 +2246,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: forceMagnitude
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (6)
@@ -2530,9 +2268,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1505796968641603708}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6554551903000117920}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!1 &2239734057729255739 stripped
@@ -2540,22 +2275,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 5557906500151705114}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1505796968641603708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2239734057729255739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &6554551903000117920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2640,6 +2359,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (8)
@@ -2654,9 +2377,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5310318910020859499}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2220786679892683520}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!1 &2071436465484532984 stripped
@@ -2664,22 +2384,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 5659824872391744473}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5310318910020859499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2071436465484532984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &2220786679892683520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2764,6 +2468,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (9)
@@ -2778,9 +2486,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2131231996739188981}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 234848014214421950}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!1 &201329241438313020 stripped
@@ -2788,22 +2493,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 5836602588069350685}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2131231996739188981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 201329241438313020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &234848014214421950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2888,6 +2577,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (8)
@@ -2902,9 +2595,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5665689966897154070}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 9120818456624850059}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!1 &312337859369793655 stripped
@@ -2912,22 +2602,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 6224292862101548886}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5665689966897154070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 312337859369793655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &9120818456624850059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3012,6 +2686,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (10)
@@ -3026,9 +2704,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6168179999069242202}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5348896507645979640}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!1 &682624537517591014 stripped
@@ -3036,22 +2711,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 6579107766673612487}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6168179999069242202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 682624537517591014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &5348896507645979640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3136,6 +2795,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (9)
@@ -3150,9 +2813,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3498213804993975729}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2842918107190461238}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!1 &3478909677939527407 stripped
@@ -3160,22 +2820,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 7094037108396562894}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3498213804993975729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3478909677939527407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &2842918107190461238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3260,6 +2904,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (9)
@@ -3274,9 +2922,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4012930709912295238}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1503741535531341175}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!1 &3803928871536418836 stripped
@@ -3284,22 +2929,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 7421582429957945141}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4012930709912295238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3803928871536418836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &1503741535531341175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3384,6 +3013,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (10)
@@ -3398,9 +3031,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1621095004059432289}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1316259078550564288}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!1 &4336404429953944257 stripped
@@ -3408,22 +3038,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 7933798945535188448}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1621095004059432289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4336404429953944257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &1316259078550564288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3508,6 +3122,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (7)
@@ -3522,9 +3140,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6410767208363651569}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6263199360631118555}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!1 &4451108201453420907 stripped
@@ -3532,22 +3147,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 8066236731484935754}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6410767208363651569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4451108201453420907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &6263199360631118555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3632,6 +3231,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (9)
@@ -3646,9 +3249,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3483302813074687501}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 484857894693949126}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!1 &2316419320767591496 stripped
@@ -3656,22 +3256,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 8219377015285850985}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3483302813074687501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2316419320767591496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &484857894693949126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3756,6 +3340,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (12)
@@ -3770,9 +3358,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5305226591427934947}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7635063639925355833}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!1 &2343881342012110305 stripped
@@ -3780,22 +3365,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 8265133806414439104}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5305226591427934947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2343881342012110305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &7635063639925355833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3880,6 +3449,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3965025148777719739, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
+      propertyPath: childObjectName
+      value: state_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       propertyPath: m_Name
       value: WallBlock (11)
@@ -3894,9 +3467,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5754500451563743552}
-    - targetCorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6042391577226097154}
   m_SourcePrefab: {fileID: 100100000, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
 --- !u!1 &3360640480699518936 stripped
@@ -3904,22 +3474,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5923505376680711969, guid: 19c4fe6a8e0fd6f43b97a53f0a8af563, type: 3}
   m_PrefabInstance: {fileID: 8977891187110123769}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5754500451563743552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3360640480699518936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 0}
-  losangePrefab: {fileID: 1558753502991316150, guid: 4c9e2fc064b86a04abe1a7a883ff4904, type: 3}
-  forceMagnitude: 2
-  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
 --- !u!114 &6042391577226097154
 MonoBehaviour:
   m_ObjectHideFlags: 0

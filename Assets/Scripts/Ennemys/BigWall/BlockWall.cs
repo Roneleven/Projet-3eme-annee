@@ -5,15 +5,20 @@ using UnityEngine;
 public class BlockWall : MonoBehaviour
 {
     public Player playerScript;
-    public GameObject losangePrefab;
-    public float forceMagnitude;
+    public float speed = 10f; // Vitesse de déplacement
     public Material newMaterial;
+    public GameObject childObject;
 
     private bool hasBeenPropelled = false; // Variable pour suivre l'état de propulsion
+    private Transform playerTransform;
 
     private void Start()
     {
         playerScript = FindObjectOfType<Player>();
+        if (playerScript != null)
+        {
+            playerTransform = playerScript.transform;
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -30,49 +35,47 @@ public class BlockWall : MonoBehaviour
         else
         {
             transform.SetParent(null);
-            Invoke("SpawnLosange", 3f);
+            ChangeMaterial();
+            Invoke("StartPropulsion", 3f);
         }
     }
 
-    void SpawnLosange()
-{
-    ChangeMaterial();
-
-    Rigidbody rb = GetComponent<Rigidbody>();
-    if (rb != null)
+    void StartPropulsion()
     {
-        rb.isKinematic = true;
-        rb.isKinematic = false;
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            Vector3 direction = player.transform.position - transform.position;
-            float distance = direction.magnitude;
-            float calculatedForce = forceMagnitude * distance;
+        hasBeenPropelled = true;
+        Invoke("DestroyBlock", 3f); // Détruire l'objet après 3 secondes
+    }
 
-            // Vérification pour limiter la force à 20
-            if (calculatedForce > 30f)
+    void Update()
+    {
+        if (hasBeenPropelled && playerTransform != null)
+        {
+            // Calculer la direction vers le joueur
+            Vector3 direction = (playerTransform.position - transform.position).normalized;
+
+            // Déplacer l'objet vers le joueur
+            transform.position += direction * speed * Time.deltaTime;
+
+            // Orienter l'objet vers le joueur
+            transform.LookAt(playerTransform);
+        }
+    }
+
+    void ChangeMaterial()
+    {
+        if (childObject != null)
+        {
+            Renderer renderer = childObject.GetComponent<Renderer>();
+            if (renderer != null && newMaterial != null)
             {
-                calculatedForce = 30f;
+                renderer.material = newMaterial;
             }
-
-            rb.AddForce(direction.normalized * calculatedForce, ForceMode.Impulse);
         }
-    }
-
-    Invoke("DestroyBlock", 3f);
-    hasBeenPropelled = true; // Marque l'objet comme ayant été propulsé
-}
-
-void ChangeMaterial()
-    {
-        Renderer renderer = GetComponent<Renderer>();
-        if (renderer != null && newMaterial != null)
+        else
         {
-            renderer.material = newMaterial;
+            Debug.LogWarning("Child object not assigned.");
         }
     }
-
 
     void DestroyBlock()
     {

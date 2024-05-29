@@ -382,6 +382,7 @@ GameObject:
   - component: {fileID: 2366979847221013025}
   - component: {fileID: 8717216850082955550}
   - component: {fileID: 6310172989416615878}
+  - component: {fileID: 3965025148777719739}
   m_Layer: 9
   m_Name: WallBlock
   m_TagString: Block
@@ -428,7 +429,6 @@ MonoBehaviour:
   health: 1
   visualRoot: {fileID: 7470556778922380122}
   CubeHit: {fileID: 8377534922468075976, guid: 96c76a57a0eb7574d8b0fe74bdbd3874, type: 3}
-  CubeDestroyed: {fileID: 6128940009062918843, guid: efc82b0f915cfc7429d43df6cb71862d, type: 3}
   CubeHitSpawnPoint: {fileID: 2184009098133156108}
 --- !u!65 &2366979847221013025
 BoxCollider:
@@ -495,6 +495,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3965025148777719739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5923505376680711969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322b24c34adc2a945b99e050690e51db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerScript: {fileID: 0}
+  forceMagnitude: 10
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
+  childObject: {fileID: 735799329749383301}
 --- !u!1 &6640312725330490306
 GameObject:
   m_ObjectHideFlags: 0

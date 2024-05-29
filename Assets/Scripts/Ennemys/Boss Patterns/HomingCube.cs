@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class HomingCube : MonoBehaviour
 {
@@ -6,6 +7,10 @@ public class HomingCube : MonoBehaviour
     public float speed = 5f; 
     public Player playerScript;
     public float destroyDistance = 1.5f; // Distance à partir de laquelle les losanges se détruisent
+
+    public VisualEffect explosionEffect;
+    public Transform explosionEffectSpawnPoint;
+    private VisualEffect explosionEffectInstance;
 
     private Transform target; 
 
@@ -45,8 +50,15 @@ public class HomingCube : MonoBehaviour
             if (cube != this)
             {
                 float distance = Vector3.Distance(transform.position, cube.transform.position);
+
+
                 if (distance < destroyDistance)
                 {
+
+                    explosionEffectInstance = Instantiate(explosionEffect, explosionEffectSpawnPoint.position, explosionEffectSpawnPoint.rotation);
+                    explosionEffectInstance.Play();
+                    explosionEffectInstance.gameObject.AddComponent<VFXAutoDestroy>();
+
                     if (speed >= cube.speed)
                     {
                         speed += cube.speed;

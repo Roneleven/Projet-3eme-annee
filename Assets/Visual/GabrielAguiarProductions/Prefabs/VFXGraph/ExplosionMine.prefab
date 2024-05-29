@@ -57,10 +57,10 @@ VisualEffect:
       - m_Value: 4
         m_Name: SphereSize
         m_Overridden: 1
-      - m_Value: 20
+      - m_Value: 15
         m_Name: SphereRate
         m_Overridden: 1
-      - m_Value: 20
+      - m_Value: 15
         m_Name: SmokeSize
         m_Overridden: 1
       - m_Value: 0
@@ -71,6 +71,9 @@ VisualEffect:
         m_Overridden: 1
       - m_Value: 0
         m_Name: ParticlesRate
+        m_Overridden: 1
+      - m_Value: 4
+        m_Name: SmokeRate
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
@@ -90,7 +93,7 @@ VisualEffect:
       - m_Value: {x: 112.30191, y: 11.943928, z: 11.759359, w: 1}
         m_Name: SphereColor
         m_Overridden: 1
-      - m_Value: {x: 3.2156863, y: 1.7519771, z: 1.4984089, w: 0}
+      - m_Value: {x: 7.3772106, y: 4.0192676, z: 3.4375486, w: 0}
         m_Name: SmokeColor01
         m_Overridden: 1
     m_Uint:

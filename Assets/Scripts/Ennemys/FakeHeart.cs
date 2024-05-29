@@ -18,6 +18,8 @@ public class FakeHeart : MonoBehaviour
     public Animator doorAnimator;
     private Player player;
 
+    public GameObject nextTarget;
+
     void Start()
     {
         player = FindObjectOfType<Player>();
@@ -42,6 +44,17 @@ public class FakeHeart : MonoBehaviour
             Idle.start();
             trueHeart.SetActive(true);
             player.IncreaseLoomParameter();
+
+            if (nextTarget != null)
+            {
+                nextTarget.SetActive(true);
+                Compass compass = FindObjectOfType<Compass>();
+                if (compass != null)
+                {
+                    compass.target = nextTarget.transform;
+                }
+            }
+
             Destroy(parentHeart);       
         }
     }

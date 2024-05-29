@@ -90,6 +90,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void CheckTimeout()
+    {
+        if (isTimeOut)
+        {
+            Loom.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        }
+    }
+
     public void Heal(int heal)
     {
         currentHealth += heal;

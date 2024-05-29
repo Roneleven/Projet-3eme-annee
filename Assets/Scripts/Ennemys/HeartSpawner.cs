@@ -219,6 +219,9 @@ public class HeartSpawner : MonoBehaviour
 
     private void TimeOut()
     {
+        player.isTimeOut = true;
+        yield return new WaitForSeconds(0.1);
+        player.isTimeOut = false;
         FindObjectOfType<SceneTransition>().ReloadScene();
     }
 

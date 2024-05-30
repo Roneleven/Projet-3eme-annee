@@ -11,8 +11,10 @@ Material:
   m_Shader: {fileID: 4800000, guid: 220de6de1f7da2249852b0e7a60a0705, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ValidKeywords:
+  - _RECEIVE_SHADOWS_OFF
+  m_InvalidKeywords:
+  - _RECEIVESHADOWS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -52,19 +54,19 @@ Material:
     - _ASEOutlineWidth: 0
     - _AlphaCutoff: 0.5
     - _EnvironmentReflections: 1
-    - _FresnelScale: 3
-    - _Highlight: 1
+    - _FresnelScale: 0.7
+    - _Highlight: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ReceiveShadows: 1
-    - _RimStrengh: 15.29
-    - _Smoothness: 0.047
+    - _ReceiveShadows: 0
+    - _RimStrengh: 8.22
+    - _Smoothness: 1
     - _SpecularHighlights: 1
     - __dirty: 0
     m_Colors:
     - _ASEOutlineColor: {r: 0, g: 0, b: 0, a: 0}
     - _Color0: {r: 1, g: 0, b: 0, a: 0}
-    - _Color1: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 0}
+    - _Color1: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Specular: {r: 1, g: 1, b: 1, a: 0}
+    - _Specular: {r: 512, g: 512, b: 512, a: 0}
   m_BuildTextureStacks: []

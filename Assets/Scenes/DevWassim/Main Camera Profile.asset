@@ -15,7 +15,7 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: -1
+    m_Value: -2.04
   contrast:
     m_OverrideState: 1
     m_Value: 10.4
@@ -107,7 +107,7 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.9853885, y: 1, z: 0.9573143, w: -0.208}
+    m_Value: {x: 0.9853885, y: 1, z: 0.9573143, w: -1}
   midtones:
     m_OverrideState: 1
     m_Value: {x: 0.9783429, y: 1, z: 0.99491525, w: -0.046004362}
@@ -116,10 +116,10 @@ MonoBehaviour:
     m_Value: {x: 1, y: 0.923642, z: 0.87345827, w: 0.00000001859665}
   shadowsStart:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.06
   shadowsEnd:
     m_OverrideState: 1
-    m_Value: 0.06
+    m_Value: 1.15
   highlightsStart:
     m_OverrideState: 1
     m_Value: 0.55
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
   m_Name: Vignette
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   color:
     m_OverrideState: 1
     m_Value: {r: 1, g: 0, b: 0, a: 1}

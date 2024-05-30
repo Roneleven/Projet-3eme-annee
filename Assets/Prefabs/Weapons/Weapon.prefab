@@ -710,7 +710,7 @@ MonoBehaviour:
   throwExtraForce: 5
   rotationForce: 120
   animTime: 0
-  shotsPerSecond: 9
+  shotsPerSecond: 8
   hitForce: 3.5
   range: 200
   tapable: 0
@@ -769,12 +769,12 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   heatPerShot: 0.017
-  heatEffectMultiplier: 1.45
+  heatEffectMultiplier: 3
   overheatThreshold: 1
   cooldownTime: 2.5
   currentHeat: 0
   overheated: 0
-  cooldownRate: 0.25
+  cooldownRate: 0.3
   heatImage: {fileID: 8630471691321958509}
   maxFillAmount: 1
   chargingEffect: {fileID: 8160295511394092841, guid: 953f0e7219309a1479883c56dc88b347, type: 3}

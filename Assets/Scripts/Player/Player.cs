@@ -100,8 +100,6 @@ public class Player : MonoBehaviour
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Behaviours/Dead");
             Loom.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            playerMovementsRB.StopJetUse();
-            playerMovementsRB.StopPlanning();
             GameOverCanvas.SetActive(true);
             Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;

@@ -47,7 +47,7 @@ public class Meteorite : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Ground"))
+        if (collision.collider.CompareTag("Ground") || collision.collider.CompareTag("DestroyableBlock") || collision.collider.CompareTag("Block") || collision.collider.CompareTag("HeartBlock"))
         {
             Instantiate(objectToSpawnOnImpact, transform.position, Quaternion.identity);
             Destroy(gameObject);
@@ -57,7 +57,7 @@ public class Meteorite : MonoBehaviour
                 Destroy(feedbackInstance);
             }
 
-            Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+            /*Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
 
             foreach (Collider hitCollider in colliders)
             {
@@ -65,12 +65,12 @@ public class Meteorite : MonoBehaviour
                 {
                     Destroy(hitCollider.gameObject);
                 }
-            }
+            }*/
 
 
         }
         
-        if (collision.collider.CompareTag("Block") || collision.collider.CompareTag("DestroyableBlock"))
+        /*if (collision.collider.CompareTag("Block") || collision.collider.CompareTag("DestroyableBlock"))
         {
             Rigidbody rb = GetComponent<Rigidbody>();
             if (rb != null)
@@ -94,7 +94,7 @@ public class Meteorite : MonoBehaviour
             }
 
             Destroy(collision.collider.gameObject);
-        }
+        }*/
 
         if (collision.collider.CompareTag("Player"))
         {

@@ -54,7 +54,7 @@ VisualEffect:
       - m_Value: 0.57
         m_Name: SphereLifetime
         m_Overridden: 1
-      - m_Value: 10
+      - m_Value: 5
         m_Name: SphereSize
         m_Overridden: 1
       - m_Value: 10
@@ -62,6 +62,15 @@ VisualEffect:
         m_Overridden: 1
       - m_Value: 5
         m_Name: SmokeSize
+        m_Overridden: 1
+      - m_Value: 0
+        m_Name: ParticlesRate
+        m_Overridden: 1
+      - m_Value: 2
+        m_Name: DecalSize
+        m_Overridden: 1
+      - m_Value: 3
+        m_Name: DecalLifetime
         m_Overridden: 1
     m_Vector2f:
       m_Array: []

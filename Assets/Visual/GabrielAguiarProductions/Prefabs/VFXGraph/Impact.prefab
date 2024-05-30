@@ -66,6 +66,9 @@ VisualEffect:
       - m_Value: 0
         m_Name: SphereRate
         m_Overridden: 1
+      - m_Value: 3
+        m_Name: DecalLifetime
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:

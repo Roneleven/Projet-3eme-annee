@@ -80,7 +80,7 @@ MonoBehaviour:
   interval: 0.01
   spawnAllAtOnce: 0
   moveSpeed: 1
-  rotationSpeed: 30
+  rotationSpeed: 0
 --- !u!1001 &255695289590732191
 PrefabInstance:
   m_ObjectHideFlags: 0

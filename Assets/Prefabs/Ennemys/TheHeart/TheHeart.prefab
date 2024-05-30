@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 880, y: 880, z: 880}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5464548926497106743}
+  m_Father: {fileID: 1503547884131688239}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!2083052967 &1114669633469187834
 VisualEffect:
@@ -380,19 +380,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRadius:
   - 0
-  - 30
-  - 40
-  - 50
-  - 60
+  - 100
+  - 120
+  - 140
+  - 160
   timer: 0
   patternActive: 0
   paliers:
   - patterns: 
   - patterns: 06000000
-  - patterns: 0400000006000000
-  - patterns: 0600000005000000
-  - patterns: 0500000006000000
-  - patterns: 020000000000000006000000
+  - patterns: 0400000000000000
+  - patterns: 0000000005000000
+  - patterns: 0500000000000000
+  - patterns: 0200000000000000
   nextPatternTimes:
   - 5000
   - 4
@@ -446,9 +446,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meteorPrefab: {fileID: 8124634591630642829, guid: 79790fe4d73093c4d8ed34335c29b87b, type: 3}
   meteorSpeed: 30
-  spawnRadius: 20
+  spawnRadius: 10
   spawnHeight: 50
-  numbersOfMeteors: 3
+  numbersOfMeteors: 10
 --- !u!114 &4267790417615788546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyPrefab: {fileID: 1413787942626273727, guid: 99e5ed7a289a0d34db49ec59023e746c, type: 3}
-  spawnRadius: 15
+  spawnRadius: 0
 --- !u!114 &3672458320004308592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,7 +490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubePrefab: {fileID: 1230891745418371966, guid: 84298ffa45b86bd44a293d38649bea51, type: 3}
   numberOfCubes: 20
-  radius: 5
+  radius: 10
   journeyDuration: 40
 --- !u!114 &6157199768885211953
 MonoBehaviour:
@@ -636,7 +636,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 9043229315004094434}
   m_Father: {fileID: 5464548926497106743}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8374639144287423287
@@ -670,6 +671,5 @@ Transform:
   m_Children:
   - {fileID: 1503547884131688239}
   - {fileID: 3934878839238042672}
-  - {fileID: 9043229315004094434}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

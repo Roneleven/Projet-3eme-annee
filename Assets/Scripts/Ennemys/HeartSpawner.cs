@@ -221,6 +221,7 @@ public class HeartSpawner : MonoBehaviour
 
     private IEnumerator TimeOut()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Behaviours/Dead");
         player.isTimeOut = true;
         yield return new WaitForSeconds(0.1f);
         player.isTimeOut = false;

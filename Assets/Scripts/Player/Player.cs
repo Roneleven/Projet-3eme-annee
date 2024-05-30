@@ -92,6 +92,7 @@ public class Player : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Behaviours/Dead");
             Loom.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             GameOverCanvas.SetActive(true);
             Time.timeScale = 0f;

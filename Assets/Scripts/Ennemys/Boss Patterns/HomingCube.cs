@@ -80,7 +80,7 @@ public class HomingCube : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            playerScript.TakeDamage(-4);
+            playerScript.TakeDamage(-3);
             Destroy(gameObject);
         }
     }

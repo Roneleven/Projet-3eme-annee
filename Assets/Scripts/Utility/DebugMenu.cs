@@ -14,6 +14,7 @@ public class DebugMenu : MonoBehaviour
     public GameObject theHeart;
     public Transform weaponHolder;
     public Transform playerCamera;
+    public Player player;
 
     private bool debugMenuActive = false;
 
@@ -52,6 +53,24 @@ public class DebugMenu : MonoBehaviour
         playerMovements.transform.position = palierTransforms[2].position;
     }
 
+    public void TeleportHeartToPosition4()
+    {
+        heartHealth.SetTargetForTeleportIndex(3);
+        playerMovements.transform.position = palierTransforms[3].position;
+    }
+
+    public void TeleportHeartToPosition5()
+    {
+        heartHealth.SetTargetForTeleportIndex(4);
+        playerMovements.transform.position = palierTransforms[4].position;
+    }
+
+    public void TeleportHeartToPosition6()
+    {
+        heartHealth.SetTargetForTeleportIndex(5);
+        playerMovements.transform.position = palierTransforms[5].position;
+    }
+
     public void PalierUp()
     {
         heartSpawner.ChangePalierOnTeleport();
@@ -60,5 +79,17 @@ public class DebugMenu : MonoBehaviour
     public void pickUpWeapon()
     {   
         weapon.Pickup(weaponHolder, playerCamera); 
+    }
+
+    public void HeallFull()
+    {
+        player.Heal(100);
+    }
+
+    public void SpeedUp()
+    {
+        playerMovements.speed += 10;
+        playerMovements.currentSpeed += 10;
+        playerMovements.maxPossibleSpeed += 10;
     }
 }

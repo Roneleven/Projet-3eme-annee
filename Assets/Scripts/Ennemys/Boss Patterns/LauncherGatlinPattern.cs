@@ -29,7 +29,7 @@ public class GatlinLauncherPattern : MonoBehaviour
         gatlin.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
     }
 
-    public void SphereLauncherPattern()  // No longer takes numCubesToMove as an argument
+    public void SphereLauncherPattern()
     {
         gatlin.setParameterByName("Pattern", 0.0F);
         gatlin.start();
@@ -42,7 +42,8 @@ public class GatlinLauncherPattern : MonoBehaviour
 
         List<GameObject> generatedCubes = new List<GameObject>(GameObject.FindGameObjectsWithTag("HeartBlock"));
 
-        StartCoroutine(MoveCubesToSphere(generatedCubes, cubesToLaunch, () => {  // Use cubesToLaunch directly
+        StartCoroutine(MoveCubesToSphere(generatedCubes, cubesToLaunch, () =>
+        {
             StartCoroutine(LaunchCubesOneByOne(generatedCubes));
             StartCoroutine(ResetPattern());
         }));
@@ -66,6 +67,11 @@ public class GatlinLauncherPattern : MonoBehaviour
             if (i < cubes.Count)
             {
                 GameObject cubeToMove = cubes[i];
+
+                if (cubeToMove == null)
+                {
+                    continue; // Skip if the cube has been destroyed
+                }
 
                 float polarAngle = Random.Range(0f, 180f);
                 float azimuthAngle = Random.Range(0f, 360f);

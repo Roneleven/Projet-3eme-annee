@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4415985967911669521}
   m_Layer: 3
   m_Name: state_0
-  m_TagString: HeartBlock
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 9012977554722779044}
   m_Layer: 3
   m_Name: state_1
-  m_TagString: HeartBlock
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 1126714913738343438}
   m_Layer: 3
   m_Name: state_2
-  m_TagString: HeartBlock
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -384,7 +384,6 @@ MonoBehaviour:
   health: 2
   visualRoot: {fileID: 3470294469841249046}
   CubeHit: {fileID: 8377534922468075976, guid: 96c76a57a0eb7574d8b0fe74bdbd3874, type: 3}
-  CubeDestroyed: {fileID: 6128940009062918843, guid: efc82b0f915cfc7429d43df6cb71862d, type: 3}
   CubeHitSpawnPoint: {fileID: 3470294469841249046}
 --- !u!65 &1366837735476708123
 BoxCollider:

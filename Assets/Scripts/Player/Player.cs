@@ -141,7 +141,5 @@ public class Player : MonoBehaviour
     public void ResetLoomParameter()
     {
         Loom.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        playerMovementsRB.StopJetUse();
-        playerMovementsRB.StopPlanning();
     }
 }

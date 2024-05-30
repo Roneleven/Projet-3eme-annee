@@ -6,7 +6,7 @@ public class ExplosionScript : MonoBehaviour
 
     public Player playerScript;
 
-    public float delayBeforeDisappear = 5f;
+    public float delayBeforeDisappear = 2f;
     public float scaleFactor = 1f;
     
     public GameObject eye;

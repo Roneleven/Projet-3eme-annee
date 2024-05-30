@@ -51,11 +51,17 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 6
+      - m_Value: 10
         m_Name: GlowSize
         m_Overridden: 1
-      - m_Value: 6
+      - m_Value: 10
         m_Name: ImpactSize
+        m_Overridden: 1
+      - m_Value: 20
+        m_Name: ParticlesRate
+        m_Overridden: 1
+      - m_Value: 1.5
+        m_Name: ParticlesSize
         m_Overridden: 1
     m_Vector2f:
       m_Array: []

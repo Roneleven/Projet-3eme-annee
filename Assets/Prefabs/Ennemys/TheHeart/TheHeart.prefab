@@ -381,7 +381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRadius:
   - 0
-  - 110
+  - 120
   - 175
   - 175
   - 200
@@ -396,10 +396,10 @@ MonoBehaviour:
   - patterns: 0200000000000000
   nextPatternTimes:
   - 5000
-  - 6.5
-  - 6.5
+  - 6
+  - 5
   - 4
-  - 5.8
+  - 3
   - 5
 --- !u!114 &8478000295457755194
 MonoBehaviour:
@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartSpawner: {fileID: 6899634225175561795}
-  numberOfCubesToLaunch: 5
+  numberOfCubesToLaunch: 10
   homingCubeSpeed: 15
   destroyDelay: 5
   cubeTimer: 5

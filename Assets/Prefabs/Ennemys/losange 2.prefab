@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Player
-  speed: 20
+  speed: 15
   playerScript: {fileID: 0}
   destroyDistance: 1.5
   explosionEffect: {fileID: 132389527545074623, guid: 7c932a5b1638edd42a91d7857259aeb0, type: 3}

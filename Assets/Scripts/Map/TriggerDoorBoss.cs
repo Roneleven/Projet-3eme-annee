@@ -25,6 +25,7 @@ public class TriggerDoorBoss : MonoBehaviour
                     {
                         animator.Play("Bossdoor1Close");
                         animator.Play("Bossdoor2Close");
+                        animator.Play("BlockWall");
                     }
                 }
                 else

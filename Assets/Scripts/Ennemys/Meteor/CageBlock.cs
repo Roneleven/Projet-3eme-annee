@@ -2,15 +2,11 @@ using UnityEngine;
 
 public class CageBlock : MonoBehaviour
 {
-    // Forces de répulsion
     public float repulsionForce = 1f;
     public float backwardForce = 10f;
     public float upwardForce = 1f;
 
-    private void Start()
-    {
-        Destroy(gameObject, 10f);
-    }
+    public Player playerScript;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -27,8 +23,7 @@ public class CageBlock : MonoBehaviour
                 playerRigidbody.AddForce(repulsionDirection * repulsionForce, ForceMode.Impulse);
             }
 
-            // AJouter dégâts
-
+        Destroy(gameObject);
         }
     }
 }

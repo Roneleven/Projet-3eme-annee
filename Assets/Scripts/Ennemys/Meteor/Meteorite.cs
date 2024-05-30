@@ -98,7 +98,7 @@ public class Meteorite : MonoBehaviour
 
         if (collision.collider.CompareTag("Player"))
         {
-                playerScript.TakeDamage(70);
+                playerScript.TakeDamage(15);
                 Destroy(gameObject);
                 Destroy(feedbackInstance);
         }

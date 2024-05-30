@@ -244,7 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubePrefab: {fileID: 997631944070638011, guid: fb00ebdef81d1be49abc0918eff87891, type: 3}
   transparentCubePrefab: {fileID: 2751100251518416, guid: e270576d61d2b784582b8db1cc980d8d, type: 3}
-  spawnInterval: 1.5
+  spawnInterval: 1.333333
   spawnRadius: 4
   gridSize: 1
   exclusionRadius: 3
@@ -265,13 +265,14 @@ MonoBehaviour:
   timerText: {fileID: 0}
   blackFade: {fileID: 0}
   anim: {fileID: 0}
+  GameOverCanvas: {fileID: 0}
   playerPosition: {x: 0, y: 0, z: 0}
   cubeDestroyDelay: 3
   launchForce: 40
   percentageToLaunch: 5
   cubesToLaunch: 5
-  CageBlockPrefab: {fileID: 1230891745418371966, guid: 095cb75299d059641a810e1d945b7e59, type: 3}
-  cageRadius: 2.3
+  CageBlockPrefab: {fileID: 1230891745418371966, guid: 6f0ada311e1e825479c6d581ab857b39, type: 3}
+  cageRadius: 15
   cageTriggerTime: 5
   cageSpawnTime: 2.1
   cagePatternPreview: {fileID: 4645954303748183070, guid: 4d4736979ec4263418d4502cc1470f40, type: 3}
@@ -310,7 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  health: 3
+  health: 10
   destroySpeed: 0.5
   teleportPositions:
   - {fileID: 0}
@@ -380,10 +381,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRadius:
   - 0
-  - 100
-  - 120
-  - 140
-  - 160
+  - 110
+  - 175
+  - 175
+  - 200
   timer: 0
   patternActive: 0
   paliers:
@@ -391,13 +392,13 @@ MonoBehaviour:
   - patterns: 06000000
   - patterns: 0400000000000000
   - patterns: 0000000005000000
-  - patterns: 0500000000000000
+  - patterns: 0200000000000000
   - patterns: 0200000000000000
   nextPatternTimes:
   - 5000
-  - 4
   - 6.5
-  - 7
+  - 6.5
+  - 4
   - 5.8
   - 5
 --- !u!114 &8478000295457755194
@@ -446,7 +447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meteorPrefab: {fileID: 8124634591630642829, guid: 79790fe4d73093c4d8ed34335c29b87b, type: 3}
   meteorSpeed: 30
-  spawnRadius: 10
+  spawnRadius: 20
   spawnHeight: 50
   numbersOfMeteors: 10
 --- !u!114 &4267790417615788546
@@ -489,9 +490,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubePrefab: {fileID: 1230891745418371966, guid: 84298ffa45b86bd44a293d38649bea51, type: 3}
-  numberOfCubes: 20
-  radius: 10
-  journeyDuration: 40
+  numberOfCubes: 25
+  radius: 25
+  journeyDuration: 60
 --- !u!114 &6157199768885211953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,9 +508,10 @@ MonoBehaviour:
   sphereRadius: 2
   sphereHeightOffset: 15
   sphereMovementDuration: 0.5
-  launchForce: 50
+  launchForce: 60
   launchInterval: 0.25
   cubesToLaunch: 15
+  newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
   heartSpawner: {fileID: 0}
 --- !u!114 &4905110009106583516
 MonoBehaviour:

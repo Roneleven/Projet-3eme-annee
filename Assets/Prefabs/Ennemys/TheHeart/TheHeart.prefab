@@ -319,6 +319,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   teleportPointBoxSpawnerPairs:
   - teleportPointIndex: 0
     boxSpawners:
@@ -385,6 +386,8 @@ MonoBehaviour:
   - 175
   - 175
   - 200
+  - 200
+  - 200
   timer: 0
   patternActive: 0
   paliers:
@@ -392,14 +395,16 @@ MonoBehaviour:
   - patterns: 06000000
   - patterns: 0400000000000000
   - patterns: 0000000005000000
+  - patterns: 0300000000000000
   - patterns: 0200000000000000
-  - patterns: 0200000000000000
+  - patterns: 0200000001000000030000000000000004000000
   nextPatternTimes:
   - 5000
   - 6
   - 5
   - 4
-  - 3
+  - 4
+  - 5
   - 5
 --- !u!114 &8478000295457755194
 MonoBehaviour:
@@ -489,7 +494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fd576a4c430dc243ba3062a1e29da27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubePrefab: {fileID: 1230891745418371966, guid: 84298ffa45b86bd44a293d38649bea51, type: 3}
+  cubePrefab: {fileID: 3494470243150850275, guid: 9f9e84e55e74fbe448d7e3bbf1fb1f74, type: 3}
   numberOfCubes: 25
   radius: 25
   journeyDuration: 60

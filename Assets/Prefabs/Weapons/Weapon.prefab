@@ -710,7 +710,7 @@ MonoBehaviour:
   throwExtraForce: 5
   rotationForce: 120
   animTime: 0
-  shotsPerSecond: 15
+  shotsPerSecond: 9
   hitForce: 3.5
   range: 200
   tapable: 0
@@ -734,7 +734,7 @@ MonoBehaviour:
   playerMovementsRB: {fileID: 0}
   explosiveDamage: 3
   explosiveRange: 250
-  explosionRadius: 10
+  explosionRadius: 7
   kickbackForceExplosive: 1.2
   kickbackTimeExplosive: 0.3
   explosionPrefab: {fileID: 191186, guid: 517c65f5c21a00340b7af8423976621c, type: 3}
@@ -769,12 +769,12 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   heatPerShot: 0.017
-  heatEffectMultiplier: 1.22
+  heatEffectMultiplier: 1.45
   overheatThreshold: 1
   cooldownTime: 2.5
   currentHeat: 0
   overheated: 0
-  cooldownRate: 0.5
+  cooldownRate: 0.25
   heatImage: {fileID: 8630471691321958509}
   maxFillAmount: 1
   chargingEffect: {fileID: 8160295511394092841, guid: 953f0e7219309a1479883c56dc88b347, type: 3}

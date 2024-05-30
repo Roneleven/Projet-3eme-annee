@@ -207,5 +207,86 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73d2be0d0910f0a42ac156c88bdf2a11, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1088925119717288094}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73d2be0d0910f0a42ac156c88bdf2a11, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6258985700228300329}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73d2be0d0910f0a42ac156c88bdf2a11, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7458033587973268865}
   m_SourcePrefab: {fileID: 100100000, guid: 73d2be0d0910f0a42ac156c88bdf2a11, type: 3}
+--- !u!1 &3494470243150850275 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 73d2be0d0910f0a42ac156c88bdf2a11, type: 3}
+  m_PrefabInstance: {fileID: 4377415249505080754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &-1088925119717288094
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3494470243150850275}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
+--- !u!114 &-6258985700228300329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3494470243150850275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8abd03aa5e50ac74e82e28fdac91b83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 3810439456834575818, guid: 2e43e7ba74c5590449a91b647d126f11, type: 3}
+  explosionTime: 1
+--- !u!114 &-7458033587973268865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3494470243150850275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -2136261918
+      Data2: 1208284945
+      Data3: 2096368530
+      Data4: -1625197273
+    Path: event:/Blocks/Behaviours/MineIdle
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 70

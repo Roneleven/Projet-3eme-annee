@@ -5,12 +5,12 @@ using UnityEngine.UI;
 public class DebugMenu : MonoBehaviour
 {
     public GameObject debugMenuUI;
-    public Toggle canMoveToggle;
     public HeartHealth heartHealth;
+    public Weapon weapon;
     public PlayerMovementsRB playerMovements;
-    public List<Button> pallierButtons; // List of buttons for each pallier
-    public List<Transform> pallierTransforms; // List of transforms for each pallier
-    public HeartSpawner heartSpawner; // Reference to HeartSpawner script
+    public List<Button> palierButtons;
+    public List<Transform> palierTransforms;
+    public HeartSpawner heartSpawner;
     public GameObject theHeart;
 
     private bool debugMenuActive = false;
@@ -18,7 +18,6 @@ public class DebugMenu : MonoBehaviour
     void Start()
     {
         debugMenuUI.SetActive(false);
-        canMoveToggle.onValueChanged.AddListener(OnCanMoveToggleChanged);
     }
 
     void Update()
@@ -33,26 +32,31 @@ public class DebugMenu : MonoBehaviour
         }
     }
 
-    void OnCanMoveToggleChanged(bool isOn)
-    {
-        playerMovements.canMove = isOn;
-        Debug.Log($"Player can move: {isOn}");
-    }
-
     public void TeleportHeartToPosition1()
     {
-        heartHealth.SetTargetForTeleportIndex(0); // L'index 0 correspond au premier point de téléportation
+        heartHealth.SetTargetForTeleportIndex(0);
+        playerMovements.transform.position = palierTransforms[0].position;
     }
 
-    // Méthode appelée lorsque le bouton de téléportation 2 est cliqué
     public void TeleportHeartToPosition2()
     {
-        heartHealth.SetTargetForTeleportIndex(1); // L'index 1 correspond au deuxième point de téléportation
+        heartHealth.SetTargetForTeleportIndex(1);
+        playerMovements.transform.position = palierTransforms[1].position;
     }
 
-    // Méthode appelée lorsque le bouton de téléportation 3 est cliqué
     public void TeleportHeartToPosition3()
     {
-        heartHealth.SetTargetForTeleportIndex(2); // L'index 2 correspond au troisième point de téléportation
+        heartHealth.SetTargetForTeleportIndex(2);
+        playerMovements.transform.position = palierTransforms[2].position;
     }
+
+    public void PalierUp()
+    {
+        heartSpawner.ChangePalierOnTeleport();
+    }
+
+    /*public void pickUpWeapon() { 
+    {
+        weapon.Pickup(Transform weaponHolder, Transform playerCamera);
+    }*/
 }

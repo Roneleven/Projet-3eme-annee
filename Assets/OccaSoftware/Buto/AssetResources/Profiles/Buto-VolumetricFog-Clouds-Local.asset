@@ -62,7 +62,7 @@ MonoBehaviour:
     m_Value: 0.03
   fogMaskBlendMode:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   fogDensity:
     m_OverrideState: 1
     m_Value: 2.6
@@ -83,7 +83,7 @@ MonoBehaviour:
     m_Value: 4
   colorRamp:
     m_OverrideState: 1
-    m_Value: {fileID: 2800000, guid: fb5d3166054a5934ca40fe8dfbebda29, type: 3}
+    m_Value: {fileID: 2800000, guid: d6dba143ea394eb4b8499c4f0a64bc2c, type: 3}
   colorRampInfluence:
     m_OverrideState: 1
     m_Value: 1

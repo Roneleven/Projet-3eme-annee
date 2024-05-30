@@ -77,7 +77,7 @@ MonoBehaviour:
     m_Value: 1
   baseHeight:
     m_OverrideState: 1
-    m_Value: -28
+    m_Value: 1
   attenuationBoundarySize:
     m_OverrideState: 1
     m_Value: 2

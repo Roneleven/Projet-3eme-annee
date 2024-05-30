@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 7204344585063069495}
   - component: {fileID: 5539153772021731632}
   - component: {fileID: 4438801079668476507}
-  - component: {fileID: 1810983729023914461}
+  - component: {fileID: 34874259225610113}
   m_Layer: 10
   m_Name: Fill
   m_TagString: Untagged
@@ -582,7 +582,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1810983729023914461
+--- !u!114 &34874259225610113
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1259,7 +1259,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.0000076293945}
   m_SizeDelta: {x: 4178, y: 405.96777}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5826549512650327050
@@ -1509,6 +1509,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2138669410139437386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2240140506463805559}
+  m_Layer: 0
+  m_Name: Palier 6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2240140506463805559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138669410139437386}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -78, y: -1670, z: 4003.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 888393170811556438}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &2184501119682280748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1818,6 +1849,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2438455652255292495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6211392810165274385}
+  m_Layer: 0
+  m_Name: Palier 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6211392810165274385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2438455652255292495}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -1222.7767, y: -1437.218, z: 714.39606}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 888393170811556438}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &2802426779766365683
 GameObject:
   m_ObjectHideFlags: 0
@@ -2458,7 +2520,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 2
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -2713,7 +2775,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -1660, y: 1157}
+  m_AnchoredPosition: {x: -1704, y: 1165.9}
   m_SizeDelta: {x: 385.49, y: 334.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2601856530995330757
@@ -2777,7 +2839,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 2
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -3105,8 +3167,8 @@ Transform:
   m_GameObject: {fileID: 3704520746862686374}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2595.1055, y: -1055.335, z: 969.9778}
-  m_LocalScale: {x: 4.4341803, y: 4.4341803, z: 4.4341803}
+  m_LocalPosition: {x: -1591.3207, y: -1890.0525, z: 1537.5315}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 888393170811556438}
@@ -3519,6 +3581,9 @@ RectTransform:
   - {fileID: 5028493453351120746}
   - {fileID: 7528593675491899349}
   - {fileID: 8057364152257813745}
+  - {fileID: 6211392810165274385}
+  - {fileID: 7315306676832098948}
+  - {fileID: 2240140506463805559}
   m_Father: {fileID: 1442612597885817208}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -8527,8 +8592,8 @@ Transform:
   m_GameObject: {fileID: 4480844578447227524}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1693.8578, y: -866.88226, z: 1193.9037}
-  m_LocalScale: {x: 4.4341803, y: 4.4341803, z: 4.4341803}
+  m_LocalPosition: {x: 177.8941, y: -1437.2175, z: 2000.8978}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 888393170811556438}
@@ -8766,8 +8831,8 @@ Transform:
   m_GameObject: {fileID: 4865395575208939256}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1680.5553, y: -885.7275, z: 351.40903}
-  m_LocalScale: {x: 4.4341803, y: 4.4341803, z: 4.4341803}
+  m_LocalPosition: {x: -164.08415, y: -1622.9006, z: 533.57227}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 888393170811556438}
@@ -11093,6 +11158,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 121359ba4aca83a46b61e7ba5e57278b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7065311081242883284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7315306676832098948}
+  m_Layer: 0
+  m_Name: Palier 5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7315306676832098948
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7065311081242883284}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -541.76935, y: -1663.6354, z: 2209.8052}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 888393170811556438}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &7112609329515832583
 GameObject:
   m_ObjectHideFlags: 0
@@ -13864,11 +13960,13 @@ MonoBehaviour:
   heartHealth: {fileID: 0}
   weapon: {fileID: 0}
   playerMovements: {fileID: 7652770132227097624}
-  palierButtons: []
   palierTransforms:
   - {fileID: 5028493453351120746}
   - {fileID: 7528593675491899349}
   - {fileID: 8057364152257813745}
+  - {fileID: 6211392810165274385}
+  - {fileID: 7315306676832098948}
+  - {fileID: 2240140506463805559}
   heartSpawner: {fileID: 0}
   theHeart: {fileID: 0}
   weaponHolder: {fileID: 2114624632310691999}

@@ -8,7 +8,6 @@ public class DebugMenu : MonoBehaviour
     public HeartHealth heartHealth;
     public Weapon weapon;
     public PlayerMovementsRB playerMovements;
-    public List<Button> palierButtons;
     public List<Transform> palierTransforms;
     public HeartSpawner heartSpawner;
     public GameObject theHeart;
@@ -25,13 +24,17 @@ public class DebugMenu : MonoBehaviour
 
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            theHeart.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
             debugMenuActive = !debugMenuActive;
+
+            theHeart.SetActive(debugMenuActive);
             debugMenuUI.SetActive(debugMenuActive);
-            Debug.Log($"Debug menu is now {(debugMenuActive ? "active" : "inactive")}");
+
+            Cursor.lockState = debugMenuActive ? CursorLockMode.None : CursorLockMode.Locked;
+
+            Time.timeScale = debugMenuActive ? 0 : 1;
         }
     }
 

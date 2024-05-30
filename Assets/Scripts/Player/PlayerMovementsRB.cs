@@ -103,6 +103,7 @@ public class PlayerMovementsRB : MonoBehaviour
             jetpackForce = initialJetpackForce; // Reset jetpack force when input is released
             speed = initialSpeed;
         }
+        
 
         UpdateJetpackChargeUI();
 
@@ -120,6 +121,25 @@ public class PlayerMovementsRB : MonoBehaviour
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/JetpackEmpty");
             isJetpackEmptySoundPlayed = true;
+        }
+    }
+
+    public void StopJetUse()
+    {
+        if (isJetUsePlaying)
+        {
+            jetUse.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            isJetUsePlaying = false;
+            jetpackEffect.Stop();
+        }
+    }
+
+    public void StopPlanning()
+    {
+        if (isPlanningPlaying)
+        {
+            planning.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            isPlanningPlaying = false;
         }
     }
 

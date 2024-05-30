@@ -14,6 +14,7 @@ public class WeaponUIManager : MonoBehaviour
     //public Sprite laserWeaponActive; // Sprite pour l'icône active du mode Laser
 
     public Image normalWeaponImage; // Image normale de l'arme
+    public TMP_Text infini;
     public Image explosiveWeaponImage; // Image pour l'arme explosive
     //public Image laserWeaponImage; // Image pour l'arme laser
     public Image explosiveChargeGainImage;
@@ -41,11 +42,13 @@ public class WeaponUIManager : MonoBehaviour
 
         // Masquer toutes les images de l'arme au départ
         normalWeaponImage.gameObject.SetActive(false);
+        infini.gameObject.SetActive(false);
         explosiveWeaponImage.gameObject.SetActive(false);
         //laserWeaponImage.gameObject.SetActive(false);
 
         // Afficher l'image de l'arme par défaut
         normalWeaponImage.gameObject.SetActive(true);
+        infini.gameObject.SetActive(true);
 
         initialPosition = explosiveChargeGainImage.rectTransform.localPosition;
     }
@@ -78,6 +81,7 @@ public class WeaponUIManager : MonoBehaviour
         // Masquer toutes les images d'arme au début
         if (normalWeaponImage != null)
             normalWeaponImage.gameObject.SetActive(false);
+            infini.gameObject.SetActive(false);
         if (explosiveWeaponImage != null)
             explosiveWeaponImage.gameObject.SetActive(false);
         /*if (laserWeaponImage != null)
@@ -94,6 +98,7 @@ public class WeaponUIManager : MonoBehaviour
                 }
                 if (normalWeaponImage != null)
                     normalWeaponImage.gameObject.SetActive(true); // Afficher l'image de l'arme pour le mode Normal
+                    infini.gameObject.SetActive(true); // Afficher l'image de l'arme pour le mode Normal
                 break;
             case FireMode.Explosive:
                 if (explosiveIcon != null)
@@ -123,6 +128,7 @@ public class WeaponUIManager : MonoBehaviour
                 case FireMode.Normal:
                     if (normalWeaponImage != null)
                         normalWeaponImage.gameObject.SetActive(true);
+                        infini.gameObject.SetActive(true);
                     break;
                 case FireMode.Explosive:
                     if (explosiveWeaponImage != null)
@@ -160,6 +166,7 @@ public class WeaponUIManager : MonoBehaviour
             {
                 case FireMode.Normal:
                     normalWeaponImage.gameObject.SetActive(true);
+                    infini.gameObject.SetActive(true);
                     break;
                 case FireMode.Explosive:
                     explosiveWeaponImage.gameObject.SetActive(true);

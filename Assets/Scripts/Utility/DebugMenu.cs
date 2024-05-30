@@ -88,8 +88,6 @@ public class DebugMenu : MonoBehaviour
 
     public void SpeedUp()
     {
-        playerMovements.speed += 10;
-        playerMovements.currentSpeed += 10;
-        playerMovements.maxPossibleSpeed += 10;
+
     }
 }

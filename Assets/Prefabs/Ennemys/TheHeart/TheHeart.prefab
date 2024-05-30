@@ -446,9 +446,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meteorPrefab: {fileID: 8124634591630642829, guid: 79790fe4d73093c4d8ed34335c29b87b, type: 3}
   meteorSpeed: 30
-  spawnRadius: 20
+  spawnRadius: 10
   spawnHeight: 50
-  numbersOfMeteors: 3
+  numbersOfMeteors: 10
 --- !u!114 &4267790417615788546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,7 +490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubePrefab: {fileID: 1230891745418371966, guid: 84298ffa45b86bd44a293d38649bea51, type: 3}
   numberOfCubes: 20
-  radius: 5
+  radius: 10
   journeyDuration: 40
 --- !u!114 &6157199768885211953
 MonoBehaviour:

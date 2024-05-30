@@ -27,9 +27,8 @@ public class DebugMenu : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F1))
         {
+            theHeart.SetActive(true);
             debugMenuActive = !debugMenuActive;
-
-            theHeart.SetActive(debugMenuActive);
             debugMenuUI.SetActive(debugMenuActive);
 
             Cursor.lockState = debugMenuActive ? CursorLockMode.None : CursorLockMode.Locked;

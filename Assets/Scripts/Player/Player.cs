@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
 
     private FMOD.Studio.EventInstance Loom;
 
+    private PlayerMovementsRB playerMovementsRB;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +50,8 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("Volume component not found in the scene.");
         }
+
+        playerMovementsRB = FindObjectOfType<PlayerMovementsRB>();
     }
 
     // Update is called once per frame
@@ -76,6 +80,8 @@ public class Player : MonoBehaviour
         if (isTimeOut)
         {
             Loom.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            playerMovementsRB.StopJetUse();
+            playerMovementsRB.StopPlanning();
         }
     }
 
@@ -94,6 +100,8 @@ public class Player : MonoBehaviour
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Behaviours/Dead");
             Loom.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            playerMovementsRB.StopJetUse();
+            playerMovementsRB.StopPlanning();
             GameOverCanvas.SetActive(true);
             Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;
@@ -133,5 +141,7 @@ public class Player : MonoBehaviour
     public void ResetLoomParameter()
     {
         Loom.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        playerMovementsRB.StopJetUse();
+        playerMovementsRB.StopPlanning();
     }
 }

@@ -62,7 +62,7 @@ public class HeartHealth : MonoBehaviour
         }
     }
 
-    void SetTargetForTeleportIndex(int teleportIndex)
+    public void SetTargetForTeleportIndex(int teleportIndex)
     {
         if (teleportIndex >= 0 && teleportIndex < teleportPositions.Length)
         {
@@ -315,4 +315,6 @@ public class HeartHealth : MonoBehaviour
             return null;
         }
     }
+
+
 }

@@ -12,6 +12,8 @@ public class DebugMenu : MonoBehaviour
     public List<Transform> palierTransforms;
     public HeartSpawner heartSpawner;
     public GameObject theHeart;
+    public Transform weaponHolder;
+    public Transform playerCamera;
 
     private bool debugMenuActive = false;
 
@@ -55,8 +57,8 @@ public class DebugMenu : MonoBehaviour
         heartSpawner.ChangePalierOnTeleport();
     }
 
-    /*public void pickUpWeapon() { 
-    {
-        weapon.Pickup(Transform weaponHolder, Transform playerCamera);
-    }*/
+    public void pickUpWeapon()
+    {   
+        weapon.Pickup(weaponHolder, playerCamera); 
+    }
 }

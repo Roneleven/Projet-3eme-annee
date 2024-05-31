@@ -209,7 +209,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("DestroyableBlock"))
         {
-            TakeDamage(5);
+            TakeDamage(2);
         }
     }
 

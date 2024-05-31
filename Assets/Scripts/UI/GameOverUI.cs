@@ -27,7 +27,7 @@ public class GameOverUI : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/UX/Button/Start");
         player.ResetLoomParameter();
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene("Arene_Demo");
+        FindObjectOfType<SceneTransition>().ReloadScene();
     }
 
     public void MainMenu()

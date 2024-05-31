@@ -224,7 +224,7 @@ public class Player : MonoBehaviour
         Loom.setUserData(IntPtr.Zero);
         Loom.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         Loom.release();
-        timelineHandle.Free();
+        //timelineHandle.Free();
     }
 
         private void OnDestroy()

@@ -802,6 +802,8 @@ MonoBehaviour:
   targetObject1: {fileID: 0}
   targetObject2: {fileID: 0}
   angleMargin: 10
+  bobbingSpeed: 0.06
+  bobbingAmount: 0.002
 --- !u!1 &5461869548831699639
 GameObject:
   m_ObjectHideFlags: 0

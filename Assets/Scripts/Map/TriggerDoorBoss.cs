@@ -7,6 +7,12 @@ public class TriggerDoorBoss : MonoBehaviour
     [SerializeField] private List<Animator> doorAnimators = new List<Animator>();
     [SerializeField] private bool isOpen = false;
     public GameObject unlinkedBoxSpawnersToRemove;
+    private Player player;
+
+    void Start()
+    {
+        player = FindObjectOfType<Player>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,6 +26,7 @@ public class TriggerDoorBoss : MonoBehaviour
                     {
                         animator.Play("Bossdoor1Open");
                         animator.Play("Bossdoor2Open");
+                        player.IncreaseLoomParameter();
                     }
                     else
                     {

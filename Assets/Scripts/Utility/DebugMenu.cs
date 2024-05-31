@@ -14,8 +14,18 @@ public class DebugMenu : MonoBehaviour
     public Transform weaponHolder;
     public Transform playerCamera;
     public Player player;
+    public BossPatternManager bossPatternManager;
+    public CubeLauncherPattern cubeLauncherPattern;
+    public CubeTracking cubeTrackingScript;
+    public AerialMinesPattern aerialMinesPattern;
+    public BigWallPattern bigWallPattern;
+    public ExplosivePillarPattern explosivePillarPattern;
+    public MeteorPattern meteorPattern;
+    public GatlinLauncherPattern gatlinLauncherPattern;
+
 
     private bool debugMenuActive = false;
+    
 
     void Start()
     {
@@ -88,8 +98,39 @@ public class DebugMenu : MonoBehaviour
         player.Heal(100);
     }
 
-    public void SpeedUp()
+    public void StopPatterns()
     {
-
+        bossPatternManager.StopAllPatterns();
     }
+
+    public void SpawnMeteor()
+    {
+        meteorPattern.LaunchMeteorPattern();
+    }
+
+    public void SpawnCubeTracking()
+    {
+        cubeTrackingScript.LaunchHomingCubes();
+    }
+
+    public void SpawnAerialMines()
+    {
+        aerialMinesPattern.LaunchAerialPattern();
+    }
+
+    public void SpawnWallPattern()
+    {
+        bigWallPattern.LaunchWallPattern();
+    }
+
+    public void SpawnExplosivePillar()
+    {
+        explosivePillarPattern.LaunchExplosivePillar();
+    }
+    public void SpawnGatlin()
+    {
+        gatlinLauncherPattern.SphereLauncherPattern();
+    }
+
+
 }

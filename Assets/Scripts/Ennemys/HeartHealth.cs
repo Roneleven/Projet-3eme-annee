@@ -37,6 +37,8 @@ public class HeartHealth : MonoBehaviour
     public UniversalRendererData urpRendererData;
 
     public List<int> accessibleTeleportPoints = new List<int>();
+    public BossPatternManager bossPatternManager;
+    public GameObject youWinPanel;
 
     private void Start()
     {
@@ -104,7 +106,7 @@ public class HeartHealth : MonoBehaviour
         HeartHitInstance.Play();
         HeartHitInstance.gameObject.AddComponent<VFXAutoDestroy>();
 
-        if (health <= 0 && !hasBeenDestroyed) // Vérifie si l'objet n'a pas déjà été détruit
+        if (health <= 0 && !hasBeenDestroyed) 
         {
             hasBeenDestroyed = true;
             doorAnimator.Play("DoorOpening");
@@ -112,9 +114,16 @@ public class HeartHealth : MonoBehaviour
 
         }
 
-        if (health <= 0) // Vérifie si l'objet n'a pas déjà été détruit
+        if (health <= 0) 
         {
-           
+            if (lastTeleportIndex == teleportPositions.Length - 1 || heartSpawner.currentPalier == heartSpawner.maxPalier)  
+            {
+                bossPatternManager.StopAllPatterns();
+                InstantiateExplosion();
+                Invoke("ShowYouWinUI", 5f); 
+                return; 
+            }
+
             Idle.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             TeleportHeart();
             TeleportEyeRadius(transform.position);
@@ -123,6 +132,19 @@ public class HeartHealth : MonoBehaviour
 
         }
     }
+    void InstantiateExplosion()
+    {
+        // Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+    }
+
+    void ShowYouWinUI()
+    {
+        youWinPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0f;
+    }
+
+
 
     private void TeleportHeart()
     {

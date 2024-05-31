@@ -179,4 +179,10 @@ public class BossPatternManager : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, detectionRadius[heartSpawner.currentPalier]);
     }
+
+    public void StopAllPatterns()
+    {
+        StopAllCoroutines();
+        patternActive = false;
+    }
 }

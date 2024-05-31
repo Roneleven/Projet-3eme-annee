@@ -124,6 +124,8 @@ public class Weapon : MonoBehaviour
     public VisualEffect smokeEffect;
     public Transform smokeEffectSpawnPoint;
     private VisualEffect smokeInstance;
+    public VisualEffect CubeHit;
+    private VisualEffect CubeHitInstance;
 
     [Header("Mode Materials")]
     public GameObject weaponModel;
@@ -579,6 +581,9 @@ public class Weapon : MonoBehaviour
 
         if (hitInfo.transform.CompareTag("DestroyableBlock"))
         {
+            CubeHitInstance = Instantiate(CubeHit, hitInfo.transform.position, hitInfo.transform.rotation);
+            CubeHitInstance.Play();
+            CubeHitInstance.gameObject.AddComponent<VFXAutoDestroy>();
             Destroy(hitInfo.transform.gameObject);
         }
     }

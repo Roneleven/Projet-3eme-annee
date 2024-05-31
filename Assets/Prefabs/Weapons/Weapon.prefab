@@ -734,7 +734,7 @@ MonoBehaviour:
   playerMovementsRB: {fileID: 0}
   explosiveDamage: 3
   explosiveRange: 250
-  explosionRadius: 7
+  explosionRadius: 8
   kickbackForceExplosive: 1.2
   kickbackTimeExplosive: 0.3
   explosionPrefab: {fileID: 191186, guid: 517c65f5c21a00340b7af8423976621c, type: 3}
@@ -742,7 +742,7 @@ MonoBehaviour:
   currentExplosiveCharges: 5
   explosiveChargeText: {fileID: 0}
   chargeTimeThreshold: 0.6
-  cubesToDestroyToGainACharge: 15
+  cubesToDestroyToGainACharge: 13
   chargingShakeIntensity: 0.1
   shakeCurve:
     serializedVersion: 2

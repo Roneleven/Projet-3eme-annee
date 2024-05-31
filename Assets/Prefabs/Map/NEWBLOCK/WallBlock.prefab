@@ -508,7 +508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScript: {fileID: 0}
-  forceMagnitude: 10
+  speed: 15
   newMaterial: {fileID: 2100000, guid: bf6991e19e2cc8448a5c1e5e97eb0181, type: 2}
   childObject: {fileID: 735799329749383301}
 --- !u!1 &6640312725330490306

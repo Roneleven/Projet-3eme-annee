@@ -135,7 +135,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Heal(20);
+            Heal(100);
         }
 
         if (_vignette != null && _vignette.intensity.value > 0)

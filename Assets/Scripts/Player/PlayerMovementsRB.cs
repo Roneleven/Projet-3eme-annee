@@ -331,4 +331,5 @@ public class PlayerMovementsRB : MonoBehaviour
             FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Locomotion/Footsteps");
         }
     }
+
 }

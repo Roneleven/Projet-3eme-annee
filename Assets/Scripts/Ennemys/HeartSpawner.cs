@@ -11,7 +11,6 @@ public class HeartSpawner : MonoBehaviour
     [Header("Cubes Spawn Properties")]
     public GameObject cubePrefab;
     public GameObject transparentCubePrefab;
-    public float spawnInterval;
     public float spawnRadius;
     private float cocon;
     public float gridSize;
@@ -92,9 +91,8 @@ public class HeartSpawner : MonoBehaviour
         warning = FMODUnity.RuntimeManager.CreateInstance("event:/Heart/Patterns/Cage_Warning");
         player = FindObjectOfType<Player>();
 
-        //dissolve = gameObject.GetComponent<Animation>();
+        player.OnBeat += SpawnCubesOnBeat;
 
-        StartCoroutine(SpawnCube());
         bossPatternManager.StartPatternsForCurrentPalier();
     }
 
@@ -153,65 +151,62 @@ public class HeartSpawner : MonoBehaviour
     }
 
     #region CUBES SPAWN
-    private IEnumerator SpawnCube()
+    private void SpawnCubesOnBeat()
     {
-        while (true)
+        for (int i = 0; i < spawnCount; i++)
         {
-            for (int i = 0; i < spawnCount; i++)
+            Vector3 spawnPosition;
+            do
             {
-                Vector3 spawnPosition;
-                do
+                spawnPosition = Random.insideUnitSphere * spawnRadius;
+            } while (spawnPosition.magnitude < exclusionRadius);
+
+            spawnPosition /= gridSize;
+            spawnPosition = new Vector3(Mathf.Round(spawnPosition.x), Mathf.Round(spawnPosition.y), Mathf.Round(spawnPosition.z));
+            spawnPosition *= gridSize;
+
+            spawnPosition += transform.position;
+
+            Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
+            if (colliders.Length > 0)
+            {
+                playerInPosition = false;
+                foreach (Collider collider in colliders)
                 {
-                    spawnPosition = Random.insideUnitSphere * spawnRadius;
-                } while (spawnPosition.magnitude < exclusionRadius);
-
-                spawnPosition /= gridSize;
-                spawnPosition = new Vector3(Mathf.Round(spawnPosition.x), Mathf.Round(spawnPosition.y), Mathf.Round(spawnPosition.z));
-                spawnPosition *= gridSize;
-
-                spawnPosition += transform.position;
-
-                Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
-                if (colliders.Length > 0)
-                {
-                    playerInPosition = false;
-                    foreach (Collider collider in colliders)
+                    if (collider.gameObject.tag == "Player")
                     {
-                        if (collider.gameObject.tag == "Player")
+                        playerInPosition = true;
+                        playerPosition = collider.transform.position;
+                        break;
+                    }
+                    CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
+                    if (cubeHealth != null)
+                    {
+                        if (cubeHealth.health < 6)
                         {
-                            playerInPosition = true;
-                            playerPosition = collider.transform.position;
+                            cubeHealth.health += 1;
+                            cubeHealth.UpdateMaterial();
                             break;
                         }
-                        CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
-                        if (cubeHealth != null)
+                        else
                         {
-                            if (cubeHealth.health < 6)
-                            {
-                                cubeHealth.health += 1;
-                                cubeHealth.UpdateMaterial();
-                                break;
-                            }
-                            else
-                            {
-                                continue;
-                            }
+                            continue;
                         }
                     }
-                    if (playerInPosition)
-                    {
-                        StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
-                    }
                 }
-                else
+                if (playerInPosition)
                 {
                     StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
                 }
             }
-
-            yield return new WaitForSeconds(spawnInterval);
+            else
+            {
+                StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
+            }
         }
     }
+
+
     IEnumerator PlayAnimationAndReload()
     {
         anim.Play("FadeIn");
@@ -250,10 +245,7 @@ public class HeartSpawner : MonoBehaviour
     {
         GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
 
-        //GameObject transparentCube = transparentCubesPool.GetObject(); nstantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-        // transparentCube.transform.position = spawnPosition;
-        // transparentCube.transform.setParent(spawnContainer.transform);
-        yield return new WaitForSeconds(spawnInterval);
+        yield return new WaitForSeconds(1f); // Adjust this delay as needed
 
         Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
         bool playerInPosition = false;
@@ -291,11 +283,9 @@ public class HeartSpawner : MonoBehaviour
             
             player.IncreaseLoomParameter();
 
-            //timerActive = true;
             StartCoroutine(ResetPalier());
             timeSincePalierStart = 0f;
 
-            // Déclencher l'événement OnPalierChange avec le nouveau palier
             if (OnPalierChange != null)
             {
                 OnPalierChange(currentPalier + 1);
@@ -305,7 +295,7 @@ public class HeartSpawner : MonoBehaviour
 
     private void UpdateCocon()
     {
-        cocon = (spawnRadius) * 110 + 220 ;
+        cocon = (spawnRadius) * 110 + 220;
         coconvfx.transform.localScale = new Vector3(cocon, cocon, cocon);
     }
 
@@ -315,10 +305,8 @@ public class HeartSpawner : MonoBehaviour
 
         float originalSpawnRadius = spawnRadius;
         float originalSpawnCount = spawnCount;
-        float originalSpawnInterval = spawnInterval;
 
         spawnCount = temporarySpawnCount;
-        spawnInterval = temporarySpawnInterval;
 
         previousPalier = currentPalier;
 
@@ -330,12 +318,11 @@ public class HeartSpawner : MonoBehaviour
             yield return new WaitForSeconds(timeTemporaryPalier);
         }
 
-        // Restaurer les valeurs originales
+        // Restore the original values
         spawnRadius = originalSpawnRadius;
         spawnCount = originalSpawnCount;
-        spawnInterval = originalSpawnInterval;
 
-        // Passer au palier suivant
+        // Move to the next palier
         currentPalier++;
         OnCurrentPalierChanged();
 
@@ -355,7 +342,6 @@ public class HeartSpawner : MonoBehaviour
 
     private void AdjustPalierValues(int palier)
     {
-
         spawnRadius = palier * 4;
         UpdateCocon();
 
@@ -366,10 +352,8 @@ public class HeartSpawner : MonoBehaviour
         else if (palier == 2)
         {
             spawnCount = 6 + ((palier - 1) * 4);
-
         }
 
-        // Déclencher l'événement OnPalierChange avec le nouveau palier
         if (OnPalierChange != null)
         {
             OnPalierChange(palier);

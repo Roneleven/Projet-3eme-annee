@@ -244,7 +244,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubePrefab: {fileID: 997631944070638011, guid: fb00ebdef81d1be49abc0918eff87891, type: 3}
   transparentCubePrefab: {fileID: 2751100251518416, guid: e270576d61d2b784582b8db1cc980d8d, type: 3}
-  spawnInterval: 1.333333
   spawnRadius: 4
   gridSize: 1
   exclusionRadius: 3
@@ -358,7 +357,6 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    - {fileID: 0}
     boxSpawnersNoHP: []
   parent: {fileID: 8374639144287423287}
   eyeRadius: {fileID: 7289005239915659131}
@@ -368,6 +366,8 @@ MonoBehaviour:
   HeartHitSpawnPoint: {fileID: 3934878839238042672}
   urpRendererData: {fileID: 11400000, guid: ea33ea2a516429a45be93e7ed1e9a400, type: 2}
   accessibleTeleportPoints: 
+  bossPatternManager: {fileID: 8454365674171955205}
+  youWinPanel: {fileID: 0}
 --- !u!114 &8454365674171955205
 MonoBehaviour:
   m_ObjectHideFlags: 0

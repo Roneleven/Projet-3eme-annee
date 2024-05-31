@@ -51,7 +51,7 @@ public class PlayerMovementsRB : MonoBehaviour
     public Rigidbody rb;
     private float movementX;
     private float movementY;
-    private bool isGrounded;
+    public bool isGrounded;
     private FMOD.Studio.EventInstance jetUse;
     private bool isJetUsePlaying = false;
     public HeartSpawner heartSpawner;

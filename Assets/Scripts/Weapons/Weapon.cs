@@ -141,6 +141,11 @@ public class Weapon : MonoBehaviour
     public GameObject targetObject2;
     public float angleMargin = 5f;
 
+    [Header("Bobbing Settings")]
+    public float bobbingSpeed = 0.18f;
+    public float bobbingAmount = 0.2f;
+    private float bobbingTimer = 0f;
+
     private void Start()
     {
         _rb = gameObject.AddComponent<Rigidbody>();
@@ -201,7 +206,38 @@ public class Weapon : MonoBehaviour
         {
             SwitchToLaserMode();
         }*/
+        if (playerMovementsRB.isGrounded)
+        {
+            Vector3 finalPosition = transform.localPosition;
+            float waveslice = 0.0f;
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
 
+            if (Mathf.Abs(horizontal) == 0 && Mathf.Abs(vertical) == 0)
+            {
+                bobbingTimer = 0.0f;
+            }
+            else
+            {
+                waveslice = Mathf.Sin(bobbingTimer);
+                bobbingTimer += bobbingSpeed;
+                if (bobbingTimer > Mathf.PI * 2)
+                {
+                    bobbingTimer = bobbingTimer - (Mathf.PI * 2);
+                }
+            }
+
+            if (waveslice != 0)
+            {
+                float translateChange = waveslice * bobbingAmount;
+                float totalAxes = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
+                totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
+                translateChange = totalAxes * translateChange;
+                finalPosition.y += translateChange;
+            }
+
+            transform.localPosition = finalPosition;
+        }
         //tir clique gauche explosive
 
         if (currentMode == FireMode.Explosive)

@@ -8,12 +8,21 @@ public class MenuiUI : MonoBehaviour
 {
     public GameObject mainMenuUI;
     public GameObject optionsUI;
+    public static FMOD.Studio.EventInstance MenuMusique;
+
+    public void Start()
+    {
+        MenuMusique = FMODUnity.RuntimeManager.CreateInstance("event:/UX/Ambience/MenuBreakingTheHeart");
+        MenuMusique.start();
+    }
 
     public void ChangeScene(string sceneName)
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/UX/Button/Start");
         PauseManager.MenuMusique.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        MenuMusique.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         SceneManager.LoadScene(sceneName);
+        
     }
 
     public void ExitGame()

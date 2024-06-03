@@ -34,6 +34,7 @@ public class HeartSpawner : MonoBehaviour
     private Player player;
     private bool isTemporaryPalierActive = false;
     private Coroutine spawnCubeCoroutine;
+    public bool[] palierTriggersReached;
 
     [Header("Timer/Reset Properties")]
     public float timer;
@@ -96,6 +97,7 @@ public class HeartSpawner : MonoBehaviour
         player.OnBeat += SpawnCubesOnBeat;
 
         bossPatternManager.StartPatternsForCurrentPalier();
+        palierTriggersReached = new bool[maxPalier];
     }
 
 
@@ -369,6 +371,13 @@ public class HeartSpawner : MonoBehaviour
     private IEnumerator ResetPalier()
     {
         isCooldownActive = true;
+
+        // Attendre que le trigger soit activé
+        while (!palierTriggersReached[currentPalier])
+        {
+            yield return null;
+        }
+
         isTemporaryPalierActive = true;
 
         float originalSpawnRadius = spawnRadius;
@@ -419,6 +428,14 @@ public class HeartSpawner : MonoBehaviour
         }
 
         isCooldownActive = false;
+    }
+
+    public void ActivatePalier(int palier)
+    {
+        if (palier > 0 && palier <= maxPalier)
+        {
+            palierTriggersReached[palier - 1] = true;
+        }
     }
 
     private void AdjustPalierValues(int palier)

@@ -32,6 +32,8 @@ public class HeartSpawner : MonoBehaviour
     public GameObject coconvfx;
     public Image timerFillImage;
     private Player player;
+    private bool isTemporaryPalierActive = false;
+    private Coroutine spawnCubeCoroutine;
 
     [Header("Timer/Reset Properties")]
     public float timer;
@@ -153,6 +155,11 @@ public class HeartSpawner : MonoBehaviour
     #region CUBES SPAWN
     private void SpawnCubesOnBeat()
     {
+        if (isTemporaryPalierActive)
+        {
+            return;
+        }
+
         for (int i = 0; i < spawnCount; i++)
         {
             Vector3 spawnPosition;
@@ -203,6 +210,66 @@ public class HeartSpawner : MonoBehaviour
             {
                 StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
             }
+        }
+    }
+
+    private IEnumerator SpawnCube()
+    {
+        while (isTemporaryPalierActive)
+        {
+            for (int i = 0; i < spawnCount; i++)
+            {
+                Vector3 spawnPosition;
+                do
+                {
+                    spawnPosition = Random.insideUnitSphere * spawnRadius;
+                } while (spawnPosition.magnitude < exclusionRadius);
+
+                spawnPosition /= gridSize;
+                spawnPosition = new Vector3(Mathf.Round(spawnPosition.x), Mathf.Round(spawnPosition.y), Mathf.Round(spawnPosition.z));
+                spawnPosition *= gridSize;
+
+                spawnPosition += transform.position;
+
+                Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
+                if (colliders.Length > 0)
+                {
+                    playerInPosition = false;
+                    foreach (Collider collider in colliders)
+                    {
+                        if (collider.gameObject.tag == "Player")
+                        {
+                            playerInPosition = true;
+                            playerPosition = collider.transform.position;
+                            break;
+                        }
+                        CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
+                        if (cubeHealth != null)
+                        {
+                            if (cubeHealth.health < 6)
+                            {
+                                cubeHealth.health += 1;
+                                cubeHealth.UpdateMaterial();
+                                break;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
+                    }
+                    if (playerInPosition)
+                    {
+                        StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
+                    }
+                }
+                else
+                {
+                    StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
+                }
+            }
+
+            yield return new WaitForSeconds(temporarySpawnInterval);
         }
     }
 
@@ -302,11 +369,18 @@ public class HeartSpawner : MonoBehaviour
     private IEnumerator ResetPalier()
     {
         isCooldownActive = true;
+        isTemporaryPalierActive = true;
 
         float originalSpawnRadius = spawnRadius;
         float originalSpawnCount = spawnCount;
 
         spawnCount = temporarySpawnCount;
+
+        if (spawnCubeCoroutine != null)
+        {
+            StopCoroutine(spawnCubeCoroutine);
+        }
+        spawnCubeCoroutine = StartCoroutine(SpawnCube());
 
         previousPalier = currentPalier;
 
@@ -316,6 +390,13 @@ public class HeartSpawner : MonoBehaviour
             AdjustPalierValues(palier);
             spawnCount = temporarySpawnCountBeforeAdjust;
             yield return new WaitForSeconds(timeTemporaryPalier);
+        }
+
+        isTemporaryPalierActive = false;
+
+        if (spawnCubeCoroutine != null)
+        {
+            StopCoroutine(spawnCubeCoroutine);
         }
 
         // Restore the original values

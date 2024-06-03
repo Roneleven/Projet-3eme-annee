@@ -35,6 +35,10 @@ public class HeartSpawner : MonoBehaviour
     private bool isTemporaryPalierActive = false;
     private Coroutine spawnCubeCoroutine;
     public bool[] palierTriggersReached;
+    private bool isTriggerActivated = false;
+    private bool isHeartTeleporting = false;
+
+
 
     [Header("Timer/Reset Properties")]
     public float timer;
@@ -157,7 +161,7 @@ public class HeartSpawner : MonoBehaviour
     #region CUBES SPAWN
     private void SpawnCubesOnBeat()
     {
-        if (isTemporaryPalierActive)
+        if (isTemporaryPalierActive || !isTriggerActivated || isHeartTeleporting)
         {
             return;
         }
@@ -214,6 +218,9 @@ public class HeartSpawner : MonoBehaviour
             }
         }
     }
+
+
+
 
     private IEnumerator SpawnCube()
     {
@@ -349,7 +356,6 @@ public class HeartSpawner : MonoBehaviour
         if (heartHealth != null)
         {
             timer = defaultTimer;
-            
             player.IncreaseLoomParameter();
 
             StartCoroutine(ResetPalier());
@@ -358,7 +364,11 @@ public class HeartSpawner : MonoBehaviour
             if (OnPalierChange != null)
             {
                 OnPalierChange(currentPalier + 1);
+                isHeartTeleporting = false;
             }
+
+            // Activer le trigger
+            isTriggerActivated = true;
         }
     }
 
@@ -371,6 +381,8 @@ public class HeartSpawner : MonoBehaviour
     private IEnumerator ResetPalier()
     {
         isCooldownActive = true;
+        isTriggerActivated = false; // Reset the trigger activated flag
+        isHeartTeleporting = true; // Indiquer que le cœur est en téléportation
 
         // Attendre que le trigger soit activé
         while (!palierTriggersReached[currentPalier])
@@ -428,15 +440,23 @@ public class HeartSpawner : MonoBehaviour
         }
 
         isCooldownActive = false;
+        isHeartTeleporting = false; // Indiquer que le cœur a terminé la téléportation
     }
+
+
 
     public void ActivatePalier(int palier)
     {
         if (palier > 0 && palier <= maxPalier)
         {
             palierTriggersReached[palier - 1] = true;
+            if (palier == currentPalier)
+            {
+                isTriggerActivated = true;
+            }
         }
     }
+
 
     private void AdjustPalierValues(int palier)
     {

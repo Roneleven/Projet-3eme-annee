@@ -7,7 +7,7 @@ public class TriggerHeartPalier : MonoBehaviour
 
     private void Start()
     {
-        heartSpawner = FindObjectOfType<HeartSpawner>();
+        //heartSpawner = FindObjectOfType<HeartSpawner>();
     }
 
     private void OnTriggerEnter(Collider other)

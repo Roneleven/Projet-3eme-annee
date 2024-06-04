@@ -65,7 +65,7 @@ public class PauseManager : MonoBehaviour
         player.ResetLoomParameter();
         Time.timeScale = 1.0f;
         SceneManager.LoadScene("Menu");
-        MenuMusique.start();
+        //MenuMusique.start();
     }
 
 }

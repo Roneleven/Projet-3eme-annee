@@ -132,5 +132,10 @@ public class DebugMenu : MonoBehaviour
         gatlinLauncherPattern.SphereLauncherPattern();
     }
 
+    public void GainACharges()
+    {
+        weapon.GainExplosiveCharge();
+    }
+
 
 }

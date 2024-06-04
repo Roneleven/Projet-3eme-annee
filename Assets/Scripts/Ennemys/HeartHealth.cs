@@ -120,7 +120,7 @@ public class HeartHealth : MonoBehaviour
             {
                 bossPatternManager.StopAllPatterns();
                 InstantiateExplosion();
-                Invoke("ShowYouWinUI", 5f); 
+                Invoke("ShowYouWinUI", 0.5f); 
                 return; 
             }
 

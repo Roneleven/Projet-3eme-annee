@@ -32,6 +32,13 @@ public class HeartSpawner : MonoBehaviour
     public GameObject coconvfx;
     public Image timerFillImage;
     private Player player;
+    private bool isTemporaryPalierActive = false;
+    private Coroutine spawnCubeCoroutine;
+    public bool[] palierTriggersReached;
+    private bool isTriggerActivated = false;
+    private bool isHeartTeleporting = false;
+
+
 
     [Header("Timer/Reset Properties")]
     public float timer;
@@ -94,6 +101,7 @@ public class HeartSpawner : MonoBehaviour
         player.OnBeat += SpawnCubesOnBeat;
 
         bossPatternManager.StartPatternsForCurrentPalier();
+        palierTriggersReached = new bool[maxPalier];
     }
 
 
@@ -153,6 +161,11 @@ public class HeartSpawner : MonoBehaviour
     #region CUBES SPAWN
     private void SpawnCubesOnBeat()
     {
+        if (isTemporaryPalierActive || !isTriggerActivated || isHeartTeleporting)
+        {
+            return;
+        }
+
         for (int i = 0; i < spawnCount; i++)
         {
             Vector3 spawnPosition;
@@ -207,6 +220,69 @@ public class HeartSpawner : MonoBehaviour
     }
 
 
+
+
+    private IEnumerator SpawnCube()
+    {
+        while (isTemporaryPalierActive)
+        {
+            for (int i = 0; i < spawnCount; i++)
+            {
+                Vector3 spawnPosition;
+                do
+                {
+                    spawnPosition = Random.insideUnitSphere * spawnRadius;
+                } while (spawnPosition.magnitude < exclusionRadius);
+
+                spawnPosition /= gridSize;
+                spawnPosition = new Vector3(Mathf.Round(spawnPosition.x), Mathf.Round(spawnPosition.y), Mathf.Round(spawnPosition.z));
+                spawnPosition *= gridSize;
+
+                spawnPosition += transform.position;
+
+                Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
+                if (colliders.Length > 0)
+                {
+                    playerInPosition = false;
+                    foreach (Collider collider in colliders)
+                    {
+                        if (collider.gameObject.tag == "Player")
+                        {
+                            playerInPosition = true;
+                            playerPosition = collider.transform.position;
+                            break;
+                        }
+                        CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
+                        if (cubeHealth != null)
+                        {
+                            if (cubeHealth.health < 6)
+                            {
+                                cubeHealth.health += 1;
+                                cubeHealth.UpdateMaterial();
+                                break;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
+                    }
+                    if (playerInPosition)
+                    {
+                        StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
+                    }
+                }
+                else
+                {
+                    StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
+                }
+            }
+
+            yield return new WaitForSeconds(temporarySpawnInterval);
+        }
+    }
+
+
     IEnumerator PlayAnimationAndReload()
     {
         anim.Play("FadeIn");
@@ -242,33 +318,52 @@ public class HeartSpawner : MonoBehaviour
     }
 
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
+{
+    GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+
+    Material transparentMaterial = transparentCube.GetComponent<Renderer>().material;
+    float duration = 0.66667f;
+    float elapsedTime = 0f;
+    float initialFresnelPower = 4f;
+    float targetFresnelPower = 10f;
+
+    while (elapsedTime < duration)
     {
-        GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+        elapsedTime += Time.deltaTime;
+        float t = elapsedTime / duration;
+        float currentFresnelPower = Mathf.Lerp(initialFresnelPower, targetFresnelPower, t);
+        transparentMaterial.SetFloat("_FresnelPower", currentFresnelPower);
 
-        yield return new WaitForSeconds(1f); // Adjust this delay as needed
+        yield return null;
+    }
 
-        Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
-        bool playerInPosition = false;
-        foreach (Collider collider in colliders)
+    // Ensure the final value is set
+    transparentMaterial.SetFloat("_FresnelPower", targetFresnelPower);
+
+    yield return new WaitForSeconds(0.66667f - duration); // Adjust this delay as needed
+
+    Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
+    bool playerInPosition = false;
+    foreach (Collider collider in colliders)
+    {
+        if (collider.gameObject.tag == "Player")
         {
-            if (collider.gameObject.tag == "Player")
-            {
-                playerInPosition = true;
-                break;
-            }
-        }
-
-        Destroy(transparentCube);
-
-        if (!playerInPosition)
-        {
-            Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-        }
-        else
-        {
-            UpgradeCubeIfNeeded(spawnPosition);
+            playerInPosition = true;
+            break;
         }
     }
+
+    Destroy(transparentCube);
+
+    if (!playerInPosition)
+    {
+        Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+    }
+    else
+    {
+        UpgradeCubeIfNeeded(spawnPosition);
+    }
+}
     #endregion
 
     #region PALIER BEHAVIOURS
@@ -280,7 +375,6 @@ public class HeartSpawner : MonoBehaviour
         if (heartHealth != null)
         {
             timer = defaultTimer;
-            
             player.IncreaseLoomParameter();
 
             StartCoroutine(ResetPalier());
@@ -289,7 +383,11 @@ public class HeartSpawner : MonoBehaviour
             if (OnPalierChange != null)
             {
                 OnPalierChange(currentPalier + 1);
+                isHeartTeleporting = false;
             }
+
+            // Activer le trigger
+            isTriggerActivated = true;
         }
     }
 
@@ -302,11 +400,27 @@ public class HeartSpawner : MonoBehaviour
     private IEnumerator ResetPalier()
     {
         isCooldownActive = true;
+        isTriggerActivated = false; // Reset the trigger activated flag
+        isHeartTeleporting = true; // Indiquer que le cœur est en téléportation
+
+        // Attendre que le trigger soit activé
+        while (!palierTriggersReached[currentPalier])
+        {
+            yield return null;
+        }
+
+        isTemporaryPalierActive = true;
 
         float originalSpawnRadius = spawnRadius;
         float originalSpawnCount = spawnCount;
 
         spawnCount = temporarySpawnCount;
+
+        if (spawnCubeCoroutine != null)
+        {
+            StopCoroutine(spawnCubeCoroutine);
+        }
+        spawnCubeCoroutine = StartCoroutine(SpawnCube());
 
         previousPalier = currentPalier;
 
@@ -316,6 +430,13 @@ public class HeartSpawner : MonoBehaviour
             AdjustPalierValues(palier);
             spawnCount = temporarySpawnCountBeforeAdjust;
             yield return new WaitForSeconds(timeTemporaryPalier);
+        }
+
+        isTemporaryPalierActive = false;
+
+        if (spawnCubeCoroutine != null)
+        {
+            StopCoroutine(spawnCubeCoroutine);
         }
 
         // Restore the original values
@@ -338,7 +459,23 @@ public class HeartSpawner : MonoBehaviour
         }
 
         isCooldownActive = false;
+        isHeartTeleporting = false; // Indiquer que le cœur a terminé la téléportation
     }
+
+
+
+    public void ActivatePalier(int palier)
+    {
+        if (palier > 0 && palier <= maxPalier)
+        {
+            palierTriggersReached[palier - 1] = true;
+            if (palier == currentPalier)
+            {
+                isTriggerActivated = true;
+            }
+        }
+    }
+
 
     private void AdjustPalierValues(int palier)
     {

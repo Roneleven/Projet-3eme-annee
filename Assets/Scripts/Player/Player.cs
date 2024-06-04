@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using System;
 using System.Runtime.InteropServices;
+using UnityEngine.VFX;
 
 public class Player : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class Player : MonoBehaviour
     public GameObject GameOverCanvas;
     public TimelineInfo timelineInfo = null;
     private GCHandle timelineHandle;
+    public VisualEffect knockbackEffect;
+    private Coroutine resetClippaCoroutine;
+    private bool isResettingClippa = false;
 
     private FMOD.Studio.EventInstance Loom;
     private FMOD.Studio.EVENT_CALLBACK beatCallback;
@@ -85,45 +89,94 @@ public class Player : MonoBehaviour
     }
 
     [AOT.MonoPInvokeCallback(typeof(FMOD.Studio.EVENT_CALLBACK))]
-    static FMOD.RESULT BeatEventCallback(FMOD.Studio.EVENT_CALLBACK_TYPE type, IntPtr instancePtr, IntPtr parameterPtr)
+static FMOD.RESULT BeatEventCallback(FMOD.Studio.EVENT_CALLBACK_TYPE type, IntPtr instancePtr, IntPtr parameterPtr)
+{
+    FMOD.Studio.EventInstance instance = new FMOD.Studio.EventInstance(instancePtr);
+
+    IntPtr timelineInfoPtr;
+    FMOD.RESULT result = instance.getUserData(out timelineInfoPtr);
+
+    if (result != FMOD.RESULT.OK)
     {
-        FMOD.Studio.EventInstance instance = new FMOD.Studio.EventInstance(instancePtr);
+        Debug.LogError("Timeline Callback error: " + result);
+    }
+    else if (timelineInfoPtr != IntPtr.Zero)
+    {
+        GCHandle timelineHandle = GCHandle.FromIntPtr(timelineInfoPtr);
+        TimelineInfo timelineInfo = (TimelineInfo)timelineHandle.Target;
 
-        IntPtr timelineInfoPtr;
-        FMOD.RESULT result = instance.getUserData(out timelineInfoPtr);
-
-        if (result != FMOD.RESULT.OK)
+        switch (type)
         {
-            Debug.LogError("Timeline Callback error: " + result);
-        }
-        else if (timelineInfoPtr != IntPtr.Zero)
-        {
-            GCHandle timelineHandle = GCHandle.FromIntPtr(timelineInfoPtr);
-            TimelineInfo timelineInfo = (TimelineInfo)timelineHandle.Target;
+            case FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT:
+                {
+                    var parameter = (FMOD.Studio.TIMELINE_BEAT_PROPERTIES)Marshal.PtrToStructure(parameterPtr, typeof(FMOD.Studio.TIMELINE_BEAT_PROPERTIES));
+                    timelineInfo.currentBeat = parameter.beat;
+                }
+                break;
+            case FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER:
+                {
+                    var parameter = (FMOD.Studio.TIMELINE_MARKER_PROPERTIES)Marshal.PtrToStructure(parameterPtr, typeof(FMOD.Studio.TIMELINE_MARKER_PROPERTIES));
+                    timelineInfo.lastMarker = parameter.name;
 
-            switch (type)
-            {
-                case FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT:
+                    if (parameter.name == "beat")
                     {
-                        var parameter = (FMOD.Studio.TIMELINE_BEAT_PROPERTIES)Marshal.PtrToStructure(parameterPtr, typeof(FMOD.Studio.TIMELINE_BEAT_PROPERTIES));
-                        timelineInfo.currentBeat = parameter.beat;
-                    }
-                    break;
-                case FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER:
-                    {
-                        var parameter = (FMOD.Studio.TIMELINE_MARKER_PROPERTIES)Marshal.PtrToStructure(parameterPtr, typeof(FMOD.Studio.TIMELINE_MARKER_PROPERTIES));
-                        timelineInfo.lastMarker = parameter.name;
+                        Player.instance?.OnBeat?.Invoke();
 
-                        if (parameter.name == "beat")
+                        // Modifier la valeur de Clippa à 0.1
+                        if (Player.instance.knockbackEffect != null)
                         {
-                            Player.instance?.OnBeat?.Invoke();
+                            Player.instance.knockbackEffect.SetFloat("Clippa", 0.1f);
+
+                            // Si une coroutine de réinitialisation est en cours, l'arrêter
+                            if (Player.instance.isResettingClippa)
+                            {
+                                Player.instance.StopCoroutine(Player.instance.resetClippaCoroutine);
+                                Player.instance.isResettingClippa = false;
+                            }
+
+                            // Démarrer une nouvelle coroutine de réinitialisation
+                            Player.instance.resetClippaCoroutine = Player.instance.StartCoroutine(Player.instance.ResetClippa());
                         }
                     }
-                    break;
-            }
+                }
+                break;
         }
-        return FMOD.RESULT.OK;
     }
+    return FMOD.RESULT.OK;
+}
+
+private IEnumerator ResetClippa()
+{
+    isResettingClippa = true;
+
+    float currentTime = 0f;
+    float duration = .5f; // Durée de la transition (en secondes)
+
+    if (Player.instance != null && Player.instance.knockbackEffect != null)
+    {
+        float startValue = 0.1f;
+        float endValue = 1f;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            float t = currentTime / duration;
+
+            // Interpolation linéaire entre startValue et endValue
+            float newValue = Mathf.Lerp(startValue, endValue, t);
+
+            // Réglez la valeur de Clippa
+            Player.instance.knockbackEffect.SetFloat("Clippa", newValue);
+
+            yield return null;
+        }
+
+        // Assurez-vous que la valeur finale est exacte
+        Player.instance.knockbackEffect.SetFloat("Clippa", endValue);
+    }
+
+    isResettingClippa = false;
+}
 
     // Update is called once per frame
     void Update()

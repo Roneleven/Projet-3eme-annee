@@ -7,28 +7,34 @@ public class BoxSpawner : MonoBehaviour
     public float spawnInterval = 1f;
     public float spawnRadius;
     public GameObject spawnContainer;
-    public Vector3 spawnBoxSize = new Vector3(8f, 8f, 8f); // Taille de la bo�te de spawn
+    public Vector3 spawnBoxSize = new Vector3(8f, 8f, 8f);
     public float gridSize = 1f;
     public float exclusionRadius = 2f;
     public float spawnCount;
     public GameObject transparentCubePrefab;
-
-    // Nouvelle variable pour d�finir le nombre maximal de blocs dans l'inspecteur Unity
     public int maxCubeCount = 50;
-
-    // Variable pour suivre le nombre actuel de blocs r�els
     public int cubeCount = 0;
 
-    private void Start()
+    private bool isTriggerActivated = false;
+
+    public void ActivateSpawner()
     {
-        //StartCoroutine(SpawnCube());
+        if (!isTriggerActivated)
+        {
+            isTriggerActivated = true;
+            StartCoroutine(SpawnCube());
+        }
     }
 
-	public IEnumerator SpawnCube()
+    public IEnumerator SpawnCube()
     {
         while (true)
         {
-           // while (pause) yield return new WaitForEndOfFrame();
+            if (!isTriggerActivated)
+            {
+                yield return null;
+                continue;
+            }
 
             if (cubeCount < maxCubeCount)
             {
@@ -68,14 +74,11 @@ public class BoxSpawner : MonoBehaviour
                                 if (cubeHealth.health < 6)
                                 {
                                     cubeHealth.health += 1;
-                                    cubeCount++; // Incr�mente le nombre de blocs r�els
+                                    cubeCount++;
                                 }
                                 else
                                 {
-                                    // Cube am�lior�, comptez-le comme un cube suppl�mentaire
-                                    cubeCount++; // Incr�mente le nombre de blocs r�els
-
-                                    // Ajoutez ici la logique d'augmentation du cubeCount en fonction de l'am�lioration du cube
+                                    cubeCount++;
                                     cubeCount += Mathf.CeilToInt(cubeHealth.health / 5f) - 1;
                                 }
                                 break;
@@ -85,7 +88,7 @@ public class BoxSpawner : MonoBehaviour
                     else
                     {
                         StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
-                        cubeCount++; // Incr�mente le nombre de blocs r�els
+                        cubeCount++;
                     }
                 }
             }
@@ -93,7 +96,6 @@ public class BoxSpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
     }
-
 
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {
@@ -115,15 +117,14 @@ public class BoxSpawner : MonoBehaviour
 
         if (playerInPosition)
         {
-        
+            // Logic if player is in position (currently nothing is done here)
         }
         else
         {
             Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-            cubeCount++; // Incr�mente le nombre de blocs r�els
+            cubeCount++;
         }
 
-        // D�cr�mente le nombre de blocs r�els lorsque la coroutine est termin�e (quand le bloc transparent est d�truit)
         cubeCount--;
     }
 

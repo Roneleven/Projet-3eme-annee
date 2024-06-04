@@ -318,33 +318,52 @@ public class HeartSpawner : MonoBehaviour
     }
 
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
+{
+    GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+
+    Material transparentMaterial = transparentCube.GetComponent<Renderer>().material;
+    float duration = 0.66667f;
+    float elapsedTime = 0f;
+    float initialFresnelPower = 4f;
+    float targetFresnelPower = 10f;
+
+    while (elapsedTime < duration)
     {
-        GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+        elapsedTime += Time.deltaTime;
+        float t = elapsedTime / duration;
+        float currentFresnelPower = Mathf.Lerp(initialFresnelPower, targetFresnelPower, t);
+        transparentMaterial.SetFloat("_FresnelPower", currentFresnelPower);
 
-        yield return new WaitForSeconds(1f); // Adjust this delay as needed
+        yield return null;
+    }
 
-        Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
-        bool playerInPosition = false;
-        foreach (Collider collider in colliders)
+    // Ensure the final value is set
+    transparentMaterial.SetFloat("_FresnelPower", targetFresnelPower);
+
+    yield return new WaitForSeconds(0.66667f - duration); // Adjust this delay as needed
+
+    Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
+    bool playerInPosition = false;
+    foreach (Collider collider in colliders)
+    {
+        if (collider.gameObject.tag == "Player")
         {
-            if (collider.gameObject.tag == "Player")
-            {
-                playerInPosition = true;
-                break;
-            }
-        }
-
-        Destroy(transparentCube);
-
-        if (!playerInPosition)
-        {
-            Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-        }
-        else
-        {
-            UpgradeCubeIfNeeded(spawnPosition);
+            playerInPosition = true;
+            break;
         }
     }
+
+    Destroy(transparentCube);
+
+    if (!playerInPosition)
+    {
+        Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+    }
+    else
+    {
+        UpgradeCubeIfNeeded(spawnPosition);
+    }
+}
     #endregion
 
     #region PALIER BEHAVIOURS

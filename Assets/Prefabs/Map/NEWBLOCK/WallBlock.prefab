@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4759459705322386588}
   m_Layer: 3
   m_Name: state_0
-  m_TagString: HeartBlock
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 6128951908845114391}
   m_Layer: 3
   m_Name: state_1
-  m_TagString: HeartBlock
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 5229042857550612426}
   m_Layer: 3
   m_Name: state_3
-  m_TagString: HeartBlock
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 8169374982599697447}
   m_Layer: 3
   m_Name: state_2
-  m_TagString: HeartBlock
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -507,7 +507,7 @@ GameObject:
   - component: {fileID: 5379326474684183560}
   m_Layer: 3
   m_Name: state_4
-  m_TagString: HeartBlock
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

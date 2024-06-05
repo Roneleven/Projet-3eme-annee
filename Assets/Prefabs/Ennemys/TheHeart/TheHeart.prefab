@@ -404,9 +404,9 @@ MonoBehaviour:
   - 6
   - 5
   - 4
-  - 4
-  - 5
-  - 5
+  - 3
+  - 2
+  - 1
 --- !u!114 &8478000295457755194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,8 +433,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartSpawner: {fileID: 6899634225175561795}
-  numberOfCubesToLaunch: 8
-  homingCubeSpeed: 15
+  numberOfCubesToLaunch: 4
+  homingCubeSpeed: 25
   destroyDelay: 5
   cubeTimer: 5
   targetTransform: {fileID: 0}

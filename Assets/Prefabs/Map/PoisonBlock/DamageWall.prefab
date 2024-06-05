@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7173625961838439358}
   - component: {fileID: 462281091523132872}
   - component: {fileID: -3657008912587515122}
+  - component: {fileID: 6959054852343434793}
   m_Layer: 3
   m_Name: DamageWall
   m_TagString: DestroyableBlock
@@ -118,7 +119,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d73e4a24886ef142abd0c1b5b400c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  repulsionForce: 2
+  repulsionForce: 10
   backwardForce: 0
   upwardForce: 2
   playerScript: {fileID: 0}
+--- !u!54 &6959054852343434793
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230891745418371966}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

@@ -7,7 +7,6 @@ public class BlockWall : MonoBehaviour
     public Player playerScript;
     public float speed = 10f; // Vitesse de déplacement
     public Material newMaterial;
-    public GameObject childObject;
 
     private bool hasBeenPropelled = false; // Variable pour suivre l'état de propulsion
     private Transform playerTransform;
@@ -63,17 +62,14 @@ public class BlockWall : MonoBehaviour
 
     void ChangeMaterial()
     {
-        if (childObject != null)
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer != null && newMaterial != null)
         {
-            Renderer renderer = childObject.GetComponent<Renderer>();
-            if (renderer != null && newMaterial != null)
-            {
-                renderer.material = newMaterial;
-            }
+            renderer.material = newMaterial;
         }
         else
         {
-            Debug.LogWarning("Child object not assigned.");
+            Debug.LogWarning("Renderer or newMaterial is not assigned.");
         }
     }
 

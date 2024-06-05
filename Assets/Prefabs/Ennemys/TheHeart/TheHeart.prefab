@@ -259,6 +259,7 @@ MonoBehaviour:
   timeSincePalierStart: 0
   coconvfx: {fileID: 113216390190002751}
   timerFillImage: {fileID: 0}
+  palierTriggersReached: 
   timer: 180
   defaultTimer: 180
   timerText: {fileID: 0}
@@ -432,7 +433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartSpawner: {fileID: 6899634225175561795}
-  numberOfCubesToLaunch: 10
+  numberOfCubesToLaunch: 8
   homingCubeSpeed: 15
   destroyDelay: 5
   cubeTimer: 5

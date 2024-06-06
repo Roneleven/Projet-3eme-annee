@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 using UnityEngine.Rendering.Universal;
+using System.Linq;
 
 [System.Serializable]
 public struct TeleportPointBoxSpawnerPair
@@ -10,6 +11,7 @@ public struct TeleportPointBoxSpawnerPair
     public int teleportPointIndex;
     public List<BoxSpawner> boxSpawners;
     public List<BoxSpawnerNoHP> boxSpawnersNoHP;
+    public List<BoxSpawnerActivateTrigger> boxSpawnersActivateTrigger;
 }
 
 public class HeartHealth : MonoBehaviour
@@ -216,6 +218,17 @@ public class HeartHealth : MonoBehaviour
                 }
             }
         }
+
+        foreach (var pair in teleportPointBoxSpawnerPairs)
+        {
+            if (pair.teleportPointIndex == lastTeleportIndex)
+            {
+                foreach (var boxSpawnerActivateTrigger in pair.boxSpawnersActivateTrigger)
+                {
+                    boxSpawnerActivateTrigger.StopAllCoroutines();
+                }
+            }
+        }
     }
 
     private void ActivateLinkedBoxSpawners(int teleportIndex)
@@ -262,6 +275,26 @@ public class HeartHealth : MonoBehaviour
                 {
                     Debug.LogError("pair.boxSpawnersNoHP is null");
                 }
+
+                if (pair.boxSpawnersActivateTrigger != null)
+                {
+                    foreach (var boxSpawnerActivateTrigger in pair.boxSpawnersActivateTrigger)
+                    {
+                        if (boxSpawnerActivateTrigger != null)
+                        {
+                            Debug.Log("Activating boxSpawnerActivateTrigger at teleport index: " + teleportIndex);
+                            boxSpawnerActivateTrigger.StartCoroutine(boxSpawnerActivateTrigger.SpawnCube());
+                        }
+                        else
+                        {
+                            Debug.LogError("boxSpawnerActivateTrigger is null in pair.boxSpawnerActivateTrigger");
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.LogError("pair.boxSpawnerActivateTrigger is null");
+                }
             }
         }
     }
@@ -300,9 +333,11 @@ public class HeartHealth : MonoBehaviour
                     foreach (var boxSpawner in pair.boxSpawners)
                     {
                         GameObject[] generatedCubes = GameObject.FindGameObjectsWithTag("Block");
-                        float percentageToRemove = 0.9f;
+                        GameObject[] generatedTransparentCubes = GameObject.FindGameObjectsWithTag("TransparentBlock");
+                        GameObject[] cubesToRemove = generatedCubes.Concat(generatedTransparentCubes).ToArray();
+                        float percentageToRemove = 1f;
                         float delayBetweenCubes = 3f / generatedCubes.Length;
-                        StartCoroutine(DestroyPercentageOfCubesGradually(generatedCubes, percentageToRemove, delayBetweenCubes));
+                        StartCoroutine(DestroyPercentageOfCubesGradually(cubesToRemove, percentageToRemove, delayBetweenCubes));
                     }
                 }
             }
@@ -317,9 +352,30 @@ public class HeartHealth : MonoBehaviour
                     foreach (var boxSpawnerNoHP in pair.boxSpawnersNoHP)
                     {
                         GameObject[] generatedCubes = GameObject.FindGameObjectsWithTag("Block");
-                        float percentageToRemove = 0.9f;
+                        GameObject[] generatedTransparentCubes = GameObject.FindGameObjectsWithTag("TransparentBlock");
+                        GameObject[] cubesToRemove = generatedCubes.Concat(generatedTransparentCubes).ToArray();
+                        float percentageToRemove = 1f;
                         float delayBetweenCubes = 3f / generatedCubes.Length;
-                        StartCoroutine(DestroyPercentageOfCubesGradually(generatedCubes, percentageToRemove, delayBetweenCubes));
+                        StartCoroutine(DestroyPercentageOfCubesGradually(cubesToRemove, percentageToRemove, delayBetweenCubes));
+                    }
+                }
+            }
+        }
+
+        foreach (var pair in teleportPointBoxSpawnerPairs)
+        {
+            if (pair.teleportPointIndex == lastTeleportIndex)
+            {
+                if (pair.boxSpawnersActivateTrigger != null)
+                {
+                    foreach (var boxSpawnerActivateTrigger in pair.boxSpawnersActivateTrigger)
+                    {
+                        GameObject[] generatedCubes = GameObject.FindGameObjectsWithTag("Block");
+                        GameObject[] generatedTransparentCubes = GameObject.FindGameObjectsWithTag("TransparentBlock");
+                        GameObject[] cubesToRemove = generatedCubes.Concat(generatedTransparentCubes).ToArray();
+                        float percentageToRemove = 1f;
+                        float delayBetweenCubes = 3f / generatedCubes.Length;
+                        StartCoroutine(DestroyPercentageOfCubesGradually(cubesToRemove, percentageToRemove, delayBetweenCubes));
                     }
                 }
             }
@@ -337,6 +393,4 @@ public class HeartHealth : MonoBehaviour
             return null;
         }
     }
-
-
 }

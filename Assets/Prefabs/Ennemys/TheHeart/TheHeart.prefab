@@ -334,9 +334,11 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     boxSpawnersNoHP: []
+    boxSpawnersActivateTrigger: []
   - teleportPointIndex: 2
     boxSpawners: []
     boxSpawnersNoHP: []
+    boxSpawnersActivateTrigger: []
   - teleportPointIndex: 4
     boxSpawners:
     - {fileID: 0}
@@ -350,6 +352,7 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     boxSpawnersNoHP: []
+    boxSpawnersActivateTrigger: []
   - teleportPointIndex: 3
     boxSpawners:
     - {fileID: 0}
@@ -359,6 +362,7 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     boxSpawnersNoHP: []
+    boxSpawnersActivateTrigger: []
   parent: {fileID: 8374639144287423287}
   eyeRadius: {fileID: 7289005239915659131}
   moveSpeed: 0.8
@@ -398,7 +402,7 @@ MonoBehaviour:
   - patterns: 0000000005000000
   - patterns: 0300000000000000
   - patterns: 0200000000000000
-  - patterns: 0200000001000000030000000000000004000000
+  - patterns: 000000000000000002000000030000000400000005000000
   nextPatternTimes:
   - 5000
   - 6

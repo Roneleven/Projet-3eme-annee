@@ -10,10 +10,10 @@ public class BoxSpawnerActivateTrigger : MonoBehaviour
     public Vector3 spawnBoxSize = new Vector3(8f, 8f, 8f);
     public float gridSize = 1f;
     public float exclusionRadius = 2f;
-    public float spawnCount;
+    public int spawnCount;
     public GameObject transparentCubePrefab;
     public int maxCubeCount = 50;
-    public int cubeCount = 0;
+    private int cubeCount = 0;
 
     private bool isTriggerActivated = false;
 
@@ -38,7 +38,8 @@ public class BoxSpawnerActivateTrigger : MonoBehaviour
 
             if (cubeCount < maxCubeCount)
             {
-                for (int i = 0; i < spawnCount; i++)
+                int spawnedThisCycle = 0;
+                for (int i = 0; i < spawnCount && cubeCount + spawnedThisCycle < maxCubeCount; i++)
                 {
                     Vector3 spawnPosition;
                     do
@@ -53,44 +54,42 @@ public class BoxSpawnerActivateTrigger : MonoBehaviour
                     spawnPosition /= gridSize;
                     spawnPosition = new Vector3(Mathf.Round(spawnPosition.x), Mathf.Round(spawnPosition.y), Mathf.Round(spawnPosition.z));
                     spawnPosition *= gridSize;
-
                     spawnPosition += transform.position;
 
                     Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
-                    if (colliders.Length > 0)
-                    {
-                        foreach (Collider collider in colliders)
-                        {
-                            bool playerInPosition = collider.gameObject.CompareTag("Player");
-                            if (playerInPosition)
-                            {
-                                StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
-                                break;
-                            }
+                    bool positionOccupied = false;
 
-                            CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
-                            if (cubeHealth != null)
+                    foreach (Collider collider in colliders)
+                    {
+                        if (collider.gameObject.CompareTag("Player"))
+                        {
+                            positionOccupied = true;
+                            break;
+                        }
+
+                        CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
+                        if (cubeHealth != null)
+                        {
+                            if (cubeHealth.health < 6)
                             {
-                                if (cubeHealth.health < 6)
-                                {
-                                    cubeHealth.health += 1;
-                                    cubeCount++;
-                                }
-                                else
-                                {
-                                    cubeCount++;
-                                    cubeCount += Mathf.CeilToInt(cubeHealth.health / 5f) - 1;
-                                }
-                                break;
+                                cubeHealth.health += 1;
                             }
+                            else
+                            {
+                                cubeCount += Mathf.CeilToInt(cubeHealth.health / 5f) - 1;
+                            }
+                            positionOccupied = true;
+                            break;
                         }
                     }
-                    else
+
+                    if (!positionOccupied)
                     {
                         StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
-                        cubeCount++;
+                        spawnedThisCycle++;
                     }
                 }
+                cubeCount += spawnedThisCycle;
             }
 
             yield return new WaitForSeconds(spawnInterval);
@@ -100,7 +99,6 @@ public class BoxSpawnerActivateTrigger : MonoBehaviour
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
     {
         GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-
         StartCoroutine(InterpolateFresnelPower(transparentCube));
 
         yield return new WaitForSeconds(spawnInterval);
@@ -121,10 +119,11 @@ public class BoxSpawnerActivateTrigger : MonoBehaviour
         if (!playerInPosition)
         {
             Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-            cubeCount++;
         }
-
-        cubeCount--;
+        else
+        {
+            cubeCount--;
+        }
     }
 
     private IEnumerator InterpolateFresnelPower(GameObject transparentCube)

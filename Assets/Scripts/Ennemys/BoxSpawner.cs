@@ -10,7 +10,7 @@ public class BoxSpawner : MonoBehaviour
     public Vector3 spawnBoxSize = new Vector3(8f, 8f, 8f);
     public float gridSize = 1f;
     public float exclusionRadius = 2f;
-    public float spawnCount;
+    public int spawnCount;
     public GameObject transparentCubePrefab;
     public int maxCubeCount = 50;
     public int cubeCount = 0;
@@ -38,7 +38,8 @@ public class BoxSpawner : MonoBehaviour
 
             if (cubeCount < maxCubeCount)
             {
-                for (int i = 0; i < spawnCount; i++)
+                int spawnedThisCycle = 0;
+                for (int i = 0; i < spawnCount && cubeCount + spawnedThisCycle < maxCubeCount; i++)
                 {
                     Vector3 spawnPosition;
                     do
@@ -53,44 +54,42 @@ public class BoxSpawner : MonoBehaviour
                     spawnPosition /= gridSize;
                     spawnPosition = new Vector3(Mathf.Round(spawnPosition.x), Mathf.Round(spawnPosition.y), Mathf.Round(spawnPosition.z));
                     spawnPosition *= gridSize;
-
                     spawnPosition += transform.position;
 
                     Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
-                    if (colliders.Length > 0)
-                    {
-                        foreach (Collider collider in colliders)
-                        {
-                            bool playerInPosition = collider.gameObject.CompareTag("Player");
-                            if (playerInPosition)
-                            {
-                                StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
-                                break;
-                            }
+                    bool positionOccupied = false;
 
-                            CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
-                            if (cubeHealth != null)
+                    foreach (Collider collider in colliders)
+                    {
+                        if (collider.gameObject.CompareTag("Player"))
+                        {
+                            positionOccupied = true;
+                            break;
+                        }
+
+                        CubeHealth cubeHealth = collider.gameObject.GetComponent<CubeHealth>();
+                        if (cubeHealth != null)
+                        {
+                            if (cubeHealth.health < 6)
                             {
-                                if (cubeHealth.health < 6)
-                                {
-                                    cubeHealth.health += 1;
-                                    cubeCount++;
-                                }
-                                else
-                                {
-                                    cubeCount++;
-                                    cubeCount += Mathf.CeilToInt(cubeHealth.health / 5f) - 1;
-                                }
-                                break;
+                                cubeHealth.health += 1;
                             }
+                            else
+                            {
+                                cubeCount += Mathf.CeilToInt(cubeHealth.health / 5f) - 1;
+                            }
+                            positionOccupied = true;
+                            break;
                         }
                     }
-                    else
+
+                    if (!positionOccupied)
                     {
                         StartCoroutine(SpawnTransparentAndRealCube(spawnPosition));
-                        cubeCount++;
+                        spawnedThisCycle++;
                     }
                 }
+                cubeCount += spawnedThisCycle;
             }
 
             yield return new WaitForSeconds(spawnInterval);
@@ -98,63 +97,55 @@ public class BoxSpawner : MonoBehaviour
     }
 
     private IEnumerator SpawnTransparentAndRealCube(Vector3 spawnPosition)
-{
-    GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-
-    // Commencez l'interpolation de FresnelPower
-    StartCoroutine(InterpolateFresnelPower(transparentCube));
-
-    yield return new WaitForSeconds(spawnInterval);
-
-    Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
-    bool playerInPosition = false;
-    foreach (Collider collider in colliders)
     {
-        if (collider.gameObject.CompareTag("Player"))
+        GameObject transparentCube = Instantiate(transparentCubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+        StartCoroutine(InterpolateFresnelPower(transparentCube));
+
+        yield return new WaitForSeconds(spawnInterval);
+
+        Collider[] colliders = Physics.OverlapSphere(spawnPosition, gridSize / 2);
+        bool playerInPosition = false;
+        foreach (Collider collider in colliders)
         {
-            playerInPosition = true;
-            break;
+            if (collider.gameObject.CompareTag("Player"))
+            {
+                playerInPosition = true;
+                break;
+            }
+        }
+
+        Destroy(transparentCube);
+
+        if (!playerInPosition)
+        {
+            Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
+        }
+        else
+        {
+            cubeCount--;
         }
     }
 
-    Destroy(transparentCube);
-
-    if (playerInPosition)
+    private IEnumerator InterpolateFresnelPower(GameObject transparentCube)
     {
-        // Ajoutez votre logique ici si nécessaire
+        Material transparentMaterial = transparentCube.GetComponent<Renderer>().material;
+        float duration = 1f;
+        float elapsedTime = 0f;
+        float initialFresnelPower = 4f;
+        float targetFresnelPower = 10f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / duration;
+            float currentFresnelPower = Mathf.Lerp(initialFresnelPower, targetFresnelPower, t);
+            transparentMaterial.SetFloat("_FresnelPower", currentFresnelPower);
+
+            yield return null;
+        }
+
+        transparentMaterial.SetFloat("_FresnelPower", targetFresnelPower);
     }
-    else
-    {
-        Instantiate(cubePrefab, spawnPosition, Quaternion.identity, spawnContainer.transform);
-        cubeCount++; // Incrémente le nombre de blocs réels
-    }
-
-    // Décrémente le nombre de blocs réels lorsque la coroutine est terminée (quand le bloc transparent est détruit)
-    cubeCount--;
-}
-
-// Nouvelle coroutine pour interpoler FresnelPower
-private IEnumerator InterpolateFresnelPower(GameObject transparentCube)
-{
-    Material transparentMaterial = transparentCube.GetComponent<Renderer>().material;
-    float duration = 1f;
-    float elapsedTime = 0f;
-    float initialFresnelPower = 4f;
-    float targetFresnelPower = 10f;
-
-    while (elapsedTime < duration)
-    {
-        elapsedTime += Time.deltaTime;
-        float t = elapsedTime / duration;
-        float currentFresnelPower = Mathf.Lerp(initialFresnelPower, targetFresnelPower, t);
-        transparentMaterial.SetFloat("_FresnelPower", currentFresnelPower);
-
-        yield return null;
-    }
-
-    // Assurez-vous que la valeur finale est définie
-    transparentMaterial.SetFloat("_FresnelPower", targetFresnelPower);
-}
 
     private void OnDrawGizmos()
     {

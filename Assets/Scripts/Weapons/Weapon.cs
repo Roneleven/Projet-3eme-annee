@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
+using UnityEditor.PackageManager;
 
 public enum FireMode
 {
@@ -727,7 +728,17 @@ public class Weapon : MonoBehaviour
                     {
                         cubeHealth.TakeDamage(explosiveDamage, true);
                     }
+
+                    if (hitCollider.transform.CompareTag("DestroyableBlock"))
+                    {
+                        CubeHitInstance = Instantiate(CubeHit, hitCollider.transform.position, hitCollider.transform.rotation);
+                        CubeHitInstance.Play();
+                        CubeHitInstance.gameObject.AddComponent<VFXAutoDestroy>();
+                        Destroy(hitCollider.transform.gameObject);
+                    }
                 }
+
+
             }
 
             currentExplosiveCharges--;

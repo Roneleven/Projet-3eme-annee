@@ -6,7 +6,7 @@ public class TriggerDoorBoss : MonoBehaviour
 {
     [SerializeField] private List<Animator> doorAnimators = new List<Animator>();
     [SerializeField] private bool isOpen = false;
-    public GameObject unlinkedBoxSpawnersToRemove;
+    public GameObject[] unlinkedBoxSpawnersToRemove;
     private Player player;
 
     void Start()
@@ -37,7 +37,7 @@ public class TriggerDoorBoss : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning("One of the door animators is not assigned.");
+                    //Debug.LogWarning("One of the door animators is not assigned.");
                 }
             }
 
@@ -47,11 +47,21 @@ public class TriggerDoorBoss : MonoBehaviour
             // Destroy the unlinked box spawners
             if (unlinkedBoxSpawnersToRemove != null)
             {
-                Destroy(unlinkedBoxSpawnersToRemove);
+                foreach (GameObject boxSpawner in unlinkedBoxSpawnersToRemove)
+                {
+                    if (boxSpawner != null)
+                    {
+                        Destroy(boxSpawner);
+                    }
+                    else
+                    {
+                        //Debug.LogWarning("One of the unlinked box spawners is not assigned.");
+                    }
+                }
             }
             else
             {
-                Debug.LogWarning("unlinkedBoxSpawnersToRemove GameObject is not assigned.");
+                //Debug.LogWarning("unlinkedBoxSpawnersToRemove array is not assigned.");
             }
         }
     }

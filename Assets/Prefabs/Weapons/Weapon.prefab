@@ -786,6 +786,7 @@ MonoBehaviour:
   shootEffect: {fileID: 1656210228620440249, guid: 89c818eb0a7f189408cdc22227191714, type: 3}
   smokeEffect: {fileID: 3045803582391615888, guid: ac4b08be3e9e426428ec9ee363b881a1, type: 3}
   smokeEffectSpawnPoint: {fileID: 6852232308582588155}
+  CubeHit: {fileID: 8377534922468075976, guid: 96c76a57a0eb7574d8b0fe74bdbd3874, type: 3}
   weaponModel: {fileID: 2253449755891213522}
   normalModeMaterial: {fileID: 2100000, guid: db353bd9508c6e643a1b0d0f96219d7e, type: 2}
   explosiveModeMaterial: {fileID: 2100000, guid: 7270f9b4cabe9fd48b1d274df83567ce, type: 2}

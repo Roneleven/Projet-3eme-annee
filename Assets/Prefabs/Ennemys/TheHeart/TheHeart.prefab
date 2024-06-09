@@ -259,7 +259,7 @@ MonoBehaviour:
   timeSincePalierStart: 0
   coconvfx: {fileID: 113216390190002751}
   timerFillImage: {fileID: 0}
-  palierTriggersReached: 
+  palierTriggersReached: 000000000000
   timer: 180
   defaultTimer: 180
   timerText: {fileID: 0}
@@ -335,10 +335,78 @@ MonoBehaviour:
     - {fileID: 0}
     boxSpawnersNoHP: []
     boxSpawnersActivateTrigger: []
+  - teleportPointIndex: 1
+    boxSpawners: []
+    boxSpawnersNoHP: []
+    boxSpawnersActivateTrigger:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
   - teleportPointIndex: 2
     boxSpawners: []
     boxSpawnersNoHP: []
-    boxSpawnersActivateTrigger: []
+    boxSpawnersActivateTrigger:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - teleportPointIndex: 3
+    boxSpawners:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    boxSpawnersNoHP: []
+    boxSpawnersActivateTrigger:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
   - teleportPointIndex: 4
     boxSpawners:
     - {fileID: 0}
@@ -352,8 +420,17 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     boxSpawnersNoHP: []
-    boxSpawnersActivateTrigger: []
-  - teleportPointIndex: 3
+    boxSpawnersActivateTrigger:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - teleportPointIndex: 5
     boxSpawners:
     - {fileID: 0}
     - {fileID: 0}
@@ -361,8 +438,47 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     boxSpawnersNoHP: []
-    boxSpawnersActivateTrigger: []
+    boxSpawnersActivateTrigger:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
   parent: {fileID: 8374639144287423287}
   eyeRadius: {fileID: 7289005239915659131}
   moveSpeed: 0.8
@@ -408,9 +524,9 @@ MonoBehaviour:
   - 6
   - 5
   - 4
+  - 3.5
   - 3
-  - 2
-  - 1
+  - 2.5
 --- !u!114 &8478000295457755194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,7 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e4bbc2af99c1945831ef3d1d1ce1d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallPatternPrefab: {fileID: 4010771748805353341, guid: 7c10a8ad32a982641811b21c33623f4f, type: 3}
+  wallPatternPrefab: {fileID: 4010771748805353341, guid: 03105af684aad9048940fb1a40a80437, type: 3}
 --- !u!114 &1133667869545958720
 MonoBehaviour:
   m_ObjectHideFlags: 0

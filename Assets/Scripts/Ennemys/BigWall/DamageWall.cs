@@ -25,7 +25,7 @@ public class DamageWall : MonoBehaviour
 
             Destroy(gameObject);
         }
-        else if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Block") || collision.gameObject.CompareTag("HeartBlock"))
+        else if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Block") || collision.gameObject.CompareTag("HeartBlock")|| collision.gameObject.CompareTag("DestroyableBlock"))
         {
             Destroy(gameObject);
         }

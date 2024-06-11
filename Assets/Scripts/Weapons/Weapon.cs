@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
-using UnityEditor.PackageManager;
 
 public enum FireMode
 {

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class TeleportUpdate : MonoBehaviour
 {
-    public Transform newTeleportPoint;
-    public Teleport teleportScript; // TeleportTrigger
+    public Teleport teleportScript;
+    public int teleportIndex; // Index du point de téléportation à activer
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            teleportScript.UpdateTeleportPoint(newTeleportPoint);
+            teleportScript.UpdateTeleportPoint(teleportIndex);
         }
     }
 }

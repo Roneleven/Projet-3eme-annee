@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Teleport : MonoBehaviour
 {
-    public Transform teleportPoint;
+    public Transform[] teleportPoints; // Tableau de points de téléportation
     private Transform currentTeleportPoint;
 
     private void Start()
     {
-        currentTeleportPoint = teleportPoint;
+        if (teleportPoints.Length > 0)
+        {
+            currentTeleportPoint = teleportPoints[0]; // Initialiser avec le premier point de téléportation
+        }
+        else
+        {
+            Debug.LogError("Aucun point de téléportation défini.");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -23,8 +30,15 @@ public class Teleport : MonoBehaviour
         }
     }
 
-    public void UpdateTeleportPoint(Transform newTeleportPoint)
+    public void UpdateTeleportPoint(int index)
     {
-        currentTeleportPoint = newTeleportPoint;
+        if (index >= 0 && index < teleportPoints.Length)
+        {
+            currentTeleportPoint = teleportPoints[index];
+        }
+        else
+        {
+            Debug.LogError("Index de point de téléportation invalide.");
+        }
     }
 }
